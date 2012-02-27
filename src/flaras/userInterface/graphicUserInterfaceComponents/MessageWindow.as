@@ -1,0 +1,162 @@
+/**
+ * FLARAS - Flash Augmented Reality Authoring System
+ * --------------------------------------------------------------------------------
+ * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * --------------------------------------------------------------------------------
+ * Developers:
+ * Raryel Costa Souza - raryel.costa[at]gmail.com
+ * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
+ * 
+ * Advisor: Claudio Kirner - ckirner[at]gmail.com
+ * http://www.ckirner.com/flaras
+ * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
+ * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
+ */
+
+package flaras.userInterface.graphicUserInterfaceComponents 
+{
+	import org.aswing.*;
+	
+	public class MessageWindow 
+	{
+		private static var parentComponentForWindows:Component;
+		
+		public static function setParentComponent(pParentComponent:Component):void
+		{
+			parentComponentForWindows = pParentComponent;
+		}		
+		
+		public static function messageFileAlreadyExists(fileName:String):void
+		{
+			JOptionPane.showMessageDialog("Warning!", "There is already another file with the name: \"" + 
+			fileName + "\" on the project.\nFLARAS does not allow that one file is associated with more than one object." +
+			"\nRename your file and you'll be able to add it to the project.", null, parentComponentForWindows);
+		}
+		
+		public static function messageProjectNotSaved2Publish():void
+		{
+			JOptionPane.showMessageDialog("Warning!", "You must save your project before trying to publish it!", null, parentComponentForWindows);
+		}
+		
+		//message window called before opening a project or creating a new project
+		public static function messageSaveBeforeAction(saveBeforeAction:Function, dontSaveBefore:Function):void
+		{
+			var msg:String = "Would you like to save your project before?";
+			
+			messageConfirmation(msg, true, saveBeforeAction, dontSaveBefore);
+		}
+	
+		public static function messageOverwriteConfirmation(confirmAction:Function, cancelAction:Function, fileName:String, folderName:String):void
+		{
+			var msg:String = "There is already another file named \"" 
+							+ fileName + "\" on the folder \"" + folderName +
+							"\". \nWould you like to overwrite it?"
+			
+			messageConfirmation(msg, false, confirmAction, cancelAction);
+		}
+		
+		private static function messageConfirmation(msg:String, showCancelButton:Boolean, yesAction:Function, noAction:Function):void
+		{
+			var buttons2show:int;
+			
+			buttons2show = JOptionPane.YES + JOptionPane.NO;
+			
+			if (showCancelButton)
+			{
+				buttons2show += JOptionPane.CANCEL;
+			}
+			
+			var jop:JOptionPane = JOptionPane.showMessageDialog("Confirmation", msg, null, parentComponentForWindows,
+			true, null, buttons2show);
+			
+			jop.getYesButton().addActionListener(yesAction);
+			jop.getNoButton().addActionListener(noAction);			
+		}
+		
+		
+		public static function errorMessage(errorMessage:String):void
+		{
+			JOptionPane.showMessageDialog("Error!", errorMessage, null, parentComponentForWindows);
+		}
+		
+		public static function keyboardCommands():void
+		{
+			JOptionPane.showMessageDialog("FLARAS Keys", 
+			"Keys related with points:\n"+
+			"A: Enable all points\n" +
+			"Q: Disable all points\n" +
+			"F1: Toggle aux points (available only for enable points). It will appear a blue sphere on the point position.\n\n"+
+			
+			"Keys related with the interaction marker:\n"+
+			"M: Toggle marker type (inspector/control)\n" +
+			"C: Toggle control marker type (backward/forward) (only avaiable if the marker type is control)\n\n" +
+			
+			"Keys related with the interaction sphere:\n"+
+			"F4: Decrease size\n" +
+			"F5: Increase size\n" +
+			"F6: Decrease distance\n" +
+			"F7: Increase distance\n" +
+			"F8: Reset properties\n\n" +
+			
+			"Others keys:\n" +
+			"F3: Toggle mirror screen\n\n" +
+			
+			"Mouse commands:\n" +
+			"Mouse scroll: hide FLARAS graphical interface\n" +
+			"Mouse click: show FLARAS graphical interface", null, parentComponentForWindows);
+		}
+		
+		
+		public static function licenseFlaras():void
+		{
+			JOptionPane.showMessageDialog("License", 
+			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
+			
+			"This program is free software: you can redistribute it and/or modify\n"+
+			"it under the terms of the GNU General Public License as published by\n" +
+			"the Free Software Foundation, either version 3 of the License, or\n" +
+			"(at your option) any later version.\n\n"+
+
+			"This program is distributed in the hope that it will be useful,\n"+
+			"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"+
+			"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"+
+			"GNU General Public License for more details.\n\n"+
+
+			"You should have received a copy of the GNU General Public License\n"+
+			"along with this program.  If not, see <http://www.gnu.org/licenses/>."
+			, null, parentComponentForWindows);
+		}
+		
+		public static function aboutFlaras():void
+		{
+			JOptionPane.showMessageDialog("About FLARAS", 
+			"Flash Augmented Reality Authoring System - Version 1.0-r1025 - February 27, 2012\n\n" +
+			
+			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n" +
+			"Developers: \n" +
+			"Raryel Costa Souza - raryel.costa@gmail.com\n" +
+			"Hipolito Douglas Franca Moreira - hipolitodouglas@gmail.com\n\n" +	
+			"Advisor: Claudio Kirner - ckirner@gmail.com\n" +
+			"http://www.ckirner.com/flaras\n\n" +
+			
+			"Developed at UNIFEI - Federal University of Itajuba - Minas Gerais - Brazil\n" +
+			"Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais\n"
+			
+			, null, parentComponentForWindows);
+		}
+	}
+}

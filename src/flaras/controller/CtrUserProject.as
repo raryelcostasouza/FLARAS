@@ -1,0 +1,501 @@
+/**
+ * FLARAS - Flash Augmented Reality Authoring System
+ * --------------------------------------------------------------------------------
+ * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * --------------------------------------------------------------------------------
+ * Developers:
+ * Raryel Costa Souza - raryel.costa[at]gmail.com
+ * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
+ * 
+ * Advisor: Claudio Kirner - ckirner[at]gmail.com
+ * http://www.ckirner.com/flaras
+ * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
+ * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
+ */
+
+package flaras.controller 
+{
+	import flaras.*;
+	import flaras.constants.*;
+	import flaras.entity.*;
+	import flaras.errorHandler.*;
+	import flaras.io.*;
+	import flaras.io.fileReader.*;
+	import flaras.io.fileSaver.*;
+	import flaras.marker.*;
+	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.video.*;
+	import flash.desktop.*;
+	import flash.errors.*;
+	import flash.events.*;
+	import flash.filesystem.*;
+	import flash.net.*;
+	import flash.utils.*;
+	
+	public class CtrUserProject 
+	{
+		private static const ACTION_NEW_PROJECT:int = 0;
+		private static const ACTION_OPEN_PROJECT:int = 1;
+		private static const ACTION_CLOSE_FLARAS:int = 2;
+		
+		/* aAlreadySavedBefore is false when there was no saving operation for this project, just for new projects
+		   aAlreadySavedBefore is true when the user already selected the destination of the XXX.flaras project file
+		   if the project was loaded this variable will always be true*/
+		private var aAlreadySavedBefore:Boolean;
+		private var aSaveAsRequested:Boolean;
+		private var aCurrentProjectTempFolder:File;
+		private var aProjectFile:File;
+		private var _actionAfterSaving:int = -1;
+		private var _ctrMain:CtrMain;
+		private var _overwriteSituation:OverwriteSituation;
+		
+		public function CtrUserProject(ctrMain:CtrMain) 
+		{
+			_ctrMain = ctrMain;
+			
+			//default policy is to create a new project on FLARAS initialization
+			actionNewProject();
+			
+			//listener for cleaning temp files when exiting the application
+			NativeApplication.nativeApplication.activeWindow.addEventListener(Event.CLOSING, onWindowClosing);
+		}
+		
+		//functions related to FLARAS closing procedure--------------------------------------------------------
+		private function onWindowClosing(e:Event = null):void
+		{
+			e.preventDefault();
+			closingFlaras();
+		}
+		
+		public function closingFlaras():void
+		{
+			MessageWindow.messageSaveBeforeAction(closeFlarasAndSave, closeFlarasWithoutSaving);
+		}
+		
+		private function closeFlarasAndSave(e:Event):void
+		{
+			this._actionAfterSaving = ACTION_CLOSE_FLARAS;
+			saveProject();
+		}
+		
+		private function closeFlarasWithoutSaving(e:Event):void
+		{
+			actionCloseFlaras();
+		}
+		
+		private function actionCloseFlaras():void
+		{
+			VideoManager.closeStream();
+			removeTmpFiles();
+			NativeApplication.nativeApplication.exit();
+		}
+		//end of functions related to FLARAS closing procedure--------------------------------------------------------
+		
+		public function getCurrentProjectTempFolder():File
+		{
+			return aCurrentProjectTempFolder;
+		}
+		
+		//functions related with new project creation -------------------------------------------------------
+		public function createNewProject():void
+		{
+			MessageWindow.messageSaveBeforeAction(saveBeforeNewProject, dontSaveBeforeNewProject);
+		}
+		
+		private function saveBeforeNewProject(e:Event):void
+		{
+			this._actionAfterSaving = ACTION_NEW_PROJECT;
+			saveProject();
+		}
+		
+		private function dontSaveBeforeNewProject(e:Event):void
+		{
+			actionNewProject();
+		}
+		
+		private function actionNewProject():void
+		{
+			aAlreadySavedBefore = false;
+			if (aCurrentProjectTempFolder != null)
+			{
+				removeTmpFiles();
+				_ctrMain.ctrPoint.clearListOfPoints();
+			}
+			
+			_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();
+			aCurrentProjectTempFolder = File.createTempDirectory();
+			initTempSubFolders();
+			
+			
+			_ctrMain.ctrGUI.comboBoxReload();	
+			
+			
+			_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();
+			FolderConstants.setFlarasAppCurrentFolder(aCurrentProjectTempFolder.url);
+			trace(aCurrentProjectTempFolder.nativePath);
+		}
+		
+		private function initTempSubFolders():void
+		{
+			var subFolders:Vector.<String> = new Vector.<String>;
+			
+			subFolders.push(FolderConstants.XML_FOLDER);
+			subFolders.push(FolderConstants.COLLADA_FOLDER);
+			subFolders.push(FolderConstants.AUDIO_FOLDER);
+			subFolders.push(FolderConstants.VIDEO_FOLDER);
+			subFolders.push(FolderConstants.TEXTURE_FOLDER);
+			
+			for each (var item:String in subFolders) 
+			{
+				try
+				{
+					aCurrentProjectTempFolder.resolvePath(item).createDirectory();
+				}
+				catch (ioE:IOError)
+				{
+					ErrorHandler.onIOErrorSynchronous(ioE, aCurrentProjectTempFolder.resolvePath(item).nativePath);
+				}
+				catch (se:SecurityError)
+				{
+					ErrorHandler.onSecurityErrorSynchronous(se, aCurrentProjectTempFolder.resolvePath(item).nativePath);
+				}
+			}
+		}
+		// end of functions related with new project creation -------------------------------------------------------
+		
+		//functions related with opening a project -----------------------------------------------------------------
+		public function openProject():void
+		{
+			MessageWindow.messageSaveBeforeAction(saveProjectBeforeOpenProject, dontSaveProjectBeforeOpenProject);
+		}
+
+		private function saveProjectBeforeOpenProject(e:Event):void
+		{
+			this._actionAfterSaving = ACTION_OPEN_PROJECT;
+			saveProject();
+		}
+		
+		private function dontSaveProjectBeforeOpenProject(e:Event):void
+		{
+			actionOpenProject();
+		}
+		
+		private function actionOpenProject():void
+		{
+			var fileProject2Open:File;
+			
+			actionNewProject();
+			
+			fileProject2Open = new File();
+			fileProject2Open.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+			fileProject2Open.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			fileProject2Open.addEventListener(Event.SELECT, onFile2OpenSelect);
+			fileProject2Open.browseForOpen("Open FLARAS Project", [new FileFilter("FLARAS Project Files (.flaras)", "*.flaras")]);
+		}
+		
+		private function onFile2OpenSelect(e:Event):void
+		{
+			var ba:ByteArray;
+			var fs:FileStream;
+			var file2Open:File;
+			
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			e.target.removeEventListener(Event.SELECT, onFile2OpenSelect);
+			
+			file2Open = File(e.target);
+			
+			ba = new ByteArray();
+			fs = new FileStream();
+			
+			try
+			{
+				fs.open(file2Open, FileMode.READ);
+				fs.readBytes(ba);
+				fs.close();
+			}
+			catch (iE:IOError)
+			{
+				ErrorHandler.onIOErrorSynchronous(iE, file2Open.nativePath);
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityErrorSynchronous(se, file2Open.nativePath);
+			}
+			// end of functions related with opening a project
+			
+			//extracts the zip file to the tmp folder
+			Zip.unzip(ba, getCurrentProjectTempFolder());		
+			
+			//stores the file pointer to the opened project file
+			aProjectFile = file2Open;
+			aAlreadySavedBefore = true;
+			
+			//read info about the interaction sphere
+			_ctrMain.ctrMarker.loadInteractionMarkerData();
+			
+			//load the list of points and list of objects
+			_ctrMain.ctrPoint.loadProjectData();
+		}
+		// end of functions related with opening a project -----------------------------------------------------------------
+		
+		public function saveProject():void
+		{
+			var listOfPoints:Vector.<Point>;
+			var ba:ByteArray;
+			var fs:FileStream;
+			var folders2Zip:Vector.<File>;
+			var file2Save:File;
+			
+			FileSaver.saveInteractionSphereProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.interactionMarker.getSphereDistance(), _ctrMain.ctrMarker.interactionMarker.getSphereSize());
+			
+			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
+			FileSaver.saveListOfPoints(listOfPoints, getCurrentProjectTempFolder());
+			
+			for each (var p:Point in listOfPoints)
+			{
+				FileSaver.saveListOfObjects(p.getListOfObjects(), getCurrentProjectTempFolder(), p.getFilePathListOfObjects());
+			}
+			
+			folders2Zip = new Vector.<File>();
+			folders2Zip.push(getCurrentProjectTempFolder().resolvePath(FolderConstants.XML_FOLDER));
+			folders2Zip.push(getCurrentProjectTempFolder().resolvePath(FolderConstants.COLLADA_FOLDER));
+			folders2Zip.push(getCurrentProjectTempFolder().resolvePath(FolderConstants.AUDIO_FOLDER));
+			folders2Zip.push(getCurrentProjectTempFolder().resolvePath(FolderConstants.VIDEO_FOLDER));
+			folders2Zip.push(getCurrentProjectTempFolder().resolvePath(FolderConstants.TEXTURE_FOLDER));			
+			
+			//creating the project file (byte array)
+			ba = Zip.generateZipFileFromFolders(folders2Zip);
+			
+			// if it's the first time that the project is being saved to a .flaras file
+			if (!aAlreadySavedBefore)
+			{
+				//ask the user where to save
+				file2Save = new File(File.userDirectory.resolvePath("flarasProject.flaras").nativePath);
+				file2Save.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				file2Save.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				file2Save.addEventListener(Event.COMPLETE, onProjectSavingComplete);
+				file2Save.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
+				file2Save.addEventListener(Event.CANCEL, onProjectSavingCancel);
+				file2Save.save(ba);
+			}
+			else
+			{
+				//save automatically on the last place that the user saved the .flaras file
+				try
+				{					
+					fs = new FileStream();
+					fs.open(aProjectFile, FileMode.WRITE);
+					fs.writeBytes(ba);
+					fs.close();
+				}
+				catch (ioE:IOError)
+				{
+					ErrorHandler.onIOErrorSynchronous(ioE, aProjectFile.nativePath);
+				}
+				catch (se:SecurityError)
+				{
+					ErrorHandler.onSecurityErrorSynchronous(se, aProjectFile.nativePath);
+				}
+				
+				runActionAfterSaving();
+			}
+		}
+		
+		private function onProjectSavingCancel(e:Event):void
+		{
+			if (aSaveAsRequested)
+			{
+				aAlreadySavedBefore = true;
+			}
+		}
+		
+		private function onProjectSavingComplete(e:Event):void
+		{
+			var file2Save:File = File(e.target);
+			file2Save.removeEventListener(Event.COMPLETE, onProjectSavingComplete);
+			aProjectFile = file2Save;
+			aSaveAsRequested = false;
+			
+			aAlreadySavedBefore = true;
+			
+			runActionAfterSaving();
+		}
+		
+		private function runActionAfterSaving():void
+		{
+			var fixedProjectFile:File;
+			
+			fixedProjectFile = forceSavedFileExtension(aProjectFile, ".flaras");
+			
+			
+			//updates the project file pointer with the extension modification
+			aProjectFile = fixedProjectFile;
+			
+			switch(this._actionAfterSaving)
+			{
+				case ACTION_CLOSE_FLARAS:
+					actionCloseFlaras();
+					break;
+				case ACTION_NEW_PROJECT:
+					actionNewProject();
+					break;
+				case ACTION_OPEN_PROJECT:
+					actionOpenProject();
+					break;
+			}
+			this._actionAfterSaving = -1;
+		}
+		
+		public function saveProjectAs():void
+		{
+			aSaveAsRequested = true;
+			aAlreadySavedBefore = false;
+			saveProject();
+		}
+		
+		public function publishProject():void
+		{
+			var ba:ByteArray;
+			var publishFile:File;
+			
+			if (!aAlreadySavedBefore)
+			{
+				MessageWindow.messageProjectNotSaved2Publish();
+			}
+			else
+			{
+				//save the project before publishing to avoid the possibility of publishing the app with unsaved modifications
+				saveProject();
+				
+				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);
+				
+				publishFile = File.userDirectory.resolvePath("flarasApp.zip");
+				publishFile.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				publishFile.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				publishFile.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
+				publishFile.addEventListener(Event.COMPLETE, onProjectPublishingComplete);
+				publishFile.save(ba);
+			}			
+		}
+		
+		private function onProjectPublishingComplete(e:Event):void
+		{
+			var publishFile:File = File(e.target);
+			
+			publishFile.removeEventListener(Event.COMPLETE, onProjectPublishingComplete);
+			forceSavedFileExtension(publishFile, ".zip");			
+		}
+	
+		private function removeTmpFiles():void
+		{
+			try
+			{
+				aCurrentProjectTempFolder.deleteDirectory(true);
+			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOErrorSynchronous(ioE, aCurrentProjectTempFolder.nativePath);
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityErrorSynchronous(se, aCurrentProjectTempFolder.nativePath);
+			}			
+		}
+		
+		//fileExtension2Force: examples: ".zip", ".flaras", ".xml", etc
+		private function forceSavedFileExtension(savedFile:File, fileExtension2Force:String):File
+		{
+			var fileName:String;
+			var savedFileExtension:String;
+			var newName:String;
+			var destination:File;
+			
+			//if the file extension is ok, the destination is the same as the source.
+			destination = savedFile;
+			fileName = savedFile.name;
+			
+			//stores the last fileExtension2Force.length characters of the fileName, in order to compare them with the
+			//expected extension to force.
+			savedFileExtension = fileName.toLowerCase().substring(fileName.length-fileExtension2Force.length); 
+						
+			
+			// if the file does not have the needed file extension (fileExtension2Force)
+			if (savedFileExtension!=fileExtension2Force)
+			{
+				newName = savedFile.name + fileExtension2Force;
+				//add the extension to the file.
+				destination = savedFile.parent.resolvePath(newName);
+				
+				try
+				{
+					//if the destination file already exists ask the user if he want to overwrite it
+					if (destination.exists)
+					{
+						this._overwriteSituation = new OverwriteSituation(savedFile, destination, fileExtension2Force);
+						MessageWindow.messageOverwriteConfirmation(confirmOverwrite, cancelOverwrite, destination.name, destination.parent.nativePath);
+					}
+					else
+					{
+						savedFile.moveTo(destination);
+					}
+				}
+				catch (ioE:IOError)
+				{
+					ErrorHandler.onIOErrorSynchronous(ioE, savedFile.nativePath);
+				}
+				catch (se:SecurityError)
+				{
+					ErrorHandler.onSecurityErrorSynchronous(se, savedFile.nativePath);
+				}				
+			}
+			
+			return destination;
+		}
+		
+		private function confirmOverwrite(e:Event):void
+		{
+			try
+			{
+				this._overwriteSituation.FileSource.moveTo(this._overwriteSituation.FileDestination, true);
+			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOErrorSynchronous(ioE, this._overwriteSituation.FileSource.nativePath);
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityErrorSynchronous(se, this._overwriteSituation.FileSource.nativePath);
+			}
+		}
+		
+		private function cancelOverwrite(e:Event):void
+		{
+			this._overwriteSituation.FileSource.deleteFile();
+			
+			switch(_overwriteSituation.FileExtension)
+			{
+				case ".zip":
+					publishProject();
+					break;
+				case ".flaras": 
+					saveProjectAs();
+					break;
+			}
+		}
+	}
+}
