@@ -144,7 +144,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		public static function aboutFlaras():void
 		{
 			JOptionPane.showMessageDialog("About FLARAS", 
-			"Flash Augmented Reality Authoring System - Version 1.0-r1025 - February 27, 2012\n\n" +
+			"Flash Augmented Reality Authoring System\n\n" +
+			"Version 1.0-r1025 - February 27, 2012\n\n" +
 			
 			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n" +
 			"Developers: \n" +
