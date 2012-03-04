@@ -71,19 +71,18 @@ package flaras.controller
 			var facObj3DBefore:FacadeObject3D = new FacadeObject3D(obj3DBefore);
 			
 			// if there has been no changes (add or remove changes only) regarding audio files
-			if (!facObj3DBefore.hasAudio() && !pHasAudio || facObj3DBefore.hasAudio() && pHasAudio)
-			//if (facObj3DBefore.getAudioPath() == pAudioPath)
+			if ((!facObj3DBefore.hasAudio() && !pHasAudio) || (facObj3DBefore.hasAudio() && pHasAudio))
 			{
 				trace("no Add or Remove AudioChange");
 				
 				//if just changed the texture file path
-				if (facObj3DBefore.getTexturePath()!= pTexturePath)
+				if (facObj3DBefore.hasTexture() && pHasTexture)
 				{
 					trace("TextureUpdate")
 					facObj3DBefore.setTexturePath(pTexturePath);
 				}
 				//if just changed the video file path
-				else if (facObj3DBefore.getVideoPath() != pVideoPath)
+				else if (facObj3DBefore.hasVideo() && pHasVideo)
 				{
 					trace("videoUpdate")
 					facObj3DBefore.setVideoPath(pVideoPath);
@@ -114,7 +113,7 @@ package flaras.controller
 				*/				
 				else 
 				{
-					trace("I'm here!!!!!!!!!!!!!")
+					trace("critical change")
 					fullRebuildNeeded = true;
 					// if the object is associated with an audio file, the audio file must not be deleted
 					if (facObj3DBefore.hasAudio())
