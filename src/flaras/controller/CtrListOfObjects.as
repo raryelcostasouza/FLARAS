@@ -76,13 +76,13 @@ package flaras.controller
 				trace("no Add or Remove AudioChange");
 				
 				//if just changed the texture file path
-				if (facObj3DBefore.hasTexture() && pHasTexture)
+				if (facObj3DBefore.hasTexture() && pHasTexture && facObj3DBefore.getTexturePath() != pTexturePath)
 				{
 					trace("TextureUpdate")
 					facObj3DBefore.setTexturePath(pTexturePath);
 				}
 				//if just changed the video file path
-				else if (facObj3DBefore.hasVideo() && pHasVideo)
+				else if (facObj3DBefore.hasVideo() && pHasVideo && facObj3DBefore.getVideoPath() != pVideoPath)
 				{
 					trace("videoUpdate")
 					facObj3DBefore.setVideoPath(pVideoPath);
