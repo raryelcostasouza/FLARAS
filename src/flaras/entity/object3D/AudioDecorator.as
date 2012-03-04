@@ -72,6 +72,8 @@ package flaras.entity.object3D
 		
 		public function setAudioPath(pAudioPath:String):void
 		{
+			AudioManager.stopAppAudio(getParentPoint().getID());
+			removeAudioFile();
 			aAudioPath = pAudioPath;
 		}
 		
@@ -88,6 +90,7 @@ package flaras.entity.object3D
 		override public function unLoad():void
 		{
 			super.unLoad();
+			
 			AudioManager.stopAppAudio(getParentPoint().getID());
 		}
 		

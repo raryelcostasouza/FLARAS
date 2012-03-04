@@ -70,19 +70,20 @@ package flaras.controller
 			obj3DBefore = listOfObjects[pObjectIndex];
 			var facObj3DBefore:FacadeObject3D = new FacadeObject3D(obj3DBefore);
 			
-			// if there has been no changes regarding audio files
-			//if (!facObj3DBefore.hasAudio() && !pHasAudio || facObj3DBefore.hasAudio() && pHasAudio)
-			if (facObj3DBefore.getAudioPath() == pAudioPath)
+			// if there has been no changes (add or remove changes only) regarding audio files
+			if (!facObj3DBefore.hasAudio() && !pHasAudio || facObj3DBefore.hasAudio() && pHasAudio)
+			//if (facObj3DBefore.getAudioPath() == pAudioPath)
 			{
-				trace("noAudioChange");
+				trace("no Add or Remove AudioChange");
+				
 				//if just changed the texture file path
-				if (facObj3DBefore.hasTexture() && pHasTexture)
+				if (facObj3DBefore.getTexturePath()!= pTexturePath)
 				{
 					trace("TextureUpdate")
 					facObj3DBefore.setTexturePath(pTexturePath);
 				}
 				//if just changed the video file path
-				else if (facObj3DBefore.hasVideo() && pHasVideo)
+				else if (facObj3DBefore.getVideoPath() != pVideoPath)
 				{
 					trace("videoUpdate")
 					facObj3DBefore.setVideoPath(pVideoPath);
@@ -95,7 +96,8 @@ package flaras.controller
 					trace("object3D update" )
 					facObj3DBefore.setFilePath(pFilePath);
 				}
-				else if ((facObj3DBefore.hasAudio() && pHasAudio) && (facObj3DBefore.getAudioPath() != pAudioPath))
+				// if just changed the audio file path
+				else if (facObj3DBefore.getAudioPath() != pAudioPath)
 				{
 					trace("audio update")
 					facObj3DBefore.setAudioPath(pAudioPath);
@@ -129,19 +131,20 @@ package flaras.controller
 					}
 				}
 			}
+			//if audio file was added or removed
 			else
 			{
 				fullRebuildNeeded = true;
 				//if it was added an audio file
-				if ((facObj3DBefore.hasAudio() != pHasAudio) && !facObj3DBefore.hasAudio())
+				if (!facObj3DBefore.hasAudio() && pHasAudio)
 				{
 					trace("audio added")
 					facObj3DBefore.unLoad();
 				}
-				//if the audio file was removed or just changed
+				//if the audio file was removed
 				else
 				{
-					trace("audio removed or changed")
+					trace("audio removed")
 					facObj3DBefore.unLoad();
 					facObj3DBefore.removeAudioFile();	
 				}
