@@ -63,6 +63,10 @@ package flaras.controller
 		private var _ctrMain:CtrMain;
 		private var _overwriteSituation:OverwriteSituation;
 		
+		// used to check if there are any unsaved modifications on the project before exitting, opening a new
+		// project or creating a new project.
+		private var _unSavedModifications:Boolean;
+		
 		public function CtrUserProject(ctrMain:CtrMain) 
 		{
 			_ctrMain = ctrMain;
@@ -83,7 +87,14 @@ package flaras.controller
 		
 		public function closingFlaras():void
 		{
-			MessageWindow.messageSaveBeforeAction(closeFlarasAndSave, closeFlarasWithoutSaving);
+			if (_unSavedModifications)
+			{
+				MessageWindow.messageSaveBeforeAction(closeFlarasAndSave, closeFlarasWithoutSaving);
+			}
+			else
+			{
+				closeFlarasWithoutSaving(null);
+			}			
 		}
 		
 		private function closeFlarasAndSave(e:Event):void
@@ -113,7 +124,14 @@ package flaras.controller
 		//functions related with new project creation -------------------------------------------------------
 		public function createNewProject():void
 		{
-			MessageWindow.messageSaveBeforeAction(saveBeforeNewProject, dontSaveBeforeNewProject);
+			if (_unSavedModifications)
+			{
+				MessageWindow.messageSaveBeforeAction(saveBeforeNewProject, dontSaveBeforeNewProject);
+			}
+			else 
+			{
+				dontSaveBeforeNewProject(null);
+			}			
 		}
 		
 		private function saveBeforeNewProject(e:Event):void
@@ -130,6 +148,8 @@ package flaras.controller
 		private function actionNewProject():void
 		{
 			aAlreadySavedBefore = false;
+			setUnsavedModifications(false);
+			
 			if (aCurrentProjectTempFolder != null)
 			{
 				removeTmpFiles();
@@ -180,7 +200,14 @@ package flaras.controller
 		//functions related with opening a project -----------------------------------------------------------------
 		public function openProject():void
 		{
-			MessageWindow.messageSaveBeforeAction(saveProjectBeforeOpenProject, dontSaveProjectBeforeOpenProject);
+			if (_unSavedModifications)
+			{
+				MessageWindow.messageSaveBeforeAction(saveProjectBeforeOpenProject, dontSaveProjectBeforeOpenProject);
+			}
+			else
+			{
+				dontSaveProjectBeforeOpenProject(null);
+			}			
 		}
 
 		private function saveProjectBeforeOpenProject(e:Event):void
@@ -340,6 +367,8 @@ package flaras.controller
 		{
 			var fixedProjectFile:File;
 			
+			setUnsavedModifications(false);
+			
 			fixedProjectFile = forceSavedFileExtension(aProjectFile, ".flaras");
 			
 			
@@ -496,6 +525,14 @@ package flaras.controller
 					saveProjectAs();
 					break;
 			}
+		}
+		
+		public function setUnsavedModifications(unSavedModifications:Boolean):void
+		{
+			if (this._unSavedModifications != unSavedModifications)
+			{
+				this._unSavedModifications = unSavedModifications;
+			}	
 		}
 	}
 }

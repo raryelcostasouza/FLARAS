@@ -59,6 +59,7 @@ package flaras.userInterface
 		}
 		
 		public function finishedFileCopying(path:String, destiny:String):void {
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			
 			var tempindex:int;
 			if (propertiesPanel.getObjList().getSelectedItem() == "New")
@@ -145,6 +146,8 @@ package flaras.userInterface
 		}
 		
 		public function textUpdate(e:Event):void {
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			
 			if (propertiesPanel.getPtList().getSelectedItem() == "New") {	}
 			else{
 				if (e.currentTarget == propertiesPanel.getPtX() || e.currentTarget == propertiesPanel.getPtY() || e.currentTarget == propertiesPanel.getPtZ()) {
@@ -294,6 +297,8 @@ package flaras.userInterface
 		}
 		
 		private function remPt(e:Event):void {
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			
 			aControl.getCtrPoint().removePoint(propertiesPanel.getPtList().getSelectedIndex() - 1);
 			comboBoxContentsPoint(propertiesPanel.getPtList(), aControl.getCtrPoint().getListOfPoints());
 			propertiesPanel.getPtList().setSelectedIndex(0);
@@ -308,6 +313,8 @@ package flaras.userInterface
 		}
 		
 		private function remObj(e:Event):void {
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			
 			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).removeObject(propertiesPanel.getObjList().getSelectedIndex() - 1);
 			
 			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
@@ -327,6 +334,8 @@ package flaras.userInterface
 		
 		private function swap(e:Event):void 
 		{	
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			
 			pos = Number(jop.getInputText().getText());
 			
 			if (aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).
@@ -381,6 +390,8 @@ package flaras.userInterface
 					var object3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
 					if (object3d.hasAudio())
 					{
+						aControl.getObjCtrUserProject().setUnsavedModifications(true);
+						
 						aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1, 
 							object3d.getFilePath(), object3d.getTranslation(), object3d.getRotation(), 
 							object3d.getScale(), object3d.hasTexture(), object3d.getTexturePath(), object3d.getTextureWidth(),
