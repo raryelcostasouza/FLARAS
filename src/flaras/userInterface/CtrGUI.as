@@ -37,6 +37,7 @@ package flaras.userInterface
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flash.events.*;
+	import flash.ui.Keyboard;
 	import org.aswing.*;
 	import org.papervision3d.core.math.*;
 	
@@ -187,15 +188,31 @@ package flaras.userInterface
 			}
 		}
 		
-		public function restrictLetters(e:KeyboardEvent):void {
-			if (e.altKey || e.ctrlKey || e.shiftKey) {
-				e.preventDefault();
-			}else{
-				if (e.charCode == 0 || e.charCode == 8 || e.charCode == 9 || e.charCode == 13 || e.charCode == 45 || e.charCode == 46 || e.charCode == 48 || e.charCode == 49 || e.charCode == 50 || e.charCode == 51 || e.charCode == 52 || e.charCode == 53 || e.charCode == 54 || e.charCode == 55 || e.charCode == 56 || e.charCode == 57 || e.charCode == 127) {
-				}else {
-					e.preventDefault();
+		public function filterValidCharFromTextField(ke:KeyboardEvent):void
+		{
+			var text:String;
+			var newCharArray:Array;
+			var j:uint;
+			var item:String;
+			var jtf:JTextField;
+			
+			jtf = JTextField(ke.currentTarget);
+			
+			text = jtf.getText();
+			
+			j = 0;
+			newCharArray = new Array();
+			for (var i:uint = 0; i < text.length; i++)
+			{
+				item = text.charAt(i);
+				if (item >= '0' && item <= '9')
+				{
+					newCharArray[j] = item;
+					j++;
 				}
 			}
+			
+			jtf.setText(newCharArray.join(''));
 		}
 		
 		public function comboBoxReload():void {

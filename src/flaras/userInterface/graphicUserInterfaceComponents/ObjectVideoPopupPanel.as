@@ -56,11 +56,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			append(new JLabel("Width"));
 			append(objVideoWidth = new JTextField("", 5));
 			objVideoWidth.addActionListener(pCtrGUI.textUpdate);
-			objVideoWidth.addEventListener(KeyboardEvent.KEY_DOWN, pCtrGUI.restrictLetters);
+			objVideoWidth.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			append(new JLabel("Height"));
 			append(objVideoHeight = new JTextField("", 5));
 			objVideoHeight.addActionListener(pCtrGUI.textUpdate);
-			objVideoHeight.addEventListener(KeyboardEvent.KEY_DOWN, pCtrGUI.restrictLetters);
+			objVideoHeight.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			append(objVideoRpt = new JCheckBox("Repeat"));
 			objVideoRpt.addActionListener(pCtrGUI.setRepeatVideo);
 			setPreferredSize(new IntDimension(200, 200));

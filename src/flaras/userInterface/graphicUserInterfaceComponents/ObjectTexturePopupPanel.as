@@ -55,11 +55,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			append(new JLabel("Width"));
 			append(objTextureWidth = new JTextField("", 5));
 			objTextureWidth.addActionListener(pCtrGUI.textUpdate);
-			objTextureWidth.addEventListener(KeyboardEvent.KEY_DOWN, pCtrGUI.restrictLetters);
+			objTextureWidth.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			append(new JLabel("Height"));
 			append(objTextureHeight = new JTextField("", 5));
 			objTextureHeight.addActionListener(pCtrGUI.textUpdate);
-			objTextureHeight.addEventListener(KeyboardEvent.KEY_DOWN, pCtrGUI.restrictLetters);
+			objTextureHeight.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			setPreferredSize(new IntDimension(200, 200));
 		}
 		
