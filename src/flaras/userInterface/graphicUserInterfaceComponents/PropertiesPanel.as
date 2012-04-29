@@ -255,6 +255,21 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		public function getAudioCheck():JCheckBox {
 			return objAudioCheck;
 		}
+		
+		public function getbtRemovePt():JButton
+		{
+			return btRemovePt;
+		}
+		
+		public function getbtRemoveObj():JButton
+		{
+			return btRemoveObj;
+		}
+		
+		public function getbtSwapObj():JButton
+		{
+			return btSwapObj;
+		}
 	}
 	
 }

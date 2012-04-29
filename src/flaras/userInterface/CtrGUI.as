@@ -289,11 +289,7 @@ package flaras.userInterface
 		}
 		
 		public function removePoint(e:Event):void {
-			if (propertiesPanel.getPtList().getSelectedItem() == "New") {
-				//JOptionPane.showMessageDialog("Warning","You tried to erase the \"new point\" function, it's not a point",null,propertiesPanel);
-			}else {
-				JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this point?", null, propertiesPanel, true, null, 12).getYesButton().addActionListener(remPt);
-			}
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this point?", null, propertiesPanel, true, null, 12).getYesButton().addActionListener(remPt);
 		}
 		
 		private function remPt(e:Event):void {
@@ -305,11 +301,7 @@ package flaras.userInterface
 		}
 		
 		public function removeObject(e:Event):void {
-			if (propertiesPanel.getObjList().getSelectedItem() == "New") {
-				//JOptionPane.showMessageDialog("Warning","You tried to erase the \"new object\" function, it's not an object",null, propertiesPanel);
-			}else {
-				JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this scene?", null, propertiesPanel, true, null, 12).getYesButton().addActionListener(remObj);
-			}
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this scene?", null, propertiesPanel, true, null, 12).getYesButton().addActionListener(remObj);
 		}
 		
 		private function remObj(e:Event):void {
@@ -323,13 +315,10 @@ package flaras.userInterface
 		}
 		
 		public function swapObject(e:Event):void {
-			if (propertiesPanel.getObjList().getSelectedItem()!="New")
-			{
-				jop = 
+			jop = 
 				JOptionPane.showInputDialog("Swap Object", "Set the new position for your scene on the scene list", null, "new position",
 										propertiesPanel);
 				jop.getOkButton().addActionListener(swap);
-			}		
 		}
 		
 		private function swap(e:Event):void 
@@ -457,9 +446,11 @@ package flaras.userInterface
 		}
 		
 		public function pointSelected(e:Event):void {
-			if (e.currentTarget == propertiesPanel.getPtList()) {
+			if (e.currentTarget == propertiesPanel.getPtList())
+			{
 				if (propertiesPanel.getPtList().getSelectedItem() == null) { } 
-				else {
+				else 
+				{
 					if (propertiesPanel.getPtList().getSelectedItem() == "New") {
 						
 						aControl.getCtrPoint().disableAllPointsUI(false);
@@ -468,8 +459,13 @@ package flaras.userInterface
 						propertiesPanel.getPtZ().setText("0");
 						comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<Object3D>());
 						propertiesPanel.getObjList().setSelectedIndex(0);
+						
+						propertiesPanel.getbtRemovePt().setEnabled(false);
 					}
-					else {
+					else 
+					{
+						propertiesPanel.getbtRemovePt().setEnabled(true);
+						
 						aControl.getCtrPoint().disableAllPointsUI(false);
 						aControl.getCtrPoint().enablePointUI(propertiesPanel.getPtList().getSelectedIndex() - 1);
 						
@@ -485,9 +481,11 @@ package flaras.userInterface
 		
 		public function objectSelected(e:Event):void  {
 			cleanFields();
-			if (e.currentTarget == propertiesPanel.getObjList()) {
+			if (e.currentTarget == propertiesPanel.getObjList()) 
+			{
 				if (propertiesPanel.getPtList().getSelectedItem() == null||propertiesPanel.getObjList().getSelectedItem() == null) { }
-				else {
+				else
+				{
 					if (String(propertiesPanel.getObjList().getSelectedItem()) == "New") {
 						
 						aControl.getCtrPoint().disableAllPoints(false);
@@ -500,8 +498,14 @@ package flaras.userInterface
 						propertiesPanel.getObjScX().setText("1");
 						propertiesPanel.getObjScY().setText("1");
 						propertiesPanel.getObjScZ().setText("1");
+						
+						propertiesPanel.getbtRemoveObj().setEnabled(false);
+						propertiesPanel.getbtSwapObj().setEnabled(false);
 					}
-					else {
+					else
+					{
+						propertiesPanel.getbtRemoveObj().setEnabled(true);
+						propertiesPanel.getbtSwapObj().setEnabled(true);						
 						
 						aControl.getCtrPoint().disableAllPoints(false);
 						var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
