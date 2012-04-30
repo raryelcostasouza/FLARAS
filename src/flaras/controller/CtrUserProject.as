@@ -71,12 +71,33 @@ package flaras.controller
 		{
 			_ctrMain = ctrMain;
 			
-			//default policy is to create a new project on FLARAS initialization
-			actionNewProject();
-			
 			//listener for cleaning temp files when exiting the application
 			NativeApplication.nativeApplication.activeWindow.addEventListener(Event.CLOSING, onWindowClosing);
+			
+			//listener for checking if the application should load a project directly or just create a new project
+			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvoke);
 		}
+		
+		//function to test if the app is being called from a project file or from the binary file 
+		private function onInvoke(io:InvokeEvent):void
+		{
+			var directory:File;
+			var file2Open:File;
+				
+			// if the app was called from the project file, open it directly
+			if (io.currentDirectory != null && io.arguments.length > 0)
+			{
+				directory = io.currentDirectory;
+				file2Open = directory.resolvePath(io.arguments[0]);
+				openProjectFromFileDirectly(file2Open);
+			}
+			//default policy is to create a new project on FLARAS initialization
+			else
+			{
+				actionNewProject();
+			}
+		}
+		
 		
 		//functions related to FLARAS closing procedure--------------------------------------------------------
 		private function onWindowClosing(e:Event = null):void
@@ -236,8 +257,6 @@ package flaras.controller
 		
 		private function onFile2OpenSelect(e:Event):void
 		{
-			var ba:ByteArray;
-			var fs:FileStream;
 			var file2Open:File;
 			
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
@@ -245,6 +264,15 @@ package flaras.controller
 			e.target.removeEventListener(Event.SELECT, onFile2OpenSelect);
 			
 			file2Open = File(e.target);
+			
+			loadOpenProjectData(file2Open);
+		}
+		
+		//used when the app is called directly from the project file
+		private function loadOpenProjectData(file2Open:File):void
+		{
+			var ba:ByteArray;
+			var fs:FileStream;
 			
 			ba = new ByteArray();
 			fs = new FileStream();
@@ -278,6 +306,13 @@ package flaras.controller
 			//load the list of points and list of objects
 			_ctrMain.ctrPoint.loadProjectData();
 		}
+		
+		private function openProjectFromFileDirectly(file2Open:File):void
+		{
+			actionNewProject();
+			loadOpenProjectData(file2Open);
+		}
+		
 		// end of functions related with opening a project -----------------------------------------------------------------
 		
 		public function saveProject():void
