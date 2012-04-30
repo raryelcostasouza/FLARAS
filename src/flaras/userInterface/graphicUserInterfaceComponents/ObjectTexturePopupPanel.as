@@ -30,7 +30,6 @@
 package flaras.userInterface.graphicUserInterfaceComponents
 {
 	import flaras.userInterface.CtrGUI;
-	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	import org.aswing.*;
 	import org.aswing.geom.IntDimension;
@@ -42,8 +41,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var objTextureWidth:JTextField;
 		private var objTextureHeight:JTextField;
 		
-		public function ObjectTexturePopupPanel(pStage:Stage, pCtrGUI:CtrGUI) {
-			super(pStage, true);
+		public function ObjectTexturePopupPanel(pCtrGUI:CtrGUI) {
 			setLayout(new FlowLayout());
 			append(new JLabel("URL"));
 			append(objTexture = new JTextField("", 14));

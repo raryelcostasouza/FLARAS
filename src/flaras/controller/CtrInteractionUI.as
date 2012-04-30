@@ -50,7 +50,7 @@ package flaras.controller
 			aFMMApp = pFMMApp;
 			
 			new BoundaryInteractionUI(this);
-			var gui:GraphicsUserInterface = new GraphicsUserInterface(this, StageReference.getStage());
+			var gui:GraphicsUserInterface = new GraphicsUserInterface(this);
 			ctrMain.ctrGUI = gui.getCtrGUI();
 			bndMMI = new BoundaryMultiMarkerInteraction(this);
 		}

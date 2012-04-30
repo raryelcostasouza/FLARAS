@@ -30,7 +30,6 @@
 package flaras.userInterface.graphicUserInterfaceComponents
 {
 	import flaras.userInterface.CtrGUI;
-	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import org.aswing.ButtonGroup;
@@ -72,7 +71,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var videoRdBt:JRadioButton;
 		private var textureRdBt:JRadioButton;
 		
-		public function PropertiesPanel(pStage:Stage, pCtrGUI:CtrGUI) {
+		public function PropertiesPanel(pCtrGUI:CtrGUI) {
 			super(new FlowLayout());
 			append(new JLabel("Point"));
 			//point properties

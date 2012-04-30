@@ -30,7 +30,6 @@
 package flaras.userInterface.graphicUserInterfaceComponents
 {
 	import flaras.userInterface.CtrGUI;
-	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	import org.aswing.*;
 	import org.aswing.geom.IntDimension;
@@ -43,8 +42,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var objVideoHeight:JTextField;
 		private var objVideoRpt:JCheckBox;
 		
-		public function ObjectVideoPopupPanel(pStage:Stage, pCtrGUI:CtrGUI) {
-			super(pStage, true);
+		public function ObjectVideoPopupPanel(pCtrGUI:CtrGUI) {
 			setLayout(new FlowLayout());
 			append(new JLabel("URL"));
 			append(objVideo = new JTextField("", 14));

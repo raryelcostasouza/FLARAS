@@ -30,7 +30,6 @@
 package flaras.userInterface.graphicUserInterfaceComponents
 {
 	import flaras.userInterface.CtrGUI;
-	import flash.display.Stage;
 	import org.aswing.*;
 	
 	public class Object3DPopupPanel extends JPopup
@@ -38,8 +37,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var objFile:JTextField;
 		private var btnFileLoad:JButton;
 		
-		public function Object3DPopupPanel(pStage:Stage, pCtrGUI:CtrGUI) {
-			super(pStage, true);
+		public function Object3DPopupPanel(pCtrGUI:CtrGUI) {
 			setLayout(new FlowLayout());
 			append(new JLabel("URL"));
 			append(objFile = new JTextField("", 14));

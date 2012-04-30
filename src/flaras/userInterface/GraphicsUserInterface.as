@@ -31,6 +31,7 @@ package flaras.userInterface
 {
 	import flaras.controller.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.util.StageReference;
 	import flash.display.*;
 	import flash.events.*;
 	import org.aswing.*;
@@ -55,18 +56,18 @@ package flaras.userInterface
 		private var videoPanel:ObjectVideoPopupPanel;
 		private var texturePanel:ObjectTexturePopupPanel;
 		
-		public function GraphicsUserInterface(pControl:CtrInteractionUI, pStage:Stage)
+		public function GraphicsUserInterface(pControl:CtrInteractionUI)
 		{
 			aControl = pControl;
-			aStage = pStage;
+			aStage = StageReference.getStage();
 			ctrGui = new CtrGUI(aControl, this);
 			
-			pStage.scaleMode = StageScaleMode.NO_SCALE;
-			pStage.stageFocusRect = false;
+			aStage.scaleMode = StageScaleMode.NO_SCALE;
+			aStage.stageFocusRect = true;
+			
 			AsWingManager.setRoot(aStage);
-			initComponents();
-			aStage.addEventListener(MouseEvent.CLICK, mouseClick);
-			aStage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheel);
+			
+			initComponents(); 
 		}
 		
 		public function getCtrGUI():CtrGUI
@@ -80,15 +81,15 @@ package flaras.userInterface
 			menu = new Menu(aControl, ctrGui);
 			auxiliar.append(menu);
 			principal.append(auxiliar, BorderLayout.WEST);
-			masterPanel = new PropertiesPanel(aStage, ctrGui);
+			masterPanel = new PropertiesPanel(ctrGui);
 			masterPanel.setPreferredSize(new IntDimension(200, 470));
 			principal.append(masterPanel, BorderLayout.EAST);
 			principal.alpha = 0.75;
 			
 			//addiction of modules object3d, video and texture
-			object3DPanel = new Object3DPopupPanel(aStage, ctrGui);
-			videoPanel = new ObjectVideoPopupPanel(aStage, ctrGui);
-			texturePanel = new ObjectTexturePopupPanel(aStage, ctrGui);
+			object3DPanel = new Object3DPopupPanel(ctrGui);
+			videoPanel = new ObjectVideoPopupPanel(ctrGui);
+			texturePanel = new ObjectTexturePopupPanel(ctrGui);
 			ctrGui.setPropertiesPanel(masterPanel);
 			ctrGui.setObject3Dpanel(object3DPanel);
 			ctrGui.setObjectVideoPanel(videoPanel);
@@ -97,24 +98,12 @@ package flaras.userInterface
 			masterPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
 			masterPanel.setBorder(new LineBorder());
 			
-			window = new JWindow(aStage);
+			window = new JWindow();
 			window.setContentPane(principal);
-			window.setSizeWH(640, 480);
+			window.setSizeWH(840, 480);
 			window.show();
 			
 			ctrGui.start();
-		}
-		
-		private function mouseClick(e:MouseEvent):void {
-			if (e.currentTarget == aStage) {
-				window.visible = true;
-			}
-		}
-		
-		private function mouseWheel(e:MouseEvent):void {
-			if (e.currentTarget == aStage) {
-				window.visible = false;
-			}
 		}
 	}
 }
