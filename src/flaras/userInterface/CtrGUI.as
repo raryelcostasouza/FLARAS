@@ -52,8 +52,6 @@ package flaras.userInterface
 		private var object3dpanel:Object3DPopupPanel;
 		private var videopanel:ObjectVideoPopupPanel;
 		private var texturepanel:ObjectTexturePopupPanel;
-		private var jop:JOptionPane;
-		private var pos:uint;
 		
 		public function CtrGUI(pControl:CtrInteractionUI, pGui:GraphicsUserInterface) {
 			aControl = pControl;
@@ -331,25 +329,28 @@ package flaras.userInterface
 			
 		}
 		
-		public function swapObject(e:Event):void {
-			jop = 
-				JOptionPane.showInputDialog("Swap Object", "Set the new position for your scene on the scene list", null, "new position",
-										propertiesPanel);
-				jop.getOkButton().addActionListener(swap);
+		public function swapObject(e:Event):void 
+		{
+			var sw:SwapWindow = new SwapWindow(swapFunction);
+			var numberOfScenes:uint;
+			var currentScenePos:uint;
+			
+			//-1 for not couting the New string
+			numberOfScenes = propertiesPanel.getObjList().getItemCount() - 1;
+			currentScenePos = propertiesPanel.getObjList().getSelectedIndex();
+			
+			sw.openSwapWindow(numberOfScenes, currentScenePos);
 		}
 		
-		private function swap(e:Event):void 
+		private function swapFunction(pos2Swap:uint):void 
 		{	
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			
-			pos = Number(jop.getInputText().getText());
+			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).
+					swapObjectPositionTo(propertiesPanel.getObjList().getSelectedIndex() - 1, pos2Swap - 1)
 			
-			if (aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).
-					swapObjectPositionTo(propertiesPanel.getObjList().getSelectedIndex() - 1, pos - 1) == 0)
-			{
-				comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
-				propertiesPanel.getObjList().setSelectedIndex(0);
-			}
+			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+			propertiesPanel.getObjList().setSelectedIndex(0);
 		}
 		
 		public function cleanFields():void {

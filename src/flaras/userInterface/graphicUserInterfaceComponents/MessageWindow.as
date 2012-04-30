@@ -156,7 +156,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"Developed at UNIFEI - Federal University of Itajuba - Minas Gerais - Brazil\n" +
 			"Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais\n"
 			
-			, null, parentComponentForWindows, false, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
+			, null, parentComponentForWindows, true, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
 			
 			jop.getOkButton().setText("Open FLARAS Website");
 			jop.getCancelButton().setText("Close");

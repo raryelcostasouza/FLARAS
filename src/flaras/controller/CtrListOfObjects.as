@@ -224,26 +224,17 @@ package flaras.controller
 			listOfObjects.splice(pIndex, 1);
 		}
 		
-		public function swapObjectPositionTo(indexObjSource:uint, indexObjDestination:uint):int
+		public function swapObjectPositionTo(indexObjSource:uint, indexObjDestination:uint):void
 		{
 			var sourceObject:Object3D;
 			var destinationObject:Object3D;
 			
-			if (indexObjDestination > listOfObjects.length - 1 || indexObjDestination < 0)
-			{
-				return -1;
-			}
-			else
-			{
-				sourceObject = listOfObjects[indexObjSource];
-				sourceObject.disableObject();
-				destinationObject = listOfObjects[indexObjDestination];
+			sourceObject = listOfObjects[indexObjSource];
+			sourceObject.disableObject();
+			destinationObject = listOfObjects[indexObjDestination];
 			
-				listOfObjects[indexObjSource] = destinationObject;
-				listOfObjects[indexObjDestination] = sourceObject;
-				
-				return 0;
-			}
+			listOfObjects[indexObjSource] = destinationObject;
+			listOfObjects[indexObjDestination] = sourceObject;
 		}
 		
 		public function getListOfObjects():Vector.<Object3D>
