@@ -60,6 +60,9 @@ package flaras.userInterface
 			aControl = pControl;
 			aStage = pStage;
 			ctrGui = new CtrGUI(aControl, this);
+			
+			pStage.scaleMode = StageScaleMode.NO_SCALE;
+			pStage.stageFocusRect = false;
 			AsWingManager.setRoot(aStage);
 			initComponents();
 			aStage.addEventListener(MouseEvent.CLICK, mouseClick);
