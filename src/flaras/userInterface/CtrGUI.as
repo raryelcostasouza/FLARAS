@@ -203,7 +203,7 @@ package flaras.userInterface
 			for (var i:uint = 0; i < text.length; i++)
 			{
 				item = text.charAt(i);
-				if (item >= '0' && item <= '9')
+				if ((item >= '0' && item <= '9')|| (item == '.'))
 				{
 					newCharArray[j] = item;
 					j++;

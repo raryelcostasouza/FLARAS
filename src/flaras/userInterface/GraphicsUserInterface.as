@@ -82,7 +82,7 @@ package flaras.userInterface
 			auxiliar.append(menu);
 			principal.append(auxiliar, BorderLayout.WEST);
 			masterPanel = new PropertiesPanel(ctrGui);
-			masterPanel.setPreferredSize(new IntDimension(200, 470));
+			masterPanel.setPreferredSize(new IntDimension(210, 470));
 			principal.append(masterPanel, BorderLayout.EAST);
 			principal.alpha = 0.75;
 			
@@ -100,7 +100,7 @@ package flaras.userInterface
 			
 			window = new JWindow();
 			window.setContentPane(principal);
-			window.setSizeWH(840, 480);
+			window.setSizeWH(850, 480);
 			window.show();
 			
 			ctrGui.start();

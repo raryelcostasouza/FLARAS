@@ -52,7 +52,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			var mainPanel:JPanel;
 			
 			setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-			//setResizable(false);
+			setResizable(false);
 			setSizeWH(320, 170);
 			setLocationXY(320 - getWidth()/2, 240 - getHeight()/2);
 			
@@ -93,7 +93,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			centerPanel.setBorder(new LineBorder());
 			
 			jlCurrent = new JLabel("Current position on the scene list:");
-			jlCurrentScenePosition = new JLabel("0");
+			jlCurrentScenePosition = new JLabel("");
 			auxPanel.append(jlCurrent);
 			auxPanel.append(jlCurrentScenePosition);
 				
@@ -149,8 +149,6 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private function closeSwapWindow(e:Event):void
 		{
 			setVisible(false);
-		}
-		
+		}		
 	}
-
 }
