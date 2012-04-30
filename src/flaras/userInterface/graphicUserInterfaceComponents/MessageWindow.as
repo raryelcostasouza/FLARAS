@@ -29,6 +29,9 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
+	import flash.events.Event;
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
 	import org.aswing.*;
 	
 	public class MessageWindow 
@@ -113,11 +116,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"F8: Reset properties\n\n" +
 			
 			"Others keys:\n" +
-			"F3: Toggle mirror screen\n\n" +
-			
-			"Mouse commands:\n" +
-			"Mouse scroll: hide FLARAS graphical interface\n" +
-			"Mouse click: show FLARAS graphical interface", null, parentComponentForWindows);
+			"F3: Toggle mirror screen\n\n", null, parentComponentForWindows);
 		}
 		
 		
@@ -143,21 +142,30 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		public static function aboutFlaras():void
 		{
-			JOptionPane.showMessageDialog("About FLARAS", 
+			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
 			"Version 1.0-r1035 - March 04, 2012\n\n" +
 			
-			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n" +
+			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
+			"Official Website: http://www.ckirner.com/flaras\n\n" +
 			"Developers: \n" +
 			"Raryel Costa Souza - raryel.costa@gmail.com\n" +
 			"Hipolito Douglas Franca Moreira - hipolitodouglas@gmail.com\n\n" +	
-			"Advisor: Claudio Kirner - ckirner@gmail.com\n" +
-			"http://www.ckirner.com/flaras\n\n" +
+			"Advisor: Claudio Kirner - ckirner@gmail.com\n\n" +		
 			
 			"Developed at UNIFEI - Federal University of Itajuba - Minas Gerais - Brazil\n" +
 			"Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais\n"
 			
-			, null, parentComponentForWindows);
+			, null, parentComponentForWindows, false, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
+			
+			jop.getOkButton().setText("Open FLARAS Website");
+			jop.getCancelButton().setText("Close");
+			
+			jop.getOkButton().addActionListener(
+			function(e:Event):void
+			{
+				navigateToURL(new URLRequest("http://www.ckirner.com/flaras"));
+			});
 		}
 	}
 }
