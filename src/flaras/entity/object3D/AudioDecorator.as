@@ -62,7 +62,7 @@ package flaras.entity.object3D
 		override public function disableObject():void
 		{
 			super.disableObject();
-			unLoad();
+			AudioManager.stopAppAudio(getParentPoint().getID());
 		}
 
 		public function getAudioPath():String
@@ -90,7 +90,6 @@ package flaras.entity.object3D
 		override public function unLoad():void
 		{
 			super.unLoad();
-			
 			AudioManager.stopAppAudio(getParentPoint().getID());
 		}
 		
