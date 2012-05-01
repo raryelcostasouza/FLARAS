@@ -178,8 +178,8 @@ package flaras.entity.object3D
 			var objKMZ:KMZ = new KMZ();
 			objKMZ.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 			objKMZ.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-		
-			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);
+			
+			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);		
 			
 			copyDisplayObject3DProperties(objKMZ);
 			aDisplayObject3D = objKMZ;
