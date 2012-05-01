@@ -38,36 +38,47 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	public class Menu extends JMenuBar
 	{
 		private var aControl:CtrInteractionUI;
-		private var menuArchive:JMenu = new JMenu("File");
-		private var newFlaras:JMenuItem = new JMenuItem("New");
-		private var openFlaras:JMenuItem = new JMenuItem("Open");
-		private var publish:JMenuItem = new JMenuItem("Publish");
-		private var saveFlaras:JMenuItem = new JMenuItem("Save");
-		private var saveAsFlaras:JMenuItem = new JMenuItem("Save as...");
-		private var exitFlaras:JMenuItem = new JMenuItem("Exit");
 		private var aCtrGUI:CtrGUI;
-	
-		private var menuAbout:JMenu =  new JMenu("About");
-		private var jmiKeys:JMenuItem = new JMenuItem("Keyboard commands");
-		private var jmiAboutFlaras:JMenuItem = new JMenuItem("About FLARAS");
-		private var jmiLicense:JMenuItem = new JMenuItem("License");
 		
-		public function Menu(pControl:CtrInteractionUI, pCtrGUI:CtrGUI):void {
+		private var menuArchive:JMenu = new JMenu("File");
+		private var newFlaras:JMenuItem = new JMenuItem("&New");
+		private var openFlaras:JMenuItem = new JMenuItem("&Open");
+		private var publish:JMenuItem = new JMenuItem("&Publish");
+		private var saveFlaras:JMenuItem = new JMenuItem("&Save");
+		private var saveAsFlaras:JMenuItem = new JMenuItem("Save &as...");
+		private var exitFlaras:JMenuItem = new JMenuItem("E&xit");
+		
+		private var menuAbout:JMenu =  new JMenu("About");
+		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands");
+		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS");
+		private var jmiLicense:JMenuItem = new JMenuItem("&License");
+		
+		public function Menu(pControl:CtrInteractionUI, pCtrGUI:CtrGUI):void
+		{
 			this.aControl = pControl;
 			this.addMenu(menuArchive);
 			
 			aCtrGUI = pCtrGUI;
 			menuArchive.append(newFlaras);
+			
 			newFlaras.addActionListener(newFunction);
+			
 			menuArchive.append(openFlaras);
+			
 			openFlaras.addActionListener(openFunction);
+			
 			menuArchive.append(new JSeparator());
 			menuArchive.append(saveFlaras);
+				
 			saveFlaras.addActionListener(saveFunction);
+			
 			menuArchive.append(saveAsFlaras);
 			saveAsFlaras.addActionListener(saveAsFunction);
+			
 			menuArchive.append(publish);
+			
 			publish.addActionListener(publishOfflineFunction);
+			
 			menuArchive.append(new JSeparator());
 			menuArchive.append(exitFlaras);
 			exitFlaras.addActionListener(exitFunction);
