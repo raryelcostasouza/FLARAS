@@ -46,12 +46,14 @@ package flaras.controller
 		public function addObject(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
 										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
 										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean):void
+										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
+										pHasAnimation:Boolean = false, pAnimationPeriod:Number = 10, pAnimationRotationAxis:uint = Animation.X_ROTATION_AXIS):void
 		{
 			var obj3D:Object3D = buildObject3D(pFilePath, pTranslation, pRotation,
 									pScale, pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 
 									pHasAudio, pAudioPath, pRepeatAudio, 
-									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo);
+									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo,
+									pHasAnimation, pAnimationPeriod, pAnimationRotationAxis);
 
 			listOfObjects.push(obj3D);
 		}
@@ -61,7 +63,8 @@ package flaras.controller
 		public function rebuildObject3D(pObjectIndex:uint, pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
 										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
 										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean):void
+										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
+										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint):void
 		{
 			var obj3DBefore:Object3D;
 			var obj3DNew:Object3D;
@@ -154,7 +157,8 @@ package flaras.controller
 				obj3DNew = buildObject3D(pFilePath, pTranslation, pRotation,
 									pScale, pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 
 									pHasAudio, pAudioPath, pRepeatAudio, 
-									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo);
+									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo,
+									pHasAnimation, pAnimationPeriod, pAnimationRotationAxis);
 				obj3DBefore.disableObject();
 				listOfObjects[pObjectIndex] = obj3DNew;
 			}
@@ -163,11 +167,14 @@ package flaras.controller
 		private function buildObject3D(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
 										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
 										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean):Object3D
+										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
+										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint):Object3D
 		{
 			var obj3D:Object3D;
+			var animation:Animation;
 			
-			obj3D = new ConcreteObject3D(this.point, pFilePath, pTranslation, pRotation, pScale);
+			animation = new Animation(pHasAnimation, pAnimationPeriod, pAnimationRotationAxis);
+			obj3D = new ConcreteObject3D(this.point, pFilePath, pTranslation, pRotation, pScale, animation);
 			
 			//It's essential to apply Video Decorator or Texture Decorator before Audio Decorator because on them we don't call super statement
 			//on the overriden methods because there is no Collada file associated to the point.

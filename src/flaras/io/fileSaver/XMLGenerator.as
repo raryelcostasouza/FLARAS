@@ -115,6 +115,7 @@ package flaras.io.fileSaver
 					{XMLGenerator.generateXMLTexture(facadeObj3D)}
 					{XMLGenerator.generateXMLAudio(facadeObj3D)}
 					{XMLGenerator.generateXMLVideo(facadeObj3D)}
+					{XMLGenerator.generateXMLAnimation(facadeObj3D)}
 				</object3D>;
 				
 				xml = xml.appendChild(newNode);
@@ -171,6 +172,22 @@ package flaras.io.fileSaver
 				</video>;
 					
 			return xml;
-		}		
+		}
+		
+		private static function generateXMLAnimation(pFacadeObject3D:FacadeObject3D):XML
+		{
+			var xml:XML;
+			
+			xml = new XML();	
+			
+			xml = 
+				<animation>
+						<hasAnimation>{uint(pFacadeObject3D.hasAnimation())}</hasAnimation>
+						<period>{pFacadeObject3D.getAnimationPeriod()}</period>
+						<rotationAxis>{pFacadeObject3D.getAnimationRotationAxis()}</rotationAxis>						
+					</animation>
+					
+			return xml;
+		}
 	}
 }

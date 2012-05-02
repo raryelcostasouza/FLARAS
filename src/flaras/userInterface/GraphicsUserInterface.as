@@ -31,30 +31,21 @@ package flaras.userInterface
 {
 	import flaras.controller.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
-	import flaras.util.StageReference;
+	import flaras.util.*;
 	import flash.display.*;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
 	import org.aswing.geom.*;
 	
-	public class GraphicsUserInterface extends JFrame
+	public class GraphicsUserInterface
 	{
 		//control variables
 		private var aControl:CtrInteractionUI;
 		private var aStage:Stage;
 		private var ctrGui:CtrGUI;
 		
-		//graphical variables
-		private var menuWindow:JWindow;
-		private var menuPanel:JPanel;
-		private var menu:Menu;
-		
-		private var window:JWindow;
-		private var masterPanel:PropertiesPanel;
-		private var object3DPanel:Object3DPopupPanel;
-		private var videoPanel:ObjectVideoPopupPanel;
-		private var texturePanel:ObjectTexturePopupPanel;
+		public static const developmentPanelWidth:uint = 214;
 		
 		public function GraphicsUserInterface(pControl:CtrInteractionUI)
 		{
@@ -75,32 +66,51 @@ package flaras.userInterface
 			return ctrGui;
 		}
 		
-		private function initComponents():void {
-			var principal:JPanel = new JPanel(new BorderLayout());
-			var auxiliar:JPanel = new JPanel();
-			menu = new Menu(aControl, ctrGui);
-			auxiliar.append(menu);
-			principal.append(auxiliar, BorderLayout.WEST);
-			masterPanel = new PropertiesPanel(ctrGui);
-			masterPanel.setPreferredSize(new IntDimension(210, 470));
-			principal.append(masterPanel, BorderLayout.EAST);
-			principal.alpha = 0.75;
+		private function initComponents():void
+		{
+			var tabbedPane:JTabbedPane;
+			var menuPanel:JPanel;
+			var menu:Menu;
+			var flarasGUI:JPanel;
+			var developmentPanel:PropertiesPanel;
+			var animationPanel:AnimationPanel;
+			var window:JWindow;
+			var object3DPanel:Object3DPopupPanel;
+			var videoPanel:ObjectVideoPopupPanel;
+			var texturePanel:ObjectTexturePopupPanel;
+		
+			tabbedPane = new JTabbedPane();
+			flarasGUI = new JPanel(new BorderLayout());
 			
-			//addiction of modules object3d, video and texture
+			menuPanel = new JPanel();
+			menu = new Menu(aControl, ctrGui);
+			menuPanel.append(menu);
+			flarasGUI.append(menuPanel, BorderLayout.WEST);
+			
+			developmentPanel = new PropertiesPanel(ctrGui);
+			developmentPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
+			
+			tabbedPane.appendTab(developmentPanel, "Basic", null, "Basic scene development");
+			
+			animationPanel = new AnimationPanel(ctrGui);
+			tabbedPane.appendTab(animationPanel, "Animation", null, "Animation effects to the scene");
+		
+			//adding modules object3d, video and texture
 			object3DPanel = new Object3DPopupPanel(ctrGui);
 			videoPanel = new ObjectVideoPopupPanel(ctrGui);
 			texturePanel = new ObjectTexturePopupPanel(ctrGui);
-			ctrGui.setPropertiesPanel(masterPanel);
+			ctrGui.setPropertiesPanel(developmentPanel);
 			ctrGui.setObject3Dpanel(object3DPanel);
 			ctrGui.setObjectVideoPanel(videoPanel);
 			ctrGui.setObjectTexturePanel(texturePanel);
+			ctrGui.setAnimationPanel(animationPanel);
 			
-			masterPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
-			masterPanel.setBorder(new LineBorder());
+			flarasGUI.append(tabbedPane, BorderLayout.EAST);
+			flarasGUI.alpha = 0.75;
 			
 			window = new JWindow();
-			window.setContentPane(principal);
-			window.setSizeWH(850, 480);
+			window.setContentPane(flarasGUI);
+			window.setSizeWH(854, 480);
 			window.show();
 			
 			ctrGui.start();

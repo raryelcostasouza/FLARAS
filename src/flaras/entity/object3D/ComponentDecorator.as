@@ -44,6 +44,11 @@ package flaras.entity.object3D
 			aComponent = pObj3D;
 		}
 		
+		override public function getAnimation():Animation
+		{
+			return aComponent.getAnimation();
+		}
+		
 		override public function getParentPoint():Point 
 		{
 			return aComponent.getParentPoint();

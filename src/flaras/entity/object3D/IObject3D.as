@@ -35,6 +35,7 @@ package flaras.entity.object3D
 	
 	public interface IObject3D 
 	{
+		function getAnimation():Animation
 		function getParentPoint():Point
 		
 		function setObject3DAlreadyLoaded(pObject3DAlreadyLoaded:Boolean):void

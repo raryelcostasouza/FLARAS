@@ -139,11 +139,13 @@ package flaras.entity.object3D
 		override public function enableObject(pPlayAudio:Boolean):void 
 		{
 			load();
+			getAnimation().startObjectAnimation();
 		}
 		
 		override public function disableObject():void 
 		{
-			unLoad();			
+			unLoad();
+			getAnimation().stopObjectAnimation();
 		}
 	
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void

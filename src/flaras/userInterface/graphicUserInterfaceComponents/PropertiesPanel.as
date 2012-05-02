@@ -32,6 +32,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	import flaras.userInterface.*;
 	import flash.events.*;
 	import org.aswing.*;
+	import org.aswing.geom.IntDimension;
 	
 	public class PropertiesPanel extends JPanel
 	{	
@@ -66,6 +67,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		public function PropertiesPanel(pCtrGUI:CtrGUI) {
 			super(new FlowLayout());
+			setPreferredSize(new IntDimension(210, 470));
+			
 			append(new JLabel("Point"));
 			//point properties
 			append(ptList = new JComboBox());
@@ -75,7 +78,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			ptList.addActionListener(pCtrGUI.pointSelected);
 			append(btRemovePt = new JButton("x"));
 			btRemovePt.addActionListener(pCtrGUI.removePoint);
-			append(new JLabel("Properties                                            "));
+			append(new JLabel("           "));
 			append(new JLabel(" X "));
 			append(ptX = new JTextField("", jtfColumns));
 			ptX.addActionListener(pCtrGUI.textUpdate);
@@ -98,7 +101,6 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			btRemoveObj.addActionListener(pCtrGUI.removeObject);
 			append(btSwapObj = new JButton("@"));
 			btSwapObj.addActionListener(pCtrGUI.swapObject);
-			append(new JLabel("Properties                                         "));
 			append(new JLabel("Translation                                           "));
 			append(new JLabel(" X "));
 			append(objTrX = new JTextField("", jtfColumns));
@@ -112,7 +114,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			append(objTrZ = new JTextField("", jtfColumns));
 			objTrZ.addActionListener(pCtrGUI.textUpdate);
 			objTrZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel("Rotation                                              "));
+			append(new JLabel("Rotation                                                "));
 			append(new JLabel(" X "));
 			append(objRtX = new JTextField("", jtfColumns));
 			objRtX.addActionListener(pCtrGUI.textUpdate);

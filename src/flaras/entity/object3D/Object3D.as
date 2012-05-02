@@ -48,6 +48,12 @@ package flaras.entity.object3D
 			}
 		}
 		
+		public function getAnimation():Animation
+		{
+			throwError();
+			return null;
+		}
+		
 		public function getParentPoint():Point 
 		{ 
 			throwError();

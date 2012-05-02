@@ -419,6 +419,37 @@ package flaras.entity.object3D
 			}
 		}
 		
+		//animation properties ------------------------------------------------------------------------------------
+		public function hasAnimation():Boolean
+		{
+			return aConcreteObject3D.getAnimation().getHasAnimation();
+		}
+		
+		public function getAnimationPeriod():Number
+		{
+			return aConcreteObject3D.getAnimation().getPeriod();
+		}
+		
+		public function getAnimationRotationAxis():uint
+		{
+			return aConcreteObject3D.getAnimation().getRotationAxis();
+		}
+		
+		public function setHasAnimation(hasAnimation:Boolean):void
+		{
+			aConcreteObject3D.getAnimation().setHasAnimation(hasAnimation);
+		}
+		
+		public function setAnimationPeriod(animationPeriod:Number):void
+		{
+			aConcreteObject3D.getAnimation().setPeriod(animationPeriod);
+		}
+		
+		public function setAnimationRotationAxis(rotationAxis:uint):void
+		{
+			aConcreteObject3D.getAnimation().setRotationAxis(rotationAxis);
+		}		
+				
 		//other methods
 		public function updateObject3DPosition():void
 		{

@@ -37,6 +37,7 @@ package flaras.entity.object3D
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flash.events.*;
+	import flash.utils.Timer;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
@@ -44,19 +45,23 @@ package flaras.entity.object3D
 	public class ConcreteObject3D extends Object3D implements IObject3D
 	{
 		//translation from the object to the parent point
-		private var aTranslation:Number3D;		
+		private var aTranslation:Number3D;
+		private var aRotation:Number3D;
 		private var aObjParentPoint:Point;
 		private var aDisplayObject3D:DisplayObject3D;
 		private var aFilePath:String;
 		private var aObject3DAlreadyLoaded:Boolean;
+		private var _animation:Animation;
 				
 		public function ConcreteObject3D(pParentPoint:Point, pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
-								pScale:Number3D) 
+								pScale:Number3D, pAnimation:Animation) 
 		{
 			super(this);
+			
 			aObjParentPoint = pParentPoint;
 			aFilePath = pFilePath;
 			aTranslation = pTranslation;
+			aRotation = pRotation;
 			
 			aDisplayObject3D = new DisplayObject3D();
 			aDisplayObject3D.position = Number3D.add(aTranslation, aObjParentPoint.getPosition());
@@ -64,6 +69,13 @@ package flaras.entity.object3D
 			setScale(pScale);
 			
 			aObject3DAlreadyLoaded = false;
+			_animation = pAnimation;
+			_animation.setObj3D(this);
+		}
+		
+		override public function getAnimation():Animation
+		{
+			return this._animation;
 		}
 		
 		override public function getDisplayObject3D():DisplayObject3D
@@ -122,9 +134,7 @@ package flaras.entity.object3D
 		
 		public function getRotation():Number3D
 		{
-			return new Number3D(aDisplayObject3D.rotationX, 
-								aDisplayObject3D.rotationY, 
-								aDisplayObject3D.rotationZ);
+			return aRotation;
 		}
 		
 		public function setRotation(pRotation:Number3D):void
@@ -132,6 +142,7 @@ package flaras.entity.object3D
 			aDisplayObject3D.rotationX = pRotation.x;
 			aDisplayObject3D.rotationY = pRotation.y;
 			aDisplayObject3D.rotationZ = pRotation.z;
+			aRotation = pRotation;
 		}
 		
 		public function getScale():Number3D
@@ -150,6 +161,7 @@ package flaras.entity.object3D
 		
 		override public function enableObject(pPlayAudio:Boolean):void
 		{
+			trace("--------enableObject")
 			if (!aObject3DAlreadyLoaded)
 			{
 				load();	
@@ -158,19 +170,21 @@ package flaras.entity.object3D
 			{
 				setVisible(true);
 			}
+			_animation.startObjectAnimation();			
 		}
 		
 		override public function disableObject():void
 		{
+			trace("--------disableObject")
 			setVisible(false);
+			_animation.stopObjectAnimation();
 		}
 		
 		override public function setVisible(visible:Boolean):void
 		{
 			aDisplayObject3D.visible = visible;
 		}
-		
-		
+			
 		private function load():void
 		{
 			aObject3DAlreadyLoaded = true;
@@ -190,6 +204,7 @@ package flaras.entity.object3D
 		override public function unLoad():void
 		{
 			setObject3DAlreadyLoaded(false);
+			_animation.stopObjectAnimation();
 			aDisplayObject3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 			aDisplayObject3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 			MarkerNodeManager.removeObjFromMarkerNode(aDisplayObject3D, Marker.REFERENCE_MARKER);
@@ -197,7 +212,8 @@ package flaras.entity.object3D
 		
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{
-			unLoad();
+			unLoad();			
+			aDisplayObject3D = null;
 			FileRemover.removeFile(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);			
 		}
 		

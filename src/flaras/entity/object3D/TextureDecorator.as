@@ -96,6 +96,7 @@ package flaras.entity.object3D
 			{
 				setVisible(true);
 			}
+			getAnimation().startObjectAnimation();
 		}
 		
 		private function load():void
