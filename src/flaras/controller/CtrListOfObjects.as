@@ -69,7 +69,7 @@ package flaras.controller
 			var obj3DBefore:Object3D;
 			var obj3DNew:Object3D;
 			var fullRebuildNeeded:Boolean = false;
-												
+							
 			obj3DBefore = listOfObjects[pObjectIndex];
 			var facObj3DBefore:FacadeObject3D = new FacadeObject3D(obj3DBefore);
 			
