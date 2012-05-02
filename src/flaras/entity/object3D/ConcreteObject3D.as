@@ -161,7 +161,6 @@ package flaras.entity.object3D
 		
 		override public function enableObject(pPlayAudio:Boolean):void
 		{
-			trace("--------enableObject")
 			if (!aObject3DAlreadyLoaded)
 			{
 				load();	
@@ -175,7 +174,6 @@ package flaras.entity.object3D
 		
 		override public function disableObject():void
 		{
-			trace("--------disableObject")
 			setVisible(false);
 			_animation.stopObjectAnimation();
 		}
@@ -213,7 +211,6 @@ package flaras.entity.object3D
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{
 			unLoad();			
-			aDisplayObject3D = null;
 			FileRemover.removeFile(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);			
 		}
 		
