@@ -31,6 +31,7 @@ package flaras.entity.object3D
 {
 	import flaras.*;
 	import flaras.constants.FolderConstants;
+	import flaras.controller.CtrMirror;
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
@@ -153,10 +154,19 @@ package flaras.entity.object3D
 		}
 		
 		public function setScale(pScale:Number3D):void
+		{			
+			var positiveScale:Number3D;
+			
+			positiveScale = new Number3D(Math.abs(pScale.x), Math.abs(pScale.y), Math.abs(pScale.z))
+			
+			aDisplayObject3D.scaleX = positiveScale.x * CtrMirror.MIRRORED_SCALE_FACTOR;
+			aDisplayObject3D.scaleY = positiveScale.y;
+			aDisplayObject3D.scaleZ = positiveScale.z;
+		}
+		
+		public function toggleMirror():void
 		{
-			aDisplayObject3D.scaleX = pScale.x;
-			aDisplayObject3D.scaleY = pScale.y;
-			aDisplayObject3D.scaleZ = pScale.z;
+			aDisplayObject3D.scaleX *= -1;
 		}
 		
 		override public function enableObject(pPlayAudio:Boolean):void

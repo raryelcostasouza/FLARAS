@@ -147,13 +147,17 @@ package flaras.marker
 		private function buildTextureCover(pFilePath:String):DisplayObject3D
 		{
 			var obj3D:DisplayObject3D;
+			var bfm:BitmapFileMaterial;
 			
 			var urlLoader:URLLoader = new URLLoader(new URLRequest(pFilePath));
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 			urlLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
 			
-			obj3D = new Plane(new BitmapFileMaterial(pFilePath), 80, 80);
+			bfm = new BitmapFileMaterial(pFilePath);
+			bfm.doubleSided = true;
+			
+			obj3D = new Plane(bfm , 80, 80);
 			obj3D.rotationX = -180;
 			obj3D.position = new Number3D(0, 0, 0);
 			
@@ -214,6 +218,13 @@ package flaras.marker
 			aObj3DCoverInspector.visible = false;
 			aObj3DCoverControlBackward.visible = false;
 			aObj3DCoverControlForward.visible = true;
+		}
+		
+		public function mirror():void
+		{
+			aObj3DCoverInspector.scaleX *= -1;
+			aObj3DCoverControlForward.scaleX *= -1;
+			aObj3DCoverControlBackward.scaleX *= -1;
 		}
 	}	
 }

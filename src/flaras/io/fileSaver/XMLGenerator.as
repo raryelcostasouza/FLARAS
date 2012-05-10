@@ -108,7 +108,7 @@ package flaras.io.fileSaver
 						<z>{rotation.z}</z>
 					</rotation>
 					<scale>
-						<x>{scale.x}</x>
+						<x>{Math.abs(scale.x)}</x>
 						<y>{scale.y}</y>
 						<z>{scale.z}</z>
 					</scale>

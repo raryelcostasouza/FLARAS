@@ -217,6 +217,35 @@ package flaras.userInterface
 			jtf.setText(newCharArray.join(''));
 		}
 		
+		
+
+		public function filterValidStrictPositiveCharFromTextField(ke:KeyboardEvent):void
+		{
+			var text:String;
+			var newCharArray:Array;
+			var j:uint;
+			var item:String;
+			var jtf:JTextField;
+			
+			jtf = JTextField(ke.currentTarget);
+			
+			text = jtf.getText();
+			
+			j = 0;
+			newCharArray = new Array();
+			for (var i:uint = 0; i < text.length; i++)
+			{
+				item = text.charAt(i);
+				if ((item >= '0' && item <= '9')|| (item == '.'))
+				{
+					newCharArray[j] = item;
+					j++;
+				}
+			}
+			
+			jtf.setText(newCharArray.join(''));
+		}
+		
 		public function comboBoxReload():void {
 			propertiesPanel.getPtList().setSelectedIndex(0);
 			cleanFields();
@@ -549,7 +578,7 @@ package flaras.userInterface
 						propertiesPanel.getObjRtX().setText(facade3d.getRotation().x+"");
 						propertiesPanel.getObjRtY().setText(facade3d.getRotation().y+"");
 						propertiesPanel.getObjRtZ().setText(facade3d.getRotation().z+"");
-						propertiesPanel.getObjScX().setText(facade3d.getScale().x+"");
+						propertiesPanel.getObjScX().setText(Math.abs(facade3d.getScale().x)+"");
 						propertiesPanel.getObjScY().setText(facade3d.getScale().y+"");
 						propertiesPanel.getObjScZ().setText(facade3d.getScale().z +"");
 						

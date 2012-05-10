@@ -199,6 +199,11 @@ package flaras.entity.object3D
 			aConcreteObject3D.setScale(pScale);
 		}
 		
+		public function toggleMirror():void
+		{
+			aConcreteObject3D.toggleMirror();
+		}
+		
 		//texture properties ----------------------------------------------------------------------------
 		public function hasTexture():Boolean
 		{

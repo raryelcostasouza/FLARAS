@@ -27,53 +27,58 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.controller
-{	
-	import flaras.boundary.*;
-	import flaras.marker.*;
-	import flaras.userInterface.*;
-	import flaras.util.*;
-	import flash.display.*;
-	import FTK.*;
-	import org.papervision3d.core.math.*;
-	
-	public class CtrInteractionUI
+package flaras.controller 
+{
+	import flaras.entity.object3D.FacadeObject3D;
+	import flaras.entity.object3D.Object3D;
+	import flaras.entity.Point;
+	import org.papervision3d.core.math.Number3D;
+
+	public class CtrMirror 
 	{
-		private var aFMMApp:FLARToolKitMultiMarkerApp;	
+		public static var MIRRORED_SCALE_FACTOR:int = 1;
+		
 		private var _ctrMain:CtrMain;
 		
-		public function CtrInteractionUI(ctrMain:CtrMain, pFMMApp:FLARToolKitMultiMarkerApp)
+		public function CtrMirror(ctrMain:CtrMain) 
 		{
-			var bndMMI:BoundaryMultiMarkerInteraction;
-			
 			this._ctrMain = ctrMain;
-			aFMMApp = pFMMApp;
+		}
+		
+		public function toggleMirror():void
+		{
+			var listOfPoints:Vector.<Point>;
+			var listOfObjects:Vector.<Object3D>;
+			var facObj3D:FacadeObject3D;
+			var currentScale:Number3D;
 			
-			new BoundaryInteractionUI(this);
-			var gui:GraphicsUserInterface = new GraphicsUserInterface(this);
-			ctrMain.ctrGUI = gui.getCtrGUI();
-			bndMMI = new BoundaryMultiMarkerInteraction(this);
-		}
-		
-		public function getCtrMain():CtrMain
-		{
-			return this._ctrMain;
-		}
-		
-		public function getCtrPoint():CtrPoint
-		{
-			return this._ctrMain.ctrPoint;
-		}
-		
-		public function getObjCtrUserProject():CtrUserProject
-		{
-			return this._ctrMain.ctrUserProject;
-		}
-		
-		public function changeScreenMirror():void
-		{
-			aFMMApp.changeScreenMirror();
-			this._ctrMain.ctrMirror.toggleMirror();
-		}
-	}	
+			listOfPoints =  _ctrMain.ctrPoint.getListOfPoints();
+			
+			if (MIRRORED_SCALE_FACTOR == 1)
+			{
+				MIRRORED_SCALE_FACTOR = -1;
+			}
+			else
+			{
+				MIRRORED_SCALE_FACTOR = 1;
+			}
+			
+			_ctrMain.ctrMarker.interactionMarker.mirror();
+			
+			for each (var p:Point in listOfPoints)
+			{
+				listOfObjects = p.getListOfObjects();
+				for each(var obj:Object3D in listOfObjects)
+				{
+					facObj3D = new FacadeObject3D(obj);
+					
+					if (facObj3D.hasTexture() || facObj3D.hasVideo())
+					{
+						currentScale = facObj3D.getScale();
+						facObj3D.toggleMirror();
+					}
+				}				
+			}
+		}		
+	}
 }
