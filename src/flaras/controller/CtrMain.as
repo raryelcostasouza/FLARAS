@@ -48,13 +48,12 @@ package flaras.controller
 		private var _interactionMarker:InteractionMarker;
 			
 		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
-		{			
+		{
 			this._ctrMarker = new CtrMarker();
 			this._ctrPoint = new CtrPoint(this);
 			new CtrInteractionUI(this, pFMMApp);
 			this._ctrUserProject = new CtrUserProject(this);
 			this._ctrPointInterWithKbd = new CtrPointInteractionWithKbd(this);
-			
 		}
 		
 		public function set ctrGUI(ctrGUI:CtrGUI):void
