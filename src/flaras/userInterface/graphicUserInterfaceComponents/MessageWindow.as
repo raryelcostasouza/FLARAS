@@ -106,7 +106,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			"Keys related with the interaction marker:\n"+
 			"M: Toggle marker type (inspector/control)\n" +
-			"C: Toggle control marker type (backward/forward) (only avaiable if the marker type is control)\n\n" +
+			"C: Toggle control marker type (backward/forward) (only available if the marker type is control)\n\n" +
 			
 			"Keys related with the interaction sphere:\n"+
 			"F4: Decrease size\n" +
