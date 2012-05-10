@@ -110,6 +110,7 @@ package flaras.entity.object3D
 			var nc:NetConnection;
 			var v:Video;
 			var plane:Plane;
+			var vsm:VideoStreamMaterial;
 			
 			setObject3DAlreadyLoaded(true);
 			
@@ -117,7 +118,10 @@ package flaras.entity.object3D
 					FolderConstants.getFlarasAppCurrentFolder()+ "/" + aVideoPath, aWidth, aHeight, aRepeatVideo);
 			
 			aObjNetStream = videoManagerElements[1];
-			plane = new Plane(new VideoStreamMaterial(videoManagerElements[0], videoManagerElements[1]), aWidth, aHeight);
+			vsm = new VideoStreamMaterial(videoManagerElements[0], videoManagerElements[1]);
+			vsm.doubleSided = true;
+			
+			plane = new Plane(vsm, aWidth, aHeight);
 			
 			copyDisplayObject3DProperties(plane);
 			setDisplayObject3D(plane);

@@ -113,6 +113,8 @@ package flaras.entity.object3D
 			
 			setObject3DAlreadyLoaded(true);
 			bfm = new BitmapFileMaterial(FolderConstants.getFlarasAppCurrentFolder() + "/" + aTexturePath);
+			bfm.doubleSided = true;
+			
 			plane = new Plane(bfm, aWidth, aHeight);
 			copyDisplayObject3DProperties(plane);
 			setDisplayObject3D(plane);
