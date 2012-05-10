@@ -48,41 +48,72 @@ package flaras.boundary
 		
 		private function keyboardMonitor(ke:KeyboardEvent):void
 		{
-			switch(ke.keyCode)
+			if (ke.ctrlKey)
 			{
-				case 65: //A
-					this._ctrInteractionUI.getCtrMain().ctrPoint.enableAllPoints();
-					break;
-				case 67: //C
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeControlMarkerType();
-					break;
-				case 81: //Q
-					this._ctrInteractionUI.getCtrMain().ctrPoint.disableAllPoints(true);
-					break;
-				case 77: //M
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeMarkerType();
-					break;
-				case Keyboard.F1:
-					this._ctrInteractionUI.getCtrMain().ctrPoint.changeVisibleAuxSphereOfPoints();
-					break;
-				case Keyboard.F3:
-					this._ctrInteractionUI.changeScreenMirror();
-					break;
-				case Keyboard.F4:
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereSize(-1);
-					break;
-				case Keyboard.F5:
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereSize(+1);
-					break;
-				case Keyboard.F6:
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereDistance(-1);
-					break;
-				case Keyboard.F7:
-					this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereDistance(+1);
-					break
-				case Keyboard.F8:
-					this._ctrInteractionUI.getCtrMain().ctrMarker.resetInteractionMarkerSphereProperties();
-					break;
+				var index:uint;
+				
+				// key is 0-9
+				if (ke.keyCode >= 48 && ke.keyCode <= 57)
+				{
+					if (ke.charCode == 48)
+					{
+						index = 9;
+					}
+					else
+					{
+						index = ke.keyCode - 48 - 1;
+					}
+					
+					this._ctrInteractionUI.getCtrMain().ctrPointInterWithKbd.selectPoint(index);
+				}
+			}
+			else
+			{
+				switch(ke.keyCode)
+				{
+					case 65: //A
+						this._ctrInteractionUI.getCtrMain().ctrPoint.enableAllPoints();
+						break;
+					case 67: //C
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeControlMarkerType();
+						break;
+					case 81: //Q
+						this._ctrInteractionUI.getCtrMain().ctrPoint.disableAllPoints(true);
+						break;
+					case 77: //M
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeMarkerType();
+						break;
+					case Keyboard.F1:
+						this._ctrInteractionUI.getCtrMain().ctrPoint.changeVisibleAuxSphereOfPoints();
+						break;
+					case Keyboard.F3:
+						this._ctrInteractionUI.changeScreenMirror();
+						break;
+					case Keyboard.F4:
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereSize(-1);
+						break;
+					case Keyboard.F5:
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereSize(+1);
+						break;
+					case Keyboard.F6:
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereDistance(-1);
+						break;
+					case Keyboard.F7:
+						this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereDistance(+1);
+						break
+					case Keyboard.F8:
+						this._ctrInteractionUI.getCtrMain().ctrMarker.resetInteractionMarkerSphereProperties();
+						break;
+					case Keyboard.PAGE_DOWN:
+						this._ctrInteractionUI.getCtrMain().ctrPointInterWithKbd.controlForwardInteractionWithSelectedPoint();	
+						break;
+					case Keyboard.PAGE_UP:
+						this._ctrInteractionUI.getCtrMain().ctrPointInterWithKbd.controlBackwardInteractionWithSelectedPoint();	
+						break;
+					case Keyboard.END:
+						this._ctrInteractionUI.getCtrMain().ctrPointInterWithKbd.deselectAllPoints();
+						break;
+				}	
 			}
 		}
 	}	
