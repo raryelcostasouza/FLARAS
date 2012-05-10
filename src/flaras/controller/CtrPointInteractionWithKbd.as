@@ -27,64 +27,62 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.controller
+package flaras.controller 
 {
-	import flaras.*;
-	import flaras.audio.*;
-	import flaras.controller.*;
-	import flaras.marker.*;
-	import flaras.userInterface.*;
-	import flaras.util.*;
-	import flash.display.*;
-	import FTK.*;
+	import flaras.entity.Point;
+	import flaras.marker.InteractionMarker;
 	
-	public class CtrMain
-	{		
-		private var _ctrPoint:CtrPoint;
-		private var _ctrUserProject:CtrUserProject;
-		private var _ctrMarker:CtrMarker;
-		private var _ctrGUI:CtrGUI;
-		private var _ctrPointInterWithKbd:CtrPointInteractionWithKbd;
-		private var _interactionMarker:InteractionMarker;
+	public class CtrPointInteractionWithKbd 
+	{
+		private var _ctrMain:CtrMain;
+		private var _currentSelectedPoint:Point;
+		
+		public function CtrPointInteractionWithKbd(ctrMain:CtrMain) 
+		{
+			this._ctrMain = ctrMain;
+			_currentSelectedPoint = null;
+		}
+		
+		public function selectPoint(pointIndex:uint):void
+		{
+			var pointList:Vector.<Point> = _ctrMain.ctrPoint.getListOfPoints();
 			
-		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
-		{			
-			this._ctrMarker = new CtrMarker();
-			this._ctrPoint = new CtrPoint(this);
-			new CtrInteractionUI(this, pFMMApp);
-			this._ctrUserProject = new CtrUserProject(this);
-			this._ctrPointInterWithKbd = new CtrPointInteractionWithKbd(this);
-			
+			if (pointIndex < pointList.length)
+			{
+				_currentSelectedPoint = pointList[pointIndex];
+				_ctrMain.ctrPoint.inspectPoint(_currentSelectedPoint);
+			}
+			//TODO give feedback that the point is selected
 		}
 		
-		public function set ctrGUI(ctrGUI:CtrGUI):void
+		public function deselectAllPoints():void
 		{
-			this._ctrGUI = ctrGUI;
+			_currentSelectedPoint = null;
 		}
 		
-		public function get ctrGUI():CtrGUI
+		public function controlForwardInteractionWithSelectedPoint():void
 		{
-			return this._ctrGUI;
+			if (_currentSelectedPoint != null && isPtoValido(_currentSelectedPoint))
+			{
+				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_FORWARD);
+			}			
 		}
 		
-		public function get ctrPoint():CtrPoint
+		public function controlBackwardInteractionWithSelectedPoint():void
 		{
-			return this._ctrPoint;
+			if (_currentSelectedPoint != null  && isPtoValido(_currentSelectedPoint))
+			{
+				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_BACKWARD);
+			}			
 		}
 		
-		public function get ctrUserProject():CtrUserProject
+		private function isPtoValido(p:Point):Boolean
 		{
-			return this._ctrUserProject;
+			if (p.getID() < _ctrMain.ctrPoint.getListOfPoints().length)
+			{
+				return true;
+			}
+			return false;
 		}
-		
-		public function get ctrMarker():CtrMarker
-		{
-			return this._ctrMarker;
-		}
-		
-		public function get ctrPointInterWithKbd():CtrPointInteractionWithKbd 
-		{
-			return this._ctrPointInterWithKbd;
-		}
-	}	
+	}
 }
