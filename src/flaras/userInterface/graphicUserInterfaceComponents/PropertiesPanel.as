@@ -131,15 +131,15 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			append(new JLabel(" X "));
 			append(objScX = new JTextField("", jtfColumns));
 			objScX.addActionListener(pCtrGUI.textUpdate);
-			objScX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
+			objScX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
 			append(new JLabel(" Y "));
 			append(objScY = new JTextField("", jtfColumns));
 			objScY.addActionListener(pCtrGUI.textUpdate);
-			objScY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
+			objScY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
 			append(new JLabel(" Z "));
 			append(objScZ = new JTextField("", jtfColumns));
 			objScZ.addActionListener(pCtrGUI.textUpdate);
-			objScZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
+			objScZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
 			append(new JLabel(""));
 			//object audio properties
 			append(new JLabel("Has audio?"));
