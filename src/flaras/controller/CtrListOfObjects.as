@@ -181,14 +181,12 @@ package flaras.controller
 			if (pHasVideo && !pHasTexture)
 			{
 				obj3D = new VideoDecorator(obj3D, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo);
-				adjustRotation(obj3D);
 			}
 			else
 			{
 				if (!pHasVideo && pHasTexture)
 				{
 					obj3D = new TextureDecorator(obj3D, pTexturePath, pTextureWidth, pTextureHeight);
-					adjustRotation(obj3D);
 				}
 			}
 			
@@ -198,23 +196,6 @@ package flaras.controller
 			}
 			
 			return obj3D;
-		}
-		
-		//adjust the rotation of videos and textures in order to them appear on the right side of the plane (visible to the user)
-		private function adjustRotation(obj3D:Object3D):void
-		{
-			var facObj3D:FacadeObject3D;
-			var rotation:Number3D;
-			
-			facObj3D= new FacadeObject3D(obj3D);
-			
-			rotation = facObj3D.getRotation();
-			if (rotation.y < 45)
-			{
-				rotation.y += 180;
-			}			
-			
-			facObj3D.setRotation(rotation);				
 		}
 		
 		public function removeObject(pIndex:uint):void
