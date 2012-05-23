@@ -102,7 +102,14 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"Keys related with points:\n"+
 			"A: Enable all points\n" +
 			"Q: Disable all points\n" +
-			"F1: Toggle aux points (available only for enable points). It will appear a blue sphere on the point position.\n\n"+
+			"F1: Toggle aux points (available only for enable points). It will appear a blue sphere on the point position.\n\n" +
+			"\nCtrl + 1: apply an inspection interaction to the point 1 and select it for keyboard interaction.\n" +
+			"Ctrl + 2: apply an inspection interaction to the point 2...\n"+
+			"...\n" +
+			"Ctrl + 0: ... to the point 10\n"+
+			"Page Down: apply control forward interaction to the selected point.\n" +
+			"Page Up: apply control backward interaction to the selected point.\n" +
+			"End: unselect the previously selected point (Page Down and Page Up will have no more effect).\n\n"+
 			
 			"Keys related with the interaction marker:\n"+
 			"M: Toggle marker type (inspector/control)\n" +
