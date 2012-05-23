@@ -52,7 +52,7 @@ package flaras.io.fileSaver
 		
 		public static function generateXMLPoints(pListOfPoints:Vector.<Point>):XML
 		{
-			var xml:XML = new XML("<pointsList></pointsList>");
+			var xml:XML = new XML("<pointsList><flarasProjectReleaseVersion>1052</flarasProjectReleaseVersion></pointsList>");
 		
 			for each(var p:Point in pListOfPoints)
 			{
