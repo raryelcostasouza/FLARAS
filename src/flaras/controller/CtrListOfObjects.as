@@ -215,14 +215,14 @@ package flaras.controller
 		public function swapObjectPositionTo(indexObjSource:uint, indexObjDestination:uint):void
 		{
 			var sourceObject:Object3D;
-			var destinationObject:Object3D;
 			
 			sourceObject = listOfObjects[indexObjSource];
 			sourceObject.disableObject();
-			destinationObject = listOfObjects[indexObjDestination];
 			
-			listOfObjects[indexObjSource] = destinationObject;
-			listOfObjects[indexObjDestination] = sourceObject;
+			//remove the source object from the list
+			listOfObjects.splice(indexObjSource, 1);
+			//adds the source element on the destination position
+			listOfObjects.splice(indexObjDestination, 0, sourceObject);
 		}
 		
 		public function getListOfObjects():Vector.<Object3D>
