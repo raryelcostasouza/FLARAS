@@ -202,10 +202,9 @@ package flaras.entity.object3D
 			objKMZ.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 			
 			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);		
-			
 			copyDisplayObject3DProperties(objKMZ);
 			aDisplayObject3D = objKMZ;
-			
+				
 			MarkerNodeManager.addObj2MarkerNode(aDisplayObject3D, Marker.REFERENCE_MARKER, null);
 		}
 		

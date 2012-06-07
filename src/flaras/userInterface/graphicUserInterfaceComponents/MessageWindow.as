@@ -151,7 +151,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		{
 			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
-			"Version 1.0-r1064 - May 23, 2012\n\n" +
+			"Version 1.0-r1066 - May 23, 2012\n\n" +
 			
 			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
 			"Official Website: http://www.ckirner.com/flaras\n\n" +
@@ -161,7 +161,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"Advisor: Claudio Kirner - ckirner@gmail.com\n\n" +		
 			
 			"Developed at UNIFEI - Federal University of Itajuba - Minas Gerais - Brazil\n" +
-			"Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais\n"
+			"Research scholarship by FAPEMIG (Fundação de Amparo à Pesquisa no Estado de Minas Gerais) and\n" +
+			"CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico)\n"
 			
 			, null, parentComponentForWindows, true, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
 			
