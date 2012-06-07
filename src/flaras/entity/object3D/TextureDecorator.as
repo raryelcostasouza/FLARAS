@@ -31,12 +31,15 @@ package flaras.entity.object3D
 {
 	import flaras.*;
 	import flaras.constants.FolderConstants;
+	import flaras.controller.CtrMirror;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flash.events.*;
 	import flash.net.*;
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.materials.*;
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.primitives.*;
 	
 	public class TextureDecorator extends ComponentDecorator
@@ -118,8 +121,22 @@ package flaras.entity.object3D
 			plane = new Plane(bfm, aWidth, aHeight);
 			copyDisplayObject3DProperties(plane);
 			setDisplayObject3D(plane);
+			setScale(new Number3D(getDisplayObject3D().scaleX, getDisplayObject3D().scaleY, getDisplayObject3D().scaleZ));
+			
 			MarkerNodeManager.addObj2MarkerNode(getDisplayObject3D(), Marker.REFERENCE_MARKER, null);
 		}	
+		
+		public function setScale(pScale:Number3D):void
+		{			
+			var positiveScale:Number3D;
+			var obj3D:DisplayObject3D;
+			positiveScale = new Number3D(Math.abs(pScale.x), Math.abs(pScale.y), Math.abs(pScale.z))
+			
+			obj3D = getDisplayObject3D();
+			obj3D.scaleX = positiveScale.x * CtrMirror.MIRRORED_SCALE_FACTOR;
+			obj3D.scaleY = positiveScale.y;
+			obj3D.scaleZ = positiveScale.z;
+		}
 		
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{	

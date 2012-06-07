@@ -196,7 +196,18 @@ package flaras.entity.object3D
 		
 		public function setScale(pScale:Number3D):void
 		{
-			aConcreteObject3D.setScale(pScale);
+			if (hasTexture())
+			{
+				aTextureDecorator.setScale(pScale);
+			}
+			else if (hasVideo())
+			{
+				aVideoDecorator.setScale(pScale);
+			}
+			else
+			{
+				aConcreteObject3D.setScale(pScale);
+			}			
 		}
 		
 		public function toggleMirror():void

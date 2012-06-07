@@ -159,7 +159,7 @@ package flaras.entity.object3D
 			
 			positiveScale = new Number3D(Math.abs(pScale.x), Math.abs(pScale.y), Math.abs(pScale.z))
 			
-			aDisplayObject3D.scaleX = positiveScale.x * CtrMirror.MIRRORED_SCALE_FACTOR;
+			aDisplayObject3D.scaleX = positiveScale.x;
 			aDisplayObject3D.scaleY = positiveScale.y;
 			aDisplayObject3D.scaleZ = positiveScale.z;
 		}

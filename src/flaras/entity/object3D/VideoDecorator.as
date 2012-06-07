@@ -31,6 +31,7 @@ package flaras.entity.object3D
 {
 	import flaras.*;
 	import flaras.constants.*;
+	import flaras.controller.CtrMirror;
 	import flaras.entity.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
@@ -125,8 +126,21 @@ package flaras.entity.object3D
 			
 			copyDisplayObject3DProperties(plane);
 			setDisplayObject3D(plane);
+			setScale(new Number3D(getDisplayObject3D().scaleX, getDisplayObject3D().scaleY, getDisplayObject3D().scaleZ));
 			
 			MarkerNodeManager.addObj2MarkerNode(getDisplayObject3D(), Marker.REFERENCE_MARKER, null);
+		}
+		
+		public function setScale(pScale:Number3D):void
+		{			
+			var positiveScale:Number3D;
+			var obj3D:DisplayObject3D;
+			positiveScale = new Number3D(Math.abs(pScale.x), Math.abs(pScale.y), Math.abs(pScale.z))
+			
+			obj3D = getDisplayObject3D();
+			obj3D.scaleX = positiveScale.x * CtrMirror.MIRRORED_SCALE_FACTOR;
+			obj3D.scaleY = positiveScale.y;
+			obj3D.scaleZ = positiveScale.z;
 		}
 		
 		override public function unLoad():void
