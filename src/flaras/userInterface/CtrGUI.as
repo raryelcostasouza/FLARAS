@@ -71,7 +71,8 @@ package flaras.userInterface
 					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
-					false, "", 0, 0, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					false, "", 0, 0, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
 					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
 				}
@@ -83,7 +84,8 @@ package flaras.userInterface
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
 					true, path, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(),
-					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 					
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
 					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
@@ -96,7 +98,8 @@ package flaras.userInterface
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
 					false, "", 0, 0, false, "", false, true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _animationPanel.getHasAnimation(),
-					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
 					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
 					
@@ -112,21 +115,21 @@ package flaras.userInterface
 					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1,
 					path, facd3d.getTranslation(), facd3d.getRotation(),
 					facd3d.getScale(), false, "", 0, 0, facd3d.hasAudio(), facd3d.getAudioPath(), facd3d.getRepeatAudio(),
-					false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 				}
 				if (destiny == "textures/") 
 				{
 					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1,
 					"", facd3d.getTranslation(), facd3d.getRotation(), facd3d.getScale(),
 					true, path, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT, facd3d.hasAudio(), facd3d.getAudioPath(), facd3d.getRepeatAudio(), false, "", 0, 0,
-					false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 				}
 				if (destiny == "videos/") 
 				{
 					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1,
 					"", facd3d.getTranslation(), facd3d.getRotation(), facd3d.getScale(),
 					false, "", 0, 0, facd3d.hasAudio(), facd3d.getAudioPath(), facd3d.getRepeatAudio(), true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
-					false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 				}
 				
 				if (destiny == "audios/") 
@@ -140,7 +143,7 @@ package flaras.userInterface
 					object3d.getScale(), object3d.hasTexture(), object3d.getTexturePath(), object3d.getTextureWidth(),
 					object3d.getTextureHeight(), true, path, propertiesPanel.getAudioRpt().isSelected(), object3d.hasVideo(), object3d.getVideoPath(),
 					object3d.getVideoWidth(), object3d.getVideoHeight(), 
-					object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+					object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 				}				
 				propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
 				/*fim modificações Raryel*/
@@ -447,7 +450,7 @@ package flaras.userInterface
 							object3d.getFilePath(), object3d.getTranslation(), object3d.getRotation(), 
 							object3d.getScale(), object3d.hasTexture(), object3d.getTexturePath(), object3d.getTextureWidth(),
 							object3d.getTextureHeight(), false, "", false, object3d.hasVideo(), object3d.getVideoPath(),
-							object3d.getVideoWidth(), object3d.getVideoHeight(), object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis());
+							object3d.getVideoWidth(), object3d.getVideoHeight(), object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 						
 						aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
 						
@@ -584,7 +587,9 @@ package flaras.userInterface
 						
 						_animationPanel.setHasAnimation(facade3d.hasAnimation());
 						_animationPanel.setAnimationPeriod(facade3d.getAnimationPeriod());
-						_animationPanel.setAnimationRotationAxis(facade3d.getAnimationRotationAxis());						
+						_animationPanel.setAnimationRotationAxis(facade3d.getAnimationRotationAxis());	
+						_animationPanel.setAnimationRadius(facade3d.getAnimationRadius());
+						_animationPanel.setAnimationRotationDirection(facade3d.getAnimationRotationDirection());
 						
 						if (facade3d.hasAudio()) 
 						{
@@ -693,5 +698,31 @@ package flaras.userInterface
 			}
 		}
 		
+		public function animationRadiusUpdade(e:Event):void
+		{
+			var facObj3D:FacadeObject3D;
+			
+			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
+			{
+				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+				facObj3D.setAnimationRadius(_animationPanel.getAnimationRadius());
+				
+				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
+			}
+		}
+		
+		public function animationReverseDirectionUpdate():void
+		{
+			var facObj3D:FacadeObject3D;			
+		
+			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
+			{
+				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+				
+				facObj3D.setAnimationRotationDirection(_animationPanel.getAnimationDirection());
+				
+				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
+			}	
+		}		
 	}
 }

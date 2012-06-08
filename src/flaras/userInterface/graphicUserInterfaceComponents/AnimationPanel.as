@@ -29,10 +29,9 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
-	import flaras.entity.object3D.Animation;
-	import flaras.userInterface.CtrGUI;
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
+	import flaras.entity.object3D.*;
+	import flaras.userInterface.*;
+	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
 	import org.aswing.ext.*;
@@ -44,6 +43,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var jrbY:JRadioButton;
 		private var jrbZ:JRadioButton;
 		private var jtfRotationPeriod:JTextField;
+		private var jtfRotationRadius:JTextField;
+		private var jcbReverseRotation:JCheckBox;
 		
 		private var _ctrGUI:CtrGUI;
 		
@@ -55,6 +56,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			addRow(buildLine1());
 			addRow(buildLine2());
 			addRow(buildLine3());
+			addRow(buildLine4());
+			addRow(buildLine5());
 			
 			setComponentsStatus(false);
 		}
@@ -65,6 +68,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jrbX.setEnabled(status);
 			jrbY.setEnabled(status);
 			jrbZ.setEnabled(status);
+			jtfRotationRadius.setEnabled(status);
+			jcbReverseRotation.setEnabled(status);
 		}
 		
 		private function buildLine1():JPanel
@@ -129,7 +134,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			jlRotationSpeed = new JLabel("Rotation period: ");
 			jtfRotationPeriod = new JTextField("10", 5);
-			jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidCharFromTextField);
+			jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
 			jtfRotationPeriod.addActionListener(_ctrGUI.animationPeriodUpdate);
 			
 			jlRotationUnit = new JLabel("seconds");
@@ -139,6 +144,38 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			southPanel.append(jlRotationUnit);
 			
 			return southPanel;
+		}
+		
+		public function buildLine4():JPanel
+		{
+			var panelLine4:JPanel;
+			var jlRotationRadius:JLabel;
+			
+			panelLine4 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			
+			jlRotationRadius = new JLabel("Rotation radius: ");
+			jtfRotationRadius = new JTextField("0", 5);
+			jtfRotationRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
+			jtfRotationRadius.addActionListener(_ctrGUI.animationRadiusUpdade);
+			
+			panelLine4.append(jlRotationRadius);
+			panelLine4.append(jtfRotationRadius);
+			
+			return panelLine4;			
+		}
+		
+		public function buildLine5():JPanel
+		{
+			var jp5:JPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+				
+			jcbReverseRotation = new JCheckBox("Reverse rotation");
+			jcbReverseRotation.addActionListener(function():void
+			{
+				_ctrGUI.animationReverseDirectionUpdate();	
+			});
+			jp5.append(jcbReverseRotation);
+			
+			return jp5;
 		}
 		
 		public function getHasAnimation():Boolean
@@ -167,6 +204,27 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			}
 		}
 		
+		public function getAnimationRadius():uint
+		{
+			return parseInt(jtfRotationRadius.getText());
+		}
+		
+		public function getAnimationDirection():int
+		{
+			var rotationDirection:int;
+			
+			if (jcbReverseRotation.isSelected())
+			{
+				rotationDirection = -1;
+			}
+			else
+			{
+				rotationDirection = 1;
+			}
+			
+			return rotationDirection;
+		}
+		
 		public function setHasAnimation(hasAnimation:Boolean):void
 		{
 			jcbHasAnimation.setSelected(hasAnimation);
@@ -191,6 +249,23 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			else
 			{
 				jrbZ.setSelected(true);
+			}
+		}
+		
+		public function setAnimationRadius(animationRadius:uint):void
+		{
+			jtfRotationRadius.setText(animationRadius+"");
+		}
+		
+		public function setAnimationRotationDirection(rotationDirection:int):void
+		{
+			if (rotationDirection == -1)
+			{
+				jcbReverseRotation.setSelected(true);
+			}
+			else
+			{
+				jcbReverseRotation.setSelected(false);
 			}
 		}
 	}

@@ -43,18 +43,23 @@ package flaras.entity.object3D
 		private var _hasAnimation:Boolean;
 		private var _period:Number;
 		private var _rotationAxis:uint;
+		private var _radius:uint;
+		private var _rotationDirection:int;
 		
+		private var angSumDegree:Number;
 		private var increaseAngleStep:Number;
 		private var obj3DToAnimate:DisplayObject3D;
 		private var timer:Timer;
 		
 		private var _concreteObj3D:ConcreteObject3D;
 		
-		public function Animation(hasAnimation:Boolean, period:Number, rotationAxis:uint):void
+		public function Animation(hasAnimation:Boolean, period:Number, rotationAxis:uint, radius:uint, rotationDirection:int):void
 		{
 			this._hasAnimation = hasAnimation;
 			this._period = period;
 			this._rotationAxis = rotationAxis;
+			this._radius = radius;
+			this._rotationDirection = rotationDirection;
 		}
 		
 		public function setObj3D(concreteObj3D:ConcreteObject3D):void
@@ -72,8 +77,9 @@ package flaras.entity.object3D
 		
 				//360º                - period (s)
 				//increaseAngleStep   - 0.033 (s) (1 frame)
-				increaseAngleStep = (360 * 0.03) / _period;
-				
+				increaseAngleStep = _rotationDirection*(360 * 0.03) / _period;
+				angSumDegree = 0;
+			
 				timer.addEventListener(TimerEvent.TIMER, animation);
 				timer.start();
 			}			
@@ -81,17 +87,31 @@ package flaras.entity.object3D
 		
 		private function animation(e:Event):void
 		{
+			var angSumRad:Number;
+			
+			angSumDegree += increaseAngleStep;
+			angSumRad = angSumDegree * Math.PI / 180.0;
+			
 			if (_rotationAxis == X_ROTATION_AXIS)
 			{
-				obj3DToAnimate.rotationX += increaseAngleStep;
+				obj3DToAnimate.y = _concreteObj3D.getAbsoluteTranslation().y + _radius * Math.cos(angSumRad);
+				obj3DToAnimate.z = _concreteObj3D.getAbsoluteTranslation().z + _radius * Math.sin(angSumRad);
+				
+				obj3DToAnimate.rotationX = _concreteObj3D.getRotation().x + angSumDegree;				
 			}
 			else if (_rotationAxis == Y_ROTATION_AXIS)
 			{
-				obj3DToAnimate.rotationY += increaseAngleStep;
+				obj3DToAnimate.x = _concreteObj3D.getAbsoluteTranslation().x + _radius * Math.cos(angSumRad);
+				obj3DToAnimate.z = _concreteObj3D.getAbsoluteTranslation().z + _radius * Math.sin(angSumRad);
+				
+				obj3DToAnimate.rotationY = _concreteObj3D.getRotation().y + angSumDegree;
 			}
 			else
 			{
-				obj3DToAnimate.rotationZ += increaseAngleStep;
+				obj3DToAnimate.x = _concreteObj3D.getAbsoluteTranslation().x + _radius * Math.cos(angSumRad);
+				obj3DToAnimate.y = _concreteObj3D.getAbsoluteTranslation().y + _radius * Math.sin(angSumRad);
+				
+				obj3DToAnimate.rotationZ = _concreteObj3D.getRotation().z + angSumDegree;
 			}
 		}
 		
@@ -106,6 +126,10 @@ package flaras.entity.object3D
 				obj3DToAnimate.rotationX = _concreteObj3D.getRotation().x;
 				obj3DToAnimate.rotationY = _concreteObj3D.getRotation().y;
 				obj3DToAnimate.rotationZ = _concreteObj3D.getRotation().z;
+				
+				obj3DToAnimate.x = _concreteObj3D.getAbsoluteTranslation().x;
+				obj3DToAnimate.y = _concreteObj3D.getAbsoluteTranslation().y;
+				obj3DToAnimate.z = _concreteObj3D.getAbsoluteTranslation().z;
 			}
 			
 		}
@@ -125,6 +149,16 @@ package flaras.entity.object3D
 			return this._rotationAxis
 		}
 		
+		public function getRadius():uint
+		{ 
+			return this._radius;
+		}
+		
+		public function getRotationDirection():int
+		{
+			return this._rotationDirection;
+		}
+		
 		public function setHasAnimation(hasAnimation:Boolean):void
 		{
 			this._hasAnimation = hasAnimation;
@@ -138,6 +172,16 @@ package flaras.entity.object3D
 		public function setRotationAxis(rotationAxis:uint):void
 		{
 			this._rotationAxis = rotationAxis;
+		}
+		
+		public function setRadius(radius:uint):void
+		{
+			this._radius = radius;
 		}		
+		
+		public function setRotationDirection(rotationDirection:int):void
+		{
+			this._rotationDirection = rotationDirection;
+		}
 	}
 }

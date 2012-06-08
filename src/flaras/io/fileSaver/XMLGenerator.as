@@ -52,7 +52,7 @@ package flaras.io.fileSaver
 		
 		public static function generateXMLPoints(pListOfPoints:Vector.<Point>):XML
 		{
-			var xml:XML = new XML("<pointsList><flarasProjectReleaseVersion>1064</flarasProjectReleaseVersion></pointsList>");
+			var xml:XML = new XML("<pointsList><flarasProjectReleaseVersion>1069</flarasProjectReleaseVersion></pointsList>");
 		
 			for each(var p:Point in pListOfPoints)
 			{
@@ -184,7 +184,9 @@ package flaras.io.fileSaver
 				<animation>
 						<hasAnimation>{uint(pFacadeObject3D.hasAnimation())}</hasAnimation>
 						<period>{pFacadeObject3D.getAnimationPeriod()}</period>
-						<rotationAxis>{pFacadeObject3D.getAnimationRotationAxis()}</rotationAxis>						
+						<rotationAxis>{pFacadeObject3D.getAnimationRotationAxis()}</rotationAxis>
+						<radius>{pFacadeObject3D.getAnimationRadius()}</radius>
+						<rotationDirection>{pFacadeObject3D.getAnimationRotationDirection()}</rotationDirection>
 					</animation>
 					
 			return xml;

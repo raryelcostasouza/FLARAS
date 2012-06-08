@@ -31,7 +31,7 @@ package flaras.io.fileReader
 {
 	import flaras.controller.*;
 	import flaras.errorHandler.*;
-	import flaras.io.GeneralIOEventHandler;
+	import flaras.io.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -67,6 +67,7 @@ package flaras.io.fileReader
 			for each (var obj3D:XML in aXMLFile.object3D) 
 			{
 				var hasAnimation:String;
+				var flarasProjectReleaseVersion:String;
 				
 				//if the string has length = 0  means that this project file is from a older version of flaras
 				//that did not support animation. So it's necessary to interpret it in a little different way, to keep compatibility.
@@ -75,7 +76,12 @@ package flaras.io.fileReader
 				//if the project is on the new xml format (animations on flaras)
 				if (hasAnimation.length != 0)
 				{
-					aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
+					flarasProjectReleaseVersion = obj3D.flarasProjectReleaseVersion.toString();
+					
+					//if it's the old project that does not have the tags radius and rotationDirection
+					if (flarasProjectReleaseVersion.indexOf("1064") > 0)
+					{
+						aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
 												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
 												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
@@ -85,6 +91,22 @@ package flaras.io.fileReader
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
 												Boolean(parseInt(obj3D.animation.hasAnimation)), obj3D.animation.period, obj3D.animation.rotationAxis);
+					}
+					else
+					{
+						aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
+												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
+												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
+												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
+												Boolean(parseInt(obj3D.texture.hasTexture)), obj3D.texture.texturePath,
+												obj3D.texture.width, obj3D.texture.height,
+												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
+												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
+												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
+												Boolean(parseInt(obj3D.animation.hasAnimation)), obj3D.animation.period, obj3D.animation.rotationAxis,
+												obj3D.animation.radius, obj3D.animation.rotationDirection);
+					}
+					
 				}
 				//old project
 				else

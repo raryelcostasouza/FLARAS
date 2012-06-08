@@ -451,6 +451,16 @@ package flaras.entity.object3D
 			return aConcreteObject3D.getAnimation().getRotationAxis();
 		}
 		
+		public function getAnimationRadius():uint
+		{
+			return aConcreteObject3D.getAnimation().getRadius();
+		}
+		
+		public function getAnimationRotationDirection():uint
+		{
+			return aConcreteObject3D.getAnimation().getRotationDirection();
+		}
+		
 		public function setHasAnimation(hasAnimation:Boolean):void
 		{
 			aConcreteObject3D.getAnimation().setHasAnimation(hasAnimation);
@@ -464,7 +474,17 @@ package flaras.entity.object3D
 		public function setAnimationRotationAxis(rotationAxis:uint):void
 		{
 			aConcreteObject3D.getAnimation().setRotationAxis(rotationAxis);
-		}		
+		}
+		
+		public function setAnimationRadius(radius:uint):void
+		{
+			aConcreteObject3D.getAnimation().setRadius(radius);
+		}
+		
+		public function setAnimationRotationDirection(rotationDirection:int):void
+		{
+			aConcreteObject3D.getAnimation().setRotationDirection(rotationDirection);
+		}
 				
 		//other methods
 		public function updateObject3DPosition():void

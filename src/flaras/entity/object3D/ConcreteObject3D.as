@@ -127,6 +127,11 @@ package flaras.entity.object3D
 			return aTranslation;
 		}
 		
+		public function getAbsoluteTranslation():Number3D
+		{
+			return Number3D.add(aTranslation, aObjParentPoint.getPosition());
+		}
+		
 		public function setTranslation(pTranslation:Number3D):void
 		{
 			aTranslation = pTranslation;
