@@ -204,7 +204,7 @@ package flaras.controller
 			var obj3D:Object3D;
 			var listObjects:Vector.<Object3D>;				
 
-			if (!p.isEditionSphereEnabled())
+			if (!p.isAxisEnabled())
 			{
 				p.enablePointSphere();
 			}
@@ -235,7 +235,7 @@ package flaras.controller
 			var p:Point = this._listOfPoints[indexPoint];
 			
 			enablePoint(p, true, false);
-			p.enableEditionSphere();
+			p.enableAxis();
 		}
 		
 		public function enableAllPoints():void
@@ -264,7 +264,7 @@ package flaras.controller
 		{
 			for each(var p:Point in this._listOfPoints)
 			{
-				p.disableEditionSphere();				
+				p.disableAxis();				
 				disablePoint(p, pPlayAudio);
 			}
 		}

@@ -43,5 +43,7 @@ package flaras.constants
 		public static const TEXTURE_PATH_INSPECTOR_MARKER:String = "system-textures/inspector.jpg";
 		public static const TEXTURE_PATH_CONTROL_FORWARD_MARKER:String = "system-textures/control-forward.jpg";
 		public static const TEXTURE_PATH_CONTROL_BACKWARD_MARKER:String = "system-textures/control-backward.jpg";
+		
+		public static const OBJ_PATH_AXIS:String = "system-obj/axis.dae"
 	}
 }

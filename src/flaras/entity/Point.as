@@ -34,12 +34,15 @@ package flaras.entity
 	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.entity.object3D.*;
+	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flaras.util.*;
+	import flash.events.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
+	import org.papervision3d.objects.parsers.*;
 	import org.papervision3d.objects.primitives.*;
 	
 	public class Point
@@ -49,7 +52,9 @@ package flaras.entity
 		private var aID:uint;
 		private var aEnabled:Boolean;
 		private var aPosition:Number3D;
-		private var aObj3DEditionSphere:DisplayObject3D;
+		
+		//the axis is shown when the point is selected for edition on FLARAS Developer
+		private var aAxisDAE:DAE;
 		private var aObj3DSphereOfPoint:DisplayObject3D;
 		private var aObj3DAuxSphere:DisplayObject3D;
 		private var aIndexActiveObject:int = 0;
@@ -58,7 +63,7 @@ package flaras.entity
 		private var ctrListOfObjects:CtrListOfObjects;
 		
 		public function Point(pID:uint, pPosition:Number3D, pObjCtrObjects:CtrPoint)
-		{
+		{			
 			ctrListOfObjects = new CtrListOfObjects(this);
 			aID = pID;
 			aEnabled = false;
@@ -71,13 +76,17 @@ package flaras.entity
 			aObj3DAuxSphere.position = aPosition;
 			aObj3DAuxSphere.visible = false;
 			
-			aObj3DEditionSphere = new Sphere(Color.green, RADIUS_SPHERE_OF_POINT, 10, 10);
-			aObj3DEditionSphere.position = aPosition;
-			aObj3DEditionSphere.visible = false;
+			aAxisDAE = new DAE();
+			aAxisDAE.load(SystemFilesPathsConstants.OBJ_PATH_AXIS);
+			aAxisDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+			aAxisDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous)
+			aAxisDAE.scale = 10;
+			aAxisDAE.position = aPosition;
+			aAxisDAE.visible = false;
 			
 			MarkerNodeManager.addObj2MarkerNode(aObj3DAuxSphere, Marker.REFERENCE_MARKER , null);
 			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereOfPoint, Marker.REFERENCE_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DEditionSphere, Marker.REFERENCE_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aAxisDAE, Marker.REFERENCE_MARKER, null);
 		}
 		
 		public function getCtrListOfObjects():CtrListOfObjects
@@ -163,7 +172,7 @@ package flaras.entity
 			
 			aObj3DSphereOfPoint.position = pPosition;
 			aObj3DAuxSphere.position = pPosition;
-			aObj3DEditionSphere.position = pPosition;
+			aAxisDAE.position = pPosition;
 			
 			for each(var obj3D:Object3D in ctrListOfObjects.getListOfObjects())
 			{
@@ -194,19 +203,19 @@ package flaras.entity
 			aObj3DSphereOfPoint.visible = false;
 		}
 		
-		public function enableEditionSphere():void
+		public function enableAxis():void
 		{
-			aObj3DEditionSphere.visible = true;
+			aAxisDAE.visible = true;
 		}
 		
-		public function disableEditionSphere():void
+		public function disableAxis():void
 		{
-			aObj3DEditionSphere.visible = false;
+			aAxisDAE.visible = false;
 		}
 		
-		public function isEditionSphereEnabled():Boolean
+		public function isAxisEnabled():Boolean
 		{
-			return aObj3DEditionSphere.visible;
+			return aAxisDAE.visible;
 		}
 		
 		public function disableAuxSphere():void
@@ -232,7 +241,7 @@ package flaras.entity
 		{
 			MarkerNodeManager.removeObjFromMarkerNode(aObj3DAuxSphere, Marker.REFERENCE_MARKER);
 			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereOfPoint, Marker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DEditionSphere, Marker.REFERENCE_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(aAxisDAE, Marker.REFERENCE_MARKER);
 		}
 		
 		public function unLoadAndRemoveFile():void
