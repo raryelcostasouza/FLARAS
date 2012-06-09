@@ -48,6 +48,10 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var saveAsFlaras:JMenuItem = new JMenuItem("Save &as...");
 		private var exitFlaras:JMenuItem = new JMenuItem("E&xit");
 		
+		private var menuView:JMenu = new JMenu("View");
+		private var refMarkerPersitence:JCheckBoxMenuItem = new JCheckBoxMenuItem("Ref. marker persistence");
+		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Screen mirror");
+		
 		private var menuAbout:JMenu =  new JMenu("About");
 		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands");
 		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS");
@@ -82,6 +86,12 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			menuArchive.append(new JSeparator());
 			menuArchive.append(exitFlaras);
 			exitFlaras.addActionListener(exitFunction);
+			
+			this.addMenu(menuView);
+			menuView.append(refMarkerPersitence);
+			refMarkerPersitence.addActionListener(actionToggleRefMarkerPersistence);
+			menuView.append(mirrorScreen);
+			mirrorScreen.addActionListener(actionMirrorScreen);
 			
 			this.addMenu(menuAbout);
 			menuAbout.append(jmiKeys);
@@ -125,6 +135,16 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			aControl.getObjCtrUserProject().closingFlaras();
 		}
 		
+		private function actionToggleRefMarkerPersistence(e:Event):void
+		{
+			aControl.getCtrMain().ctrMarker.refMarker.togglePersistence();
+		}
+		
+		private function actionMirrorScreen(e:Event):void
+		{
+			aControl.getCtrMain().ctrMirror.toggleMirror();
+		}
+		
 		private function flarasKeys(e:Event):void
 		{
 			MessageWindow.keyboardCommands();
@@ -139,5 +159,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		{
 			MessageWindow.licenseFlaras();
 		}
+		
+		
 	}
 }

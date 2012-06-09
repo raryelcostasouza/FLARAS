@@ -42,6 +42,7 @@ package flaras.controller
 		public function CtrMarker() 
 		{
 			this._refMarker = new Marker();
+			
 			this._interactionMarker = new InteractionMarker();
 		}
 		
@@ -49,6 +50,11 @@ package flaras.controller
 		{
 			return this._interactionMarker;
 		}	
+		
+		public function get refMarker():Marker
+		{
+			return this._refMarker;
+		}
 		
 		public function resetInteractionMarkerSphereProperties():void
 		{

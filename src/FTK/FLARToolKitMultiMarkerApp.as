@@ -56,6 +56,7 @@ package FTK
 	public class FLARToolKitMultiMarkerApp extends Sprite
 	{
 		
+		private var _ctrMain:CtrMain;
 		/**
 		 * 画面の幅と高さ
 		 */
@@ -379,7 +380,7 @@ package FTK
 		{
 			StageReference.setStage(stage);
 			MarkerNodeManager.init(markerNodeList, markerList);
-			new CtrMain(this);
+			_ctrMain = new CtrMain(this);
 			
 			this.addEventListener(Event.ENTER_FRAME, this.run);			
 		}
@@ -454,7 +455,11 @@ package FTK
 				// 非認識時
 				} else {
 //					trace("[rem] id : " + i +"[confidence]"+markerData.confidence);
-					this.markerNodeList[i].visible = false;
+					
+					if (i == Marker.INTERACTION_MARKER || (i == Marker.REFERENCE_MARKER && !_ctrMain.ctrMarker.refMarker.persistence))
+					{
+						this.markerNodeList[i].visible = false;
+					}					
 				}
 			}
 			

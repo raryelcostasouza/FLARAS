@@ -40,6 +40,9 @@ package flaras.marker
 		public static const REFERENCE_MARKER:uint = 0;
 		public static const INTERACTION_MARKER:uint = 1;
 		
+		//after removing the marker from the camera field the 3D Viewport keeps being shown
+		private var _persistence:Boolean = false;
+		
 		public function Marker()
 		{
 			var aObj3DCover:DisplayObject3D;
@@ -48,6 +51,23 @@ package flaras.marker
 			aObj3DCover.position = new Number3D(0, 0, 0);
 			aObj3DCover.rotationX = -180;
 			MarkerNodeManager.addObj2MarkerNode(aObj3DCover, REFERENCE_MARKER, null);
-		}				
+		}		
+	
+		public function get persistence():Boolean
+		{
+			return this._persistence;
+		}
+		
+		public function togglePersistence():void
+		{
+			if (this._persistence)
+			{
+				this._persistence = false;
+			}
+			else
+			{
+				this._persistence = true;
+			}
+		}
 	}	
 }

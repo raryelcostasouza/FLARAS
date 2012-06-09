@@ -52,10 +52,10 @@ package flaras.controller
 		{
 			this._ctrMarker = new CtrMarker();
 			this._ctrPoint = new CtrPoint(this);
-			new CtrInteractionUI(this, pFMMApp);
+			new CtrInteractionUI(this);
 			this._ctrUserProject = new CtrUserProject(this);
 			this._ctrPointInterWithKbd = new CtrPointInteractionWithKbd(this);
-			this._ctrMirror = new CtrMirror(this);
+			this._ctrMirror = new CtrMirror(this, pFMMApp);
 		}
 		
 		public function set ctrGUI(ctrGUI:CtrGUI):void

@@ -42,12 +42,11 @@ package flaras.controller
 		private var aFMMApp:FLARToolKitMultiMarkerApp;	
 		private var _ctrMain:CtrMain;
 		
-		public function CtrInteractionUI(ctrMain:CtrMain, pFMMApp:FLARToolKitMultiMarkerApp)
+		public function CtrInteractionUI(ctrMain:CtrMain)
 		{
 			var bndMMI:BoundaryMultiMarkerInteraction;
 			
 			this._ctrMain = ctrMain;
-			aFMMApp = pFMMApp;
 			
 			new BoundaryInteractionUI(this);
 			var gui:GraphicsUserInterface = new GraphicsUserInterface(this);
@@ -72,7 +71,6 @@ package flaras.controller
 		
 		public function changeScreenMirror():void
 		{
-			aFMMApp.changeScreenMirror();
 			this._ctrMain.ctrMirror.toggleMirror();
 		}
 	}	

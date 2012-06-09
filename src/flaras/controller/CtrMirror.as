@@ -32,6 +32,7 @@ package flaras.controller
 	import flaras.entity.object3D.FacadeObject3D;
 	import flaras.entity.object3D.Object3D;
 	import flaras.entity.Point;
+	import FTK.FLARToolKitMultiMarkerApp;
 	import org.papervision3d.core.math.Number3D;
 
 	public class CtrMirror 
@@ -39,10 +40,12 @@ package flaras.controller
 		public static var MIRRORED_SCALE_FACTOR:int = 1;
 		
 		private var _ctrMain:CtrMain;
+		private var aFMMApp:FLARToolKitMultiMarkerApp;
 		
-		public function CtrMirror(ctrMain:CtrMain) 
+		public function CtrMirror(ctrMain:CtrMain, pFMMApp:FLARToolKitMultiMarkerApp) 
 		{
 			this._ctrMain = ctrMain;
+			aFMMApp = pFMMApp;
 		}
 		
 		public function toggleMirror():void
@@ -51,6 +54,8 @@ package flaras.controller
 			var listOfObjects:Vector.<Object3D>;
 			var facObj3D:FacadeObject3D;
 			var currentScale:Number3D;
+			
+			aFMMApp.changeScreenMirror();
 			
 			listOfPoints =  _ctrMain.ctrPoint.getListOfPoints();
 			
