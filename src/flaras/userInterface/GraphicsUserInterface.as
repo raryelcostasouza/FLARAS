@@ -44,6 +44,7 @@ package flaras.userInterface
 		private var aControl:CtrInteractionUI;
 		private var aStage:Stage;
 		private var ctrGui:CtrGUI;
+		private var _cameraSelectWindow:CameraSelectWindow;
 		
 		public static const developmentPanelWidth:uint = 214;
 		
@@ -59,6 +60,7 @@ package flaras.userInterface
 			AsWingManager.setRoot(aStage);
 			
 			initComponents(); 
+			initWindows();
 		}
 		
 		public function getCtrGUI():CtrGUI
@@ -114,6 +116,16 @@ package flaras.userInterface
 			window.show();
 			
 			ctrGui.start();
+		}
+		
+		private function initWindows():void
+		{
+			_cameraSelectWindow = new CameraSelectWindow(aControl);
+		}
+		
+		public function getCameraSelectWindow():CameraSelectWindow
+		{
+			return _cameraSelectWindow;
 		}
 	}
 }

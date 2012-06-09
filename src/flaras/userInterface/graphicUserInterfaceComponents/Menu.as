@@ -50,7 +50,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		private var menuView:JMenu = new JMenu("View");
 		private var refMarkerPersitence:JCheckBoxMenuItem = new JCheckBoxMenuItem("Ref. marker persistence");
-		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Screen mirror");
+		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Camera mirror");
+		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
 		
 		private var menuAbout:JMenu =  new JMenu("About");
 		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands");
@@ -92,6 +93,9 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			refMarkerPersitence.addActionListener(actionToggleRefMarkerPersistence);
 			menuView.append(mirrorScreen);
 			mirrorScreen.addActionListener(actionMirrorScreen);
+			menuView.append(new JSeparator());
+			menuView.append(chooseCaptureCamera);
+			chooseCaptureCamera.addActionListener(actionChooseCaptureCamera);
 			
 			this.addMenu(menuAbout);
 			menuAbout.append(jmiKeys);
@@ -143,6 +147,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private function actionMirrorScreen(e:Event):void
 		{
 			aControl.getCtrMain().ctrMirror.toggleMirror();
+		}
+		
+		private function actionChooseCaptureCamera(e:Event):void
+		{
+			aControl.getCtrMain().ctrCamera.selectCameraToCapture();
 		}
 		
 		private function flarasKeys(e:Event):void

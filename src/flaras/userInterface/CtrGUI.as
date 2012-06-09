@@ -48,6 +48,7 @@ package flaras.userInterface
 	public class CtrGUI
 	{
 		private var aControl:CtrInteractionUI;
+		private var aGUI:GraphicsUserInterface;
 		private var propertiesPanel:PropertiesPanel;
 		private var object3dpanel:Object3DPopupPanel;
 		private var videopanel:ObjectVideoPopupPanel;
@@ -56,6 +57,12 @@ package flaras.userInterface
 		
 		public function CtrGUI(pControl:CtrInteractionUI, pGui:GraphicsUserInterface) {
 			aControl = pControl;
+			aGUI = pGui;
+		}
+		
+		public function getGUI():GraphicsUserInterface
+		{
+			return aGUI;
 		}
 		
 		public function finishedFileCopying(path:String, destiny:String):void {

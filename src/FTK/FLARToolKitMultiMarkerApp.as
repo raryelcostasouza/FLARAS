@@ -57,6 +57,7 @@ package FTK
 	{
 		
 		private var _ctrMain:CtrMain;
+		private var _camera2Capture:uint = 0;
 		/**
 		 * 画面の幅と高さ
 		 */
@@ -289,14 +290,7 @@ package FTK
 		{
 			this.removeEventListener(Event.COMPLETE, initialization);
 			
-			// Setup camera
-			this.webCamera = Camera.getCamera();
-			if (!this.webCamera) {
-				throw new Error('No webcam!!!!');
-			}
-			this.webCamera.setMode( this.captureWidth, this.captureHeight, 30);
-			this.video = new Video( this.captureWidth, this.captureHeight);
-			this.video.attachCamera(this.webCamera);
+			setupCamera();
 			
 			// setup ARToolkit
 			this.capture = new Bitmap(new BitmapData(this.captureWidth, this.captureHeight, false, 0),
@@ -334,6 +328,18 @@ package FTK
 			
 			// スタート
 			this.start();
+		}
+		
+		protected function setupCamera():void
+		{
+			// Setup camera
+			this.webCamera = Camera.getCamera(_camera2Capture+"");
+			if (!this.webCamera) {
+				throw new Error('No webcam!!!!');
+			}			
+			this.webCamera.setMode( this.captureWidth, this.captureHeight, 30);
+			this.video = new Video( this.captureWidth, this.captureHeight);
+			this.video.attachCamera(this.webCamera);
 		}
 		
 		/**
@@ -398,6 +404,23 @@ package FTK
 				this.scaleX = -1;
 				this.x = 640;				
 			}
+		}
+		
+		public function stop(camera2Capture:uint):void
+		{
+			this.removeEventListener(Event.ENTER_FRAME, this.run);
+			_camera2Capture = camera2Capture;
+			
+			//turning off the active camera
+			this.webCamera = null;
+			this.video.attachCamera(null);
+			this.video.clear();
+			this.video = null;
+			
+			//setup the new camera
+			this.setupCamera();
+			
+			this.addEventListener(Event.ENTER_FRAME, this.run);
 		}
 		
 		/**
