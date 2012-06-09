@@ -47,8 +47,8 @@ package flaras.controller
 										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
 										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
 										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
-										pHasAnimation:Boolean = false, pAnimationPeriod:Number = 10, pAnimationRotationAxis:uint = Animation.X_ROTATION_AXIS,
-										pAnimationRadius:uint = 0, pAnimationRotationDirection:int = 1):void
+										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint,
+										pAnimationRadius:uint, pAnimationRotationDirection:int):void
 		{
 			var obj3D:Object3D = buildObject3D(pFilePath, pTranslation, pRotation,
 									pScale, pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 

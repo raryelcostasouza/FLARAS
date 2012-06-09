@@ -65,53 +65,41 @@ package flaras.io.fileReader
 			aXMLFile = XML(e.target.data);
 			
 			for each (var obj3D:XML in aXMLFile.object3D) 
-			{
-				var hasAnimation:String;
-				var flarasProjectReleaseVersion:String;
+			{			
+				var hasAnimation:Boolean;
+				var animationPeriod:Number;
+				var animationAxis:uint;
+				var animationRadius:uint;
+				var animationRotDirection:int;
 				
-				//if the string has length = 0  means that this project file is from a older version of flaras
-				//that did not support animation. So it's necessary to interpret it in a little different way, to keep compatibility.
-				hasAnimation = obj3D.animation.hasAnimation.toString();				
-				
-				//if the project is on the new xml format (animations on flaras)
-				if (hasAnimation.length != 0)
+				//old flaras project withoud animation support
+				if (obj3D.animation.hasAnimation == undefined)
 				{
-					flarasProjectReleaseVersion = obj3D.flarasProjectReleaseVersion.toString();
-					
-					//if it's the old project that does not have the tags radius and rotationDirection
-					if (flarasProjectReleaseVersion.indexOf("1064") > 0)
-					{
-						aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
-												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
-												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
-												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
-												Boolean(parseInt(obj3D.texture.hasTexture)), obj3D.texture.texturePath,
-												obj3D.texture.width, obj3D.texture.height,
-												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
-												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
-												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												Boolean(parseInt(obj3D.animation.hasAnimation)), obj3D.animation.period, obj3D.animation.rotationAxis);
-					}
-					else
-					{
-						aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
-												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
-												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
-												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
-												Boolean(parseInt(obj3D.texture.hasTexture)), obj3D.texture.texturePath,
-												obj3D.texture.width, obj3D.texture.height,
-												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
-												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
-												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												Boolean(parseInt(obj3D.animation.hasAnimation)), obj3D.animation.period, obj3D.animation.rotationAxis,
-												obj3D.animation.radius, obj3D.animation.rotationDirection);
-					}
-					
+					hasAnimation = false;
+					animationPeriod = 10;
+					animationAxis = 0;
 				}
-				//old project
 				else
 				{
-					aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
+					hasAnimation = Boolean(parseInt(obj3D.animation.hasAnimation));
+					animationPeriod = obj3D.animation.period;
+					animationAxis = obj3D.animation.rotationAxis;
+					
+					//flaras project with partial animation support	
+					if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
+					{
+						animationRadius = 0;
+						animationRotDirection = 1;
+					}
+					//latest flaras project (support for radius and rotationDirection)
+					else
+					{
+						animationRadius = obj3D.animation.radius;
+						animationRotDirection = obj3D.animation.rotationDirection
+					}
+				}
+				
+				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
 												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
 												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
@@ -119,8 +107,8 @@ package flaras.io.fileReader
 												obj3D.texture.width, obj3D.texture.height,
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
-												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)));
-				}
+												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
+												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection);
 			}
 		}
 	}	
