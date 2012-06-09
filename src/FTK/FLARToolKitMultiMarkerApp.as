@@ -37,6 +37,7 @@ package FTK
 	import flaras.util.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.Rectangle;
 	import flash.media.*;
 	import flash.net.*;
 	import flash.utils.*;
@@ -58,6 +59,7 @@ package FTK
 		
 		private var _ctrMain:CtrMain;
 		private var _camera2Capture:uint = 0;
+		private var recCameraOff:Shape;
 		/**
 		 * 画面の幅と高さ
 		 */
@@ -384,11 +386,22 @@ package FTK
 		 */
 		protected function start():void
 		{
+			initRecCameraOff();
 			StageReference.setStage(stage);
 			MarkerNodeManager.init(markerNodeList, markerList);
 			_ctrMain = new CtrMain(this);
 			
 			this.addEventListener(Event.ENTER_FRAME, this.run);			
+		}
+		
+		private function initRecCameraOff():void
+		{
+			recCameraOff= new Shape();
+			recCameraOff.graphics.beginFill(0x000000); 
+			recCameraOff.graphics.drawRect(0, 0, 640,480);
+			recCameraOff.graphics.endFill(); 
+			recCameraOff.visible = false;
+			addChild(recCameraOff);
 		}
 		
 		public function changeScreenMirror():void
@@ -406,16 +419,30 @@ package FTK
 			}
 		}
 		
-		public function stop(camera2Capture:uint):void
+		public function selectCamera2Capture(camera2Capture:uint):void
+		{
+			stopCamera();
+			_camera2Capture = camera2Capture;
+			
+			startCamera();
+		}
+		
+		public function stopCamera():void
 		{
 			this.removeEventListener(Event.ENTER_FRAME, this.run);
-			_camera2Capture = camera2Capture;
 			
 			//turning off the active camera
 			this.webCamera = null;
 			this.video.attachCamera(null);
 			this.video.clear();
 			this.video = null;
+			
+			recCameraOff.visible = true;
+		}
+		
+		public function startCamera():void
+		{
+			recCameraOff.visible = false;
 			
 			//setup the new camera
 			this.setupCamera();

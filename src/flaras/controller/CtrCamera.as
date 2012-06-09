@@ -41,6 +41,18 @@ package flaras.controller
 			this._ctrMain = ctrMain;
 		}	
 		
+		public function setCameraStatus(status:Boolean):void
+		{
+			if (status)
+			{
+				_ctrMain.fmmapp.stopCamera();
+			}
+			else
+			{
+				_ctrMain.fmmapp.startCamera();
+			}
+		}
+		
 		public function selectCameraToCapture():void
 		{
 			var vectorCameraNames:Vector.<String>;
@@ -57,7 +69,7 @@ package flaras.controller
 		public function cameraSelected(cameraIndex:uint):void
 		{
 			_selectedCameraIndex = cameraIndex;
-			_ctrMain.fmmapp.stop(cameraIndex);
+			_ctrMain.fmmapp.selectCamera2Capture(cameraIndex);
 		}
 	}
 }

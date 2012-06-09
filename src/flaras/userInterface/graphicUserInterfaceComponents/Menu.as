@@ -51,6 +51,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var menuView:JMenu = new JMenu("View");
 		private var refMarkerPersitence:JCheckBoxMenuItem = new JCheckBoxMenuItem("Ref. marker persistence");
 		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Camera mirror");
+		private var stopCameraCapture:JCheckBoxMenuItem = new JCheckBoxMenuItem("Stop camera");
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
 		
 		private var menuAbout:JMenu =  new JMenu("About");
@@ -93,6 +94,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			refMarkerPersitence.addActionListener(actionToggleRefMarkerPersistence);
 			menuView.append(mirrorScreen);
 			mirrorScreen.addActionListener(actionMirrorScreen);
+			menuView.append(stopCameraCapture);
+			stopCameraCapture.addActionListener(actionStopCameraCapture);
 			menuView.append(new JSeparator());
 			menuView.append(chooseCaptureCamera);
 			chooseCaptureCamera.addActionListener(actionChooseCaptureCamera);
@@ -149,6 +152,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			aControl.getCtrMain().ctrMirror.toggleMirror();
 		}
 		
+		private function actionStopCameraCapture(e:Event):void
+		{
+			aControl.getCtrMain().ctrCamera.setCameraStatus(stopCameraCapture.isSelected());
+		}
+		
 		private function actionChooseCaptureCamera(e:Event):void
 		{
 			aControl.getCtrMain().ctrCamera.selectCameraToCapture();
@@ -167,8 +175,6 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private function licenseFlarasFunction(e:Event):void
 		{
 			MessageWindow.licenseFlaras();
-		}
-		
-		
+		}		
 	}
 }
