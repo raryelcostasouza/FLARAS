@@ -456,7 +456,7 @@ package flaras.entity.object3D
 			return aConcreteObject3D.getAnimation().getRadius();
 		}
 		
-		public function getAnimationRotationDirection():uint
+		public function getAnimationRotationDirection():int
 		{
 			return aConcreteObject3D.getAnimation().getRotationDirection();
 		}
