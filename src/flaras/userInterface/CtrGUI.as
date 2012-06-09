@@ -379,7 +379,6 @@ package flaras.userInterface
 		
 		public function swapObject(e:Event):void 
 		{
-			var sw:SwapWindow = new SwapWindow(swapFunction);
 			var numberOfScenes:uint;
 			var currentScenePos:uint;
 			
@@ -387,10 +386,10 @@ package flaras.userInterface
 			numberOfScenes = propertiesPanel.getObjList().getItemCount() - 1;
 			currentScenePos = propertiesPanel.getObjList().getSelectedIndex();
 			
-			sw.openSwapWindow(numberOfScenes, currentScenePos);
+			aGUI.getSwapWindow().openSwapWindow(numberOfScenes, currentScenePos);
 		}
 		
-		private function swapFunction(pos2Swap:uint):void 
+		public function swapFunction(pos2Swap:uint):void 
 		{	
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			

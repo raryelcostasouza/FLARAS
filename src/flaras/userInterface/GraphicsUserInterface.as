@@ -45,6 +45,7 @@ package flaras.userInterface
 		private var aStage:Stage;
 		private var ctrGui:CtrGUI;
 		private var _cameraSelectWindow:CameraSelectWindow;
+		private var _swapWindow:SwapWindow;
 		
 		public static const developmentPanelWidth:uint = 214;
 		
@@ -121,11 +122,17 @@ package flaras.userInterface
 		private function initWindows():void
 		{
 			_cameraSelectWindow = new CameraSelectWindow(aControl);
+			_swapWindow = new SwapWindow(ctrGui);
 		}
 		
 		public function getCameraSelectWindow():CameraSelectWindow
 		{
 			return _cameraSelectWindow;
+		}
+		
+		public function getSwapWindow():SwapWindow
+		{
+			return _swapWindow;
 		}
 	}
 }

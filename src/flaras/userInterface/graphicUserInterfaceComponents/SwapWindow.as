@@ -29,6 +29,7 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
+	import flaras.userInterface.CtrGUI;
 	import flaras.util.StageReference;
 	import flash.events.Event;
 	import org.aswing.border.LineBorder;
@@ -45,10 +46,13 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	{
 		private var jcb:JComboBox;
 		private var jlCurrentScenePosition:JLabel;
+		private var _ctrGUI:CtrGUI;
 		
-		public function SwapWindow(swapFunction:Function) 
+		public function SwapWindow(ctrGUI:CtrGUI) 
 		{
 			super(null, "Swap Scene Position", true);
+			this._ctrGUI = ctrGUI;
+			
 			var mainPanel:JPanel;
 			
 			setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -60,7 +64,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			mainPanel.append(buildNorthPanel(), BorderLayout.NORTH);
 			mainPanel.append(buildCenterPanel(), BorderLayout.CENTER);
-			mainPanel.append(buildSouthPanel(swapFunction), BorderLayout.SOUTH);
+			mainPanel.append(buildSouthPanel(), BorderLayout.SOUTH);
 			
 			setContentPane(mainPanel);
 		}
@@ -108,7 +112,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			return centerPanel;
 		}
 		
-		private function buildSouthPanel(swapFunction:Function):JPanel
+		private function buildSouthPanel():JPanel
 		{
 			var southPanel:JPanel;
 			var jbOk:JButton;
@@ -116,8 +120,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			jbOk = new JButton("OK");
-			jbOk.addActionListener( function(e:Event):void{
-				swapFunction(parseInt(jcb.getSelectedItem()));
+			jbOk.addActionListener( function(e:Event):void {
+				_ctrGUI.swapFunction(parseInt(jcb.getSelectedItem()));
 				closeSwapWindow(null);
 			});
 			
