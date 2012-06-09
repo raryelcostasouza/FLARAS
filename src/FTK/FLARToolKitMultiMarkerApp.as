@@ -351,7 +351,7 @@ package FTK
 		protected function supportLibsInit(): void
 		{
 			this.viewport3d = new Viewport3D(this.captureWidth,
-											  this.captureHeight);
+											  this.captureHeight, false, true);
 			this.addChild(this.viewport3d);
 			this.viewport3d.scaleX = this.canvasWidth / this.captureWidth;
 			this.viewport3d.scaleY = this.canvasHeight / this.captureHeight;

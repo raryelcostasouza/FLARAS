@@ -37,9 +37,13 @@ package flaras.entity.object3D
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
+	import flaras.util.StageReference;
 	import flash.events.*;
 	import flash.utils.Timer;
 	import org.papervision3d.core.math.*;
+	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	
@@ -205,8 +209,9 @@ package flaras.entity.object3D
 			var objKMZ:KMZ = new KMZ();
 			objKMZ.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 			objKMZ.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			//objKMZ.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
 			
-			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);		
+			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);	
 			copyDisplayObject3DProperties(objKMZ);
 			aDisplayObject3D = objKMZ;
 				
@@ -245,5 +250,40 @@ package flaras.entity.object3D
 			aDestination.scaleY = aDisplayObject3D.scaleY;
 			aDestination.scaleZ = aDisplayObject3D.scaleZ;
 		}
+		
+		/*private function onLoadComplete(e:Event):void
+		{
+			addMouseClickInteraction();
+		}
+		
+		private function addMouseClickInteraction():void
+		{
+			setInteractiveMaterialTrue();
+			addInteractiveEventListener(aDisplayObject3D, InteractiveScene3DEvent.OBJECT_PRESS,onMouseClick);
+		}
+		
+		private function setInteractiveMaterialTrue():void
+		{
+			for each(var mat:MaterialObject3D in aDisplayObject3D.materials.materialsByName)
+			{
+				mat.interactive = true;
+			}
+		}
+		
+		private function addInteractiveEventListener(obj:DisplayObject3D, eventType:String, handler:Function):void
+		{
+			obj.addEventListener(eventType, handler);
+			
+			for each(var child:DisplayObject3D in obj.children)
+			{
+				addInteractiveEventListener(child, eventType, handler);
+			}
+		}
+		
+		private function onMouseClick(e:InteractiveScene3DEvent):void
+		{
+			//this.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+			trace("parent Point: " + aObjParentPoint.getID());
+		}*/		
 	}
 }

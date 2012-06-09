@@ -74,21 +74,19 @@ package flaras.userInterface
 			var tabbedPane:JTabbedPane;
 			var menuPanel:JPanel;
 			var menu:Menu;
-			var flarasGUI:JPanel;
 			var developmentPanel:PropertiesPanel;
 			var animationPanel:AnimationPanel;
 			var window:JWindow;
+			var window2:JWindow;
 			var object3DPanel:Object3DPopupPanel;
 			var videoPanel:ObjectVideoPopupPanel;
 			var texturePanel:ObjectTexturePopupPanel;
 		
 			tabbedPane = new JTabbedPane();
-			flarasGUI = new JPanel(new BorderLayout());
 			
 			menuPanel = new JPanel();
 			menu = new Menu(aControl, ctrGui);
 			menuPanel.append(menu);
-			flarasGUI.append(menuPanel, BorderLayout.WEST);
 			
 			developmentPanel = new PropertiesPanel(ctrGui);
 			developmentPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
@@ -108,13 +106,17 @@ package flaras.userInterface
 			ctrGui.setObjectTexturePanel(texturePanel);
 			ctrGui.setAnimationPanel(animationPanel);
 			
-			flarasGUI.append(tabbedPane, BorderLayout.EAST);
-			flarasGUI.alpha = 0.75;
-			
 			window = new JWindow();
-			window.setContentPane(flarasGUI);
-			window.setSizeWH(854, 480);
+			window.setContentPane(menuPanel);
+			window.pack();
 			window.show();
+			
+			window2 = new JWindow();
+			window2.setContentPane(tabbedPane);
+			window2.setSizeWH(214, 480);
+			window2.setLocationXY(640, 0);
+			window2.show();
+			window2.alpha = 0.75;
 			
 			ctrGui.start();
 		}
