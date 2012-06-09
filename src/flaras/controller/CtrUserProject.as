@@ -364,6 +364,7 @@ package flaras.controller
 					fs.open(aProjectFile, FileMode.WRITE);
 					fs.writeBytes(ba);
 					fs.close();
+					MessageWindow.messageSaveSuccess();
 				}
 				catch (ioE:IOError)
 				{
@@ -394,6 +395,7 @@ package flaras.controller
 			aSaveAsRequested = false;
 			
 			aAlreadySavedBefore = true;
+			MessageWindow.messageSaveSuccess();
 			
 			runActionAfterSaving();
 		}
