@@ -48,7 +48,7 @@ package flaras.controller
 			aFMMApp = pFMMApp;
 		}
 		
-		public function toggleMirror():void
+		public function toggleMirror(actionfiredFromKeyboard:Boolean):void
 		{
 			var listOfPoints:Vector.<Point>;
 			var listOfObjects:Vector.<Object3D>;
@@ -82,6 +82,18 @@ package flaras.controller
 						currentScale = facObj3D.getScale();
 						facObj3D.toggleMirror();
 					}
+				}				
+			}
+			
+			if (actionfiredFromKeyboard)
+			{
+				if (MIRRORED_SCALE_FACTOR == 1)
+				{
+					_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBMirrorScreen(true);
+				}
+				else
+				{
+					_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBMirrorScreen(false);
 				}				
 			}
 		}		
