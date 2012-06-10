@@ -46,6 +46,7 @@ package flaras.userInterface
 		private var ctrGui:CtrGUI;
 		private var _cameraSelectWindow:CameraSelectWindow;
 		private var _swapWindow:SwapWindow;
+		private var menu:Menu;
 		
 		public static const developmentPanelWidth:uint = 214;
 		
@@ -73,7 +74,6 @@ package flaras.userInterface
 		{
 			var tabbedPane:JTabbedPane;
 			var menuPanel:JPanel;
-			var menu:Menu;
 			var developmentPanel:PropertiesPanel;
 			var animationPanel:AnimationPanel;
 			var window:JWindow;
@@ -135,6 +135,11 @@ package flaras.userInterface
 		public function getSwapWindow():SwapWindow
 		{
 			return _swapWindow;
+		}
+		
+		public function getMenu():Menu
+		{
+			return menu;
 		}
 	}
 }
