@@ -68,10 +68,5 @@ package flaras.controller
 		{
 			return this._ctrMain.ctrUserProject;
 		}
-		
-		public function changeScreenMirror():void
-		{
-			this._ctrMain.ctrMirror.toggleMirror();
-		}
 	}	
 }
