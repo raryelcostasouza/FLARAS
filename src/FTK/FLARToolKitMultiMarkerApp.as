@@ -429,25 +429,31 @@ package FTK
 		
 		public function stopCamera():void
 		{
-			this.removeEventListener(Event.ENTER_FRAME, this.run);
+			if (!recCameraOff.visible)
+			{
+				this.removeEventListener(Event.ENTER_FRAME, this.run);
 			
-			//turning off the active camera
-			this.webCamera = null;
-			this.video.attachCamera(null);
-			this.video.clear();
-			this.video = null;
-			
-			recCameraOff.visible = true;
+				//turning off the active camera
+				this.webCamera = null;
+				this.video.attachCamera(null);
+				this.video.clear();
+				this.video = null;
+				
+				recCameraOff.visible = true;
+			}			
 		}
 		
 		public function startCamera():void
 		{
-			recCameraOff.visible = false;
+			if (!_ctrMain.ctrCamera.isCameraDisabled())
+			{
+				recCameraOff.visible = false;
 			
-			//setup the new camera
-			this.setupCamera();
-			
-			this.addEventListener(Event.ENTER_FRAME, this.run);
+				//setup the new camera
+				this.setupCamera();
+				
+				this.addEventListener(Event.ENTER_FRAME, this.run);
+			}			
 		}
 		
 		/**
