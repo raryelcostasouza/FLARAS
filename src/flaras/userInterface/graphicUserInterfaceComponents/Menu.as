@@ -149,7 +149,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		private function actionMirrorScreen(e:Event):void
 		{
-			aControl.getCtrMain().ctrMirror.toggleMirror();
+			aControl.getCtrMain().ctrMirror.toggleMirror(false);
 		}
 		
 		private function actionStopCameraCapture(e:Event):void
@@ -160,6 +160,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private function actionChooseCaptureCamera(e:Event):void
 		{
 			aControl.getCtrMain().ctrCamera.selectCameraToCapture();
+		}
+		
+		public function setStatusJCBMirrorScreen(enabled:Boolean):void
+		{
+			mirrorScreen.setSelected(enabled);
 		}
 		
 		private function flarasKeys(e:Event):void
