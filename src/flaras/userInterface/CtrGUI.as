@@ -29,7 +29,7 @@
 
 package flaras.userInterface
 {
-	import flaras.constants.GeneralConstants;
+	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
@@ -37,14 +37,9 @@ package flaras.userInterface
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flash.events.*;
-	import flash.ui.Keyboard;
 	import org.aswing.*;
 	import org.papervision3d.core.math.*;
 	
-	/**
-	 * Controlador da Interface Gráfica
-	 * @author Hipólito Douglas
-	 */
 	public class CtrGUI
 	{
 		private var aControl:CtrInteractionUI;
@@ -503,7 +498,6 @@ package flaras.userInterface
 		}
 		
 		public function start():void {
-			//modificação Raryel
 			MessageWindow.setParentComponent(propertiesPanel);
 			
 			propertiesPanel.getPtList().setSelectedIndex(0);
@@ -669,6 +663,7 @@ package flaras.userInterface
 		{
 			var facObj3D:FacadeObject3D;
 			
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
 				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
@@ -682,6 +677,7 @@ package flaras.userInterface
 		{
 			var facObj3D:FacadeObject3D;
 			
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
 				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
@@ -695,6 +691,7 @@ package flaras.userInterface
 		{
 			var facObj3D:FacadeObject3D;
 			
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
 				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
@@ -708,6 +705,7 @@ package flaras.userInterface
 		{
 			var facObj3D:FacadeObject3D;
 			
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
 				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
@@ -721,6 +719,7 @@ package flaras.userInterface
 		{
 			var facObj3D:FacadeObject3D;			
 		
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
 				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
