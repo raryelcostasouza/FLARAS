@@ -53,7 +53,6 @@ package flaras.controller
 			var listOfPoints:Vector.<Point>;
 			var listOfObjects:Vector.<Object3D>;
 			var facObj3D:FacadeObject3D;
-			var currentScale:Number3D;
 			
 			aFMMApp.changeScreenMirror();
 			
@@ -79,7 +78,6 @@ package flaras.controller
 					
 					if (facObj3D.hasTexture() || facObj3D.hasVideo())
 					{
-						currentScale = facObj3D.getScale();
 						facObj3D.toggleMirror();
 					}
 				}				
