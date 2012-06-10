@@ -87,7 +87,7 @@ package flaras.boundary
 						this._ctrInteractionUI.getCtrMain().ctrPoint.changeVisibleAuxSphereOfPoints();
 						break;
 					case Keyboard.F3:
-						this._ctrInteractionUI.changeScreenMirror();
+						this._ctrInteractionUI.getCtrMain().ctrMirror.toggleMirror(true);
 						break;
 					case Keyboard.F4:
 						this._ctrInteractionUI.getCtrMain().ctrMarker.changeInteractionSphereSize(-1);
