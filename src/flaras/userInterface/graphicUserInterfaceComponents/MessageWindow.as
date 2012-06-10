@@ -45,7 +45,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		public static function messageSaveSuccess():void
 		{
-			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, parentComponentForWindows, true, new LoadIcon("icons/ok.png", 64, 64));
+			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, parentComponentForWindows, true, new LoadIcon("icons/ok.png", 32, 32));
 		}
 		
 		public static function messageFileAlreadyExists(fileName:String):void
