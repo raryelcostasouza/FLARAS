@@ -34,16 +34,18 @@ package flaras.controller
 	public class CtrCamera 
 	{
 		private var _ctrMain:CtrMain;
-		private var _selectedCameraIndex:uint;
+		private var _selectedCameraIndex:uint
+		private var _cameraDisabled:Boolean;
 		
 		public function CtrCamera(ctrMain:CtrMain) 
 		{
 			this._ctrMain = ctrMain;
 		}	
 		
-		public function setCameraStatus(status:Boolean):void
+		public function setCameraStatus(cameraDisabled:Boolean):void
 		{
-			if (status)
+			_cameraDisabled = cameraDisabled;
+			if (cameraDisabled)
 			{
 				_ctrMain.fmmapp.stopCamera();
 			}
@@ -51,6 +53,11 @@ package flaras.controller
 			{
 				_ctrMain.fmmapp.startCamera();
 			}
+		}
+		
+		public function isCameraDisabled():Boolean
+		{
+			return this._cameraDisabled;
 		}
 		
 		public function selectCameraToCapture():void
