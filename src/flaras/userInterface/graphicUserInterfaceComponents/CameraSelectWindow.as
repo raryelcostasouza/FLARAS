@@ -57,7 +57,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			setResizable(false);
-			setSizeWH(320, 170);
+			setSizeWH(210, 130);
 			setLocationXY(320 - getWidth()/2, 240 - getHeight()/2);
 			
 			mainPanel = new JPanel(new BorderLayout());
@@ -72,13 +72,22 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		{
 			var centerPanel:JPanel;
 			var jl:JLabel;
+			var auxPanel:JPanel;
+			var auxPanel2:JPanel;
 			
-			centerPanel = new JPanel(new GridLayout(2, 1));
+			centerPanel = new JPanel(new GridLayout(2,1));
 			
-			jl = new JLabel("Select the camera for video capture:")
+			jl = new JLabel("Select the camera for video capture:");
+			auxPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			auxPanel2.append(jl);
+			
 			jcb = new JComboBox();
-			centerPanel.append(jl);
-			centerPanel.append(jcb);
+			jcb.setPreferredWidth(180);
+			auxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			auxPanel.append(jcb);
+			
+			centerPanel.append(auxPanel2);
+			centerPanel.append(auxPanel);
 			
 			return centerPanel;
 		}
