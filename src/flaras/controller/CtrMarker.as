@@ -36,11 +36,13 @@ package flaras.controller
 	
 	public class CtrMarker 
 	{		
+		private var _ctrMain:CtrMain;
 		private var _refMarker:Marker;
 		private var _interactionMarker:InteractionMarker;
 		
-		public function CtrMarker() 
+		public function CtrMarker(ctrMain:CtrMain) 
 		{
+			this._ctrMain = ctrMain;
 			this._refMarker = new Marker();
 			
 			this._interactionMarker = new InteractionMarker();
@@ -140,6 +142,19 @@ package flaras.controller
 		{
 			_interactionMarker.setSphereSize(intSphereData.size);
 			_interactionMarker.setSphereDistance(intSphereData.distance);
+		}
+		
+		public function toggleRefMarkerPersistence():void
+		{
+			if (_refMarker.persistence)
+			{
+				refMarker.persistence = false;
+			}
+			else
+			{
+				refMarker.persistence = true;
+			}
+			_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBRefMarkPersist(refMarker.persistence);
 		}
 	}
 }

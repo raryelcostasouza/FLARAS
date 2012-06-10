@@ -144,7 +144,12 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		private function actionToggleRefMarkerPersistence(e:Event):void
 		{
-			aControl.getCtrMain().ctrMarker.refMarker.togglePersistence();
+			aControl.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
+		}
+		
+		public function setStatusJCBRefMarkPersist(enabled:Boolean):void
+		{
+			refMarkerPersitence.setSelected(enabled);
 		}
 		
 		private function actionMirrorScreen(e:Event):void

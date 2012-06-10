@@ -83,6 +83,9 @@ package flaras.boundary
 					case 77: //M
 						this._ctrInteractionUI.getCtrMain().ctrMarker.changeMarkerType();
 						break;
+					case 80: //P
+						this._ctrInteractionUI.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
+						break;
 					case Keyboard.F1:
 						this._ctrInteractionUI.getCtrMain().ctrPoint.changeVisibleAuxSphereOfPoints();
 						break;

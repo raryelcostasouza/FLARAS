@@ -53,7 +53,7 @@ package flaras.controller
 		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
 		{
 			_fmmapp = pFMMApp;
-			this._ctrMarker = new CtrMarker();
+			this._ctrMarker = new CtrMarker(this);
 			this._ctrPoint = new CtrPoint(this);
 			new CtrInteractionUI(this);
 			this._ctrUserProject = new CtrUserProject(this);

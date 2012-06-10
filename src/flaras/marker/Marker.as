@@ -58,16 +58,9 @@ package flaras.marker
 			return this._persistence;
 		}
 		
-		public function togglePersistence():void
+		public function set persistence(persistence:Boolean):void
 		{
-			if (this._persistence)
-			{
-				this._persistence = false;
-			}
-			else
-			{
-				this._persistence = true;
-			}
+			this._persistence = persistence;
 		}
 	}	
 }
