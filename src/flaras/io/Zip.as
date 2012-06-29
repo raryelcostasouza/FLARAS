@@ -152,6 +152,37 @@ package flaras.io
 					ErrorHandler.onSecurityErrorAsynchronous(se);
 				}							
 			}
-		}	
+		}
+		
+		public static function unzipFile(zipFile:File, destinationFolder2ExtractFiles:File):void
+		{
+			var fs:FileStream;
+			var baZipFile:ByteArray;
+			
+			try
+			{
+				fs = new FileStream();
+				baZipFile = new ByteArray();
+				
+				fs.open(zipFile, FileMode.READ);
+				fs.readBytes(baZipFile);
+				fs.close();
+			}
+			catch (iE:IOError)
+			{
+				ErrorHandler.onIOErrorSynchronous(iE, zipFile.nativePath);
+			}
+			catch (sE:SecurityError)
+			{
+				ErrorHandler.onSecurityErrorSynchronous(sE, zipFile.nativePath);
+			}
+			
+			unzip(baZipFile, destinationFolder2ExtractFiles);			
+		}
+		
+		public function unzipToFileNameFolder(baZipFile:ByteArray, destinationFolder2ExtractFiles:File):void
+		{
+			
+		}
 	}
 }
