@@ -271,30 +271,9 @@ package flaras.controller
 		//used when the app is called directly from the project file
 		private function loadOpenProjectData(file2Open:File):void
 		{
-			var ba:ByteArray;
-			var fs:FileStream;
-			
-			ba = new ByteArray();
-			fs = new FileStream();
-			
-			try
-			{
-				fs.open(file2Open, FileMode.READ);
-				fs.readBytes(ba);
-				fs.close();
-			}
-			catch (iE:IOError)
-			{
-				ErrorHandler.onIOErrorSynchronous(iE, file2Open.nativePath);
-			}
-			catch (se:SecurityError)
-			{
-				ErrorHandler.onSecurityErrorSynchronous(se, file2Open.nativePath);
-			}
-			// end of functions related with opening a project
-			
 			//extracts the zip file to the tmp folder
-			Zip.unzip(ba, getCurrentProjectTempFolder());		
+			
+			Zip.unzipFile(file2Open, getCurrentProjectTempFolder());
 			
 			//stores the file pointer to the opened project file
 			aProjectFile = file2Open;
