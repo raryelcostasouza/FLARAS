@@ -180,9 +180,34 @@ package flaras.io
 			unzip(baZipFile, destinationFolder2ExtractFiles);			
 		}
 		
-		public function unzipToFileNameFolder(baZipFile:ByteArray, destinationFolder2ExtractFiles:File):void
+		public static function unzipToFileNameFolder(zipFile:File, destinationFolder2ExtractFiles:File):String
 		{
+			var fileNameWithoutExtension:String;
+			var indexFileExtensionDot:uint;
+			var folderWithFileName:File;
 			
+			//get the index of the last dot, that indicates the file extension
+			indexFileExtensionDot = zipFile.name.lastIndexOf(".");
+			fileNameWithoutExtension = zipFile.name.slice(0, indexFileExtensionDot);			
+					
+			//create the directory with the fileNameWithoutExtension
+			folderWithFileName = destinationFolder2ExtractFiles.resolvePath(fileNameWithoutExtension);
+			try
+			{
+				folderWithFileName.createDirectory();
+			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOErrorSynchronous(ioE, folderWithFileName.nativePath);
+			}
+			catch (sE:SecurityError)
+			{
+				ErrorHandler.onSecurityErrorSynchronous(sE, folderWithFileName.nativePath);
+			}			
+			
+			unzipFile(zipFile, folderWithFileName);
+			
+			return fileNameWithoutExtension;
 		}
 	}
 }

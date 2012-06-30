@@ -29,6 +29,8 @@
 
 package flaras.io.fileReader
 {
+	import air.update.net.FileDownloader;
+	import flaras.constants.FolderConstants;
 	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
@@ -71,6 +73,9 @@ package flaras.io.fileReader
 				var animationAxis:uint;
 				var animationRadius:uint;
 				var animationRotDirection:int;
+				var obj3DFile:File;
+				var flarasTempFolder:File;
+				var newFilePath:String;
 				
 				//old flaras project withoud animation support
 				if (obj3D.animation.hasAnimation == undefined)
@@ -99,7 +104,20 @@ package flaras.io.fileReader
 					}
 				}
 				
-				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(obj3D.filePath, 
+				//import compatibility of old projects that used KMZ loader
+				//unzip files and then use DAE loader
+				flarasTempFolder = new File(FolderConstants.getFlarasAppCurrentFolder());
+				obj3DFile = flarasTempFolder.resolvePath(obj3D.filePath);
+				if (obj3DFile.name.toLowerCase().indexOf(".zip") != -1 || obj3DFile.name.toLowerCase().indexOf(".kmz") != -1)
+				{
+					newFilePath = KMZ2DAEImporter.importKMZ(obj3DFile);
+				}
+				else
+				{
+					newFilePath = obj3D.filePath;
+				}
+				
+				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(newFilePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
 												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
 												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),

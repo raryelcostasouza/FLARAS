@@ -99,6 +99,9 @@ package flaras.io
 		{
 			var f:File;
 			var fileSource:File;
+			var strFolderExtractedFile:String;
+			var daeFile:File;
+			var path:String;
 			
 			fileSource = File(e.target);
 			
@@ -111,6 +114,28 @@ package flaras.io
 				try
 				{
 					fileSource.copyTo(fileDestinationSubFolder.resolvePath(fileSource.name), false);
+					
+					//verificar se pasta já existe
+					//if it was selected a 3d model file
+					if (fileSource.name.toLowerCase().indexOf(".zip") != -1 || fileSource.name.toLowerCase().indexOf(".kmz") != -1)
+					{
+						path = KMZ2DAEImporter.importKMZ(fileDestinationSubFolder.resolvePath(fileSource.name));
+						
+						if (path == null)
+						{
+							MessageWindow.messageInvalidDAEFile();
+						}
+						else
+						{
+							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+						}
+					}
+					//if it was copied a texture, video or audio
+					else
+					{
+						path = fileSource.name;
+						aCtrGUI.finishedFileCopying(aDestinationSubFolder+path, aDestinationSubFolder);	
+					}
 				}
 				catch (ioE:IOError)
 				{
@@ -119,8 +144,7 @@ package flaras.io
 				catch (se:SecurityError)
 				{
 					ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
-				}				
-				aCtrGUI.finishedFileCopying(aDestinationSubFolder+fileSource.name, aDestinationSubFolder);	
+				}
 			}
 			else
 			{

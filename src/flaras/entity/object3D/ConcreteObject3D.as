@@ -206,14 +206,14 @@ package flaras.entity.object3D
 		{
 			aObject3DAlreadyLoaded = true;
 			
-			var objKMZ:KMZ = new KMZ();
-			objKMZ.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			objKMZ.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			//objKMZ.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
+			var objDAE:DAE = new DAE(true, null, true);
+			objDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+			objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			//objDAE.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
 			
-			objKMZ.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);	
-			copyDisplayObject3DProperties(objKMZ);
-			aDisplayObject3D = objKMZ;
+			objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);	
+			copyDisplayObject3DProperties(objDAE);
+			aDisplayObject3D = objDAE;
 				
 			MarkerNodeManager.addObj2MarkerNode(aDisplayObject3D, Marker.REFERENCE_MARKER, null);
 		}

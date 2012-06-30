@@ -55,6 +55,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"\nRename your file and you'll be able to add it to the project.", null, parentComponentForWindows);
 		}
 		
+		public static function messageInvalidDAEFile():void
+		{
+			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE) on the selected file", null, parentComponentForWindows);
+		}
+		
 		public static function messageProjectNotSaved2Publish():void
 		{
 			JOptionPane.showMessageDialog("Warning!", "You must save your project before trying to publish it!", null, parentComponentForWindows);
