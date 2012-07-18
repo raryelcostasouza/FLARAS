@@ -130,6 +130,8 @@ package flaras.io
 						if (path == null)
 						{
 							MessageWindow.messageInvalidDAEFile();
+							//remove the extracted folder
+							FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
 						}
 						else
 						{
