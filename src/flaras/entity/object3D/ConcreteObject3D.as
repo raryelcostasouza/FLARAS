@@ -39,6 +39,7 @@ package flaras.entity.object3D
 	import flaras.marker.*;
 	import flaras.util.StageReference;
 	import flash.events.*;
+	import flash.filesystem.File;
 	import flash.utils.Timer;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.core.proto.MaterialObject3D;
@@ -230,7 +231,7 @@ package flaras.entity.object3D
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{
 			unLoad();			
-			FileRemover.removeFile(FolderConstants.getFlarasAppCurrentFolder()+"/"+aFilePath);			
+			FileRemover.remove(KMZ2DAEImporter.getDAEFileExtractedFolder(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath)).nativePath);
 		}
 		
 		override public function updateObject3DPosition():void
