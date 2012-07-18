@@ -83,17 +83,21 @@ package flaras.io
 				//if the entry is a file
 				else
 				{
-					//loading file f to ByteArray
-					ba = new ByteArray();
-					fs.open(f, FileMode.READ);
-					fs.readBytes(ba);
-					fs.close();
-					
-					//creating zip entry
-					ze = new ZipEntry(fullPath + f.name);
-					pZipOut.putNextEntry(ze);
-					pZipOut.write(ba);
-					pZipOut.closeEntry();
+					// if the file is not empty, add it to the zip file
+					if (f.size > 0)
+					{
+						//loading file f to ByteArray
+						ba = new ByteArray();
+						fs.open(f, FileMode.READ);
+						fs.readBytes(ba);
+						fs.close();
+						
+						//creating zip entry
+						ze = new ZipEntry(fullPath + f.name);
+						pZipOut.putNextEntry(ze);
+						pZipOut.write(ba);
+						pZipOut.closeEntry();
+					}					
 				}				
 			}
 			
