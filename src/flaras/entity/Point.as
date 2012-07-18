@@ -261,7 +261,7 @@ package flaras.entity
 			
 			if (f.exists)
 			{
-				FileRemover.removeFile(f.nativePath);
+				FileRemover.remove(f.nativePath);
 			}
 		}
 	}	
