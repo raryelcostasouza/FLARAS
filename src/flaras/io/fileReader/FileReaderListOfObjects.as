@@ -103,6 +103,7 @@ package flaras.io.fileReader
 					}
 				}
 				
+				//only on FLARAS Developer
 				//import compatibility of old projects that used KMZ loader
 				//unzip files and then use DAE loader
 				flarasTempFolder = new File(FolderConstants.getFlarasAppCurrentFolder());
@@ -114,7 +115,8 @@ package flaras.io.fileReader
 				else
 				{
 					newFilePath = obj3D.filePath;
-				}
+				}				
+				//end only on FLARAS Developer
 				
 				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(newFilePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
