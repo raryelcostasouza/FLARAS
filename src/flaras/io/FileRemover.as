@@ -36,13 +36,21 @@ package flaras.io
 	
 	public class FileRemover 
 	{
-		public static function removeFile(filePath:String):void
+		public static function remove(filePath:String):void
 		{
 			var f:File;
 			try
 			{
 				f = new File(filePath);
-				f.deleteFile();
+				
+				if (f.isDirectory)
+				{
+					f.deleteDirectory(true);
+				}
+				else
+				{
+					f.deleteFile();
+				}
 			}
 			catch (ioE:IOError)
 			{
