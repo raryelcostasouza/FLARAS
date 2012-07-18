@@ -71,6 +71,26 @@ package flaras.io
 			}
 			
 			return newFilePath;
-		}		
+		}
+		
+		//get the folderpath of the folder to which the KMZ/ZIP file was extracted
+		public static function getDAEFileExtractedFolder(daeFilePath:File):File
+		{
+			var daeProjectFolder:File;
+			var relativePath:String;
+			var indexFirstSlash:uint;
+			var extractedFolderName:String;
+			var extractedFolderPath:File;
+			
+			daeProjectFolder = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + FolderConstants.COLLADA_FOLDER);
+			
+			relativePath = daeProjectFolder.getRelativePath(daeFilePath);
+			indexFirstSlash = relativePath.indexOf("/");
+			extractedFolderName = relativePath.slice(0, indexFirstSlash);
+			
+			extractedFolderPath = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + FolderConstants.COLLADA_FOLDER + extractedFolderName);
+			
+			return extractedFolderPath;
+		}
 	}
 }
