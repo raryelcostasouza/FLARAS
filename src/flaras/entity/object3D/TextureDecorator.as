@@ -141,7 +141,7 @@ package flaras.entity.object3D
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{	
 			unLoad();
-			FileRemover.removeFile(FolderConstants.getFlarasAppCurrentFolder() + "/" + aTexturePath);
+			FileRemover.remove(FolderConstants.getFlarasAppCurrentFolder() + "/" + aTexturePath);
 		}
 	}
 }

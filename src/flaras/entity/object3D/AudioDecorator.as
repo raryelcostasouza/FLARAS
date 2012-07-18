@@ -106,7 +106,7 @@ package flaras.entity.object3D
 		
 		public function removeAudioFile():void
 		{
-			FileRemover.removeFile(FolderConstants.getFlarasAppCurrentFolder()+ "/"+ aAudioPath);
+			FileRemover.remove(FolderConstants.getFlarasAppCurrentFolder()+ "/"+ aAudioPath);
 		}
 	}
 }
