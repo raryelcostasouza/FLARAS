@@ -29,8 +29,7 @@
 
 package flaras.io.fileReader
 {
-	import air.update.net.FileDownloader;
-	import flaras.constants.FolderConstants;
+	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
@@ -108,7 +107,7 @@ package flaras.io.fileReader
 				//unzip files and then use DAE loader
 				flarasTempFolder = new File(FolderConstants.getFlarasAppCurrentFolder());
 				obj3DFile = flarasTempFolder.resolvePath(obj3D.filePath);
-				if (obj3DFile.name.toLowerCase().indexOf(".zip") != -1 || obj3DFile.name.toLowerCase().indexOf(".kmz") != -1)
+				if (obj3DFile.extension.toLowerCase() == "zip" || obj3DFile.extension.toLowerCase() == "kmz" )
 				{
 					newFilePath = KMZ2DAEImporter.importKMZ(obj3DFile);
 				}
