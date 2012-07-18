@@ -133,7 +133,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			"F8: Reset properties\n\n" +
 			
 			"Others keys:\n" +
-			"F3: Toggle mirror screen\n\n", null, parentComponentForWindows);
+			"F3: Toggle mirror screen\n" +
+			"P: Toggle reference marker persistence\n\n", null, parentComponentForWindows);
 		}
 		
 		
