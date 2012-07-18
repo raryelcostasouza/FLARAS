@@ -102,22 +102,28 @@ package flaras.io
 			var strFolderExtractedFile:String;
 			var daeFile:File;
 			var path:String;
+			var indexFileExtensionDot:uint;
+			var fileNameWithoutExtension:String;
 			
 			fileSource = File(e.target);
-			
 			fileSource.removeEventListener(Event.SELECT, fileSelected);
 						
 			f = new File(fileDestinationSubFolder.resolvePath(fileSource.name).nativePath);
-			// if there is no other file with the same name
-			if (!f.exists)
+			
+			indexFileExtensionDot = f.name.lastIndexOf(".");
+			fileNameWithoutExtension = f.name.slice(0, indexFileExtensionDot);	
+			
+			// if there is no other file/folder with the same name
+			if ((!f.exists && !isObj3DFile(f)) || 
+				//extracted folder does not exist
+				(!f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
 			{
 				try
 				{
 					fileSource.copyTo(fileDestinationSubFolder.resolvePath(fileSource.name), false);
 					
-					//verificar se pasta já existe
 					//if it was selected a 3d model file
-					if (fileSource.name.toLowerCase().indexOf(".zip") != -1 || fileSource.name.toLowerCase().indexOf(".kmz") != -1)
+					if (isObj3DFile(f))
 					{
 						path = KMZ2DAEImporter.importKMZ(fileDestinationSubFolder.resolvePath(fileSource.name));
 						
@@ -200,5 +206,9 @@ package flaras.io
 			}
 		}
 		
+		private static function isObj3DFile(file:File):Boolean
+		{
+			return (file.extension.toLowerCase() == "kmz" || file.extension.toLowerCase() == "zip");
+		}		
 	}
 }
