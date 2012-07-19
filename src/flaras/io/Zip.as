@@ -30,6 +30,7 @@
 package flaras.io 
 {
 	import flaras.errorHandler.*;
+	import flaras.userInterface.graphicUserInterfaceComponents.MessageWindow;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -147,14 +148,18 @@ package flaras.io
 						fs.close();			
 					}	
 				}
-				catch (ioE:IOErrorEvent)
+				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorAsynchronous(ioE);
+					ErrorHandler.onIOErrorSynchronous(ioE, fDestination.nativePath);
 				}
-				catch (se:SecurityErrorEvent)
+				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorAsynchronous(se);
-				}							
+					ErrorHandler.onSecurityErrorSynchronous(se, fDestination.nativePath);
+				}
+				catch (e:Error)
+				{
+					MessageWindow.messageInvalidZipFile();
+				}
 			}
 		}
 		
