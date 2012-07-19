@@ -110,54 +110,65 @@ package flaras.io
 						
 			f = new File(fileDestinationSubFolder.resolvePath(fileSource.name).nativePath);
 			
-			indexFileExtensionDot = f.name.lastIndexOf(".");
-			fileNameWithoutExtension = f.name.slice(0, indexFileExtensionDot);	
-			
-			// if there is no other file/folder with the same name
-			if ((!f.exists && !isObj3DFile(f)) || 
-				//extracted folder does not exist
-				(!f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
+			if (hasValidFileName(f.name))
 			{
-				try
+				indexFileExtensionDot = f.name.lastIndexOf(".");
+				fileNameWithoutExtension = f.name.slice(0, indexFileExtensionDot);	
+				
+				// if there is no other file/folder with the same name
+				if ((!f.exists && !isObj3DFile(f)) || 
+					//extracted folder does not exist
+					(!f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
 				{
-					fileSource.copyTo(fileDestinationSubFolder.resolvePath(fileSource.name), false);
-					
-					//if it was selected a 3d model file
-					if (isObj3DFile(f))
+					try
 					{
-						path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(fileSource.name));
+						fileSource.copyTo(fileDestinationSubFolder.resolvePath(fileSource.name), false);
 						
-						if (path == null)
+						//if it was selected a 3d model file
+						if (isObj3DFile(f))
 						{
-							MessageWindow.messageInvalidDAEFile();
-							//remove the extracted folder
-							FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
+							path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(fileSource.name));
+							
+							if (path == null)
+							{
+								MessageWindow.messageInvalidDAEFile();
+								//remove the extracted folder
+								FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
+							}
+							else if (!hasValidFileName(getFileNameFromPath(path)))
+							{
+								MessageWindow.messageInvalidFileName(MessageWindow.OBJ3D_INVALID_FILENAME);
+							}
+							else
+							{
+								aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+							}
 						}
+						//if it was copied a texture, video or audio
 						else
 						{
-							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+							path = fileSource.name;
+							aCtrGUI.finishedFileCopying(aDestinationSubFolder+path, aDestinationSubFolder);	
 						}
 					}
-					//if it was copied a texture, video or audio
-					else
+					catch (ioE:IOError)
 					{
-						path = fileSource.name;
-						aCtrGUI.finishedFileCopying(aDestinationSubFolder+path, aDestinationSubFolder);	
+						ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
+					}
+					catch (se:SecurityError)
+					{
+						ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
 					}
 				}
-				catch (ioE:IOError)
+				else
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
-				}
-				catch (se:SecurityError)
-				{
-					ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
+					MessageWindow.messageFileAlreadyExists(fileSource.name);
 				}
 			}
 			else
 			{
-				MessageWindow.messageFileAlreadyExists(fileSource.name);
-			}
+				MessageWindow.messageInvalidFileName(MessageWindow.OTHER_TYPE_INVALID_FILENAME);
+			}			
 		}
 		
 		public static function copyFolder(folder2Copy:File, destinationFolder:File, pCopiedFolderNewName:String = ""):void
@@ -211,6 +222,25 @@ package flaras.io
 		private static function isObj3DFile(file:File):Boolean
 		{
 			return (file.extension.toLowerCase() == "kmz" || file.extension.toLowerCase() == "zip");
-		}		
+		}	
+		
+		private static function getFileNameFromPath(path:String):String
+		{
+			var indexOfLastSlash:uint;
+			
+			
+			indexOfLastSlash = path.lastIndexOf("/");
+			return path.slice(indexOfLastSlash + 1, path.length);		
+		}
+		
+		//check if the filename contains only letters A-Z/a-z, digits 0-9 and -/_
+		private static function hasValidFileName(fileName:String):Boolean
+		{
+			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_]+[.][0-9a-zA-Z]+/
+			var match:String = regExpValidFileName.exec(fileName);
+			
+			// it's a valid filename if the string matched has the same lenght of the filename
+			return (match.length == fileName.length);
+		}
 	}
 }

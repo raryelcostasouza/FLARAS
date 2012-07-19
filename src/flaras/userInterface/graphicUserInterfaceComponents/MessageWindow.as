@@ -37,6 +37,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	public class MessageWindow 
 	{
 		private static var parentComponentForWindows:Component;
+		public static const OBJ3D_INVALID_FILENAME:String = "The obj3D file inside this zipped file has an invalid filename!";
+		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";
 		
 		public static function setParentComponent(pParentComponent:Component):void
 		{
@@ -63,6 +65,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		public static function messageInvalidZipFile():void
 		{
 			JOptionPane.showMessageDialog("Error!", "Invalid/corrupted zip file! One possible cause for this problem may be that the zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, parentComponentForWindows);
+		}
+		
+		public static function messageInvalidFileName(type:String):void
+		{
+			JOptionPane.showMessageDialog("Error!", type + "\nOnly the following characters are allowed for filenames: \n\na-z \nA-Z \n0-9 \n-(hyphen) \n_(underscore) \n\nFilenames with spaces and special characters are NOT allowed.", null, parentComponentForWindows);
 		}
 		
 		public static function messageProjectNotSaved2Publish():void
