@@ -34,23 +34,23 @@ package flaras.io
 	import flash.errors.*;
 	import flash.filesystem.*;
 	
-	public class KMZ2DAEImporter 
+	public class Zipped3DFileImporter 
 	{
-		public static function importKMZ(kmzFile:File):String
+		public static function importFile(zipFile:File):String
 		{
 			var flarasTempFolder:File = new File(FolderConstants.getFlarasAppCurrentFolder());
 			var fileDestinationSubFolder:File;
 			var newFilePath:String;
 			var strFolderExtractedFile:String;
-			var daeFile:File;
+			var obj3DFileFound:File;
 			
 			fileDestinationSubFolder = flarasTempFolder.resolvePath(FolderConstants.COLLADA_FOLDER);
-			strFolderExtractedFile = Zip.unzipToFileNameFolder(kmzFile, fileDestinationSubFolder);
-			daeFile = FileSearch.getDAEFilePath(fileDestinationSubFolder.resolvePath(strFolderExtractedFile));
+			strFolderExtractedFile = Zip.unzipToFileNameFolder(zipFile, fileDestinationSubFolder);
+			obj3DFileFound = FileSearch.recursiveSearch3DFile(fileDestinationSubFolder.resolvePath(strFolderExtractedFile));
 			
-			if (daeFile != null)
+			if (obj3DFileFound != null)
 			{
-				newFilePath = FolderConstants.COLLADA_FOLDER + fileDestinationSubFolder.getRelativePath(daeFile);
+				newFilePath = FolderConstants.COLLADA_FOLDER + fileDestinationSubFolder.getRelativePath(obj3DFileFound);
 			}
 			else
 			{
@@ -59,22 +59,22 @@ package flaras.io
 			
 			try
 			{
-				kmzFile.deleteFile();
+				zipFile.deleteFile();
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, kmzFile.nativePath);
+				ErrorHandler.onIOErrorSynchronous(ioE, zipFile.nativePath);
 			}
 			catch (sE:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(sE, kmzFile.nativePath);
+				ErrorHandler.onSecurityErrorSynchronous(sE, zipFile.nativePath);
 			}
 			
 			return newFilePath;
 		}
 		
-		//get the folderpath of the folder to which the KMZ/ZIP file was extracted
-		public static function getDAEFileExtractedFolder(daeFilePath:File):File
+		//get the folderpath of the folder to which the ZIP file was extracted
+		public static function get3DFileExtractedFolder(daeFilePath:File):File
 		{
 			var daeProjectFolder:File;
 			var relativePath:String;

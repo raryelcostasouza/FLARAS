@@ -110,7 +110,7 @@ package flaras.io.fileReader
 				obj3DFile = flarasTempFolder.resolvePath(obj3D.filePath);
 				if (obj3DFile.extension.toLowerCase() == "zip" || obj3DFile.extension.toLowerCase() == "kmz" )
 				{
-					newFilePath = KMZ2DAEImporter.importKMZ(obj3DFile);
+					newFilePath = Zipped3DFileImporter.importFile(obj3DFile);
 				}
 				else
 				{

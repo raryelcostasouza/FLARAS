@@ -56,7 +56,7 @@ package flaras.io
 		{
 			aCtrGUI = pCtrGUI;
 			aDestinationSubFolder = FolderConstants.COLLADA_FOLDER;
-			copy(new FileFilter("DAE zipped Files (.zip) or KMZ Files (.kmz)", "*.zip;*.kmz"), pCurrentProjectTempFolder, "Get Collada file");
+			copy(new FileFilter("DAE/3DS zipped Files (.zip) or KMZ Files (.kmz)", "*.zip;*.kmz;"), pCurrentProjectTempFolder, "Get Collada file");
 		}
 		
 		public static function textureCopy(pCurrentProjectTempFolder:File, pCtrGUI:CtrGUI):void
@@ -125,7 +125,7 @@ package flaras.io
 					//if it was selected a 3d model file
 					if (isObj3DFile(f))
 					{
-						path = KMZ2DAEImporter.importKMZ(fileDestinationSubFolder.resolvePath(fileSource.name));
+						path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(fileSource.name));
 						
 						if (path == null)
 						{

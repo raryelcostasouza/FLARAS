@@ -32,13 +32,10 @@ package flaras.io
 	import flash.filesystem.*;
 	
 	public class FileSearch 
-	{
-		public static function getDAEFilePath(folder2Check:File):File
-		{
-			return recursiveSearch(folder2Check, "dae");
-		}
+	{		
+		private static var obj3DExtensions:Array = ["dae", "3ds"];
 		
-		private static function recursiveSearch(folder:File, fileExtension:String):File
+		public static function recursiveSearch3DFile(folder:File):File
 		{
 			var directoryListing:Array;
 			var ret:File;
@@ -48,7 +45,7 @@ package flaras.io
 			{
 				if (entry.isDirectory)
 				{
-					ret = recursiveSearch(entry, fileExtension);
+					ret = recursiveSearch3DFile(entry);
 					if (ret != null)
 					{
 						return ret;
@@ -56,13 +53,25 @@ package flaras.io
 				}
 				else
 				{
-					if (entry.extension.toLowerCase() == fileExtension)
+					if (isObj3DFile(entry))
 					{
 						return entry;
 					}
 				}
 			}
 			return null;			
-		}		
+		}
+		
+		private static function isObj3DFile(f:File):Boolean
+		{
+			for each (var ext:String in obj3DExtensions) 
+			{
+				if (f.extension.toLowerCase() == ext)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }
