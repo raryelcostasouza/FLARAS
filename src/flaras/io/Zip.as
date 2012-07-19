@@ -158,6 +158,7 @@ package flaras.io
 				}
 				catch (e:Error)
 				{
+					//zip errors
 					MessageWindow.messageInvalidZipFile();
 				}
 			}

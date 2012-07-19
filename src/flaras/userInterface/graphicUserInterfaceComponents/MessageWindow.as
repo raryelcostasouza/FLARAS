@@ -62,7 +62,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		public static function messageInvalidZipFile():void
 		{
-			JOptionPane.showMessageDialog("Error!", "The zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Error!", "Invalid/corrupted zip file! One possible cause for this problem may be that the zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, parentComponentForWindows);
 		}
 		
 		public static function messageProjectNotSaved2Publish():void
