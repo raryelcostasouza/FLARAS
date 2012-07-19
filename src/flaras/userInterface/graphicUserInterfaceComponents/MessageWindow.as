@@ -174,7 +174,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		{
 			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
-			"Version 1.0-r1110 - July, 19 2012\n\n" +
+			"Version 1.0-r1115 - July, 19 2012\n\n" +
 			
 			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
 			"Official Website: http://www.ckirner.com/flaras\n\n" +
