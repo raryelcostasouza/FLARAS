@@ -60,6 +60,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE) on the selected file", null, parentComponentForWindows);
 		}
 		
+		public static function messageInvalidZipFile():void
+		{
+			JOptionPane.showMessageDialog("Error!", "The zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, parentComponentForWindows);
+		}
+		
 		public static function messageProjectNotSaved2Publish():void
 		{
 			JOptionPane.showMessageDialog("Warning!", "You must save your project before trying to publish it!", null, parentComponentForWindows);
