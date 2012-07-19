@@ -206,15 +206,28 @@ package flaras.entity.object3D
 		private function load():void
 		{
 			aObject3DAlreadyLoaded = true;
-			
-			var objDAE:DAE = new DAE(true, null, true);
-			objDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			//objDAE.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
-			
-			objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);	
-			copyDisplayObject3DProperties(objDAE);
-			aDisplayObject3D = objDAE;
+			if (aFilePath.toLowerCase().indexOf(".dae") != -1)
+			{
+				var objDAE:DAE = new DAE(true, null, true);
+				objDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				//objDAE.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
+				
+				objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);	
+				copyDisplayObject3DProperties(objDAE);
+				aDisplayObject3D = objDAE;
+			}
+			//if it is a 3DS file
+			else
+			{
+				var objMAX3DS:Max3DS = new Max3DS();
+				objMAX3DS.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				objMAX3DS.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				
+				objMAX3DS.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath);
+				copyDisplayObject3DProperties(objMAX3DS);
+				aDisplayObject3D = objMAX3DS;
+			}				
 				
 			MarkerNodeManager.addObj2MarkerNode(aDisplayObject3D, Marker.REFERENCE_MARKER, null);
 		}
@@ -231,7 +244,7 @@ package flaras.entity.object3D
 		override public function unLoadAndRemoveFile(removeAudio:Boolean):void
 		{
 			unLoad();			
-			FileRemover.remove(KMZ2DAEImporter.getDAEFileExtractedFolder(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath)).nativePath);
+			FileRemover.remove(Zipped3DFileImporter.get3DFileExtractedFolder(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + aFilePath)).nativePath);
 		}
 		
 		override public function updateObject3DPosition():void
