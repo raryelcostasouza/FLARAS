@@ -87,7 +87,7 @@ package flaras.boundary
 						this._ctrInteractionUI.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
 						break;
 					case Keyboard.F1:
-						this._ctrInteractionUI.getCtrMain().ctrPoint.changeVisibleAuxSphereOfPoints();
+						this._ctrInteractionUI.getCtrMain().ctrPoint.toggleVisibleAuxSphereOfPoints();
 						break;
 					case Keyboard.F3:
 						this._ctrInteractionUI.getCtrMain().ctrMirror.toggleMirror(true);

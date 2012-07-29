@@ -31,6 +31,7 @@ package flaras.controller
 {
 	import flaras.*;
 	import flaras.audio.*;
+	import flaras.boundary.BoundaryPoint;
 	import flaras.constants.*;
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
@@ -43,11 +44,62 @@ package flaras.controller
 	public class CtrPoint
 	{
 		private var _listOfPoints:Vector.<Point> = new Vector.<Point>();
+		private var _listOfBoundaryPoints:Vector.<BoundaryPoint> = new Vector.<BoundaryPoint>();
 		private var _ctrMain:CtrMain;
 		
 		public function CtrPoint(ctrMain:CtrMain)
 		{
 			this._ctrMain = ctrMain;
+		}
+		
+		public function destroyListOfPoints():void
+		{
+			if (this._listOfPoints.length != 0)
+			{
+				for each(var p:Point in this._listOfPoints)
+				{
+					destroyPointInfo(p, false); 
+				}
+				this._listOfPoints = new Vector.<Point>();
+				this._listOfBoundaryPoints = new Vector.<BoundaryPoint>();
+			}			
+		}
+		
+		private function destroyPointInfo(p:Point, removeFiles:Boolean):void
+		{
+			var facObj3D:FacadeObject3D;
+			var bndPoint:BoundaryPoint;
+			var obj3D:Object3D;
+			var f:File;
+			
+			if (!removeFiles)
+			{
+				for each(obj3D in p.getListOfObjects())
+				{
+					facObj3D = new FacadeObject3D(obj3D);
+					facObj3D.unLoad();
+				}
+			}
+			else
+			{
+				for each(obj3D in p.getListOfObjects())
+				{
+					facObj3D = new FacadeObject3D(obj3D);
+					facObj3D.unLoadAndRemoveFile(AudioDecorator.REMOVE_AUDIO_FILE);
+				}
+				
+				//removing the xml file with the object list
+				f = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects());
+				if (f.exists)
+				{
+					FileRemover.remove(f.nativePath);
+				}
+			}
+			
+			bndPoint = _listOfBoundaryPoints[p.getID()];
+			bndPoint.destroy();
+			bndPoint = null;
+			p = null;			
 		}
 		
 		public function loadProjectData():void
@@ -58,23 +110,16 @@ package flaras.controller
 		public function finishedReadingListOfPoints():void
 		{
 			this._ctrMain.ctrGUI.comboBoxReload();
-		}
-		
-		public function clearListOfPoints():void
-		{
-			if (this._listOfPoints.length != 0)
-			{
-				for each(var p:Point in this._listOfPoints)
-				{
-					p.unLoad();
-				}
-				this._listOfPoints = new Vector.<Point>();
-			}			
-		}
+		}		
 		
 		public function getListOfPoints():Vector.<Point>
 		{
 			return this._listOfPoints;
+		}
+		
+		public function getCtrListOfObjects(indexPoint:uint):CtrListOfObjects
+		{
+			return new CtrListOfObjects(this._listOfPoints[indexPoint]);
 		}
 		
 		// functions related with adding and removing points -----------------------------------------------------------
@@ -84,24 +129,35 @@ package flaras.controller
 			
 			p = new Point(this._listOfPoints.length, pPosition);
 			this._listOfPoints.push(p);
+			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));			
+			
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
 		}
 		
 		public function addPoint(pPosition:Number3D):void
 		{
-			this._listOfPoints.push(new Point(this._listOfPoints.length, pPosition));
+			var p:Point;
+			
+			p = new Point(this._listOfPoints.length, pPosition)
+			this._listOfPoints.push(p);
+			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));
 		}
 		
-		public function removePoint(pPointID:uint):void
+		public function removePoint(p:Point):void
 		{
 			var id:uint;
 			
-			this._listOfPoints[pPointID].unLoadAndRemoveFile();
-			this._listOfPoints.splice(pPointID, 1);
+			id = p.getID()
+			destroyPointInfo(p, true);
 			
+			//removing from the lists
+			this._listOfPoints.splice(id, 1);
+			this._listOfBoundaryPoints.splice(id, 1);		
+			
+			//regenerating the point IDs
 			id = 0;
-			for each(var p:Point in this._listOfPoints)
+			for each(p in this._listOfPoints)
 			{
 				p.setID(id);
 				id++;
@@ -109,6 +165,22 @@ package flaras.controller
 		}
 		// end of functions related with adding and removing points -----------------------------------------------------------
 		
+		public function updatePointPosition(p:Point, position:Number3D):void
+		{
+			var facObj3D:FacadeObject3D;
+			var bndPoint:BoundaryPoint;
+			
+			bndPoint = _listOfBoundaryPoints[p.getID()];		
+			p.setPosition(position);
+			bndPoint.setPosition(position);
+				
+			for each(var obj3D:Object3D in p.getListOfObjects())
+			{
+				facObj3D = new FacadeObject3D(obj3D);
+				facObj3D.updateObject3DPosition();
+			}
+		}
+
 		//functions related with navigating through the list of objects -------------------------------------------------------------
 		public function inspectPoint(p:Point):void
 		{			
@@ -176,12 +248,15 @@ package flaras.controller
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
 		
 		// functions related with enabling and disabling points
-		public function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
+		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
 		{			
 			var obj3D:Object3D;
 			var listObjects:Vector.<Object3D>;
+			var bndPoint:BoundaryPoint;
 			
-			p.disablePointSphere();
+			bndPoint = _listOfBoundaryPoints[p.getID()];
+			bndPoint.hidePointSphere();
+			
 			p.setEnabled(true);
 			
 			if (pPlaySystemAudio)
@@ -199,17 +274,22 @@ package flaras.controller
 			}
 		}
 		
-		public function disablePoint(p:Point, pPlayAudio:Boolean):void
+		private function disablePoint(p:Point, pPlayAudio:Boolean):void
 		{
 			var obj3D:Object3D;
-			var listObjects:Vector.<Object3D>;				
+			var listObjects:Vector.<Object3D>;
+			var bndPoint:BoundaryPoint;
+			
+			bndPoint = _listOfBoundaryPoints[p.getID()];
 
-			if (!p.isAxisEnabled())
+			if (!bndPoint.isAxisVisible())
 			{
-				p.enablePointSphere();
+				//p.enablePointSphere();
+				bndPoint.showPointSphere();
 			}
 			
-			p.disableAuxSphere();
+			bndPoint.hideAuxSphere();
+			
 			p.setEnabled(false);
 			
 			if (pPlayAudio)
@@ -233,9 +313,13 @@ package flaras.controller
 		public function enablePointUI(indexPoint:int):void
 		{
 			var p:Point = this._listOfPoints[indexPoint];
+			var bndPoint:BoundaryPoint;
 			
-			enablePoint(p, true, false);
-			p.enableAxis();
+			bndPoint = _listOfBoundaryPoints[p.getID()];
+			
+			enablePoint(p, true, false);			
+			bndPoint.showAxis();
+			
 		}
 		
 		public function enableAllPoints():void
@@ -262,33 +346,30 @@ package flaras.controller
 		
 		public function disableAllPointsUI(pPlayAudio:Boolean):void
 		{
+			var bndPoint:BoundaryPoint;
+						
 			for each(var p:Point in this._listOfPoints)
 			{
-				p.disableAxis();				
+				bndPoint = _listOfBoundaryPoints[p.getID()];				
+				bndPoint.hideAxis();
 				disablePoint(p, pPlayAudio);
 			}
 		}
 		//end of functions related with enabling and disabling points
 		
-		public function changeVisibleAuxSphereOfPoints():void
+		public function toggleVisibleAuxSphereOfPoints():void
 		{
+			var bndPoint:BoundaryPoint;
+			
 			for each(var p:Point in this._listOfPoints)
 			{
+				bndPoint = _listOfBoundaryPoints[p.getID()];
 				if (p.isEnabled())
 				{
-					p.changeVisibleAuxSphere();
+					bndPoint.toggleVisibleAuxSphere();
 				}				
 			}
 		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
-		
-		
-		//functions related with the list of objects --------------------------------------------------------------------------------------		
-		public function getCtrListOfObjects(indexPoint:uint):CtrListOfObjects
-		{
-			//return this._listOfPoints[indexPoint].getCtrListOfObjects();
-			return new CtrListOfObjects(this._listOfPoints[indexPoint]);
-		}
-		//end of functions relaterd with the list of objects --------------------------------------------------------------------------------------
 	}		
 }

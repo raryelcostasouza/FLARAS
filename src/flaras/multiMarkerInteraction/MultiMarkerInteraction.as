@@ -29,7 +29,7 @@
 
 package flaras.multiMarkerInteraction 
 {
-	import flaras.entity.Point;
+	import flaras.boundary.*;
 	import flaras.marker.*;
 	import flaras.util.*;
 	import flash.display.*;
@@ -68,7 +68,7 @@ package flaras.multiMarkerInteraction
 		
 			// if the distance between the center of the spheres (the sphere of the point and the lock sphere)
 			// is smaller than the sum of the two radius
-			if (dist <= pObjInteractionSphere.getRadius() + Point.RADIUS_SPHERE_OF_POINT)
+			if (dist <= pObjInteractionSphere.getRadius() + BoundaryPoint.RADIUS_SPHERE_OF_POINT)
 			{
 				return true;
 			}

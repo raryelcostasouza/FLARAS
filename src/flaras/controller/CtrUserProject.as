@@ -174,7 +174,7 @@ package flaras.controller
 			if (aCurrentProjectTempFolder != null)
 			{
 				removeTmpFiles();
-				_ctrMain.ctrPoint.clearListOfPoints();
+				_ctrMain.ctrPoint.destroyListOfPoints();
 			}
 			
 			_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();

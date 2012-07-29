@@ -46,17 +46,11 @@ package flaras.entity
 	import org.papervision3d.objects.primitives.*;
 	
 	public class Point
-	{
-		public static const RADIUS_SPHERE_OF_POINT:uint = 10;
-		
+	{		
 		private var aID:uint;
 		private var aEnabled:Boolean;
 		private var aPosition:Number3D;
 		
-		//the axis is shown when the point is selected for edition on FLARAS Developer
-		private var aAxisDAE:DAE;
-		private var aObj3DSphereOfPoint:DisplayObject3D;
-		private var aObj3DAuxSphere:DisplayObject3D;
 		private var aIndexActiveObject:int = 0;
 		private var aIndexLastActiveObject:int = 0;
 		private var aInteractionLock:Boolean = false;
@@ -70,25 +64,6 @@ package flaras.entity
 			aID = pID;
 			aEnabled = false;
 			aPosition = pPosition;
-			
-			aObj3DSphereOfPoint = new Sphere(Color.gray, RADIUS_SPHERE_OF_POINT, 10, 10);
-			aObj3DSphereOfPoint.position = aPosition;
-			
-			aObj3DAuxSphere = new Sphere(Color.blue, RADIUS_SPHERE_OF_POINT, 10, 10);
-			aObj3DAuxSphere.position = aPosition;
-			aObj3DAuxSphere.visible = false;
-			
-			aAxisDAE = new DAE();
-			aAxisDAE.load(SystemFilesPathsConstants.OBJ_PATH_AXIS);
-			aAxisDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			aAxisDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous)
-			aAxisDAE.scale = 10;
-			aAxisDAE.position = aPosition;
-			aAxisDAE.visible = false;
-			
-			MarkerNodeManager.addObj2MarkerNode(aObj3DAuxSphere, Marker.REFERENCE_MARKER , null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereOfPoint, Marker.REFERENCE_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aAxisDAE, Marker.REFERENCE_MARKER, null);
 		}
 		
 		public function getIndexActiveObject():int
@@ -141,11 +116,6 @@ package flaras.entity
 			aEnabled = enable;
 		}
 		
-		public function isObj3DAuxSphereVisible():Boolean
-		{
-			return aObj3DAuxSphere.visible;
-		}
-		
 		public function getPosition():Number3D
 		{
 			return aPosition;
@@ -163,103 +133,7 @@ package flaras.entity
 		
 		public function setPosition(pPosition:Number3D):void
 		{
-			var facObj3D:FacadeObject3D;
-			
 			aPosition = pPosition;
-			
-			aObj3DSphereOfPoint.position = pPosition;
-			aObj3DAuxSphere.position = pPosition;
-			aAxisDAE.position = pPosition;
-			
-			for each(var obj3D:Object3D in _listOfObjects)
-			{
-				facObj3D = new FacadeObject3D(obj3D);
-				facObj3D.updateObject3DPosition();
-			}
-		}
-
-		public function changeVisibleAuxSphere():void
-		{
-			if (aObj3DAuxSphere.visible)
-			{
-				aObj3DAuxSphere.visible = false;
-			}
-			else
-			{
-				aObj3DAuxSphere.visible = true;
-			}
-		}
-		
-		public function enablePointSphere():void
-		{
-			aObj3DSphereOfPoint.visible = true;
-		}
-		
-		public function disablePointSphere():void
-		{
-			aObj3DSphereOfPoint.visible = false;
-		}
-		
-		public function enableAxis():void
-		{
-			aAxisDAE.visible = true;
-		}
-		
-		public function disableAxis():void
-		{
-			aAxisDAE.visible = false;
-		}
-		
-		public function isAxisEnabled():Boolean
-		{
-			return aAxisDAE.visible;
-		}
-		
-		public function disableAuxSphere():void
-		{
-			aObj3DAuxSphere.visible = false;
-		}
-		
-		//unLoad all the objects associated to the point and also the point's position sphere
-		public function unLoad():void
-		{
-			var facObj3D:FacadeObject3D;
-			
-			for each(var obj3D:Object3D in _listOfObjects)
-			{
-				facObj3D = new FacadeObject3D(obj3D);
-				facObj3D.unLoad();
-			}
-			
-			unLoadSpheresPoint();
-		}
-		
-		private function unLoadSpheresPoint():void
-		{
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DAuxSphere, Marker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereOfPoint, Marker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aAxisDAE, Marker.REFERENCE_MARKER);
-		}
-		
-		public function unLoadAndRemoveFile():void
-		{
-			var facObj3D:FacadeObject3D;
-			var f:File;
-			for each(var obj3D:Object3D in _listOfObjects)
-			{
-				facObj3D = new FacadeObject3D(obj3D);
-				facObj3D.unLoadAndRemoveFile(AudioDecorator.REMOVE_AUDIO_FILE);
-			}
-			
-			unLoadSpheresPoint();
-			
-			//removing the xml file with the object list
-			f = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + getFilePathListOfObjects());
-			
-			if (f.exists)
-			{
-				FileRemover.remove(f.nativePath);
-			}
 		}
 	}	
 }

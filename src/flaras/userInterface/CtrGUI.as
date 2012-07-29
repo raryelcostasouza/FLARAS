@@ -159,8 +159,11 @@ package flaras.userInterface
 			if (propertiesPanel.getPtList().getSelectedItem() == "New") {	}
 			else{
 				if (e.currentTarget == propertiesPanel.getPtX() || e.currentTarget == propertiesPanel.getPtY() || e.currentTarget == propertiesPanel.getPtZ()) {
-					aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].setPosition(new Number3D
-					(new Number(propertiesPanel.getPtX().getText()),new Number(propertiesPanel.getPtY().getText()),new Number(propertiesPanel.getPtZ().getText())));
+					/*aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].setPosition(new Number3D
+					(new Number(propertiesPanel.getPtX().getText()),new Number(propertiesPanel.getPtY().getText()),new Number(propertiesPanel.getPtZ().getText())));*/
+					aControl.getCtrPoint().updatePointPosition(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1], new Number3D
+					(new Number(propertiesPanel.getPtX().getText()), new Number(propertiesPanel.getPtY().getText()), new Number(propertiesPanel.getPtZ().getText())));
+
 				}
 				if (propertiesPanel.getObjList().getSelectedItem() == "New") { }
 				else {
@@ -353,7 +356,7 @@ package flaras.userInterface
 		private function remPt(e:Event):void {
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			
-			aControl.getCtrPoint().removePoint(propertiesPanel.getPtList().getSelectedIndex() - 1);
+			aControl.getCtrPoint().removePoint(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]);
 			comboBoxContentsPoint(propertiesPanel.getPtList(), aControl.getCtrPoint().getListOfPoints());
 			propertiesPanel.getPtList().setSelectedIndex(0);
 		}
