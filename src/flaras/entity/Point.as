@@ -60,11 +60,13 @@ package flaras.entity
 		private var aIndexActiveObject:int = 0;
 		private var aIndexLastActiveObject:int = 0;
 		private var aInteractionLock:Boolean = false;
-		private var ctrListOfObjects:CtrListOfObjects;
 		
-		public function Point(pID:uint, pPosition:Number3D, pObjCtrObjects:CtrPoint)
+		private var _listOfObjects:Vector.<Object3D>;
+		
+		public function Point(pID:uint, pPosition:Number3D)
 		{			
-			ctrListOfObjects = new CtrListOfObjects(this);
+			_listOfObjects = new Vector.<Object3D>();
+			
 			aID = pID;
 			aEnabled = false;
 			aPosition = pPosition;
@@ -87,11 +89,6 @@ package flaras.entity
 			MarkerNodeManager.addObj2MarkerNode(aObj3DAuxSphere, Marker.REFERENCE_MARKER , null);
 			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereOfPoint, Marker.REFERENCE_MARKER, null);
 			MarkerNodeManager.addObj2MarkerNode(aAxisDAE, Marker.REFERENCE_MARKER, null);
-		}
-		
-		public function getCtrListOfObjects():CtrListOfObjects
-		{
-			return ctrListOfObjects;
 		}
 		
 		public function getIndexActiveObject():int
@@ -161,7 +158,7 @@ package flaras.entity
 		
 		public function getListOfObjects():Vector.<Object3D>
 		{
-			return ctrListOfObjects.getListOfObjects();
+			return _listOfObjects;
 		}
 		
 		public function setPosition(pPosition:Number3D):void
@@ -174,7 +171,7 @@ package flaras.entity
 			aObj3DAuxSphere.position = pPosition;
 			aAxisDAE.position = pPosition;
 			
-			for each(var obj3D:Object3D in ctrListOfObjects.getListOfObjects())
+			for each(var obj3D:Object3D in _listOfObjects)
 			{
 				facObj3D = new FacadeObject3D(obj3D);
 				facObj3D.updateObject3DPosition();
@@ -228,7 +225,7 @@ package flaras.entity
 		{
 			var facObj3D:FacadeObject3D;
 			
-			for each(var obj3D:Object3D in ctrListOfObjects.getListOfObjects())
+			for each(var obj3D:Object3D in _listOfObjects)
 			{
 				facObj3D = new FacadeObject3D(obj3D);
 				facObj3D.unLoad();
@@ -248,7 +245,7 @@ package flaras.entity
 		{
 			var facObj3D:FacadeObject3D;
 			var f:File;
-			for each(var obj3D:Object3D in ctrListOfObjects.getListOfObjects())
+			for each(var obj3D:Object3D in _listOfObjects)
 			{
 				facObj3D = new FacadeObject3D(obj3D);
 				facObj3D.unLoadAndRemoveFile(AudioDecorator.REMOVE_AUDIO_FILE);

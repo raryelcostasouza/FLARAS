@@ -35,12 +35,13 @@ package flaras.controller
 	
 	public class CtrListOfObjects 
 	{
-		private var listOfObjects:Vector.<Object3D> = new Vector.<Object3D>();
+		private var listOfObjects:Vector.<Object3D>;
 		private var point:Point;
 		
 		public function CtrListOfObjects(point:Point)
 		{
 			this.point = point;
+			this.listOfObjects = point.getListOfObjects();
 		}
 	
 		public function addObject(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 

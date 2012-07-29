@@ -82,7 +82,7 @@ package flaras.controller
 		{
 			var p:Point;
 			
-			p = new Point(this._listOfPoints.length, pPosition, this);
+			p = new Point(this._listOfPoints.length, pPosition);
 			this._listOfPoints.push(p);
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
@@ -90,7 +90,7 @@ package flaras.controller
 		
 		public function addPoint(pPosition:Number3D):void
 		{
-			this._listOfPoints.push(new Point(this._listOfPoints.length, pPosition, this));
+			this._listOfPoints.push(new Point(this._listOfPoints.length, pPosition));
 		}
 		
 		public function removePoint(pPointID:uint):void
@@ -286,7 +286,8 @@ package flaras.controller
 		//functions related with the list of objects --------------------------------------------------------------------------------------		
 		public function getCtrListOfObjects(indexPoint:uint):CtrListOfObjects
 		{
-			return this._listOfPoints[indexPoint].getCtrListOfObjects();
+			//return this._listOfPoints[indexPoint].getCtrListOfObjects();
+			return new CtrListOfObjects(this._listOfPoints[indexPoint]);
 		}
 		//end of functions relaterd with the list of objects --------------------------------------------------------------------------------------
 	}		
