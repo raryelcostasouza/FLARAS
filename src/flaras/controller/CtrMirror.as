@@ -56,8 +56,6 @@ package flaras.controller
 			
 			aFMMApp.changeScreenMirror();
 			
-			listOfPoints =  _ctrMain.ctrPoint.getListOfPoints();
-			
 			if (MIRRORED_SCALE_FACTOR == 1)
 			{
 				MIRRORED_SCALE_FACTOR = -1;
@@ -66,13 +64,20 @@ package flaras.controller
 			{
 				MIRRORED_SCALE_FACTOR = 1;
 			}
-			
 			_ctrMain.ctrMarker.interactionMarker.mirror();
 			
+			listOfPoints =  _ctrMain.ctrPoint.getListOfPoints();
 			for each (var p:Point in listOfPoints)
 			{
-				listOfObjects = p.getListOfObjects();
-				for each(var obj:Object3D in listOfObjects)
+				//listOfObjects = p.getListOfScenes();
+				
+				for (var i:int = 0; i < p.getListOfFlarasScenes().length; i++) 
+				{
+					_ctrMain.ctrPoint.getCtrListOfObjects(p.getID()).toggleMirrorScenes();
+				}
+				
+				
+				/*for each(var obj:Object3D in listOfObjects)
 				{
 					facObj3D = new FacadeObject3D(obj);
 					
@@ -80,7 +85,7 @@ package flaras.controller
 					{
 						facObj3D.toggleMirror();
 					}
-				}				
+				}*/				
 			}
 			
 			if (actionfiredFromKeyboard)

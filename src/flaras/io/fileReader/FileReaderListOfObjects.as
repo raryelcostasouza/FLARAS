@@ -118,7 +118,18 @@ package flaras.io.fileReader
 				}				
 				//end only on FLARAS Developer
 				
-				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(newFilePath, 
+				/*aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addObject(newFilePath, 
+												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
+												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
+												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),
+												Boolean(parseInt(obj3D.texture.hasTexture)), obj3D.texture.texturePath,
+												obj3D.texture.width, obj3D.texture.height,
+												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
+												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
+												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
+												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection);*/
+												
+				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addScene(newFilePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
 												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
 												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),

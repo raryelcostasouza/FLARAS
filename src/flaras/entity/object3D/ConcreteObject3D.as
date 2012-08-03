@@ -30,21 +30,15 @@
 package flaras.entity.object3D
 {
 	import flaras.*;
-	import flaras.constants.FolderConstants;
-	import flaras.controller.CtrMirror;
+	import flaras.constants.*;
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
-	import flaras.util.StageReference;
 	import flash.events.*;
-	import flash.filesystem.File;
-	import flash.utils.Timer;
+	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
-	import org.papervision3d.core.proto.MaterialObject3D;
-	import org.papervision3d.events.FileLoadEvent;
-	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	

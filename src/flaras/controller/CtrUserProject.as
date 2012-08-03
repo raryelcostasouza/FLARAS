@@ -309,7 +309,7 @@ package flaras.controller
 			
 			for each (var p:Point in listOfPoints)
 			{
-				FileSaver.saveListOfObjects(p.getListOfObjects(), getCurrentProjectTempFolder(), p.getFilePathListOfObjects());
+				FileSaver.saveListOfObjects(p.getListOfFlarasScenes(), getCurrentProjectTempFolder(), p.getFilePathListOfObjects());
 			}
 			
 			folders2Zip = new Vector.<File>();

@@ -104,13 +104,13 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			jrbX = new JRadioButton("X");
 			jrbX.setSelected(true);
-			jrbX.addActionListener(_ctrGUI.animationAxisUpdate);
+			jrbX.addActionListener(_ctrGUI.animationPropertiesUpdate);
 			
 			jrbY = new JRadioButton("Y");
-			jrbY.addActionListener(_ctrGUI.animationAxisUpdate);
+			jrbY.addActionListener(_ctrGUI.animationPropertiesUpdate);
 			
 			jrbZ = new JRadioButton("Z");
-			jrbZ.addActionListener(_ctrGUI.animationAxisUpdate);
+			jrbZ.addActionListener(_ctrGUI.animationPropertiesUpdate);
 			
 			buttonGroup = new ButtonGroup();
 			buttonGroup.append(jrbX);
@@ -135,7 +135,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jlRotationSpeed = new JLabel("Rotation period: ");
 			jtfRotationPeriod = new JTextField("10", 5);
 			jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationPeriod.addActionListener(_ctrGUI.animationPeriodUpdate);
+			jtfRotationPeriod.addActionListener(_ctrGUI.animationPropertiesUpdate);
 			
 			jlRotationUnit = new JLabel("seconds");
 			
@@ -156,7 +156,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jlRotationRadius = new JLabel("Rotation radius: ");
 			jtfRotationRadius = new JTextField("0", 5);
 			jtfRotationRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationRadius.addActionListener(_ctrGUI.animationRadiusUpdade);
+			jtfRotationRadius.addActionListener(_ctrGUI.animationPropertiesUpdate);
 			
 			panelLine4.append(jlRotationRadius);
 			panelLine4.append(jtfRotationRadius);
@@ -171,7 +171,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jcbReverseRotation = new JCheckBox("Reverse rotation");
 			jcbReverseRotation.addActionListener(function():void
 			{
-				_ctrGUI.animationReverseDirectionUpdate();	
+				_ctrGUI.animationPropertiesUpdate(null);	
 			});
 			jp5.append(jcbReverseRotation);
 			

@@ -34,6 +34,7 @@ package flaras.userInterface
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
 	import flaras.io.*;
+	import flaras.model.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flash.events.*;
@@ -69,19 +70,40 @@ package flaras.userInterface
 				if (destiny == "dae/") 
 				{
 					tempindex = propertiesPanel.getObjList().getItemCount();
-					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject(path,
+					
+					/*aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject(path,
+					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
+					false, "", 0, 0, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());*/
+					
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addScene(path,
 					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
 					false, "", 0, 0, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
 					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+					
+					
+					/*comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfScenes());*/
+					
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
-					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
 				}
 				if (destiny == "textures/") 
 				{
 					tempindex = propertiesPanel.getObjList().getItemCount();
-					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject("",
+					/*aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject("",
+					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
+					true, path, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false, _animationPanel.getHasAnimation(),
+					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());*/
+					
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addScene("",
 					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
@@ -89,29 +111,85 @@ package flaras.userInterface
 					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
 					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
 					
+					/*comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfScenes());*/
+					
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
-					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
 				}
 				if (destiny == "videos/") 
 				{
 					tempindex = propertiesPanel.getObjList().getItemCount();
-					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject("",
+					
+					/*aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addObject("",
+					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
+					false, "", 0, 0, false, "", false, true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _animationPanel.getHasAnimation(),
+					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
+					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());*/
+					
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).addScene("",
 					new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
 					new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())),
 					false, "", 0, 0, false, "", false, true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _animationPanel.getHasAnimation(),
 					_animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(),
 					_animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+					
+					/*comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfScenes());*/
+					
 					comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint()
-					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+					.getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
 					
 				}
 				propertiesPanel.getObjList().setSelectedIndex(tempindex);
 			}
 			else 
-			{
-				var facd3d:FacadeObject3D = new FacadeObject3D(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().
-				getSelectedIndex() - 1].getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+			{				
+				if (destiny == "dae/") 
+				{
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateRebuildScene(propertiesPanel.getObjList().getSelectedIndex() - 1, 
+						path, 
+						new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
+						false, "", 0, 0, 
+						propertiesPanel.getAudioCheck().isSelected(), propertiesPanel.getAudioFilePath().getText(), propertiesPanel.getAudioRpt().isSelected(),
+						false, "", 0, 0, false,
+						_animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+				}
+				if (destiny == "textures/") 
+				{
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateRebuildScene(propertiesPanel.getObjList().getSelectedIndex() - 1,
+						"",
+						new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
+						true, path, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT,
+						propertiesPanel.getAudioCheck().isSelected(), propertiesPanel.getAudioFilePath().getText(), propertiesPanel.getAudioRpt().isSelected(),
+						false, "", 0, 0, false,
+						_animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+				}
+				if (destiny == "videos/") 
+				{
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateRebuildScene(propertiesPanel.getObjList().getSelectedIndex() - 1,
+						"",
+						new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY().getText()), new Number(propertiesPanel.getObjTrZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY().getText()), new Number(propertiesPanel.getObjRtZ().getText())),
+						new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY().getText()), new Number(propertiesPanel.getObjScZ().getText())), 
+						false, "", 0, 0,
+						propertiesPanel.getAudioCheck().isSelected(), propertiesPanel.getAudioFilePath().getText(), propertiesPanel.getAudioRpt().isSelected(),
+						true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false,
+						_animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+				}			
+				
+				/*var facd3d:FacadeObject3D = new FacadeObject3D(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().
+				getSelectedIndex() - 1].getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
 				if (destiny == "dae/") 
 				{
 					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1,
@@ -132,23 +210,24 @@ package flaras.userInterface
 					"", facd3d.getTranslation(), facd3d.getRotation(), facd3d.getScale(),
 					false, "", 0, 0, facd3d.hasAudio(), facd3d.getAudioPath(), facd3d.getRepeatAudio(), true, path, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
 					false, _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
-				}
+				}*/
 				
 				if (destiny == "audios/") 
 				{
-					var object3d:FacadeObject3D = new FacadeObject3D(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().
-					getSelectedIndex() - 1].getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateAddAudio(propertiesPanel.getObjList().getSelectedIndex() - 1, path, propertiesPanel.getAudioRpt().isSelected());
+					
+					/*var object3d:FacadeObject3D = new FacadeObject3D(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().
+					getSelectedIndex() - 1].getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
 				
-					/*modificações Raryel*/
 					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1, 
 					object3d.getFilePath(), object3d.getTranslation(), object3d.getRotation(), 
 					object3d.getScale(), object3d.hasTexture(), object3d.getTexturePath(), object3d.getTextureWidth(),
 					object3d.getTextureHeight(), true, path, propertiesPanel.getAudioRpt().isSelected(), object3d.hasVideo(), object3d.getVideoPath(),
 					object3d.getVideoWidth(), object3d.getVideoHeight(), 
-					object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+					object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());*/
 				}				
 				propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
-				/*fim modificações Raryel*/
+				
 			}
 			
 		}
@@ -167,8 +246,9 @@ package flaras.userInterface
 				}
 				if (propertiesPanel.getObjList().getSelectedItem() == "New") { }
 				else {
-					var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList()
-					.getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+					/*var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList()
+					.getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+					
 					if (e.currentTarget == propertiesPanel.getObjTrX() || e.currentTarget == propertiesPanel.getObjTrY() || e.currentTarget == 
 					propertiesPanel.getObjTrZ()) {
 						facade3d.setTranslation(new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY()
@@ -193,7 +273,45 @@ package flaras.userInterface
 						facade3d.setTextureHeight(new Number(texturepanel.getObjTextureHeight().getText()));
 						facade3d.setTextureWidth(new Number(texturepanel.getObjTextureWidth().getText()));
 						propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
+					}*/
+					
+					if (e.currentTarget == propertiesPanel.getObjTrX() || e.currentTarget == propertiesPanel.getObjTrY() || e.currentTarget == 
+					propertiesPanel.getObjTrZ()) {
+						aControl.getCtrMain().ctrPoint.getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateTranslation(propertiesPanel.getObjList().getSelectedIndex() - 1, new Number3D(new Number(propertiesPanel.getObjTrX().getText()), new Number(propertiesPanel.getObjTrY()
+						.getText()), new Number(propertiesPanel.getObjTrZ().getText())));
 					}
+					if (e.currentTarget == propertiesPanel.getObjRtX() || e.currentTarget == propertiesPanel.getObjRtY() || e.currentTarget == propertiesPanel
+					.getObjRtZ()) {
+						
+						aControl.getCtrMain().ctrPoint.getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateRotation(propertiesPanel.getObjList().getSelectedIndex() - 1, new Number3D(new Number(propertiesPanel.getObjRtX().getText()), new Number(propertiesPanel.getObjRtY()
+						.getText()), new Number(propertiesPanel.getObjRtZ().getText())));
+						
+					}
+					if (e.currentTarget == propertiesPanel.getObjScX() || e.currentTarget == propertiesPanel.getObjScY() || e.currentTarget == propertiesPanel
+					.getObjScZ()) {
+						aControl.getCtrMain().ctrPoint.getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+						.updateScale(propertiesPanel.getObjList().getSelectedIndex() - 1,new Number3D(new Number(propertiesPanel.getObjScX().getText()), new Number(propertiesPanel.getObjScY()
+						.getText()), new Number(propertiesPanel.getObjScZ().getText())));
+					}
+					
+					if (e.currentTarget == videopanel.getObjVideoHeight() || e.currentTarget == videopanel.getObjVideoWidth()) 
+					{
+						aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateVideoSize(propertiesPanel.getObjList().getSelectedIndex() - 1, new Number(videopanel.getObjVideoWidth().getText()), new Number(videopanel.getObjVideoHeight().getText()));
+						
+						/*facade3d.setVideoHeight(new Number(videopanel.getObjVideoHeight().getText()));
+						facade3d.setVideoWidth(new Number(videopanel.getObjVideoWidth().getText()));*/
+						propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
+					}
+					if (e.currentTarget == texturepanel.getObjTextureHeight() || e.currentTarget == texturepanel.getObjTextureWidth())
+					{
+						aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateTextureSize(propertiesPanel.getObjList().getSelectedIndex() - 1, new Number(texturepanel.getObjTextureWidth().getText()), new Number(texturepanel.getObjTextureHeight().getText()));
+						/*facade3d.setTextureHeight(new Number(texturepanel.getObjTextureHeight().getText()));
+						facade3d.setTextureWidth(new Number(texturepanel.getObjTextureWidth().getText()));*/
+						propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
+					}
+					
 				}
 			}
 		}
@@ -258,7 +376,8 @@ package flaras.userInterface
 			propertiesPanel.getPtList().setSelectedIndex(0);
 			cleanFields();
 			comboBoxContentsPoint(propertiesPanel.getPtList(), aControl.getCtrPoint().getListOfPoints());
-			comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<Object3D>);
+//			comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<Object3D>);
+			comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<FlarasScene>);
 		}
 		
 		public function comboBoxContentsPoint(comboBox:JComboBox, objects:Vector.<Point>):void {
@@ -270,7 +389,16 @@ package flaras.userInterface
 			comboBox.setListData(copyVectToArray(obj));
 		}
 		
-		public function comboBoxContentsObj(comboBox:JComboBox, objects:Vector.<Object3D>):void {
+		/*public function comboBoxContentsObj(comboBox:JComboBox, objects:Vector.<Object3D>):void {
+			var obj:Vector.<String> = new Vector.<String>();
+			obj.push("New");
+			for (var i:int = 1; i <= objects.length; i++ ) {
+				obj.push(i);
+			}
+			comboBox.setListData(copyVectToArray(obj));
+		}*/
+		
+		public function comboBoxContentsObj(comboBox:JComboBox, objects:Vector.<FlarasScene>):void {
 			var obj:Vector.<String> = new Vector.<String>();
 			obj.push("New");
 			for (var i:int = 1; i <= objects.length; i++ ) {
@@ -368,11 +496,11 @@ package flaras.userInterface
 		private function remObj(e:Event):void {
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			
-			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).removeObject(propertiesPanel.getObjList().getSelectedIndex() - 1);
+			//aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).removeObject(propertiesPanel.getObjList().getSelectedIndex() - 1);
+			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).removeScene(propertiesPanel.getObjList().getSelectedIndex() - 1);
 			
-			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
 			propertiesPanel.getObjList().setSelectedIndex(0);
-			
 		}
 		
 		public function swapObject(e:Event):void 
@@ -389,12 +517,20 @@ package flaras.userInterface
 		
 		public function swapFunction(pos2Swap:uint):void 
 		{	
-			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			/*aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			
 			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).
 					swapObjectPositionTo(propertiesPanel.getObjList().getSelectedIndex() - 1, pos2Swap - 1)
 			
-			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfScenes());
+			propertiesPanel.getObjList().setSelectedIndex(0);*/
+			
+			aControl.getObjCtrUserProject().setUnsavedModifications(true);
+			
+			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).
+					swapScenePositionTo(propertiesPanel.getObjList().getSelectedIndex() - 1, pos2Swap - 1)
+			
+			comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
 			propertiesPanel.getObjList().setSelectedIndex(0);
 		}
 		
@@ -432,6 +568,7 @@ package flaras.userInterface
 		}
 		
 		public function audioSelected(e:Event):void {
+			
 			//if the has audio checkbox was marked
 			if (propertiesPanel.getAudioCheck().isSelected()) 
 			{
@@ -445,16 +582,23 @@ package flaras.userInterface
 				//if it's a point selected and a scene selected
 				if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 				{
-					var object3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-					if (object3d.hasAudio())
+					
+					//var object3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+					var audioData:AudioScene;
+					audioData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getAudioData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+					
+					//if (object3d.hasAudio())
+					if (audioData)
 					{
 						aControl.getObjCtrUserProject().setUnsavedModifications(true);
 						
-						aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1, 
+						aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateRemoveAudio(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						
+						/*aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).rebuildObject3D(propertiesPanel.getObjList().getSelectedIndex() - 1, 
 							object3d.getFilePath(), object3d.getTranslation(), object3d.getRotation(), 
 							object3d.getScale(), object3d.hasTexture(), object3d.getTexturePath(), object3d.getTextureWidth(),
 							object3d.getTextureHeight(), false, "", false, object3d.hasVideo(), object3d.getVideoPath(),
-							object3d.getVideoWidth(), object3d.getVideoHeight(), object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+							object3d.getVideoWidth(), object3d.getVideoHeight(), object3d.getRepeatVideo(), _animationPanel.getHasAnimation(), _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());*/
 						
 						aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
 						
@@ -525,7 +669,8 @@ package flaras.userInterface
 						propertiesPanel.getPtX().setText("0");
 						propertiesPanel.getPtY().setText("0");
 						propertiesPanel.getPtZ().setText("0");
-						comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<Object3D>());
+						//comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<Object3D>());
+						comboBoxContentsObj(propertiesPanel.getObjList(), new Vector.<FlarasScene>());
 						propertiesPanel.getObjList().setSelectedIndex(0);
 						
 						propertiesPanel.getbtRemovePt().setEnabled(false);
@@ -540,7 +685,11 @@ package flaras.userInterface
 						propertiesPanel.getPtX().setText(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex()-1].getPosition().x + "");
 						propertiesPanel.getPtY().setText(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex()-1].getPosition().y + "");
 						propertiesPanel.getPtZ().setText(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex()-1].getPosition().z + "");
-						comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfObjects());
+						
+						//comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfScenes());
+						comboBoxContentsObj(propertiesPanel.getObjList(), aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1].getListOfFlarasScenes());
+						
+						
 						propertiesPanel.getObjList().setSelectedIndex(0);
 					}
 				}
@@ -576,9 +725,95 @@ package flaras.userInterface
 						propertiesPanel.getbtSwapObj().setEnabled(true);						
 						
 						aControl.getCtrPoint().disableAllPoints(false);
-						var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+						//var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+						var translation:Number3D;
+						var rotation:Number3D;
+						var scale:Number3D;
+						var audioData:AudioScene;
+						var videoData:VideoScene;
+						var textureData:TextureScene;
+						var virtualObjectData:VirtualObjectScene;
+						var animationData:AnimationScene;
+						
+						translation = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getTranslation(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						rotation = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getRotation(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						scale = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getScale(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						
+						virtualObjectData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getVirtualObjectData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						videoData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getVideoData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						textureData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getTextureData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						audioData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getAudioData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						animationData = aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).getAnimationData(propertiesPanel.getObjList().getSelectedIndex() - 1);
+						
 						aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
-						propertiesPanel.getObjTrX().setText(facade3d.getTranslation().x+"");
+						
+						propertiesPanel.getObjTrX().setText(translation.x+"");
+						propertiesPanel.getObjTrY().setText(translation.y+"");
+						propertiesPanel.getObjTrZ().setText(translation.z+"");
+						propertiesPanel.getObjRtX().setText(rotation.x+"");
+						propertiesPanel.getObjRtY().setText(rotation.y+"");
+						propertiesPanel.getObjRtZ().setText(rotation.z+"");
+						propertiesPanel.getObjScX().setText(scale.x+"");
+						propertiesPanel.getObjScY().setText(scale.y+"");
+						propertiesPanel.getObjScZ().setText(scale.z +"");
+						
+						if (animationData)
+						{
+							_animationPanel.setHasAnimation(true);
+							_animationPanel.setAnimationPeriod(animationData.getPeriod());
+							_animationPanel.setAnimationRotationAxis(animationData.getRotationAxis());	
+							_animationPanel.setAnimationRadius(animationData.getRadius());
+							_animationPanel.setAnimationRotationDirection(animationData.getRotationDirection());						
+						}
+						
+						
+						if (audioData) 
+						{
+							propertiesPanel.getAudioCheck().setSelected(true);
+							propertiesPanel.getAudioFilePath().setEnabled(true);
+							propertiesPanel.getAudioFilePath().setText(audioData.getAudioFilePath());
+							propertiesPanel.getAudioRpt().setEnabled(true);
+							propertiesPanel.getAudioRpt().setSelected(audioData.getRepeatAudio());
+							propertiesPanel.getbtAudioLoad().setEnabled(true);
+						}
+						
+						if (videoData) 
+						{
+							propertiesPanel.getRdVideoObject().setSelected(true);
+							videoSelect();
+							videopanel.getObjVideo().setEnabled(true);
+							videopanel.getObjVideo().setText(videoData.getVideoFilePath());
+							videopanel.getObjVideoHeight().setEnabled(true);
+							videopanel.getObjVideoHeight().setText(videoData.getHeight().toString());
+							videopanel.getObjVideoWidth().setEnabled(true);
+							videopanel.getObjVideoWidth().setText(videoData.getWidth().toString());
+							videopanel.getObjVideoRpt().setEnabled(true);
+							videopanel.getObjVideoRpt().setSelected(videoData.getRepeatVideo());
+							videopanel.getBtnVideoLoad().setEnabled(true);
+						}
+						else if (textureData) 
+						{
+							propertiesPanel.getRdTextureObject().setSelected(true);
+							textureSelect();
+							texturepanel.getObjTexture().setEnabled(true);
+							texturepanel.getObjTexture().setText(textureData.getTextureFilePath());
+							texturepanel.getObjTextureHeight().setEnabled(true);
+							texturepanel.getObjTextureHeight().setText(textureData.getHeight().toString());
+							texturepanel.getObjTextureWidth().setEnabled(true);
+							texturepanel.getObjTextureWidth().setText(textureData.getWidth().toString());
+							texturepanel.getBtnTextureLoad().setEnabled(true);
+						}
+						else 
+						{
+							propertiesPanel.getRd3dObject().setSelected(true);
+							objectSelect();
+							object3dpanel.getObjFile().setEnabled(true);
+							object3dpanel.getObjFile().setText(virtualObjectData.getPath3DObjectFile());
+							object3dpanel.getBtnObject3dLoad().setEnabled(true);
+						}
+						
+						
+						/*propertiesPanel.getObjTrX().setText(facade3d.getTranslation().x+"");
 						propertiesPanel.getObjTrY().setText(facade3d.getTranslation().y+"");
 						propertiesPanel.getObjTrZ().setText(facade3d.getTranslation().z+"");
 						propertiesPanel.getObjRtX().setText(facade3d.getRotation().x+"");
@@ -586,9 +821,9 @@ package flaras.userInterface
 						propertiesPanel.getObjRtZ().setText(facade3d.getRotation().z+"");
 						propertiesPanel.getObjScX().setText(Math.abs(facade3d.getScale().x)+"");
 						propertiesPanel.getObjScY().setText(facade3d.getScale().y+"");
-						propertiesPanel.getObjScZ().setText(facade3d.getScale().z +"");
+						propertiesPanel.getObjScZ().setText(facade3d.getScale().z +"");*/
 						
-						_animationPanel.setHasAnimation(facade3d.hasAnimation());
+						/*_animationPanel.setHasAnimation(facade3d.hasAnimation());
 						_animationPanel.setAnimationPeriod(facade3d.getAnimationPeriod());
 						_animationPanel.setAnimationRotationAxis(facade3d.getAnimationRotationAxis());	
 						_animationPanel.setAnimationRadius(facade3d.getAnimationRadius());
@@ -636,7 +871,7 @@ package flaras.userInterface
 							object3dpanel.getObjFile().setEnabled(true);
 							object3dpanel.getObjFile().setText(facade3d.getFilePath());
 							object3dpanel.getBtnObject3dLoad().setEnabled(true);
-						}
+						}*/
 					}
 				}
 			}
@@ -647,90 +882,63 @@ package flaras.userInterface
 		}
 		
 		public function setRepeatAudio(e:Event):void {
-			var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateAudioRepeat(propertiesPanel.getObjList().getSelectedIndex() - 1, propertiesPanel.getAudioRpt().isSelected());
+			
+			/*var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
 			if (facade3d.getRepeatAudio()) {
 				facade3d.setRepeatAudio(false);
-			}else facade3d.setRepeatAudio(true);
+			}else facade3d.setRepeatAudio(true);*/
 			propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
 		}
 		
 		public function setRepeatVideo(e:Event):void {
-			var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+			aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateVideoRepeat(propertiesPanel.getObjList().getSelectedIndex() - 1, videopanel.getObjVideoRpt().isSelected());
+			
+			/*var facade3d:FacadeObject3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
 			if (facade3d.getRepeatVideo()) {
 				facade3d.setRepeatVideo(false);
-			}else facade3d.setRepeatVideo(true);
+			}else facade3d.setRepeatVideo(true);*/
 			propertiesPanel.getObjList().setSelectedIndex(propertiesPanel.getObjList().getSelectedIndex());
 		}
 		
 		public function animationStateUpdate(newState:Boolean):void
 		{
-			var facObj3D:FacadeObject3D;
+			//var facObj3D:FacadeObject3D;
 			
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
-				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-				facObj3D.setHasAnimation(_animationPanel.getHasAnimation());
+				if (newState)
+				{
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateAddAnimation(propertiesPanel.getObjList().getSelectedIndex() - 1, _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());	
+				}
+				else
+				{
+					aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1).updateRemoveAnimation(propertiesPanel.getObjList().getSelectedIndex() - 1);
+				}
 				
-				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
-			}			
-		}
-		
-		public function animationAxisUpdate(e:Event):void
-		{
-			var facObj3D:FacadeObject3D;
-			
-			aControl.getObjCtrUserProject().setUnsavedModifications(true);
-			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
-			{
-				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-				facObj3D.setAnimationRotationAxis(_animationPanel.getAnimationRotationAxis());		
+				/*facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+				facObj3D.setHasAnimation(_animationPanel.getHasAnimation());*/
 				
 				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
 			}
 		}
 		
-		public function animationPeriodUpdate(e:Event):void
+		public function animationPropertiesUpdate(e:Event):void
 		{
 			var facObj3D:FacadeObject3D;
 			
 			aControl.getObjCtrUserProject().setUnsavedModifications(true);
 			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
 			{
-				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-				facObj3D.setAnimationPeriod(_animationPanel.getAnimationPeriod());
+				aControl.getCtrPoint().getCtrListOfObjects(propertiesPanel.getPtList().getSelectedIndex() - 1)
+				.updateAnimationProperties(propertiesPanel.getObjList().getSelectedIndex() - 1, _animationPanel.getAnimationPeriod(), _animationPanel.getAnimationRotationAxis(), _animationPanel.getAnimationRadius(), _animationPanel.getAnimationDirection());
+				
+			/*	facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfScenes()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
+				facObj3D.setAnimationPeriod(_animationPanel.getAnimationPeriod());*/
 				
 				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
 			}
 		}
-		
-		public function animationRadiusUpdade(e:Event):void
-		{
-			var facObj3D:FacadeObject3D;
-			
-			aControl.getObjCtrUserProject().setUnsavedModifications(true);
-			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
-			{
-				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-				facObj3D.setAnimationRadius(_animationPanel.getAnimationRadius());
-				
-				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
-			}
-		}
-		
-		public function animationReverseDirectionUpdate():void
-		{
-			var facObj3D:FacadeObject3D;			
-		
-			aControl.getObjCtrUserProject().setUnsavedModifications(true);
-			if (propertiesPanel.getPtList().getSelectedIndex() != 0 && propertiesPanel.getObjList().getSelectedIndex() != 0) 
-			{
-				facObj3D = new FacadeObject3D(Point(aControl.getCtrPoint().getListOfPoints()[propertiesPanel.getPtList().getSelectedIndex() - 1]).getListOfObjects()[propertiesPanel.getObjList().getSelectedIndex() - 1]);
-				
-				facObj3D.setAnimationRotationDirection(_animationPanel.getAnimationDirection());
-				
-				aControl.getCtrPoint().goToObject(propertiesPanel.getPtList().getSelectedIndex() - 1, propertiesPanel.getObjList().getSelectedIndex() - 1 );
-			}	
-		}		
 	}
 }

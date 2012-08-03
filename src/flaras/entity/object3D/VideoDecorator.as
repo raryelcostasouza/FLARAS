@@ -31,7 +31,7 @@ package flaras.entity.object3D
 {
 	import flaras.*;
 	import flaras.constants.*;
-	import flaras.controller.CtrMirror;
+	import flaras.controller.*;
 	import flaras.entity.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;

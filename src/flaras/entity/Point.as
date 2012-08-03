@@ -37,6 +37,7 @@ package flaras.entity
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
+	import flaras.model.FlarasScene;
 	import flaras.util.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -47,78 +48,84 @@ package flaras.entity
 	
 	public class Point
 	{		
-		private var aID:uint;
-		private var aEnabled:Boolean;
-		private var aPosition:Number3D;
+		private var _id:uint;
+		private var _enabled:Boolean;
+		private var _indexActiveScene:int = 0;
+		private var _indexLastActiveScene:int = 0;
+		private var _interactionLock:Boolean = false;
 		
-		private var aIndexActiveObject:int = 0;
-		private var aIndexLastActiveObject:int = 0;
-		private var aInteractionLock:Boolean = false;
-		
-		private var _listOfObjects:Vector.<Object3D>;
+		private var _position:Number3D;
+		//private var _listOfScenes:Vector.<Object3D>;
+		private var _listOfFlarasScenes:Vector.<FlarasScene>;
 		
 		public function Point(pID:uint, pPosition:Number3D)
 		{			
-			_listOfObjects = new Vector.<Object3D>();
+			//_listOfScenes = new Vector.<Object3D>();
+			_listOfFlarasScenes = new Vector.<FlarasScene>();
 			
-			aID = pID;
-			aEnabled = false;
-			aPosition = pPosition;
+			_id = pID;
+			_enabled = false;
+			_position = pPosition;
 		}
 		
-		public function getIndexActiveObject():int
+		public function getIndexActiveScene():int
 		{
-			return aIndexActiveObject;
+			return _indexActiveScene;
 		}
 		
-		public function setIndexActiveObject(pIndex:int):void
+		public function setIndexActiveScene(pIndex:int):void
 		{
-			aIndexActiveObject = pIndex;
+			_indexActiveScene = pIndex;
 		}
 		
-		public function getIndexLastActiveObject():int
+		public function getIndexLastActiveScene():int
 		{
-			return aIndexLastActiveObject;
+			return _indexLastActiveScene;
 		}
 		
-		public function setIndexLastActiveObject(pIndex:int):void
+		public function setIndexLastActiveScene(pIndex:int):void
 		{
-			aIndexLastActiveObject = pIndex;
+			_indexLastActiveScene = pIndex;
 		}
 		
 		public function getInteractionLock():Boolean
 		{
-			return aInteractionLock;
+			return _interactionLock;
 		}
 		
 		public function setInteractionLock(pInteractionLock:Boolean):void
 		{
-			aInteractionLock = pInteractionLock;
+			_interactionLock = pInteractionLock;
 		}
 		
 		public function getID():uint
 		{
-			return aID;
+			return _id;
 		}
 		
 		public function setID(pID:uint):void
 		{
-			aID = pID;
+			_id = pID;
 		}
 		
 		public function isEnabled():Boolean
 		{
-			return aEnabled;
+			return _enabled;
 		}
 		
 		public function setEnabled(enable:Boolean):void
 		{
-			aEnabled = enable;
+			_enabled = enable;
 		}
 		
 		public function getPosition():Number3D
 		{
-			return aPosition;
+			return _position;
+		}
+		
+		public function setPosition(pPosition:Number3D):void
+		{
+			_position = pPosition;
 		}
 		
 		public function getFilePathListOfObjects():String
@@ -126,14 +133,14 @@ package flaras.entity
 			return XMLFilesConstants.LIST_OF_OBJECTS_SEMI_COMPLETE_PATH + getID() + ".xml";
 		}
 		
-		public function getListOfObjects():Vector.<Object3D>
+		/*public function getListOfScenes():Vector.<Object3D>
 		{
-			return _listOfObjects;
-		}
+			return _listOfScenes;
+		}*/		
 		
-		public function setPosition(pPosition:Number3D):void
+		public function getListOfFlarasScenes():Vector.<FlarasScene>
 		{
-			aPosition = pPosition;
+			return _listOfFlarasScenes;
 		}
 	}	
 }

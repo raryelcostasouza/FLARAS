@@ -30,16 +30,16 @@
 package flaras.entity.object3D 
 {
 	import flaras.*;
-	import flaras.constants.FolderConstants;
-	import flaras.controller.CtrMirror;
+	import flaras.constants.*;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flash.events.*;
 	import flash.net.*;
-	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.*;
 	import org.papervision3d.materials.*;
-	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
 	
 	public class TextureDecorator extends ComponentDecorator
