@@ -91,12 +91,6 @@ package flaras.controller
 					getCtrListOfObjects(p.getID()).removeScene(indexScene);
 				}
 				
-				/*for each(obj3D in p.getListOfScenes())
-				{
-					facObj3D = new FacadeObject3D(obj3D);
-					facObj3D.unLoadAndRemoveFile(AudioDecorator.REMOVE_AUDIO_FILE);
-				}*/
-				
 				//removing the xml file with the object list
 				f = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects());
 				if (f.exists)
@@ -126,10 +120,19 @@ package flaras.controller
 			return this._listOfPoints;
 		}
 		
+		public function getNumberOfPoints():uint
+		{
+			return _listOfPoints.length;
+		}
+		
 		public function getCtrListOfObjects(indexPoint:uint):CtrListOfObjects
 		{
 			return _listOfCtrScenes[indexPoint];
-			//return new CtrListOfObjects(this._listOfPoints[indexPoint]);
+		}
+		
+		public function getPosition(indexPoint:uint):Number3D
+		{
+			return _listOfPoints[indexPoint].getPosition();	
 		}
 		
 		// functions related with adding and removing points -----------------------------------------------------------
@@ -138,10 +141,6 @@ package flaras.controller
 			var p:Point;
 			
 			p = addPoint(pPosition);
-			/*p = new Point(this._listOfPoints.length, pPosition);
-			this._listOfPoints.push(p);
-			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));
-			this._listOfCtrScenes.push(new CtrListOfObjects(p));*/
 			
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
@@ -154,14 +153,19 @@ package flaras.controller
 			p = new Point(this._listOfPoints.length, pPosition)
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));
-			this._listOfCtrScenes.push(new CtrListOfObjects(p));
+			this._listOfCtrScenes.push(new CtrListOfObjects(_ctrMain, p));
 			
 			return p;
 		}
 		
-		public function removePoint(p:Point):void
+		public function removePoint(indexPoint:uint):void
 		{
 			var id:uint;
+			var p:Point;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
+			p = _listOfPoints[indexPoint];
 			
 			id = p.getID()
 			destroyPointInfo(p, true);
@@ -181,10 +185,15 @@ package flaras.controller
 		}
 		// end of functions related with adding and removing points -----------------------------------------------------------
 		
-		public function updatePointPosition(p:Point, position:Number3D):void
+		public function updatePointPosition(indexPoint:uint, position:Number3D):void
 		{
 			var facObj3D:FacadeObject3D;
 			var bndPoint:BoundaryPoint;
+			var p:Point;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
+			p = _listOfPoints[indexPoint];
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];		
 			p.setPosition(position);
@@ -194,11 +203,6 @@ package flaras.controller
 			{
 				getCtrListOfObjects(p.getID()).updateReloadPointPosition(i);
 			}
-			/*for each(var obj3D:Object3D in p.getListOfScenes())
-			{
-				facObj3D = new FacadeObject3D(obj3D);
-				facObj3D.updateObject3DPosition();
-			}*/
 		}
 
 		//functions related with navigating through the list of objects -------------------------------------------------------------
@@ -225,9 +229,6 @@ package flaras.controller
 				indexActiveObject = p.getIndexActiveScene();
 				getCtrListOfObjects(p.getID()).disableScene(indexActiveObject);
 				
-				/*var obj3D:Object3D = listObjects[indexActiveObject];
-				obj3D.disableObject();*/
-				
 				p.setIndexActiveScene(indexActiveObject + pDirection)
 				indexActiveObject = p.getIndexActiveScene();
 				
@@ -244,9 +245,6 @@ package flaras.controller
 				}
 				
 				getCtrListOfObjects(p.getID()).enableScene(p.getIndexActiveScene(), true);
-				
-				/*obj3D = listObjects[p.getIndexActiveScene()];
-				obj3D.enableObject(true);*/
 			}			
 		}
 		
@@ -260,16 +258,6 @@ package flaras.controller
 				enablePointUI(indexPoint);
 			}
 			
-			/*listObjects = p.getListOfScenes();
-			var obj3D:Object3D = listObjects[p.getIndexActiveScene()];
-			
-			obj3D.disableObject();
-			
-			obj3D = listObjects[pObjectIndex];
-			
-			p.setIndexActiveScene(pObjectIndex);
-			obj3D.enableObject(true);*/
-			
 			getCtrListOfObjects(p.getID()).disableScene(p.getIndexActiveScene());
 			
 			p.setIndexActiveScene(pObjectIndex);
@@ -282,7 +270,6 @@ package flaras.controller
 		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
 		{			
 			var obj3D:Object3D;
-			//var listObjects:Vector.<Object3D>;
 			var listOfFlarasScenes:Vector.<FlarasScene>;
 			var bndPoint:BoundaryPoint;
 			
@@ -296,23 +283,12 @@ package flaras.controller
 				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_ENABLE);
 			}			
 			
-			/*listObjects = p.getListOfScenes();
-			if (listObjects.length > 0)
-			{
-				p.setIndexActiveScene(p.getIndexLastActiveScene());
-				obj3D = listObjects[p.getIndexActiveScene()];
-			
-				obj3D.enableObject(pPlayAudio);
-			}*/
 			listOfFlarasScenes = p.getListOfFlarasScenes();
 			if (listOfFlarasScenes.length > 0)
 			{
 				p.setIndexActiveScene(p.getIndexLastActiveScene());
 				
-				getCtrListOfObjects(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio)
-				/*obj3D = listObjects[p.getIndexActiveScene()];
-			
-				obj3D.enableObject(pPlayAudio);*/
+				getCtrListOfObjects(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio);
 			}
 		}
 		
@@ -336,31 +312,13 @@ package flaras.controller
 			if (pPlayAudio)
 			{
 				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_DISABLE);
-			}
-			
-			/*listObjects = p.getListOfScenes();
-			if (listObjects.length > 0)
-			{
-				p.setIndexLastActiveScene(p.getIndexActiveScene());
-				
-				obj3D = listObjects[p.getIndexActiveScene()];
-				if (obj3D.isEnabled())
-				{
-					obj3D.disableObject();			
-				}				
-			}*/			
-			
+			}			
 			
 			if (p.getListOfFlarasScenes().length > 0)
 			{
 				p.setIndexLastActiveScene(p.getIndexActiveScene());
 				
 				getCtrListOfObjects(p.getID()).disableScene(p.getIndexActiveScene());
-				/*obj3D = listObjects[p.getIndexActiveScene()];
-				if (obj3D.isEnabled())
-				{
-					obj3D.disableObject();			
-				}*/				
 			}
 		}	
 		
@@ -371,9 +329,8 @@ package flaras.controller
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			
-			enablePoint(p, true, false);			
 			bndPoint.showAxis();
-			
+			enablePoint(p, true, false);
 		}
 		
 		public function enableAllPoints():void
@@ -398,7 +355,7 @@ package flaras.controller
 			}
 		}
 		
-		public function disableAllPointsUI(pPlayAudio:Boolean):void
+		public function disableAllPointsUI():void
 		{
 			var bndPoint:BoundaryPoint;
 						
@@ -406,7 +363,7 @@ package flaras.controller
 			{
 				bndPoint = _listOfBoundaryPoints[p.getID()];				
 				bndPoint.hideAxis();
-				disablePoint(p, pPlayAudio);
+				disablePoint(p, false);
 			}
 		}
 		//end of functions related with enabling and disabling points

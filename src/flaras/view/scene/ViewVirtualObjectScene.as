@@ -12,26 +12,18 @@ package flaras.view.scene
 	import org.papervision3d.objects.parsers.*;
 	
 	public class ViewVirtualObjectScene extends ViewFlarasScene
-	{
-		private var _obj3DAlreadyLoaded:Boolean;
-		
+	{		
 		private var _virtualObjectScene:VirtualObjectScene;
 		
 		public function ViewVirtualObjectScene(virtualObjectScene:VirtualObjectScene) 
 		{
 			super(this, virtualObjectScene);
 			_virtualObjectScene = virtualObjectScene;
-			_obj3DAlreadyLoaded = false;
 		}
-		
-		/*public function getObj3D():DisplayObject3D
-		{
-			return _obj3D;
-		}*/
 		
 		override public function showScene(playAudio:Boolean):void
 		{
-			if (_obj3DAlreadyLoaded)
+			if (_obj3D)
 			{
 				_obj3D.visible = true;
 			}
@@ -45,7 +37,7 @@ package flaras.view.scene
 		override public function hideScene():void
 		{
 			super.hideScene();
-			if (_obj3DAlreadyLoaded)
+			if (_obj3D)
 			{
 				_obj3D.visible = false;
 			}
@@ -75,7 +67,6 @@ package flaras.view.scene
 				objMax3DS.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
 				_obj3D = objMax3DS;
 			}
-			_obj3DAlreadyLoaded = true;
 			
 			setObj3DProperties(_virtualObjectScene, _obj3D);
 			
@@ -84,12 +75,15 @@ package flaras.view.scene
 		
 		override public function unLoad():void
 		{
-			super.unLoad();
-			_obj3DAlreadyLoaded = false;
-			_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3D, Marker.REFERENCE_MARKER);
+			if (_obj3D)
+			{
+				super.unLoad();
+				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				
+				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, Marker.REFERENCE_MARKER);
+				_obj3D = null;
+			}			
 		}	
 	}
 }

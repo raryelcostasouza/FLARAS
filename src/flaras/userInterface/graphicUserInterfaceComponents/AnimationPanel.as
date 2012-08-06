@@ -268,6 +268,10 @@ package flaras.userInterface.graphicUserInterfaceComponents
 				jcbReverseRotation.setSelected(false);
 			}
 		}
+		
+		public function getJcbHasAnimation():JCheckBox
+		{
+			return jcbHasAnimation;
+		}
 	}
-
 }

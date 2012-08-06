@@ -1,9 +1,9 @@
 package flaras.model 
 {
-	import flaras.constants.FolderConstants;
+	import flaras.constants.*;
 	import flaras.entity.*;
-	import flaras.io.Zipped3DFileImporter;
-	import flash.filesystem.File;
+	import flaras.io.*;
+	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
 	public class VirtualObjectScene extends FlarasScene

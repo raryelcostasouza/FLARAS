@@ -34,7 +34,7 @@ package flaras.io.fileSaver
 	import flaras.entity.*;
 	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
-	import flaras.model.FlarasScene;
+	import flaras.model.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -53,15 +53,6 @@ package flaras.io.fileSaver
 			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLPoints(pListOfPoints));
 			save(pCurrentProjectTempFolder, XMLFilesConstants.LIST_OF_POINTS_PATH, ba);
 		}
-		
-		/*public static function saveListOfObjects(pListOfObjects:Vector.<Object3D>, pCurrentProjectTempFolder:File, pFilePathListOfObjects:String):void
-		{
-			var ba:ByteArray;
-			ba = new ByteArray();
-			
-			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLObjects(pListOfObjects));
-			save(pCurrentProjectTempFolder, pFilePathListOfObjects, ba);
-		}*/
 		
 		public static function saveListOfObjects(pListOfScenes:Vector.<FlarasScene>, pCurrentProjectTempFolder:File, pFilePathListOfObjects:String):void
 		{

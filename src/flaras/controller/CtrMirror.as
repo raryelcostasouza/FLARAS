@@ -75,17 +75,6 @@ package flaras.controller
 				{
 					_ctrMain.ctrPoint.getCtrListOfObjects(p.getID()).toggleMirrorScenes();
 				}
-				
-				
-				/*for each(var obj:Object3D in listOfObjects)
-				{
-					facObj3D = new FacadeObject3D(obj);
-					
-					if (facObj3D.hasTexture() || facObj3D.hasVideo())
-					{
-						facObj3D.toggleMirror();
-					}
-				}*/				
 			}
 			
 			if (actionfiredFromKeyboard)

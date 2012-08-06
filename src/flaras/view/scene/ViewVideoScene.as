@@ -27,21 +27,22 @@ package flaras.view.scene
 			_videoScene = videoScene;
 		}
 		
-		/*public function getObj3D():DisplayObject3D
-		{
-			return _obj3D;
-		}*/
-		
 		override public function showScene(playAudio:Boolean):void 
 		{
-			load();
-			super.showScene(playAudio);
+			if (!_obj3D)
+			{
+				load();
+				super.showScene(playAudio);
+			}			
 		}
 		
 		override public function hideScene():void
 		{
 			super.hideScene();
-			unLoad();
+			if (_obj3D)
+			{
+				unLoad();
+			}			
 		}
 		
 		public function load():void
@@ -64,17 +65,15 @@ package flaras.view.scene
 			//set position, rotation and scale
 			setObj3DProperties(_videoScene, _obj3D);	
 			setMirrorScaleFactor(CtrMirror.MIRRORED_SCALE_FACTOR);
-						
-			//porque ?????? setScale(new Number3D(getDisplayObject3D().scaleX, getDisplayObject3D().scaleY, getDisplayObject3D().scaleZ));
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3D, Marker.REFERENCE_MARKER, null);
 		}
 		
 		override public function unLoad():void
 		{
-			super.unLoad();
-			if (_obj3DAlreadyLoaded)
+			if (_obj3D)
 			{
+				super.unLoad();
 				_obj3DAlreadyLoaded = false;
 				_netStream.pause();
 				_netStream.close();	
@@ -82,7 +81,8 @@ package flaras.view.scene
 				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, Marker.REFERENCE_MARKER);
-			}	
+				_obj3D = null;			
+			}			
 		}
 	}
 }

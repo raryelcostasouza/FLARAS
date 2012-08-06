@@ -37,7 +37,7 @@ package flaras.entity
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
-	import flaras.model.FlarasScene;
+	import flaras.model.*;
 	import flaras.util.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -55,12 +55,10 @@ package flaras.entity
 		private var _interactionLock:Boolean = false;
 		
 		private var _position:Number3D;
-		//private var _listOfScenes:Vector.<Object3D>;
 		private var _listOfFlarasScenes:Vector.<FlarasScene>;
 		
 		public function Point(pID:uint, pPosition:Number3D)
-		{			
-			//_listOfScenes = new Vector.<Object3D>();
+		{
 			_listOfFlarasScenes = new Vector.<FlarasScene>();
 			
 			_id = pID;
@@ -132,11 +130,6 @@ package flaras.entity
 		{
 			return XMLFilesConstants.LIST_OF_OBJECTS_SEMI_COMPLETE_PATH + getID() + ".xml";
 		}
-		
-		/*public function getListOfScenes():Vector.<Object3D>
-		{
-			return _listOfScenes;
-		}*/		
 		
 		public function getListOfFlarasScenes():Vector.<FlarasScene>
 		{

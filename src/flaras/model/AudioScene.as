@@ -16,7 +16,12 @@ package flaras.model
 		
 		public function getAudioFilePath():String { return _audioFilePath; }
 		public function getRepeatAudio():Boolean { return _repeatAudio; }
-		public function getParentPointID():uint { return _parentFlarasScene.getParentPoint().getID(); }		
+		public function getParentPointID():uint { return _parentFlarasScene.getParentPoint().getID(); }	
+		
+		public function setAudioFilePath(audioFilePath:String):void
+		{
+			_audioFilePath = audioFilePath;
+		}
 		
 		public function setRepeatAudio(repeatAudio:Boolean):void 
 		{

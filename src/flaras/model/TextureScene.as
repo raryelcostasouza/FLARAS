@@ -3,6 +3,7 @@ package flaras.model
 	import flaras.constants.*;
 	import flaras.entity.*;
 	import org.papervision3d.core.math.*;
+	
 	public class TextureScene extends FlarasScene
 	{
 		private var _textureFilePath:String;

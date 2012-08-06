@@ -20,7 +20,7 @@ package flaras.view.scene
 		
 		public function hideScene():void
 		{
-			AudioManager.stopAppAudio(_audioScene.getParentPointID());
+			unLoad();
 		}		
 		
 		public function unLoad():void

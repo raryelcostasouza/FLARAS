@@ -14,9 +14,7 @@ package flaras.view.scene
 	import org.papervision3d.objects.primitives.*;
 
 	public class ViewTextureScene extends ViewFlarasScene
-	{
-		private var _obj3DAlreadyLoaded:Boolean;
-		
+	{		
 		private var _textureScene:TextureScene;
 		
 		public function ViewTextureScene(textureScene:TextureScene) 
@@ -25,14 +23,9 @@ package flaras.view.scene
 			_textureScene = textureScene;
 		}
 		
-		/*public function getObj3D():DisplayObject3D
-		{
-			return _obj3D;
-		}*/
-		
 		override public function showScene(playAudio:Boolean):void 
 		{
-			if (_obj3DAlreadyLoaded)
+			if (_obj3D)
 			{
 				_obj3D.visible = true;
 			}
@@ -46,7 +39,7 @@ package flaras.view.scene
 		override public function hideScene():void
 		{
 			super.hideScene();
-			if (_obj3DAlreadyLoaded)
+			if (_obj3D)
 			{
 				_obj3D.visible = false;
 			}
@@ -70,7 +63,6 @@ package flaras.view.scene
 			plane = new Plane(bfm, _textureScene.getWidth(), _textureScene.getHeight());
 		
 			_obj3D = plane;
-			_obj3DAlreadyLoaded = true;
 			
 			//set position, rotation and scale
 			setObj3DProperties(_textureScene, _obj3D);
@@ -81,12 +73,15 @@ package flaras.view.scene
 		
 		override public function unLoad():void
 		{
-			super.unLoad();
-			_obj3DAlreadyLoaded = false;
-			_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3D, Marker.REFERENCE_MARKER);
+			if (_obj3D)
+			{
+				super.unLoad();
+				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
+				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				
+				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, Marker.REFERENCE_MARKER);
+				_obj3D = null;
+			}			
 		}
 	}
 

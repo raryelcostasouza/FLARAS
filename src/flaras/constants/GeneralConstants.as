@@ -35,7 +35,7 @@ package flaras.constants
 		public static const VIDEO_DEFAULT_HEIGHT:uint = 240;
 		
 		public static const TEXTURE_DEFAULT_WIDTH:uint = 100;
-		public static const TEXTURE_DEFAULT_HEIGHT:uint = 100;		
+		public static const TEXTURE_DEFAULT_HEIGHT:uint = 100;
 	}
 
 }

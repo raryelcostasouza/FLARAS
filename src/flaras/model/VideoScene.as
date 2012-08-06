@@ -1,9 +1,9 @@
 package flaras.model 
 {
-	import flaras.constants.FolderConstants;
+	import flaras.constants.*;
 	import flaras.entity.*;
-	import flash.filesystem.File;
 	import org.papervision3d.core.math.*;
+	
 	public class VideoScene extends FlarasScene
 	{
 		private var _videoFilePath:String;

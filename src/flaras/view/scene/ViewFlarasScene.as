@@ -65,8 +65,7 @@ package flaras.view.scene
 			if (_viewAnimation)
 			{
 				_viewAnimation.showScene();
-			}
-			
+			}			
 		}
 		
 		public function hideScene():void
