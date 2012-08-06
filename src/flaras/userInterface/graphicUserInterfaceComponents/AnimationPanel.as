@@ -91,7 +91,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			newState = jcbHasAnimation.isSelected();
 			setComponentsStatus(newState);
-			this._ctrGUI.animationStateUpdate(newState);
+			this._ctrGUI.updateAnimationState(newState);
 		}
 		
 		private function buildLine2():JPanel
@@ -104,13 +104,13 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			
 			jrbX = new JRadioButton("X");
 			jrbX.setSelected(true);
-			jrbX.addActionListener(_ctrGUI.animationPropertiesUpdate);
+			jrbX.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			jrbY = new JRadioButton("Y");
-			jrbY.addActionListener(_ctrGUI.animationPropertiesUpdate);
+			jrbY.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			jrbZ = new JRadioButton("Z");
-			jrbZ.addActionListener(_ctrGUI.animationPropertiesUpdate);
+			jrbZ.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			buttonGroup = new ButtonGroup();
 			buttonGroup.append(jrbX);
@@ -135,7 +135,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jlRotationSpeed = new JLabel("Rotation period: ");
 			jtfRotationPeriod = new JTextField("10", 5);
 			jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationPeriod.addActionListener(_ctrGUI.animationPropertiesUpdate);
+			jtfRotationPeriod.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			jlRotationUnit = new JLabel("seconds");
 			
@@ -156,7 +156,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jlRotationRadius = new JLabel("Rotation radius: ");
 			jtfRotationRadius = new JTextField("0", 5);
 			jtfRotationRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationRadius.addActionListener(_ctrGUI.animationPropertiesUpdate);
+			jtfRotationRadius.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			panelLine4.append(jlRotationRadius);
 			panelLine4.append(jtfRotationRadius);
@@ -171,7 +171,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			jcbReverseRotation = new JCheckBox("Reverse rotation");
 			jcbReverseRotation.addActionListener(function():void
 			{
-				_ctrGUI.animationPropertiesUpdate(null);	
+				_ctrGUI.updateAnimationProperties(null);	
 			});
 			jp5.append(jcbReverseRotation);
 			

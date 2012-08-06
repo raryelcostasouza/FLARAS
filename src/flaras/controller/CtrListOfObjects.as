@@ -68,6 +68,8 @@ package flaras.controller
 		{
 			var scene:FlarasScene;
 			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
 			scene = buildScene(pFilePath, pTranslation, pRotation,
 									absScale(pScale), pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 
 									pHasAudio, pAudioPath, pRepeatAudio, 
@@ -189,7 +191,9 @@ package flaras.controller
 				//updating scene lists
 				_listOfScenes2[indexScene] =scene;
 				_listOfViewFlarasScenes[indexScene] = viewFlarasScene;				
-			}			
+			}	
+			
+			viewFlarasScene.showScene(true);			
 		}
 		
 		private function buildViewScene(scene:FlarasScene):ViewFlarasScene

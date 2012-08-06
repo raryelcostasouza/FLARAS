@@ -43,16 +43,16 @@ package flaras.boundary
 
 	public class  BoundaryMultiMarkerInteraction extends MultiMarkerInteraction
 	{
-		private var aObjCtrInteractionUI:CtrInteractionUI;
+		private var _ctrMain:CtrMain;
 		private var aObjInteractionMarker:InteractionMarker;
 		private var listOfPoints:Vector.<Point>;
 		
-		public function BoundaryMultiMarkerInteraction(pObjCtrInteractionUI:CtrInteractionUI)
+		public function BoundaryMultiMarkerInteraction(ctrMain:CtrMain)
 		{
 			var timer:Timer;
 			
-			aObjCtrInteractionUI = pObjCtrInteractionUI;
-			aObjInteractionMarker = aObjCtrInteractionUI.getCtrMain().ctrMarker.interactionMarker;
+			_ctrMain = ctrMain;
+			aObjInteractionMarker = _ctrMain.ctrMarker.interactionMarker;
 			
 			timer = new Timer(20);
 			timer.addEventListener(TimerEvent.TIMER, loopCheckInteractionAreas);
@@ -62,7 +62,7 @@ package flaras.boundary
 		private function loopCheckInteractionAreas(e:Event):void
 		{
 			var convertedPositionInteractionMarker:Number3D;
-			listOfPoints = aObjCtrInteractionUI.getCtrPoint().getListOfPoints();
+			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
 				
 			//if the FTK marker and Hiro marker are visible
 			if (MarkerNodeManager.isMarkerDetected(Marker.INTERACTION_MARKER) && MarkerNodeManager.isMarkerDetected(Marker.REFERENCE_MARKER))
@@ -119,14 +119,14 @@ package flaras.boundary
 				if ( aObjInteractionMarker.getMarkerType() == InteractionMarker.INSPECTOR_MARKER)
 				{
 					p.setInteractionLock(true);
-					aObjCtrInteractionUI.getCtrPoint().inspectPoint(p);
+					_ctrMain.ctrPoint.inspectPoint(p);
 				}
 				else
 				{
 					if (p.isEnabled())
 					{
 						p.setInteractionLock(true);
-						aObjCtrInteractionUI.getCtrPoint().controlPoint(p, aObjInteractionMarker.getControlMarkerType());
+						_ctrMain.ctrPoint.controlPoint(p, aObjInteractionMarker.getControlMarkerType());
 					}					
 				}
 			}

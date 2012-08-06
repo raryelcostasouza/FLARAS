@@ -29,29 +29,20 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
-	import flaras.controller.CtrInteractionUI;
-	import flaras.util.StageReference;
-	import flash.events.Event;
-	import org.aswing.border.LineBorder;
-	import org.aswing.BorderLayout;
-	import org.aswing.FlowLayout;
-	import org.aswing.GridLayout;
-	import org.aswing.JButton;
-	import org.aswing.JComboBox;
-	import org.aswing.JFrame;
-	import org.aswing.JLabel;
-	import org.aswing.JPanel;	
+	import flaras.controller.*;
+	import flash.events.*;
+	import org.aswing.*;
 	
 	public class CameraSelectWindow extends JFrame
 	{
 		private var jcb:JComboBox;
 		private var jlCurrentScenePosition:JLabel;
-		private var _ctrInteractionUI:CtrInteractionUI
+		private var _ctrMain:CtrMain;
 		
-		public function CameraSelectWindow(ctrInteractionUI:CtrInteractionUI) 
+		public function CameraSelectWindow(ctrMain:CtrMain) 
 		{
 			super(null, "Select camera", true);
-			this._ctrInteractionUI = ctrInteractionUI;
+			_ctrMain = ctrMain;
 			
 			var mainPanel:JPanel;
 			
@@ -101,7 +92,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			jbOk = new JButton("OK");
 			jbOk.addActionListener( function(e:Event):void{
-				_ctrInteractionUI.getCtrMain().ctrCamera.cameraSelected(jcb.getSelectedIndex());
+				_ctrMain.ctrCamera.cameraSelected(jcb.getSelectedIndex());
 				closeWindow(null);
 			});
 			

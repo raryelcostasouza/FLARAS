@@ -39,34 +39,12 @@ package flaras.controller
 	
 	public class CtrInteractionUI
 	{
-		private var aFMMApp:FLARToolKitMultiMarkerApp;	
+		
 		private var _ctrMain:CtrMain;
 		
 		public function CtrInteractionUI(ctrMain:CtrMain)
 		{
-			var bndMMI:BoundaryMultiMarkerInteraction;
 			
-			this._ctrMain = ctrMain;
-			
-			new BoundaryInteractionUI(this);
-			var gui:GraphicsUserInterface = new GraphicsUserInterface(this);
-			ctrMain.ctrGUI = gui.getCtrGUI();
-			bndMMI = new BoundaryMultiMarkerInteraction(this);
-		}
-		
-		public function getCtrMain():CtrMain
-		{
-			return this._ctrMain;
-		}
-		
-		public function getCtrPoint():CtrPoint
-		{
-			return this._ctrMain.ctrPoint;
-		}
-		
-		public function getObjCtrUserProject():CtrUserProject
-		{
-			return this._ctrMain.ctrUserProject;
 		}
 	}	
 }

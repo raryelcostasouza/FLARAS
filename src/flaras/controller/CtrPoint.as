@@ -381,6 +381,14 @@ package flaras.controller
 				}				
 			}
 		}
+		
+		public function toggleMirrorPointsScenes():void
+		{
+			for each (var p:Point in _listOfPoints) 
+			{
+				getCtrListOfObjects(p.getID()).toggleMirrorScenes();
+			}
+		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
 	}		
 }

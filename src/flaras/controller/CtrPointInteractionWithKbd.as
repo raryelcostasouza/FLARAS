@@ -29,8 +29,8 @@
 
 package flaras.controller 
 {
-	import flaras.entity.Point;
-	import flaras.marker.InteractionMarker;
+	import flaras.entity.*;
+	import flaras.marker.*;
 	
 	public class CtrPointInteractionWithKbd 
 	{
@@ -62,7 +62,7 @@ package flaras.controller
 		
 		public function controlForwardInteractionWithSelectedPoint():void
 		{
-			if (_currentSelectedPoint != null && isPtoValido(_currentSelectedPoint))
+			if (_currentSelectedPoint != null && isValidPoint(_currentSelectedPoint))
 			{
 				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_FORWARD);
 			}			
@@ -70,13 +70,13 @@ package flaras.controller
 		
 		public function controlBackwardInteractionWithSelectedPoint():void
 		{
-			if (_currentSelectedPoint != null  && isPtoValido(_currentSelectedPoint))
+			if (_currentSelectedPoint != null  && isValidPoint(_currentSelectedPoint))
 			{
 				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_BACKWARD);
 			}			
 		}
 		
-		private function isPtoValido(p:Point):Boolean
+		private function isValidPoint(p:Point):Boolean
 		{
 			if (p.getID() < _ctrMain.ctrPoint.getListOfPoints().length)
 			{

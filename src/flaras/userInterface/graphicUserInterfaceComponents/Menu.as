@@ -37,7 +37,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 
 	public class Menu extends JMenuBar
 	{
-		private var aControl:CtrInteractionUI;
+		private var _ctrMain:CtrMain;
 		private var aCtrGUI:CtrGUI;
 		
 		private var menuArchive:JMenu = new JMenu("File");
@@ -59,9 +59,9 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS");
 		private var jmiLicense:JMenuItem = new JMenuItem("&License");
 		
-		public function Menu(pControl:CtrInteractionUI, pCtrGUI:CtrGUI):void
+		public function Menu(ctrMain:CtrMain, pCtrGUI:CtrGUI):void
 		{
-			this.aControl = pControl;
+			_ctrMain = ctrMain;
 			this.addMenu(menuArchive);
 			
 			aCtrGUI = pCtrGUI;
@@ -114,37 +114,37 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		private function newFunction(e:Event):void 
 		{
-			aControl.getObjCtrUserProject().createNewProject();
+			_ctrMain.ctrUserProject.createNewProject();
 		}
 		
 		private function openFunction(e:Event):void 
 		{
-			aControl.getObjCtrUserProject().openProject();
+			_ctrMain.ctrUserProject.openProject();
 		}
 		
 		private function publishOfflineFunction(e:Event):void
 		{
-			aControl.getObjCtrUserProject().publishProject();
+			_ctrMain.ctrUserProject.publishProject();
 		}
 		
 		private function saveFunction(e:Event):void 
 		{
-			aControl.getObjCtrUserProject().saveProject();
+			_ctrMain.ctrUserProject.saveProject();
 		}
 		
 		private function saveAsFunction(e:Event):void 
 		{
-			aControl.getObjCtrUserProject().saveProjectAs();
+			_ctrMain.ctrUserProject.saveProjectAs();
 		}
 		
 		private function exitFunction(e:Event):void 
 		{
-			aControl.getObjCtrUserProject().closingFlaras();
+			_ctrMain.ctrUserProject.closingFlaras();
 		}
 		
 		private function actionToggleRefMarkerPersistence(e:Event):void
 		{
-			aControl.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
+			_ctrMain.ctrMarker.toggleRefMarkerPersistence();
 		}
 		
 		public function setStatusJCBRefMarkPersist(enabled:Boolean):void
@@ -154,17 +154,17 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		private function actionMirrorScreen(e:Event):void
 		{
-			aControl.getCtrMain().ctrMirror.toggleMirror(false);
+			_ctrMain.ctrMirror.toggleMirror(false);
 		}
 		
 		private function actionStopCameraCapture(e:Event):void
 		{
-			aControl.getCtrMain().ctrCamera.setCameraStatus(stopCameraCapture.isSelected());
+			_ctrMain.ctrCamera.setCameraStatus(stopCameraCapture.isSelected());
 		}
 		
 		private function actionChooseCaptureCamera(e:Event):void
 		{
-			aControl.getCtrMain().ctrCamera.selectCameraToCapture();
+			_ctrMain.ctrCamera.selectCameraToCapture();
 		}
 		
 		public function setStatusJCBMirrorScreen(enabled:Boolean):void

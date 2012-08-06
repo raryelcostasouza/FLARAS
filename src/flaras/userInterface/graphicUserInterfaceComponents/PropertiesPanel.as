@@ -161,11 +161,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			objAudioRpt.addActionListener(pCtrGUI.setRepeatAudio);
 			//object type selection radio buttons group
 			append(obj3DRdBt = new JRadioButton("3D Object"));
-			obj3DRdBt.addActionListener(pCtrGUI.object3DSelected);
+			obj3DRdBt.addActionListener(pCtrGUI.radioObj3DSelected);
 			append(videoRdBt = new JRadioButton("Video"));
-			videoRdBt.addActionListener(pCtrGUI.videoSelected);
+			videoRdBt.addActionListener(pCtrGUI.radioVideoSelected);
 			append(textureRdBt = new JRadioButton("Texture"));
-			textureRdBt.addActionListener(pCtrGUI.textureSelected);
+			textureRdBt.addActionListener(pCtrGUI.radioTextureSelected);
 			var btgroup:ButtonGroup = new ButtonGroup();
 			btgroup.append(obj3DRdBt);
 			btgroup.append(videoRdBt);

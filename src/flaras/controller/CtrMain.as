@@ -31,6 +31,7 @@ package flaras.controller
 {
 	import flaras.*;
 	import flaras.audio.*;
+	import flaras.boundary.*;
 	import flaras.controller.*;
 	import flaras.marker.*;
 	import flaras.userInterface.*;
@@ -55,11 +56,22 @@ package flaras.controller
 			_fmmapp = pFMMApp;
 			this._ctrMarker = new CtrMarker(this);
 			this._ctrPoint = new CtrPoint(this);
-			new CtrInteractionUI(this);
 			this._ctrUserProject = new CtrUserProject(this);
 			this._ctrPointInterWithKbd = new CtrPointInteractionWithKbd(this);
 			this._ctrMirror = new CtrMirror(this, pFMMApp);
 			this._ctrCamera = new CtrCamera(this);
+			initUI();
+		}
+		
+		private function initUI():void
+		{
+			var bndMMI:BoundaryMultiMarkerInteraction;
+			var gui:GraphicsUserInterface;
+			
+			new BoundaryInteractionUI(this);
+			gui = new GraphicsUserInterface(this);
+			ctrGUI = gui.getCtrGUI();
+			bndMMI = new BoundaryMultiMarkerInteraction(this);
 		}
 		
 		public function set ctrGUI(ctrGUI:CtrGUI):void

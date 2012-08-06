@@ -41,7 +41,7 @@ package flaras.userInterface
 	public class GraphicsUserInterface
 	{
 		//control variables
-		private var aControl:CtrInteractionUI;
+		private var _ctrMain:CtrMain;
 		private var aStage:Stage;
 		private var ctrGui:CtrGUI;
 		private var _cameraSelectWindow:CameraSelectWindow;
@@ -50,11 +50,11 @@ package flaras.userInterface
 		
 		public static const developmentPanelWidth:uint = 214;
 		
-		public function GraphicsUserInterface(pControl:CtrInteractionUI)
+		public function GraphicsUserInterface(ctrMain:CtrMain)
 		{
-			aControl = pControl;
+			_ctrMain = ctrMain;
 			aStage = StageReference.getStage();
-			ctrGui = new CtrGUI(aControl, this);
+			ctrGui = new CtrGUI(ctrMain, this);
 			
 			aStage.scaleMode = StageScaleMode.NO_SCALE;
 			aStage.stageFocusRect = true;
@@ -85,7 +85,7 @@ package flaras.userInterface
 			tabbedPane = new JTabbedPane();
 			
 			menuPanel = new JPanel();
-			menu = new Menu(aControl, ctrGui);
+			menu = new Menu(_ctrMain, ctrGui);
 			menuPanel.append(menu);
 			
 			developmentPanel = new PropertiesPanel(ctrGui);
@@ -123,7 +123,7 @@ package flaras.userInterface
 		
 		private function initWindows():void
 		{
-			_cameraSelectWindow = new CameraSelectWindow(aControl);
+			_cameraSelectWindow = new CameraSelectWindow(_ctrMain);
 			_swapWindow = new SwapWindow(ctrGui);
 		}
 		
