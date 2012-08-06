@@ -64,7 +64,7 @@ package flaras.controller
 		{
 			if (_currentSelectedPoint != null && isValidPoint(_currentSelectedPoint))
 			{
-				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_FORWARD);
+				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, CtrMarker.CONTROL_FORWARD);
 			}			
 		}
 		
@@ -72,7 +72,7 @@ package flaras.controller
 		{
 			if (_currentSelectedPoint != null  && isValidPoint(_currentSelectedPoint))
 			{
-				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, InteractionMarker.CONTROL_BACKWARD);
+				_ctrMain.ctrPoint.controlPoint(_currentSelectedPoint, CtrMarker.CONTROL_BACKWARD);
 			}			
 		}
 		

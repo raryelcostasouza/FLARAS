@@ -29,18 +29,10 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
-	import flaras.userInterface.CtrGUI;
-	import flaras.util.StageReference;
-	import flash.events.Event;
-	import org.aswing.border.LineBorder;
-	import org.aswing.BorderLayout;
-	import org.aswing.FlowLayout;
-	import org.aswing.GridLayout;
-	import org.aswing.JButton;
-	import org.aswing.JComboBox;
-	import org.aswing.JFrame;
-	import org.aswing.JLabel;
-	import org.aswing.JPanel;
+	import flaras.userInterface.*;
+	import flash.events.*;
+	import org.aswing.*;
+	import org.aswing.border.*;
 	
 	public class SwapWindow extends JFrame 
 	{

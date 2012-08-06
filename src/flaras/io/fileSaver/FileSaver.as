@@ -35,6 +35,7 @@ package flaras.io.fileSaver
 	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
 	import flaras.model.*;
+	import flaras.model.marker.ModelInteractionMarker;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -63,12 +64,12 @@ package flaras.io.fileSaver
 			save(pCurrentProjectTempFolder, pFilePathListOfObjects, ba);
 		}
 		
-		public static function saveInteractionSphereProperties(tmpFolder:File, distanceToMarkerCenter:uint, size:uint):void
+		public static function saveInteractionSphereProperties(tmpFolder:File, modelInteractionMarker:ModelInteractionMarker):void
 		{
 			var ba:ByteArray;
 			
 			ba = new ByteArray();
-			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLInteractionSphere(distanceToMarkerCenter, size));
+			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLInteractionSphere(modelInteractionMarker));
 			save(tmpFolder, XMLFilesConstants.INTERACTION_SPHERE_PATH, ba);
 		}
 		

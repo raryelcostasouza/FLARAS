@@ -38,7 +38,7 @@ package flaras.controller
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
-	public class CtrListOfObjects 
+	public class CtrScene 
 	{
 		private var _point:Point;
 		private var _ctrMain:CtrMain;
@@ -46,7 +46,7 @@ package flaras.controller
 		private var _listOfScenes2:Vector.<FlarasScene>;
 		private var _listOfViewFlarasScenes:Vector.<ViewFlarasScene>;
 		
-		public function CtrListOfObjects(ctrMain:CtrMain, point:Point)
+		public function CtrScene(ctrMain:CtrMain, point:Point)
 		{
 			_ctrMain = ctrMain;
 			this._point = point;

@@ -56,7 +56,7 @@ package flaras.controller
 			{
 				MIRRORED_SCALE_FACTOR = 1;
 			}
-			_ctrMain.ctrMarker.interactionMarker.mirror();
+			_ctrMain.ctrMarker.mirrorInteractionMarker();
 			_ctrMain.ctrPoint.toggleMirrorPointsScenes();
 			
 			if (actionfiredFromKeyboard)

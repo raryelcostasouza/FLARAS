@@ -58,6 +58,7 @@ package flaras.controller
 			this._ctrPoint = new CtrPoint(this);
 			this._ctrUserProject = new CtrUserProject(this);
 			this._ctrPointInterWithKbd = new CtrPointInteractionWithKbd(this);
+			this._ctrGUI = new CtrGUI(this);
 			this._ctrMirror = new CtrMirror(this, pFMMApp);
 			this._ctrCamera = new CtrCamera(this);
 			initUI();
@@ -66,11 +67,8 @@ package flaras.controller
 		private function initUI():void
 		{
 			var bndMMI:BoundaryMultiMarkerInteraction;
-			var gui:GraphicsUserInterface;
 			
 			new BoundaryInteractionUI(this);
-			gui = new GraphicsUserInterface(this);
-			ctrGUI = gui.getCtrGUI();
 			bndMMI = new BoundaryMultiMarkerInteraction(this);
 		}
 		

@@ -48,13 +48,19 @@ package flaras.userInterface
 		private var _swapWindow:SwapWindow;
 		private var menu:Menu;
 		
+		private var _propertiesPanel:PropertiesPanel;
+		private var _obj3DPanel:Object3DPopupPanel;
+		private var _texturePanel:ObjectTexturePopupPanel;
+		private var _videoPanel:ObjectVideoPopupPanel;
+		private var _animationPanel:AnimationPanel;
+		
 		public static const developmentPanelWidth:uint = 214;
 		
-		public function GraphicsUserInterface(ctrMain:CtrMain)
+		public function GraphicsUserInterface(ctrMain:CtrMain, pCtrGUI:CtrGUI)
 		{
 			_ctrMain = ctrMain;
 			aStage = StageReference.getStage();
-			ctrGui = new CtrGUI(ctrMain, this);
+			ctrGui = pCtrGUI;
 			
 			aStage.scaleMode = StageScaleMode.NO_SCALE;
 			aStage.stageFocusRect = true;
@@ -74,13 +80,8 @@ package flaras.userInterface
 		{
 			var tabbedPane:JTabbedPane;
 			var menuPanel:JPanel;
-			var developmentPanel:PropertiesPanel;
-			var animationPanel:AnimationPanel;
 			var window:JWindow;
 			var window2:JWindow;
-			var object3DPanel:Object3DPopupPanel;
-			var videoPanel:ObjectVideoPopupPanel;
-			var texturePanel:ObjectTexturePopupPanel;
 		
 			tabbedPane = new JTabbedPane();
 			
@@ -88,24 +89,19 @@ package flaras.userInterface
 			menu = new Menu(_ctrMain, ctrGui);
 			menuPanel.append(menu);
 			
-			developmentPanel = new PropertiesPanel(ctrGui);
-			developmentPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
+			_propertiesPanel = new PropertiesPanel(ctrGui);
+			_propertiesPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
 			
-			tabbedPane.appendTab(developmentPanel, "Basic", null, "Basic scene development");
+			tabbedPane.appendTab(_propertiesPanel, "Basic", null, "Basic scene development");
 			
-			animationPanel = new AnimationPanel(ctrGui);
-			tabbedPane.appendTab(animationPanel, "Animation", null, "Animation effects to the scene");
+			_animationPanel = new AnimationPanel(ctrGui);
+			tabbedPane.appendTab(_animationPanel, "Animation", null, "Animation effects to the scene");
 		
 			//adding modules object3d, video and texture
-			object3DPanel = new Object3DPopupPanel(ctrGui);
-			videoPanel = new ObjectVideoPopupPanel(ctrGui);
-			texturePanel = new ObjectTexturePopupPanel(ctrGui);
-			ctrGui.setPropertiesPanel(developmentPanel);
-			ctrGui.setObject3Dpanel(object3DPanel);
-			ctrGui.setObjectVideoPanel(videoPanel);
-			ctrGui.setObjectTexturePanel(texturePanel);
-			ctrGui.setAnimationPanel(animationPanel);
-			
+			_obj3DPanel = new Object3DPopupPanel(ctrGui);
+			_videoPanel = new ObjectVideoPopupPanel(ctrGui);
+			_texturePanel = new ObjectTexturePopupPanel(ctrGui);
+		
 			window = new JWindow();
 			window.setContentPane(menuPanel);
 			window.pack();
@@ -117,14 +113,13 @@ package flaras.userInterface
 			window2.setLocationXY(640, 0);
 			window2.show();
 			window2.alpha = 0.75;
-			
-			ctrGui.start();
 		}
 		
 		private function initWindows():void
 		{
 			_cameraSelectWindow = new CameraSelectWindow(_ctrMain);
 			_swapWindow = new SwapWindow(ctrGui);
+			MessageWindow.setParentComponent(_propertiesPanel);			
 		}
 		
 		public function getCameraSelectWindow():CameraSelectWindow
@@ -141,5 +136,30 @@ package flaras.userInterface
 		{
 			return menu;
 		}
+		
+		public function getPropertiesPanel():PropertiesPanel
+		{
+			return _propertiesPanel;
+		}
+		
+		public function getObj3DPanel():Object3DPopupPanel
+		{
+			return _obj3DPanel;
+		}
+		
+		public function getTexturePanel():ObjectTexturePopupPanel
+		{
+			return _texturePanel;
+		}
+		
+		public function getVideoPanel():ObjectVideoPopupPanel
+		{
+			return _videoPanel;
+		}
+		
+		public function getAnimationPanel():AnimationPanel
+		{
+			return _animationPanel;
+		}	
 	}
 }

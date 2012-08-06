@@ -118,7 +118,7 @@ package flaras.io.fileReader
 				}				
 				//end only on FLARAS Developer
 												
-				aObjCtrPoint.getCtrListOfObjects(aIndexBuffer).addScene(newFilePath, 
+				aObjCtrPoint.getCtrScene(aIndexBuffer).addScene(newFilePath, 
 												new Number3D(obj3D.translation.x, obj3D.translation.y, obj3D.translation.z),
 												new Number3D(obj3D.rotation.x, obj3D.rotation.y, obj3D.rotation.z),
 												new Number3D(obj3D.scale.x, obj3D.scale.y, obj3D.scale.z),

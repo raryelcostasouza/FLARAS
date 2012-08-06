@@ -302,7 +302,7 @@ package flaras.controller
 			var folders2Zip:Vector.<File>;
 			var file2Save:File;
 			
-			FileSaver.saveInteractionSphereProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.interactionMarker.getSphereDistance(), _ctrMain.ctrMarker.interactionMarker.getSphereSize());
+			FileSaver.saveInteractionSphereProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.getModelInteractionMarker());
 			
 			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
 			FileSaver.saveListOfPoints(listOfPoints, getCurrentProjectTempFolder());

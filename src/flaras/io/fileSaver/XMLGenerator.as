@@ -34,6 +34,7 @@ package flaras.io.fileSaver
 	import flaras.model.AnimationScene;
 	import flaras.model.AudioScene;
 	import flaras.model.FlarasScene;
+	import flaras.model.marker.ModelInteractionMarker;
 	import flaras.model.TextureScene;
 	import flaras.model.VideoScene;
 	import flaras.model.VirtualObjectScene;
@@ -41,15 +42,15 @@ package flaras.io.fileSaver
 	
 	public class XMLGenerator
 	{
-		public static function generateXMLInteractionSphere(distanceToMarker:uint, size:uint):XML
+		public static function generateXMLInteractionSphere(modelInteractionMarker:ModelInteractionMarker):XML
 		{
 			var xml:XML = new XML("<data></data>");
 			
 			var infoNode:XML = new XML();
 			infoNode = 
 				<info>
-					<distanceToMarker>{distanceToMarker}</distanceToMarker>
-					<size>{size}</size>
+					<distanceToMarker>{modelInteractionMarker.getSphereDistance()}</distanceToMarker>
+					<size>{modelInteractionMarker.getSphereSize()}</size>
 				</info>
 			xml.appendChild(infoNode);
 			

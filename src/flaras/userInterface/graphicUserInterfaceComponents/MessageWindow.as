@@ -29,9 +29,8 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
-	import flash.events.Event;
-	import flash.net.navigateToURL;
-	import flash.net.URLRequest;
+	import flash.events.*;
+	import flash.net.*;
 	import org.aswing.*;
 	
 	public class MessageWindow 

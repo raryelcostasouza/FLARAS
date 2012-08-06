@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,12 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
@@ -35,7 +35,7 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	import org.aswing.geom.IntDimension;
 	
 	public class PropertiesPanel extends JPanel
-	{	
+	{
 		private var ptList:JComboBox;
 		private var btRemovePt:JButton;
 		private var ptX:JTextField;
@@ -64,8 +64,8 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var textureRdBt:JRadioButton;
 		private const jtfColumns:uint = 4;
 		
-		
-		public function PropertiesPanel(pCtrGUI:CtrGUI) {
+		public function PropertiesPanel(pCtrGUI:CtrGUI)
+		{
 			super(new FlowLayout());
 			setPreferredSize(new IntDimension(210, 470));
 			
@@ -172,87 +172,108 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			btgroup.append(textureRdBt);
 		}
 		
-		public function getPtList():JComboBox {
+		public function getPtList():JComboBox
+		{
 			return ptList;
 		}
 		
-		public function getObjList():JComboBox {
+		public function getObjList():JComboBox
+		{
 			return objList;
 		}
 		
-		public function getPtX():JTextField {
+		public function getPtX():JTextField
+		{
 			return ptX;
 		}
 		
-		public function getPtY():JTextField {
+		public function getPtY():JTextField
+		{
 			return ptY;
 		}
 		
-		public function getPtZ():JTextField {
+		public function getPtZ():JTextField
+		{
 			return ptZ;
 		}
 		
-		public function getObjTrX():JTextField {
+		public function getObjTrX():JTextField
+		{
 			return objTrX;
 		}
 		
-		public function getObjTrY():JTextField {
+		public function getObjTrY():JTextField
+		{
 			return objTrY;
 		}
 		
-		public function getObjTrZ():JTextField {
+		public function getObjTrZ():JTextField
+		{
 			return objTrZ;
 		}
 		
-		public function getObjRtX():JTextField {
+		public function getObjRtX():JTextField
+		{
 			return objRtX;
 		}
 		
-		public function getObjRtY():JTextField {
+		public function getObjRtY():JTextField
+		{
 			return objRtY;
 		}
 		
-		public function getObjRtZ():JTextField {
+		public function getObjRtZ():JTextField
+		{
 			return objRtZ;
 		}
 		
-		public function getObjScX():JTextField {
+		public function getObjScX():JTextField
+		{
 			return objScX;
 		}
 		
-		public function getObjScY():JTextField {
+		public function getObjScY():JTextField
+		{
 			return objScY;
 		}
 		
-		public function getObjScZ():JTextField {
+		public function getObjScZ():JTextField
+		{
 			return objScZ;
 		}
 		
-		public function getRd3dObject():JRadioButton {
+		public function getRd3dObject():JRadioButton
+		{
 			return obj3DRdBt;
 		}
 		
-		public function getRdVideoObject():JRadioButton {
+		public function getRdVideoObject():JRadioButton
+		{
 			return videoRdBt;
 		}
 		
-		public function getRdTextureObject():JRadioButton {
+		public function getRdTextureObject():JRadioButton
+		{
 			return textureRdBt;
 		}
-
-		public function getAudioFilePath():JTextField {
+		
+		public function getAudioFilePath():JTextField
+		{
 			return objAudioFilePath;
 		}
 		
-		public function getbtAudioLoad():JButton {
+		public function getbtAudioLoad():JButton
+		{
 			return btnAudioLoad;
 		}
 		
-		public function getAudioRpt():JCheckBox {
+		public function getAudioRpt():JCheckBox
+		{
 			return objAudioRpt;
 		}
 		
-		public function getAudioCheck():JCheckBox {
+		public function getAudioCheck():JCheckBox
+		{
 			return objAudioCheck;
 		}
 		
@@ -271,5 +292,5 @@ package flaras.userInterface.graphicUserInterfaceComponents
 			return btSwapObj;
 		}
 	}
-	
+
 }

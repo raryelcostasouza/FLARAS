@@ -31,8 +31,10 @@ package flaras.controller
 {
 	import flaras.audio.*;
 	import flaras.constants.*;
-	import flaras.io.fileReader.FileReaderInteractionSphere;
+	import flaras.io.fileReader.*;
 	import flaras.marker.*;
+	import flaras.model.marker.*;
+	import org.papervision3d.core.math.Matrix3D;
 	
 	public class CtrMarker 
 	{		
@@ -40,18 +42,36 @@ package flaras.controller
 		private var _refMarker:Marker;
 		private var _interactionMarker:InteractionMarker;
 		
+		private var _modelInteractionMarker:ModelInteractionMarker;
+		
+		private static const DEFAULT_SPHERE_SIZE:uint = 20;
+		private static const DEFAULT_SPHERE_DISTANCE:uint = 140;
+		public static const DEFAULT_RADIUS_DIFFERENCE:uint = 10;
+		
+		public static const CONTROL_FORWARD:int = 1;
+		public static const CONTROL_BACKWARD:int = -1;
+		
+		public static const CONTROL_MARKER:int = 0;
+		public static const INSPECTOR_MARKER:int = 1;
+		
 		public function CtrMarker(ctrMain:CtrMain) 
 		{
 			this._ctrMain = ctrMain;
 			this._refMarker = new Marker();
 			
-			this._interactionMarker = new InteractionMarker();
+			this._modelInteractionMarker = new ModelInteractionMarker(DEFAULT_SPHERE_SIZE, DEFAULT_SPHERE_DISTANCE, INSPECTOR_MARKER, CONTROL_FORWARD);
+			this._interactionMarker = new InteractionMarker(_modelInteractionMarker);			
+		}		
+		
+		public function getModelInteractionMarker():ModelInteractionMarker
+		{
+			return _modelInteractionMarker;
 		}
 		
-		public function get interactionMarker():InteractionMarker
+		public function getWorldMatrixInteractionMarker():Matrix3D
 		{
-			return this._interactionMarker;
-		}	
+			return _interactionMarker.getWorldMatrixObj3DSphere();
+		}
 		
 		public function get refMarker():Marker
 		{
@@ -60,19 +80,30 @@ package flaras.controller
 		
 		public function resetInteractionMarkerSphereProperties():void
 		{
-			this._interactionMarker.setSphereDistance(140);
-			this._interactionMarker.setSphereSize(20);
+			_modelInteractionMarker.setSphereSize(DEFAULT_SPHERE_SIZE);
+			_modelInteractionMarker.setSphereDistance(DEFAULT_SPHERE_DISTANCE);
+			
+			this._interactionMarker.updateDistance();
+			this._interactionMarker.updateSize();
 		}
 		
 		public function changeMarkerType():void
 		{
 			// if the marker is inspector marker
-			if (_interactionMarker.getMarkerType() == InteractionMarker.INSPECTOR_MARKER)
+			if (_modelInteractionMarker.getMarkerType() == CtrMarker.INSPECTOR_MARKER)
 			{
 				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_MARKER);
 				
 				//change it to control marker
-				_interactionMarker.change2ControlMarker();
+				_modelInteractionMarker.setMarkerType(CtrMarker.CONTROL_MARKER);
+				if (_modelInteractionMarker.getControlMarkerType() == CtrMarker.CONTROL_BACKWARD)
+				{
+					_interactionMarker.change2ControlMarkerBackward();
+				}
+				else
+				{
+					_interactionMarker.change2ControlMarkerForward();
+				}
 			}
 			// if the marker is the control marker
 			else
@@ -80,20 +111,23 @@ package flaras.controller
 				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_INSPECTOR_MARKER);
 				
 				//change it to inspector marker
+				_modelInteractionMarker.setMarkerType(CtrMarker.INSPECTOR_MARKER);
 				_interactionMarker.change2InspectorMarker();
+				
 			}
 		}
 		
 		public function changeControlMarkerType():void
 		{
 			//only does something if the marker type is control marker
-			if (_interactionMarker.getMarkerType() == InteractionMarker.CONTROL_MARKER)
+			if (_modelInteractionMarker.getMarkerType() == CtrMarker.CONTROL_MARKER)
 			{
 				// if it's forward control marker
-				if (_interactionMarker.getControlMarkerType() == InteractionMarker.CONTROL_FORWARD)
+				if (_modelInteractionMarker.getControlMarkerType() == CtrMarker.CONTROL_FORWARD)
 				{	
 					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_BACKWARD_MARKER);
 					//change it to backward control marker
+					_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_BACKWARD);
 					_interactionMarker.change2ControlMarkerBackward();
 				}
 				// if it's backward control marker
@@ -101,6 +135,7 @@ package flaras.controller
 				{
 					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_FORWARD_MARKER);
 					//change it to forward control marker
+					_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_FORWARD);
 					_interactionMarker.change2ControlMarkerForward();
 				}
 			}
@@ -108,28 +143,33 @@ package flaras.controller
 		
 		public function changeInteractionSphereSize(deltaSize:int):void
 		{
-			var newSize:uint = _interactionMarker.getSphereSize() + deltaSize;
+			var newSize:uint = _modelInteractionMarker.getSphereSize() + deltaSize;
 			
 			if (newSize > 0)
 			{
-				_interactionMarker.setSphereSize(newSize);
+				_modelInteractionMarker.setSphereSize(newSize);
+				_interactionMarker.updateSize();
 			}			
 		}
 		
 		public function changeInteractionSphereDistance(deltaDistance:int):void
 		{
-			var newDistance:uint = _interactionMarker.getSphereDistance() + deltaDistance;
+			var newDistance:uint = _modelInteractionMarker.getSphereDistance() + deltaDistance;
 			
 			if (newDistance > 0)
 			{
-				_interactionMarker.setSphereDistance(newDistance);
+				_modelInteractionMarker.setSphereDistance(newDistance);
+				_interactionMarker.updateDistance();
 			}	
 		}	
 		
 		public function setInteractionSphereData(distance:uint, size:uint):void
 		{
-			_interactionMarker.setSphereDistance(distance);
-			_interactionMarker.setSphereSize(size);
+			_modelInteractionMarker.setSphereDistance(distance);
+			_modelInteractionMarker.setSphereSize(size);
+			
+			_interactionMarker.updateDistance();
+			_interactionMarker.updateSize();
 		}
 		
 		public function loadInteractionMarkerData():void
@@ -140,8 +180,8 @@ package flaras.controller
 		
 		public function finishedLoadingInteractionMarkerData(intSphereData:InteractionSphereData):void
 		{
-			_interactionMarker.setSphereSize(intSphereData.size);
-			_interactionMarker.setSphereDistance(intSphereData.distance);
+			_interactionMarker.updateDistance();
+			_interactionMarker.updateDistance();
 		}
 		
 		public function toggleRefMarkerPersistence():void
@@ -155,6 +195,11 @@ package flaras.controller
 				refMarker.persistence = true;
 			}
 			_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBRefMarkPersist(refMarker.persistence);
+		}
+		
+		public function mirrorInteractionMarker():void
+		{
+			_interactionMarker.mirror();
 		}
 	}
 }

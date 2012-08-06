@@ -46,7 +46,7 @@ package flaras.controller
 	{
 		private var _listOfPoints:Vector.<Point> = new Vector.<Point>();
 		private var _listOfBoundaryPoints:Vector.<BoundaryPoint> = new Vector.<BoundaryPoint>();
-		private var _listOfCtrScenes:Vector.<CtrListOfObjects> = new Vector.<CtrListOfObjects>();
+		private var _listOfCtrScenes:Vector.<CtrScene> = new Vector.<CtrScene>();
 		
 		private var _ctrMain:CtrMain;
 		
@@ -65,7 +65,7 @@ package flaras.controller
 				}
 				this._listOfPoints = new Vector.<Point>();
 				this._listOfBoundaryPoints = new Vector.<BoundaryPoint>();
-				this._listOfCtrScenes = new Vector.<CtrListOfObjects>();
+				this._listOfCtrScenes = new Vector.<CtrScene>();
 			}			
 		}
 		
@@ -81,14 +81,14 @@ package flaras.controller
 			{
 				for (indexScene = 0; indexScene < p.getListOfFlarasScenes().length; indexScene++) 
 				{
-					getCtrListOfObjects(p.getID()).unLoadScene(indexScene);
+					getCtrScene(p.getID()).unLoadScene(indexScene);
 				}
 			}
 			else
 			{
 				for (indexScene = 0; indexScene < p.getListOfFlarasScenes().length; indexScene++) 
 				{
-					getCtrListOfObjects(p.getID()).removeScene(indexScene);
+					getCtrScene(p.getID()).removeScene(indexScene);
 				}
 				
 				//removing the xml file with the object list
@@ -125,7 +125,7 @@ package flaras.controller
 			return _listOfPoints.length;
 		}
 		
-		public function getCtrListOfObjects(indexPoint:uint):CtrListOfObjects
+		public function getCtrScene(indexPoint:uint):CtrScene
 		{
 			return _listOfCtrScenes[indexPoint];
 		}
@@ -153,7 +153,7 @@ package flaras.controller
 			p = new Point(this._listOfPoints.length, pPosition)
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));
-			this._listOfCtrScenes.push(new CtrListOfObjects(_ctrMain, p));
+			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
 			
 			return p;
 		}
@@ -201,7 +201,7 @@ package flaras.controller
 				
 			for (var i:int = 0; i < p.getListOfFlarasScenes().length ; i++) 
 			{
-				getCtrListOfObjects(p.getID()).updateReloadPointPosition(i);
+				getCtrScene(p.getID()).updateReloadPointPosition(i);
 			}
 		}
 
@@ -227,7 +227,7 @@ package flaras.controller
 			{
 				//listObjects = p.getListOfScenes();
 				indexActiveObject = p.getIndexActiveScene();
-				getCtrListOfObjects(p.getID()).disableScene(indexActiveObject);
+				getCtrScene(p.getID()).disableScene(indexActiveObject);
 				
 				p.setIndexActiveScene(indexActiveObject + pDirection)
 				indexActiveObject = p.getIndexActiveScene();
@@ -244,7 +244,7 @@ package flaras.controller
 					}
 				}
 				
-				getCtrListOfObjects(p.getID()).enableScene(p.getIndexActiveScene(), true);
+				getCtrScene(p.getID()).enableScene(p.getIndexActiveScene(), true);
 			}			
 		}
 		
@@ -258,10 +258,10 @@ package flaras.controller
 				enablePointUI(indexPoint);
 			}
 			
-			getCtrListOfObjects(p.getID()).disableScene(p.getIndexActiveScene());
+			getCtrScene(p.getID()).disableScene(p.getIndexActiveScene());
 			
 			p.setIndexActiveScene(pObjectIndex);
-			getCtrListOfObjects(p.getID()).enableScene(pObjectIndex, true);
+			getCtrScene(p.getID()).enableScene(pObjectIndex, true);
 			
 		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
@@ -288,7 +288,7 @@ package flaras.controller
 			{
 				p.setIndexActiveScene(p.getIndexLastActiveScene());
 				
-				getCtrListOfObjects(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio);
+				getCtrScene(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio);
 			}
 		}
 		
@@ -318,7 +318,7 @@ package flaras.controller
 			{
 				p.setIndexLastActiveScene(p.getIndexActiveScene());
 				
-				getCtrListOfObjects(p.getID()).disableScene(p.getIndexActiveScene());
+				getCtrScene(p.getID()).disableScene(p.getIndexActiveScene());
 			}
 		}	
 		
@@ -386,7 +386,7 @@ package flaras.controller
 		{
 			for each (var p:Point in _listOfPoints) 
 			{
-				getCtrListOfObjects(p.getID()).toggleMirrorScenes();
+				getCtrScene(p.getID()).toggleMirrorScenes();
 			}
 		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------

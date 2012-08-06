@@ -35,6 +35,7 @@ package flaras.boundary
 	import flaras.controller.*;
 	import flaras.entity.*;
 	import flaras.marker.*;
+	import flaras.model.marker.*;
 	import flaras.multiMarkerInteraction.*;
 	import flaras.util.*;
 	import flash.events.*;
@@ -44,7 +45,8 @@ package flaras.boundary
 	public class  BoundaryMultiMarkerInteraction extends MultiMarkerInteraction
 	{
 		private var _ctrMain:CtrMain;
-		private var aObjInteractionMarker:InteractionMarker;
+		//private var aObjInteractionMarker:InteractionMarker;
+		private var _modelInteractionMarker:ModelInteractionMarker;
 		private var listOfPoints:Vector.<Point>;
 		
 		public function BoundaryMultiMarkerInteraction(ctrMain:CtrMain)
@@ -52,7 +54,8 @@ package flaras.boundary
 			var timer:Timer;
 			
 			_ctrMain = ctrMain;
-			aObjInteractionMarker = _ctrMain.ctrMarker.interactionMarker;
+			_modelInteractionMarker = _ctrMain.ctrMarker.getModelInteractionMarker();
+			//aObjInteractionMarker = _ctrMain.ctrMarker.interactionMarker;
 			
 			timer = new Timer(20);
 			timer.addEventListener(TimerEvent.TIMER, loopCheckInteractionAreas);
@@ -71,7 +74,7 @@ package flaras.boundary
 				{
 					//conversion from the position of the interaction sphere of the interaction marker 
 					//to the coordinates of the reference marker
-					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(Marker.INTERACTION_MARKER, Marker.REFERENCE_MARKER, aObjInteractionMarker.getWorldMatrixObj3DSphere());
+					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(Marker.INTERACTION_MARKER, Marker.REFERENCE_MARKER, _ctrMain.ctrMarker.getWorldMatrixInteractionMarker());
 					
 					//if the point's interaction is not locked
 					if (!p.getInteractionLock())
@@ -92,7 +95,7 @@ package flaras.boundary
 			var convertedInteractionSphere:InteractionSphere;
 			
 			convertedInteractionSphere = new InteractionSphere(pConvertedPositionInteractionMarker, 
-																			aObjInteractionMarker.getObjUnlockInteractionSphere().getRadius());
+																			_modelInteractionMarker.getModelInteractionSphereUnlock().getRadius());
 
 			// if the point is outside the most external sphere (unlock sphere of the interaction marker) then a new interaction 
 			// will be allowed (unlocked)
@@ -109,14 +112,14 @@ package flaras.boundary
 			var convertedInteractionSphere:InteractionSphere;
 			
 			convertedInteractionSphere = new InteractionSphere(pConvertedPositionInteractionMarker, 
-																			aObjInteractionMarker.getObjLockInteractionSphere().getRadius());
+																			_modelInteractionMarker.getModelInteractionSphereLock().getRadius());
 					
 			// if the point is inside the most internal sphere (lock sphere of the interaction marker) then a interaction will
 			// be done and becomes locked
 			if (happenedSphereCollision(p.getPosition(), convertedInteractionSphere))
 			{	
 				
-				if ( aObjInteractionMarker.getMarkerType() == InteractionMarker.INSPECTOR_MARKER)
+				if (_modelInteractionMarker.getMarkerType() == CtrMarker.INSPECTOR_MARKER)
 				{
 					p.setInteractionLock(true);
 					_ctrMain.ctrPoint.inspectPoint(p);
@@ -126,7 +129,7 @@ package flaras.boundary
 					if (p.isEnabled())
 					{
 						p.setInteractionLock(true);
-						_ctrMain.ctrPoint.controlPoint(p, aObjInteractionMarker.getControlMarkerType());
+						_ctrMain.ctrPoint.controlPoint(p, _modelInteractionMarker.getControlMarkerType());
 					}					
 				}
 			}
