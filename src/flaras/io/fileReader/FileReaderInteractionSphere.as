@@ -33,6 +33,7 @@ package flaras.io.fileReader
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
+	import flaras.model.marker.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;

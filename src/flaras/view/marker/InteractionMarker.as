@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.marker
+package flaras.view.marker
 {
 	import flaras.*;
 	import flaras.audio.*;
@@ -35,6 +35,7 @@ package flaras.marker
 	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
+	import flaras.marker.*;
 	import flaras.model.marker.*;
 	import flaras.multiMarkerInteraction.*;
 	import flaras.util.*;

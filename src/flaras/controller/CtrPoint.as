@@ -39,13 +39,14 @@ package flaras.controller
 	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
+	import flaras.view.point.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
 	public class CtrPoint
 	{
 		private var _listOfPoints:Vector.<Point> = new Vector.<Point>();
-		private var _listOfBoundaryPoints:Vector.<BoundaryPoint> = new Vector.<BoundaryPoint>();
+		private var _listOfBoundaryPoints:Vector.<ViewPoint> = new Vector.<ViewPoint>();
 		private var _listOfCtrScenes:Vector.<CtrScene> = new Vector.<CtrScene>();
 		
 		private var _ctrMain:CtrMain;
@@ -64,14 +65,14 @@ package flaras.controller
 					destroyPointInfo(p, false); 
 				}
 				this._listOfPoints = new Vector.<Point>();
-				this._listOfBoundaryPoints = new Vector.<BoundaryPoint>();
+				this._listOfBoundaryPoints = new Vector.<ViewPoint>();
 				this._listOfCtrScenes = new Vector.<CtrScene>();
 			}			
 		}
 		
 		private function destroyPointInfo(p:Point, removeFiles:Boolean):void
 		{
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			var f:File;
 			var indexScene:uint;
 			
@@ -150,7 +151,7 @@ package flaras.controller
 			
 			p = new Point(this._listOfPoints.length, pPosition)
 			this._listOfPoints.push(p);
-			this._listOfBoundaryPoints.push(new BoundaryPoint(p.getPosition()));
+			this._listOfBoundaryPoints.push(new ViewPoint(p.getPosition()));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
 			
 			return p;
@@ -185,7 +186,7 @@ package flaras.controller
 		
 		public function updatePointPosition(indexPoint:uint, position:Number3D):void
 		{
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			var p:Point;
 			
 			_ctrMain.ctrUserProject.setUnsavedModifications(true);
@@ -266,7 +267,7 @@ package flaras.controller
 		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
 		{			
 			var listOfFlarasScenes:Vector.<FlarasScene>;
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			bndPoint.hidePointSphere();
@@ -289,7 +290,7 @@ package flaras.controller
 		
 		private function disablePoint(p:Point, pPlayAudio:Boolean):void
 		{
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 
@@ -318,7 +319,7 @@ package flaras.controller
 		public function enablePointUI(indexPoint:int):void
 		{
 			var p:Point = this._listOfPoints[indexPoint];
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			
@@ -350,7 +351,7 @@ package flaras.controller
 		
 		public function disableAllPointsUI():void
 		{
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 						
 			for each(var p:Point in this._listOfPoints)
 			{
@@ -363,7 +364,7 @@ package flaras.controller
 		
 		public function toggleVisibleAuxSphereOfPoints():void
 		{
-			var bndPoint:BoundaryPoint;
+			var bndPoint:ViewPoint;
 			
 			for each(var p:Point in this._listOfPoints)
 			{

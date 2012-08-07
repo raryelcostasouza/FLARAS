@@ -34,7 +34,8 @@ package flaras.controller
 	import flaras.io.fileReader.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
-	import org.papervision3d.core.math.Matrix3D;
+	import flaras.view.marker.*;
+	import org.papervision3d.core.math.*;
 	
 	public class CtrMarker 
 	{		

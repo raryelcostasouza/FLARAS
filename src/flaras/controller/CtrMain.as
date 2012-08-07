@@ -48,7 +48,6 @@ package flaras.controller
 		private var _ctrPointInterWithKbd:CtrPointInteractionWithKbd;
 		private var _ctrMirror:CtrMirror;
 		private var _ctrCamera:CtrCamera;
-		private var _interactionMarker:InteractionMarker;
 		private var _fmmapp:FLARToolKitMultiMarkerApp;
 			
 		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
