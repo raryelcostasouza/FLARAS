@@ -37,7 +37,7 @@ package flaras.view.marker
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
 	
-	public class Marker 
+	public class ViewMarker 
 	{
 		public static const REFERENCE_MARKER:uint = 0;
 		public static const INTERACTION_MARKER:uint = 1;
@@ -45,7 +45,7 @@ package flaras.view.marker
 		//after removing the marker from the camera field the 3D Viewport keeps being shown
 		private var _persistence:Boolean = false;
 		
-		public function Marker()
+		public function ViewMarker()
 		{
 			var aObj3DCover:DisplayObject3D;
 			

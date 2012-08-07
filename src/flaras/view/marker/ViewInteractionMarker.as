@@ -49,7 +49,7 @@ package flaras.view.marker
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
 	
-	public class InteractionMarker
+	public class ViewInteractionMarker
 	{
 		private var _modelInteractionMarker:ModelInteractionMarker;
 		
@@ -59,7 +59,7 @@ package flaras.view.marker
 		private var aObj3DCoverControlForward:DisplayObject3D;
 		private var aObj3DCoverControlBackward:DisplayObject3D;
 		
-		public function InteractionMarker(pModelInteractionMarker:ModelInteractionMarker)
+		public function ViewInteractionMarker(pModelInteractionMarker:ModelInteractionMarker)
 		{			
 			_modelInteractionMarker = pModelInteractionMarker;
 			
@@ -74,8 +74,8 @@ package flaras.view.marker
 		
 		public function updateSize():void
 		{
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphere, Marker.INTERACTION_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereUnlock, Marker.INTERACTION_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphere, ViewMarker.INTERACTION_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereUnlock, ViewMarker.INTERACTION_MARKER);
 			build3DSphere();		
 		}
 		
@@ -95,9 +95,9 @@ package flaras.view.marker
 			aObj3DCoverControlForward.visible = false;
 			aObj3DCoverControlBackward.visible = false;
 			
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverInspector, Marker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlForward, Marker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlBackward, Marker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverInspector, ViewMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlForward, ViewMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlBackward, ViewMarker.INTERACTION_MARKER, null);
 		}
 		
 		private function buildTextureCover(pFilePath:String):DisplayObject3D
@@ -128,8 +128,8 @@ package flaras.view.marker
 			aObj3DSphereUnlock = new Sphere(new WireframeMaterial(0xffe600), _modelInteractionMarker.getSphereSize()+10, 10, 10);
 			aObj3DSphereUnlock.position = new Number3D(0, _modelInteractionMarker.getSphereDistance(), 0);
 			
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphere, Marker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereUnlock, Marker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DSphere, ViewMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereUnlock, ViewMarker.INTERACTION_MARKER, null);
 		}
 		
 		public function change2InspectorMarker():void

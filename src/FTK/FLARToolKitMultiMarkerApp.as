@@ -513,7 +513,7 @@ package FTK
 				} else {
 //					trace("[rem] id : " + i +"[confidence]"+markerData.confidence);
 					
-					if (i == Marker.INTERACTION_MARKER || (i == Marker.REFERENCE_MARKER && !_ctrMain.ctrMarker.refMarker.persistence))
+					if (i == ViewMarker.INTERACTION_MARKER || (i == ViewMarker.REFERENCE_MARKER && !_ctrMain.ctrMarker.refMarker.persistence))
 					{
 						this.markerNodeList[i].visible = false;
 					}					

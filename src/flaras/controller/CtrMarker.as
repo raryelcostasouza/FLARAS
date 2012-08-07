@@ -43,8 +43,8 @@ package flaras.controller
 	public class CtrMarker 
 	{		
 		private var _ctrMain:CtrMain;
-		private var _refMarker:Marker;
-		private var _interactionMarker:InteractionMarker;
+		private var _refMarker:ViewMarker;
+		private var _interactionMarker:ViewInteractionMarker;
 		
 		private var _modelInteractionMarker:ModelInteractionMarker;
 		
@@ -61,10 +61,10 @@ package flaras.controller
 		public function CtrMarker(ctrMain:CtrMain) 
 		{
 			this._ctrMain = ctrMain;
-			this._refMarker = new Marker();
+			this._refMarker = new ViewMarker();
 			
 			this._modelInteractionMarker = new ModelInteractionMarker(DEFAULT_SPHERE_SIZE, DEFAULT_SPHERE_DISTANCE, INSPECTOR_MARKER, CONTROL_FORWARD);
-			this._interactionMarker = new InteractionMarker(_modelInteractionMarker);			
+			this._interactionMarker = new ViewInteractionMarker(_modelInteractionMarker);			
 		}		
 		
 		public function getModelInteractionMarker():ModelInteractionMarker
@@ -77,7 +77,7 @@ package flaras.controller
 			return _interactionMarker.getWorldMatrixObj3DSphere();
 		}
 		
-		public function get refMarker():Marker
+		public function get refMarker():ViewMarker
 		{
 			return this._refMarker;
 		}

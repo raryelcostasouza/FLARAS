@@ -42,7 +42,7 @@ package flaras.view
 	import flaras.model.point.*;
 	import flaras.multiMarkerInteraction.*;
 	import flaras.util.*;
-	import flaras.view.marker.Marker;
+	import flaras.view.marker.ViewMarker;
 	import flash.events.*;
 	import flash.utils.*;
 	import org.papervision3d.core.math.*;
@@ -73,13 +73,13 @@ package flaras.view
 			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
 				
 			//if the FTK marker and Hiro marker are visible
-			if (MarkerNodeManager.isMarkerDetected(Marker.INTERACTION_MARKER) && MarkerNodeManager.isMarkerDetected(Marker.REFERENCE_MARKER))
+			if (MarkerNodeManager.isMarkerDetected(ViewMarker.INTERACTION_MARKER) && MarkerNodeManager.isMarkerDetected(ViewMarker.REFERENCE_MARKER))
 			{	
 				for each(var p:Point in listOfPoints)
 				{
 					//conversion from the position of the interaction sphere of the interaction marker 
 					//to the coordinates of the reference marker
-					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(Marker.INTERACTION_MARKER, Marker.REFERENCE_MARKER, _ctrMain.ctrMarker.getWorldMatrixInteractionMarker());
+					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(ViewMarker.INTERACTION_MARKER, ViewMarker.REFERENCE_MARKER, _ctrMain.ctrMarker.getWorldMatrixInteractionMarker());
 					
 					//if the point's interaction is not locked
 					if (!p.getInteractionLock())
