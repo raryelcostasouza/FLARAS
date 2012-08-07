@@ -38,7 +38,6 @@ package flaras.userInterface.graphicUserInterfaceComponents
 	public class Menu extends JMenuBar
 	{
 		private var _ctrMain:CtrMain;
-		private var aCtrGUI:CtrGUI;
 		
 		private var menuArchive:JMenu = new JMenu("File");
 		private var newFlaras:JMenuItem = new JMenuItem("&New");
@@ -59,12 +58,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS");
 		private var jmiLicense:JMenuItem = new JMenuItem("&License");
 		
-		public function Menu(ctrMain:CtrMain, pCtrGUI:CtrGUI):void
+		public function Menu(ctrMain:CtrMain):void
 		{
 			_ctrMain = ctrMain;
 			this.addMenu(menuArchive);
 			
-			aCtrGUI = pCtrGUI;
 			menuArchive.append(newFlaras);
 			
 			newFlaras.addActionListener(newFunction);

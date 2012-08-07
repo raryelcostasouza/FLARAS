@@ -86,7 +86,7 @@ package flaras.userInterface
 			tabbedPane = new JTabbedPane();
 			
 			menuPanel = new JPanel();
-			menu = new Menu(_ctrMain, ctrGui);
+			menu = new Menu(_ctrMain);
 			menuPanel.append(menu);
 			
 			_propertiesPanel = new PropertiesPanel(ctrGui);
