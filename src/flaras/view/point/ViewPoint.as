@@ -30,9 +30,11 @@
 package flaras.view.point 
 {
 	import flaras.constants.*;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.marker.*;
 	import flaras.util.*;
+	import flaras.view.marker.Marker;
 	import flash.events.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;

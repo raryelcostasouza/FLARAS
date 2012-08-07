@@ -1,11 +1,13 @@
 package flaras.view.scene 
 {
 	import flaras.constants.*;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
+	import flaras.view.marker.*;
 	import flash.events.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;

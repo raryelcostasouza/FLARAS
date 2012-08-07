@@ -41,6 +41,7 @@ package flaras.view
 	import flaras.model.point.*;
 	import flaras.multiMarkerInteraction.*;
 	import flaras.util.*;
+	import flaras.view.marker.Marker;
 	import flash.events.*;
 	import flash.utils.*;
 	import org.papervision3d.core.math.*;

@@ -30,6 +30,7 @@
 package flaras.controller.multimarkerInteraction 
 {
 	import flaras.boundary.*;
+	import flaras.controller.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
 	import flaras.util.*;

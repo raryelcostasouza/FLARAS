@@ -7,6 +7,7 @@ package flaras.view.scene
 	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
+	import flaras.view.marker.*;
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;

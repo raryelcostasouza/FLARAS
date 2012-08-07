@@ -27,8 +27,9 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.marker
+package flaras.view.marker
 {
+	import flaras.controller.MarkerNodeManager;
 	import flaras.util.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.materials.*;

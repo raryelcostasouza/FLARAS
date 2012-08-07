@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.marker
+package flaras.controller
 {
 	import FTK.*;
 	import org.libspark.flartoolkit.support.pv3d.*;

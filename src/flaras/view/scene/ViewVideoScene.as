@@ -8,6 +8,7 @@ package flaras.view.scene
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flaras.video.*;
+	import flaras.view.marker.Marker;
 	import flash.events.*;
 	import flash.media.*;
 	import flash.net.*;
