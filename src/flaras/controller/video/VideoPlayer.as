@@ -29,6 +29,7 @@
 
 package flaras.controller.video 
 {
+	import flaras.controller.ErrorHandler;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flash.events.*;

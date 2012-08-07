@@ -29,8 +29,9 @@
 
 package flaras.controller.audio
 {
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
-	import flaras.io.GeneralIOEventHandler;
+	import flaras.io.*;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.media.*;

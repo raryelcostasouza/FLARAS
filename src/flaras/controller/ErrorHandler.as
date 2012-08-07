@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.errorHandler 
+package flaras.controller 
 {
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flaras.view.gui.*;
