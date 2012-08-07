@@ -27,9 +27,10 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.userInterface
+package flaras.view.gui
 {
 	import flaras.controller.*;
+	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flaras.util.*;
 	import flash.display.*;

@@ -34,6 +34,7 @@ package flaras.io
 	import flaras.errorHandler.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.view.gui.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;

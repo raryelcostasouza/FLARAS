@@ -38,6 +38,7 @@ package flaras.userInterface
 	import flaras.model.scene.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.view.gui.GraphicsUserInterface;
 	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;

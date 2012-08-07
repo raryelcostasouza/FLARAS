@@ -30,6 +30,7 @@
 package flaras.errorHandler 
 {
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.view.gui.*;
 	import flash.errors.*;
 	import flash.events.*;
 	

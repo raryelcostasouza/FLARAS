@@ -40,6 +40,7 @@ package flaras.controller
 	import flaras.model.point.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flaras.video.*;
+	import flaras.view.gui.*;
 	import flash.desktop.*;
 	import flash.errors.*;
 	import flash.events.*;

@@ -30,7 +30,7 @@
 package flaras.io 
 {
 	import flaras.errorHandler.*;
-	import flaras.userInterface.graphicUserInterfaceComponents.MessageWindow;
+	import flaras.view.gui.MessageWindow;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
