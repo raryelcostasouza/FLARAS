@@ -39,7 +39,7 @@ package flaras.boundary
 	import org.papervision3d.objects.parsers.*;
 	import org.papervision3d.objects.primitives.*;
 	
-	public class BoundaryPoint 
+	public class ViewPoint 
 	{
 		private var _obj3DSphereOfPoint:DisplayObject3D;
 		private var _obj3DAuxSphere:DisplayObject3D;
@@ -47,7 +47,7 @@ package flaras.boundary
 		
 		public static const RADIUS_SPHERE_OF_POINT:uint = 10;
 		
-		public function BoundaryPoint(position:Number3D) 
+		public function ViewPoint(position:Number3D) 
 		{
 			_obj3DSphereOfPoint = new Sphere(Color.gray, RADIUS_SPHERE_OF_POINT, 10, 10);
 			_obj3DSphereOfPoint.position = position;
