@@ -33,12 +33,12 @@ package FTK
 {
 	import flaras.*;
 	import flaras.controller.*;
+	import flaras.controller.util.*;
 	import flaras.marker.*;
 	import flaras.util.*;
-	import flaras.view.marker.Marker;
+	import flaras.view.marker.*;
 	import flash.display.*;
 	import flash.events.*;
-	import flash.geom.Rectangle;
 	import flash.media.*;
 	import flash.net.*;
 	import flash.utils.*;

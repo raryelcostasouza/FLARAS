@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.util
+package flaras.controller.util
 {
 	import org.papervision3d.lights.*;
 	import org.papervision3d.materials.shadematerials.*;
