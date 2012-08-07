@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.audio
+package flaras.controller.audio
 {	
 	public class  AudioManager
 	{

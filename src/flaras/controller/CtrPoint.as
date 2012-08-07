@@ -33,13 +33,14 @@ package flaras.controller
 	import flaras.audio.*;
 	import flaras.boundary.*;
 	import flaras.constants.*;
+	import flaras.controller.audio.*;
 	import flaras.entity.*;
 	import flaras.io.*;
 	import flaras.io.fileReader.*;
 	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
-	import flaras.model.scene.FlarasScene;
+	import flaras.model.scene.*;
 	import flaras.view.point.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;

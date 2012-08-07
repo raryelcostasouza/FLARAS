@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.video 
+package flaras.controller.video 
 {
 	public class VideoManager 
 	{

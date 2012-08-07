@@ -31,6 +31,7 @@ package flaras.controller
 {
 	import flaras.audio.*;
 	import flaras.constants.*;
+	import flaras.controller.audio.*;
 	import flaras.io.fileReader.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
