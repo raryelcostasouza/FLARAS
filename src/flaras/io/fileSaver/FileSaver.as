@@ -32,10 +32,10 @@ package flaras.io.fileSaver
 	import flaras.*;
 	import flaras.constants.*;
 	import flaras.entity.*;
-	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
 	import flaras.model.*;
-	import flaras.model.marker.ModelInteractionMarker;
+	import flaras.model.marker.*;
+	import flaras.model.point.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;

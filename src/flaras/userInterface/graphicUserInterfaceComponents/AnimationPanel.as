@@ -29,8 +29,8 @@
 
 package flaras.userInterface.graphicUserInterfaceComponents 
 {
-	import flaras.entity.object3D.*;
 	import flaras.userInterface.*;
+	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
@@ -192,15 +192,15 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		{
 			if (jrbX.isSelected())
 			{
-				return Animation.X_ROTATION_AXIS;
+				return ViewAnimationScene.X_ROTATION_AXIS;
 			}
 			else if (jrbY.isSelected())
 			{
-				return Animation.Y_ROTATION_AXIS;
+				return ViewAnimationScene.Y_ROTATION_AXIS;
 			}
 			else
 			{
-				return Animation.Z_ROTATION_AXIS;
+				return ViewAnimationScene.Z_ROTATION_AXIS;
 			}
 		}
 		
@@ -238,11 +238,11 @@ package flaras.userInterface.graphicUserInterfaceComponents
 		
 		public function setAnimationRotationAxis(rotationAxis:uint):void
 		{
-			if (rotationAxis == Animation.X_ROTATION_AXIS)
+			if (rotationAxis == ViewAnimationScene.X_ROTATION_AXIS)
 			{
 				jrbX.setSelected(true);
 			}
-			else if (rotationAxis == Animation.Y_ROTATION_AXIS)
+			else if (rotationAxis == ViewAnimationScene.Y_ROTATION_AXIS)
 			{
 				jrbY.setSelected(true);
 			}

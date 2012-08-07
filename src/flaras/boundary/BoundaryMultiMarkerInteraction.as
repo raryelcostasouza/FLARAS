@@ -36,6 +36,7 @@ package flaras.boundary
 	import flaras.entity.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
+	import flaras.model.point.*;
 	import flaras.multiMarkerInteraction.*;
 	import flaras.util.*;
 	import flash.events.*;

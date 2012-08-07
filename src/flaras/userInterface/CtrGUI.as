@@ -32,11 +32,12 @@ package flaras.userInterface
 	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.entity.*;
-	import flaras.entity.object3D.*;
 	import flaras.io.*;
 	import flaras.model.*;
+	import flaras.model.point.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
+	import flaras.view.scene.ViewAnimationScene;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.papervision3d.core.math.*;
@@ -361,7 +362,7 @@ package flaras.userInterface
 			_gui.getTexturePanel().getObjTextureWidth().setText("");
 			
 			_gui.getAnimationPanel().setHasAnimation(false);
-			_gui.getAnimationPanel().setAnimationRotationAxis(Animation.X_ROTATION_AXIS);
+			_gui.getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
 			_gui.getAnimationPanel().setAnimationPeriod(10);
 			_gui.getAnimationPanel().setAnimationRadius(0);
 			_gui.getAnimationPanel().setAnimationRotationDirection(1);

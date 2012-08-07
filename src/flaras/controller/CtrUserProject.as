@@ -37,6 +37,7 @@ package flaras.controller
 	import flaras.io.fileReader.*;
 	import flaras.io.fileSaver.*;
 	import flaras.marker.*;
+	import flaras.model.point.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flaras.video.*;
 	import flash.desktop.*;

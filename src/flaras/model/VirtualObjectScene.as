@@ -3,6 +3,7 @@ package flaras.model
 	import flaras.constants.*;
 	import flaras.entity.*;
 	import flaras.io.*;
+	import flaras.model.point.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	

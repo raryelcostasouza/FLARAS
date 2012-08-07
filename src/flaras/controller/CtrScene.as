@@ -31,9 +31,9 @@ package flaras.controller
 {
 	import flaras.constants.*;
 	import flaras.entity.*;
-	import flaras.entity.object3D.*;
 	import flaras.io.*;
 	import flaras.model.*;
+	import flaras.model.point.*;
 	import flaras.view.scene.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;

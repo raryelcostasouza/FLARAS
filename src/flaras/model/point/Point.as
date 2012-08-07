@@ -27,13 +27,12 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.entity
+package flaras.model.point
 {
 	import flaras.*;
 	import flaras.audio.*;
 	import flaras.constants.*;
 	import flaras.controller.*;
-	import flaras.entity.object3D.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;

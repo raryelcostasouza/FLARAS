@@ -2,6 +2,7 @@ package flaras.model
 {
 	import flaras.constants.*;
 	import flaras.entity.*;
+	import flaras.model.point.*;
 	import org.papervision3d.core.math.*;
 	
 	public class VideoScene extends FlarasScene

@@ -34,11 +34,11 @@ package flaras.controller
 	import flaras.boundary.*;
 	import flaras.constants.*;
 	import flaras.entity.*;
-	import flaras.entity.object3D.*;
 	import flaras.io.*;
 	import flaras.io.fileReader.*;
 	import flaras.marker.*;
 	import flaras.model.*;
+	import flaras.model.point.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
@@ -71,9 +71,7 @@ package flaras.controller
 		
 		private function destroyPointInfo(p:Point, removeFiles:Boolean):void
 		{
-			var facObj3D:FacadeObject3D;
 			var bndPoint:BoundaryPoint;
-			var obj3D:Object3D;
 			var f:File;
 			var indexScene:uint;
 			
@@ -187,7 +185,6 @@ package flaras.controller
 		
 		public function updatePointPosition(indexPoint:uint, position:Number3D):void
 		{
-			var facObj3D:FacadeObject3D;
 			var bndPoint:BoundaryPoint;
 			var p:Point;
 			
@@ -221,18 +218,18 @@ package flaras.controller
 		public function controlPoint(p:Point, pDirection:int):void
 		{
 			var indexActiveObject:int;
-			var listObjects:Vector.<Object3D>;
-			
+			var listOfScenes:Vector.<FlarasScene>;
+		
 			if (p.isEnabled())
 			{
-				//listObjects = p.getListOfScenes();
+				listOfScenes = getCtrScene(p.getID()).getListOfFlarasScenes();
 				indexActiveObject = p.getIndexActiveScene();
 				getCtrScene(p.getID()).disableScene(indexActiveObject);
 				
 				p.setIndexActiveScene(indexActiveObject + pDirection)
 				indexActiveObject = p.getIndexActiveScene();
 				
-				if (indexActiveObject > listObjects.length - 1)
+				if (indexActiveObject > listOfScenes.length - 1)
 				{
 					p.setIndexActiveScene(0);
 				}
@@ -240,7 +237,7 @@ package flaras.controller
 				{
 					if (indexActiveObject < 0)
 					{
-						p.setIndexActiveScene(listObjects.length - 1);
+						p.setIndexActiveScene(listOfScenes.length - 1);
 					}
 				}
 				
@@ -251,7 +248,6 @@ package flaras.controller
 		public function goToObject(indexPoint:int, pObjectIndex:uint):void
 		{
 			var p:Point = this._listOfPoints[indexPoint];
-			var listObjects:Vector.<Object3D>;
 			
 			if (!p.isEnabled())
 			{
@@ -269,7 +265,6 @@ package flaras.controller
 		// functions related with enabling and disabling points
 		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
 		{			
-			var obj3D:Object3D;
 			var listOfFlarasScenes:Vector.<FlarasScene>;
 			var bndPoint:BoundaryPoint;
 			
@@ -294,8 +289,6 @@ package flaras.controller
 		
 		private function disablePoint(p:Point, pPlayAudio:Boolean):void
 		{
-			var obj3D:Object3D;
-			var listObjects:Vector.<Object3D>;
 			var bndPoint:BoundaryPoint;
 			
 			bndPoint = _listOfBoundaryPoints[p.getID()];

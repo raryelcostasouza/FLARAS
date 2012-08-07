@@ -30,14 +30,9 @@
 package flaras.io.fileSaver 
 {
 	import flaras.entity.*;
-	import flaras.entity.object3D.*;
-	import flaras.model.AnimationScene;
-	import flaras.model.AudioScene;
-	import flaras.model.FlarasScene;
-	import flaras.model.marker.ModelInteractionMarker;
-	import flaras.model.TextureScene;
-	import flaras.model.VideoScene;
-	import flaras.model.VirtualObjectScene;
+	import flaras.model.*;
+	import flaras.model.marker.*;
+	import flaras.model.point.*;
 	import org.papervision3d.core.math.*;
 	
 	public class XMLGenerator
@@ -133,11 +128,9 @@ package flaras.io.fileSaver
 		public static function generateXMLObjects(pListOfObjects:Vector.<FlarasScene>):XML
 		{
 			var xml:XML = new XML("<objectsList></objectsList>");
-			var concreteObject3D:ConcreteObject3D;
 			var translation:Number3D;
 			var rotation:Number3D;
 			var scale:Number3D;
-			var objChecked:Object3D;
 			var pathObj3D:String;
 			
 			for each(var scene:FlarasScene in pListOfObjects)
