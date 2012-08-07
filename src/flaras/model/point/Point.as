@@ -33,6 +33,7 @@ package flaras.model.point
 	import flaras.audio.*;
 	import flaras.constants.*;
 	import flaras.controller.*;
+	import flaras.controller.constants.XMLFilesConstants;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;

@@ -27,10 +27,11 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.io 
+package flaras.controller.io 
 {
 	import flaras.*;
 	import flaras.constants.*;
+	import flaras.controller.constants.*;
 	import flash.filesystem.*;
 	import flash.utils.*;
 	import nochump.util.zip.*;

@@ -30,6 +30,7 @@
 package flaras.controller.audio
 {
 	import flaras.controller.*;
+	import flaras.controller.io.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flash.display.*;

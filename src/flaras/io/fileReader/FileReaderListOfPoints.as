@@ -30,6 +30,7 @@
 package flaras.io.fileReader
 {
 	import flaras.controller.*;
+	import flaras.controller.io.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flash.errors.*;

@@ -33,6 +33,8 @@ package flaras.view.marker
 	import flaras.audio.*;
 	import flaras.constants.*;
 	import flaras.controller.*;
+	import flaras.controller.constants.*;
+	import flaras.controller.io.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;

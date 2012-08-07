@@ -34,6 +34,7 @@ package flaras.view
 	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.audio.*;
+	import flaras.controller.constants.SystemFilesPathsConstants;
 	import flaras.controller.multimarkerInteraction.*;
 	import flaras.entity.*;
 	import flaras.marker.*;

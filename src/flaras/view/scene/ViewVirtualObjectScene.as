@@ -2,6 +2,7 @@ package flaras.view.scene
 {
 	import flaras.constants.*;
 	import flaras.controller.*;
+	import flaras.controller.constants.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
