@@ -29,8 +29,9 @@
 
 package flaras.io 
 {
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
-	import flaras.view.gui.MessageWindow;
+	import flaras.view.gui.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
