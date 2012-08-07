@@ -1,8 +1,8 @@
 package flaras.model.marker
 {
-	import flaras.controller.CtrMarker;
-	import flaras.multiMarkerInteraction.InteractionSphere;
-	import org.papervision3d.core.math.Number3D;
+	import flaras.controller.*;
+	import org.papervision3d.core.math.*;
+	
 	public class ModelInteractionMarker
 	{		
 		private var _sphereSize:uint;

@@ -27,10 +27,11 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.multiMarkerInteraction 
+package flaras.controller.multimarkerInteraction 
 {
 	import flaras.boundary.*;
 	import flaras.marker.*;
+	import flaras.model.marker.*;
 	import flaras.util.*;
 	import flaras.view.point.*;
 	import flash.display.*;
@@ -77,41 +78,6 @@ package flaras.multiMarkerInteraction
 			{
 				return false;
 			}			
-		}
-		
-		protected function isPointInsideRectangle(pTestPoint:Number3D, pObjInteractionRectangle:InteractionRectangle, pTestZAxis:Boolean):Boolean
-		{
-			var pointUpLeft:Number3D = pObjInteractionRectangle.getPointUpLeft();
-			var pontoDownRight:Number3D = pObjInteractionRectangle.getPointDownRight();
-			var verticalSensibility:Number = pObjInteractionRectangle.getVerticalSensibility();
-				
-			if (pTestZAxis)
-			{
-				if ((pTestPoint.x >= pointUpLeft.x && pTestPoint.y <= pointUpLeft.y) &&
-				(pTestPoint.x <= pontoDownRight.x && pTestPoint.y >= pontoDownRight.y) &&
-				(pTestPoint.z >= pontoDownRight.z - verticalSensibility && pTestPoint.z <= pontoDownRight.z + verticalSensibility))
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				if ((pTestPoint.x >= pointUpLeft.x && pTestPoint.y <= pointUpLeft.y) &&
-				(pTestPoint.x <= pontoDownRight.x && pTestPoint.y >= pontoDownRight.y) &&
-				(pTestPoint.z >= 0))
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			
 		}
 	}
 }

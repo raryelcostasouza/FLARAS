@@ -34,6 +34,7 @@ package flaras.boundary
 	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.audio.*;
+	import flaras.controller.multimarkerInteraction.*;
 	import flaras.entity.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
