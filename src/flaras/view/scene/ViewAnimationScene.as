@@ -35,7 +35,7 @@ package flaras.view.scene
 		
 		public function showScene():void
 		{
-			if (_animationScene.getPeriod() != 0)
+			if (_animationScene.getPeriod() != 0 && _timer == null)
 			{
 				initAnimVars();
 				_timer = new Timer(33); //30 fps... 1 frap aprox every 33 ms
