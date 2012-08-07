@@ -36,6 +36,7 @@ package flaras.controller
 	import flaras.marker.*;
 	import flaras.userInterface.*;
 	import flaras.util.*;
+	import flaras.view.*;
 	import flash.display.*;
 	import FTK.*;
 	
