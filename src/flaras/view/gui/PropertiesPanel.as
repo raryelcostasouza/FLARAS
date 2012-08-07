@@ -29,10 +29,11 @@
 
 package flaras.view.gui
 {
+	import flaras.controller.*;
 	import flaras.userInterface.*;
 	import flash.events.*;
 	import org.aswing.*;
-	import org.aswing.geom.IntDimension;
+	import org.aswing.geom.*;
 	
 	public class PropertiesPanel extends JPanel
 	{

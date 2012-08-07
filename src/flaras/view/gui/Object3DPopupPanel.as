@@ -29,7 +29,7 @@
 
 package flaras.view.gui
 {
-	import flaras.userInterface.CtrGUI;
+	import flaras.controller.*;
 	import org.aswing.*;
 	
 	public class Object3DPopupPanel extends JPopup

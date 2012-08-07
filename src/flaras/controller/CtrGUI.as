@@ -27,7 +27,7 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.userInterface
+package flaras.controller
 {
 	import flaras.constants.*;
 	import flaras.controller.*;
@@ -38,7 +38,7 @@ package flaras.userInterface
 	import flaras.model.scene.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
-	import flaras.view.gui.GraphicsUserInterface;
+	import flaras.view.gui.*;
 	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;

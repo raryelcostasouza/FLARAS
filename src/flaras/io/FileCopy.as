@@ -31,6 +31,7 @@ package flaras.io
 {
 	import flaras.*;
 	import flaras.constants.*;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;

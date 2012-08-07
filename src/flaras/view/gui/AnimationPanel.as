@@ -29,6 +29,7 @@
 
 package flaras.view.gui 
 {
+	import flaras.controller.*;
 	import flaras.userInterface.*;
 	import flaras.view.scene.*;
 	import flash.events.*;
