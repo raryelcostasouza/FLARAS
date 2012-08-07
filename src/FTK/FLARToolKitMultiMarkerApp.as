@@ -35,6 +35,7 @@ package FTK
 	import flaras.controller.*;
 	import flaras.marker.*;
 	import flaras.util.*;
+	import flaras.view.marker.Marker;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.Rectangle;

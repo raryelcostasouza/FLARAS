@@ -33,6 +33,7 @@ package flaras.controller
 	import flaras.constants.*;
 	import flaras.controller.audio.*;
 	import flaras.controller.constants.*;
+	import flaras.controller.io.fileReader.*;
 	import flaras.io.fileReader.*;
 	import flaras.marker.*;
 	import flaras.model.marker.*;
