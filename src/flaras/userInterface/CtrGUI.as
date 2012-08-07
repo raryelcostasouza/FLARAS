@@ -35,9 +35,10 @@ package flaras.userInterface
 	import flaras.io.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
+	import flaras.model.scene.*;
 	import flaras.userInterface.*;
 	import flaras.userInterface.graphicUserInterfaceComponents.*;
-	import flaras.view.scene.ViewAnimationScene;
+	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.papervision3d.core.math.*;

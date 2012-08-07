@@ -1,11 +1,12 @@
 package flaras.view.scene 
 {
 	import flaras.constants.*;
-	import flaras.controller.CtrMirror;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flaras.model.*;
+	import flaras.model.scene.*;
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;

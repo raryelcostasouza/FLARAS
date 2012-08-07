@@ -3,6 +3,7 @@ package flaras.view.scene
 	import flaras.audio.*;
 	import flaras.constants.*;
 	import flaras.model.*;
+	import flaras.model.scene.*;
 	
 	public class ViewAudioScene 
 	{

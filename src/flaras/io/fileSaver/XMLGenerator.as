@@ -33,6 +33,7 @@ package flaras.io.fileSaver
 	import flaras.model.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
+	import flaras.model.scene.*;
 	import org.papervision3d.core.math.*;
 	
 	public class XMLGenerator

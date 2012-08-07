@@ -1,6 +1,7 @@
 package flaras.view.scene 
 {
 	import flaras.model.*;
+	import flaras.model.scene.*;
 	import flash.errors.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;

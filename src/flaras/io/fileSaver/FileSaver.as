@@ -36,6 +36,7 @@ package flaras.io.fileSaver
 	import flaras.model.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
+	import flaras.model.scene.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;

@@ -34,6 +34,7 @@ package flaras.controller
 	import flaras.io.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
+	import flaras.model.scene.*;
 	import flaras.view.scene.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;

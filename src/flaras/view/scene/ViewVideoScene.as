@@ -1,10 +1,11 @@
 package flaras.view.scene 
 {
 	import flaras.constants.*;
-	import flaras.controller.CtrMirror;
+	import flaras.controller.*;
 	import flaras.errorHandler.*;
 	import flaras.marker.*;
 	import flaras.model.*;
+	import flaras.model.scene.*;
 	import flaras.video.*;
 	import flash.events.*;
 	import flash.media.*;

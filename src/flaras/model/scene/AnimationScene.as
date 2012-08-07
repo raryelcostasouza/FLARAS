@@ -1,4 +1,4 @@
-package flaras.model 
+package flaras.model.scene 
 {
 	public class AnimationScene 
 	{

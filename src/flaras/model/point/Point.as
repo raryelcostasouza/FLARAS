@@ -37,6 +37,7 @@ package flaras.model.point
 	import flaras.io.*;
 	import flaras.marker.*;
 	import flaras.model.*;
+	import flaras.model.scene.*;
 	import flaras.util.*;
 	import flash.events.*;
 	import flash.filesystem.*;
