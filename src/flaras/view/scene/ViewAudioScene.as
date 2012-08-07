@@ -30,5 +30,11 @@ package flaras.view.scene
 		{
 			AudioManager.stopAppAudio(_audioScene.getParentPointID());
 		}		
+		
+		public function destroy():void
+		{
+			unLoad();
+			_audioScene = null;
+		}
 	}
 }

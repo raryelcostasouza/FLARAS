@@ -85,7 +85,7 @@ package flaras.controller
 			{
 				for (indexScene = 0; indexScene < p.getListOfFlarasScenes().length; indexScene++) 
 				{
-					getCtrScene(p.getID()).unLoadScene(indexScene);
+					getCtrScene(p.getID()).destroyScene(indexScene);
 				}
 			}
 			else

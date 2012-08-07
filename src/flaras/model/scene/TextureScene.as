@@ -20,6 +20,12 @@ package flaras.model.scene
 			_height = height;
 		}
 		
+		override public function destroy():void 
+		{
+			super.destroy();
+			_textureFilePath = null;
+		}
+		
 		public function getTextureFilePath():String { return _textureFilePath; }
 		public function getWidth():Number { return _width; }
 		public function getHeight():Number { return _height; }

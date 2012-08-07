@@ -19,6 +19,12 @@ package flaras.model.scene
 			_path3DObjectFile = path3DObjectFile;
 		}	
 		
+		override public function destroy():void 
+		{
+			super.destroy();
+			_path3DObjectFile = null;
+		}
+		
 		public function set3DObjPath(pathObj3D:String):void
 		{
 			_path3DObjectFile = pathObj3D;

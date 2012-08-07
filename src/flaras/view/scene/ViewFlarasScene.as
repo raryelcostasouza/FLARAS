@@ -175,5 +175,18 @@ package flaras.view.scene
 		{
 			_viewAudio.unLoad();
 		}
+		
+		public function destroy():void
+		{
+			if (_viewAnimation)
+			{
+				_viewAnimation.destroy();
+			}
+			
+			if (_viewAudio)
+			{
+				_viewAudio.destroy();
+			}
+		}
 	}
 }

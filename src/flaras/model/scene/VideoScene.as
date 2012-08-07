@@ -22,6 +22,12 @@ package flaras.model.scene
 			_height = height;
 		}
 		
+		override public function destroy():void 
+		{
+			super.destroy();
+			_videoFilePath = null;
+		}
+		
 		public function getVideoFilePath():String { return _videoFilePath; }
 		public function getRepeatVideo():Boolean { return _repeatVideo; }
 		public function getWidth():Number { return _width; }

@@ -34,6 +34,18 @@ package flaras.model.scene
 			}
 		}
 		
+		public function destroy():void
+		{
+			_audio.destroy();
+			_audio = null;
+			_animation = null;
+			
+			_parentPoint = null;
+			_translation = null;
+			_rotation = null;
+			_scale = null;
+		}
+		
 		public function getAnimation():AnimationScene
 		{
 			return _animation;

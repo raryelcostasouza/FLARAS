@@ -89,5 +89,12 @@ package flaras.view.scene
 				_obj3D = null;
 			}			
 		}	
+		
+		override public function destroy():void 
+		{
+			unLoad();
+			super.destroy();
+			_virtualObjectScene = null;
+		}
 	}
 }

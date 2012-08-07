@@ -176,7 +176,7 @@ package flaras.controller
 				5) Video -> Object3D or
 				6) Video -> Texture*/
 				
-				viewFlarasScene.unLoad();
+				viewFlarasScene.destroy();
 				FileRemover.remove(scene.getBaseSceneFilePath());
 				
 				//removing the scene from lists
@@ -243,15 +243,15 @@ package flaras.controller
 			
 			viewFlarasScene = _listOfViewFlarasScenes[indexScene];
 			viewFlarasScene.hideScene();
-		}
+		}	
 		
-		public function unLoadScene(indexScene:uint):void
+		public function destroyScene(indexScene:uint):void
 		{
 			var viewFlarasScene:ViewFlarasScene;
 			
 			viewFlarasScene = getViewScene(indexScene);
-			viewFlarasScene.unLoad();
-		}		
+			viewFlarasScene.destroy();
+		}
 
 		public function removeScene(indexScene:uint):void
 		{
@@ -267,7 +267,7 @@ package flaras.controller
 			_listOfScenes2.splice(indexScene, 1);
 			_listOfViewFlarasScenes.splice(indexScene, 1);
 			
-			viewFlarasScene.unLoad();
+			viewFlarasScene.destroy();
 			listOfFilesAndDirs = flarasScene.getListOfFilesAndDirs();
 			
 			//removing data from disk

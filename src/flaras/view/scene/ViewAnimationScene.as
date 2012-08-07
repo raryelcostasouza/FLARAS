@@ -104,6 +104,14 @@ package flaras.view.scene
 			}
 		}
 		
+		public function destroy():void
+		{
+			unLoad();
+			_obj3DToAnimate = null;
+			_animationScene = null;
+			_viewFlarasScene = null;
+		}
+		
 		private function getCurrentTranslation():Number3D
 		{
 			return Number3D.add(_viewFlarasScene.getBaseFlarasScene().getTranslation(), _viewFlarasScene.getBaseFlarasScene().getParentPoint().getPosition());
