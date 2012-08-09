@@ -41,27 +41,35 @@ package flaras.view.marker
 		public static const REFERENCE_MARKER:uint = 0;
 		public static const INTERACTION_MARKER:uint = 1;
 		
-		//after removing the marker from the camera field the 3D Viewport keeps being shown
-		private var _persistence:Boolean = false;
+		private var _obj3DRefBaseRectanglePlane:DisplayObject3D;
+		private var _obj3DRefBasePoint:DisplayObject3D;
 		
 		public function ViewMarker()
-		{
-			var aObj3DCover:DisplayObject3D;
+		{			
+			_obj3DRefBaseRectanglePlane = new Plane(Color.white, 80, 80);
+			_obj3DRefBaseRectanglePlane.position = Number3D.ZERO;
+			_obj3DRefBaseRectanglePlane.rotationX = -180;
+			_obj3DRefBaseRectanglePlane.visible = false;
+			MarkerNodeManager.addObj2MarkerNode(_obj3DRefBaseRectanglePlane, REFERENCE_MARKER, null);
 			
-			aObj3DCover = new Plane(Color.white, 80, 80);
-			aObj3DCover.position = new Number3D(0, 0, 0);
-			aObj3DCover.rotationX = -180;
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCover, REFERENCE_MARKER, null);
-		}		
-	
-		public function get persistence():Boolean
-		{
-			return this._persistence;
+			_obj3DRefBasePoint = new Sphere(Color.white, 10, 10, 10);
+			_obj3DRefBasePoint.position = Number3D.ZERO;
+			_obj3DRefBasePoint.visible = false;
+			MarkerNodeManager.addObj2MarkerNode(_obj3DRefBasePoint, REFERENCE_MARKER, null);
 		}
 		
-		public function set persistence(persistence:Boolean):void
+		public function updateView(pBaseType:uint):void
 		{
-			this._persistence = persistence;
+			if (pBaseType == CtrMarker.REF_BASE_POINT)
+			{
+				_obj3DRefBasePoint.visible = true;
+				_obj3DRefBaseRectanglePlane.visible = false;
+			}
+			else
+			{
+				_obj3DRefBasePoint.visible = false;
+				_obj3DRefBaseRectanglePlane.visible = true;
+			}
 		}
 	}	
 }
