@@ -233,8 +233,6 @@ package flaras.controller
 		public function mirrorInteractionMarker():void
 		{
 			_viewInteractionMarker.mirror();
-		}
-		
-		
+		}		
 	}
 }
