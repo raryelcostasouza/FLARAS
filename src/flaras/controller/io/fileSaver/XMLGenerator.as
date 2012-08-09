@@ -52,6 +52,18 @@ package flaras.controller.io.fileSaver
 			return xml;
 		}
 		
+		public static function generateXMLRefMarker(modelRefMarker:ModelRefMarker):XML 
+		{
+			var xml:XML = new XML("<refMarkerData></refMarkerData>");
+			
+			var infoNode:XML = new XML();
+			infoNode = 
+				<baseType>{modelRefMarker.getBaseType()}</baseType>
+			xml.appendChild(infoNode);
+			
+			return xml;
+		}
+		
 		public static function generateXMLPoints(pListOfPoints:Vector.<Point>):XML
 		{
 			var xml:XML = new XML("<pointsList></pointsList>");
@@ -75,55 +87,6 @@ package flaras.controller.io.fileSaver
 			}
 			return xml;
 		}
-		
-		/*public static function generateXMLObjects(pListOfObjects:Vector.<Object3D>):XML
-		{
-			var xml:XML = new XML("<objectsList></objectsList>");
-			var concreteObject3D:ConcreteObject3D;
-			var translation:Number3D;
-			var rotation:Number3D;
-			var scale:Number3D;
-			var objChecked:Object3D;
-			
-			for each(var obj:Object3D in pListOfObjects)
-			{
-				var facadeObj3D:FacadeObject3D;
-				
-				facadeObj3D = new FacadeObject3D(obj);
-				
-				translation = facadeObj3D.getTranslation();
-				rotation = facadeObj3D.getRotation();
-				scale = facadeObj3D.getScale();
-				
-				var newNode:XML = new XML();
-				newNode = 
-				<object3D>
-					<filePath>{facadeObj3D.getFilePath()}</filePath>
-					<translation>
-						<x>{translation.x}</x>
-						<y>{translation.y}</y>
-						<z>{translation.z}</z>
-					</translation>
-					<rotation>
-						<x>{rotation.x}</x>
-						<y>{rotation.y}</y>
-						<z>{rotation.z}</z>
-					</rotation>
-					<scale>
-						<x>{Math.abs(scale.x)}</x>
-						<y>{scale.y}</y>
-						<z>{scale.z}</z>
-					</scale>
-					{XMLGenerator.generateXMLTexture(facadeObj3D)}
-					{XMLGenerator.generateXMLAudio(facadeObj3D)}
-					{XMLGenerator.generateXMLVideo(facadeObj3D)}
-					{XMLGenerator.generateXMLAnimation(facadeObj3D)}
-				</object3D>;
-				
-				xml = xml.appendChild(newNode);
-			}
-			return xml;
-		}*/
 		
 		public static function generateXMLObjects(pListOfObjects:Vector.<FlarasScene>):XML
 		{
@@ -178,23 +141,6 @@ package flaras.controller.io.fileSaver
 			return xml;
 		}
 		
-		/*private static function generateXMLTexture(pFacadeObj3D:FacadeObject3D):XML
-		{
-			var xml:XML;
-			
-			xml = new XML();
-			
-			xml = 
-				<texture>
-					<hasTexture>{uint(pFacadeObj3D.hasTexture())}</hasTexture>
-					<texturePath>{pFacadeObj3D.getTexturePath()}</texturePath>
-					<width>{pFacadeObj3D.getTextureWidth()}</width>
-					<height>{pFacadeObj3D.getTextureHeight()}</height>
-				</texture>;
-		
-			return xml;			
-		}*/
-		
 		private static function generateXMLTexture(scene:FlarasScene):XML
 		{
 			var xml:XML;
@@ -233,22 +179,6 @@ package flaras.controller.io.fileSaver
 			return xml;			
 		}
 		
-		/*private static function generateXMLAudio(pFacadeObj3D:FacadeObject3D):XML
-		{
-			var xml:XML;
-			
-			xml = new XML();
-		
-			xml = 
-				<audio>
-					<hasAudio>{uint(pFacadeObj3D.hasAudio())}</hasAudio>
-					<audioPath>{pFacadeObj3D.getAudioPath()}</audioPath>
-					<repeatAudio>{uint(pFacadeObj3D.getRepeatAudio())}</repeatAudio>
-				</audio>;
-	
-			return xml;
-		}*/
-		
 		private static function generateXMLAudio(scene:FlarasScene):XML
 		{
 			var xml:XML;
@@ -282,24 +212,6 @@ package flaras.controller.io.fileSaver
 	
 			return xml;
 		}
-		
-		/*private static function generateXMLVideo(pFacadeObj3D:FacadeObject3D):XML
-		{
-			var xml:XML;
-			
-			xml = new XML();	
-			
-			xml = 
-				<video>
-					<hasVideo>{uint(pFacadeObj3D.hasVideo())}</hasVideo>
-					<videoPath>{pFacadeObj3D.getVideoPath()}</videoPath>
-					<width>{pFacadeObj3D.getVideoWidth()}</width>
-					<height>{pFacadeObj3D.getVideoHeight()}</height>
-					<repeatVideo>{uint(pFacadeObj3D.getRepeatVideo())}</repeatVideo>
-				</video>;
-					
-			return xml;
-		}*/
 		
 		private static function generateXMLVideo(scene:FlarasScene):XML
 		{
@@ -342,24 +254,6 @@ package flaras.controller.io.fileSaver
 					
 			return xml;
 		}
-		
-		/*private static function generateXMLAnimation(pFacadeObject3D:FacadeObject3D):XML
-		{
-			var xml:XML;
-			
-			xml = new XML();	
-			
-			xml = 
-				<animation>
-						<hasAnimation>{uint(pFacadeObject3D.hasAnimation())}</hasAnimation>
-						<period>{pFacadeObject3D.getAnimationPeriod()}</period>
-						<rotationAxis>{pFacadeObject3D.getAnimationRotationAxis()}</rotationAxis>
-						<radius>{pFacadeObject3D.getAnimationRadius()}</radius>
-						<rotationDirection>{pFacadeObject3D.getAnimationRotationDirection()}</rotationDirection>
-					</animation>
-					
-			return xml;
-		}*/
 		
 		private static function generateXMLAnimation(scene:FlarasScene):XML
 		{

@@ -64,9 +64,9 @@ package flaras.view.point
 			_obj3DAxis.position = position;
 			_obj3DAxis.visible = false;
 			
-			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereOfPoint, ViewMarker.REFERENCE_MARKER , null);
-			MarkerNodeManager.addObj2MarkerNode(_obj3DAuxSphere, ViewMarker.REFERENCE_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(_obj3DAxis, ViewMarker.REFERENCE_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER , null);
+			MarkerNodeManager.addObj2MarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER, null);
 		}
 		
 		public function hidePointSphere():void
@@ -125,9 +125,9 @@ package flaras.view.point
 		
 		public function destroy():void
 		{
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereOfPoint, ViewMarker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAuxSphere, ViewMarker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAxis, ViewMarker.REFERENCE_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER);
 			
 			_obj3DSphereOfPoint = null;
 			_obj3DAuxSphere = null;

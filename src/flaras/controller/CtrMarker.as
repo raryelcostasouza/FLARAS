@@ -39,7 +39,7 @@ package flaras.controller
 	public class CtrMarker 
 	{		
 		private var _ctrMain:CtrMain;
-		private var _viewRefMarker:ViewMarker;
+		private var _viewRefMarker:ViewRefMarker;
 		private var _viewInteractionMarker:ViewInteractionMarker;
 		
 		private var _modelInteractionMarker:ModelInteractionMarker;
@@ -51,20 +51,22 @@ package flaras.controller
 		
 		public static const CONTROL_FORWARD:int = 1;
 		public static const CONTROL_BACKWARD:int = -1;
-		
 		public static const CONTROL_MARKER:int = 0;
 		public static const INSPECTOR_MARKER:int = 1;
 		
-		public static const REF_BASE_POINT:uint = 0;
-		public static const REF_BASE_RECTANGLE_PLANE:uint = 1;
+		public static const REFERENCE_MARKER:uint = 0;
+		public static const INTERACTION_MARKER:uint = 1;
+		
+		public static const REF_BASE_RECTANGLE_PLANE:uint = 0;
+		public static const REF_BASE_POINT:uint = 1;
 		
 		public function CtrMarker(ctrMain:CtrMain) 
 		{
 			this._ctrMain = ctrMain;
 			
 			this._modelRefMarker = new ModelRefMarker(REF_BASE_RECTANGLE_PLANE, false);
-			this._viewRefMarker = new ViewMarker();
-			_viewRefMarker.updateView(_modelRefMarker.getBaseType());
+			this._viewRefMarker = new ViewRefMarker();
+			_viewRefMarker.updateView(_modelRefMarker);
 			
 			this._modelInteractionMarker = new ModelInteractionMarker(DEFAULT_SPHERE_SIZE, DEFAULT_SPHERE_DISTANCE, INSPECTOR_MARKER, CONTROL_FORWARD);
 			this._viewInteractionMarker = new ViewInteractionMarker(_modelInteractionMarker);			
@@ -85,6 +87,12 @@ package flaras.controller
 			return _viewInteractionMarker.getWorldMatrixObj3DSphere();
 		}
 		
+		public function resetBaseType():void 
+		{
+			_modelRefMarker.setBaseType(REF_BASE_RECTANGLE_PLANE);
+			_viewRefMarker.updateView(_modelRefMarker);
+		}
+		
 		public function resetInteractionMarkerSphereProperties():void
 		{
 			_modelInteractionMarker.setSphereSize(DEFAULT_SPHERE_SIZE);
@@ -92,6 +100,12 @@ package flaras.controller
 			
 			this._viewInteractionMarker.updateDistance();
 			this._viewInteractionMarker.updateSize();
+		}
+		
+		public function changeRefMarkerBaseType(pBaseType:uint):void
+		{
+			_modelRefMarker.setBaseType(pBaseType);
+			_viewRefMarker.updateView(_modelRefMarker);
 		}
 		
 		public function changeMarkerType():void
@@ -183,12 +197,24 @@ package flaras.controller
 		{
 			new FileReaderInteractionSphere(this, FolderConstants.getFlarasAppCurrentFolder() + "/"
 													+ XMLFilesConstants.INTERACTION_SPHERE_PATH );
-		}	
+		}
+		
+		public function loadRefMarkerData():void
+		{
+			new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH)
+		}
 		
 		public function finishedLoadingInteractionMarkerData(intSphereData:InteractionSphereData):void
 		{
 			_viewInteractionMarker.updateDistance();
 			_viewInteractionMarker.updateDistance();
+		}
+		
+		public function finishedLoadingRefMarkerData(pRefMarkerBaseType:uint):void
+		{
+			_modelRefMarker.setBaseType(pRefMarkerBaseType);
+			_viewRefMarker.updateView(_modelRefMarker);
+			_ctrMain.ctrGUI.getGUI().getMenu().setSelectionJRBRefMarkerBaseType(_modelRefMarker.getBaseType());
 		}
 		
 		public function toggleRefMarkerPersistence():void
@@ -208,5 +234,7 @@ package flaras.controller
 		{
 			_viewInteractionMarker.mirror();
 		}
+		
+		
 	}
 }

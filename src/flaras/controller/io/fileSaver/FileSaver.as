@@ -73,6 +73,15 @@ package flaras.controller.io.fileSaver
 			save(tmpFolder, XMLFilesConstants.INTERACTION_SPHERE_PATH, ba);
 		}
 		
+		public static function saveRefMarkerProperties(tmpFolder:File, modelRefMarker:ModelRefMarker):void
+		{
+			var ba:ByteArray;
+			
+			ba = new ByteArray();
+			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLRefMarker(modelRefMarker));
+			save(tmpFolder, XMLFilesConstants.REF_MARKER_PROPERTIES_PATH, ba);
+		}
+		
 		private static function save(pCurrentProjectTempFolder:File, pFileName:String, pObjByteArray:ByteArray):void
 		{
 			var outStream:FileStream;

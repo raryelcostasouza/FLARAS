@@ -34,8 +34,6 @@ package FTK
 	import flaras.*;
 	import flaras.controller.*;
 	import flaras.controller.util.*;
-	import flaras.marker.*;
-	import flaras.util.*;
 	import flaras.view.marker.*;
 	import flash.display.*;
 	import flash.events.*;
@@ -513,7 +511,7 @@ package FTK
 				} else {
 //					trace("[rem] id : " + i +"[confidence]"+markerData.confidence);
 					
-					if (i == ViewMarker.INTERACTION_MARKER || (i == ViewMarker.REFERENCE_MARKER && !_ctrMain.ctrMarker.refMarker.persistence))
+					if (i == CtrMarker.INTERACTION_MARKER || (i == CtrMarker.REFERENCE_MARKER && !_ctrMain.ctrMarker.getModelRefMarker().getPersistence()))
 					{
 						this.markerNodeList[i].visible = false;
 					}					

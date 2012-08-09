@@ -34,5 +34,6 @@ package flaras.controller.constants
 		public static const LIST_OF_POINTS_PATH:String = FolderConstants.XML_FOLDER + "pointsList.xml";
 		public static const LIST_OF_OBJECTS_SEMI_COMPLETE_PATH:String = FolderConstants.XML_FOLDER + "objectsList";
 		public static const INTERACTION_SPHERE_PATH:String = FolderConstants.XML_FOLDER + "interactionSphere.xml";
+		public static const REF_MARKER_PROPERTIES_PATH:String = FolderConstants.XML_FOLDER + "refMarker.xml"
 	}
 }

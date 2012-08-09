@@ -70,7 +70,7 @@ package flaras.view.scene
 			
 			setObj3DProperties(_virtualObjectScene, _obj3D);
 			
-			MarkerNodeManager.addObj2MarkerNode(_obj3D, ViewMarker.REFERENCE_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER, null);
 		}
 		
 		override public function unLoad():void
@@ -81,7 +81,7 @@ package flaras.view.scene
 				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 				
-				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, ViewMarker.REFERENCE_MARKER);
+				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER);
 				_obj3D = null;
 			}			
 		}	

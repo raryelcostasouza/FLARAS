@@ -32,11 +32,10 @@ package flaras.view
 	import flaras.*;
 	import flaras.controller.*;
 	import flaras.controller.audio.*;
-	import flaras.controller.constants.SystemFilesPathsConstants;
+	import flaras.controller.constants.*;
 	import flaras.controller.multimarkerInteraction.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
-	import flaras.view.marker.ViewMarker;
 	import flash.events.*;
 	import flash.utils.*;
 	import org.papervision3d.core.math.*;
@@ -67,13 +66,13 @@ package flaras.view
 			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
 				
 			//if the FTK marker and Hiro marker are visible
-			if (MarkerNodeManager.isMarkerDetected(ViewMarker.INTERACTION_MARKER) && MarkerNodeManager.isMarkerDetected(ViewMarker.REFERENCE_MARKER))
+			if (MarkerNodeManager.isMarkerDetected(CtrMarker.INTERACTION_MARKER) && MarkerNodeManager.isMarkerDetected(CtrMarker.REFERENCE_MARKER))
 			{	
 				for each(var p:Point in listOfPoints)
 				{
 					//conversion from the position of the interaction sphere of the interaction marker 
 					//to the coordinates of the reference marker
-					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(ViewMarker.INTERACTION_MARKER, ViewMarker.REFERENCE_MARKER, _ctrMain.ctrMarker.getWorldMatrixInteractionMarker());
+					convertedPositionInteractionMarker = convertCoordPointToCoordMarker2(CtrMarker.INTERACTION_MARKER, CtrMarker.REFERENCE_MARKER, _ctrMain.ctrMarker.getWorldMatrixInteractionMarker());
 					
 					//if the point's interaction is not locked
 					if (!p.getInteractionLock())

@@ -174,6 +174,7 @@ package flaras.controller
 				_ctrMain.ctrPoint.destroyListOfPoints();
 			}
 			
+			_ctrMain.ctrMarker.resetBaseType();
 			_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();
 			aCurrentProjectTempFolder = File.createTempDirectory();
 			initTempSubFolders();
@@ -277,6 +278,7 @@ package flaras.controller
 			aAlreadySavedBefore = true;
 			
 			//read info about the interaction sphere
+			_ctrMain.ctrMarker.loadRefMarkerData();
 			_ctrMain.ctrMarker.loadInteractionMarkerData();
 			
 			//load the list of points and list of objects
@@ -300,6 +302,7 @@ package flaras.controller
 			var file2Save:File;
 			
 			FileSaver.saveInteractionSphereProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.getModelInteractionMarker());
+			FileSaver.saveRefMarkerProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.getModelRefMarker());
 			
 			listOfPoints = _ctrMain.ctrPoint.getListOfPoints();
 			FileSaver.saveListOfPoints(listOfPoints, getCurrentProjectTempFolder());

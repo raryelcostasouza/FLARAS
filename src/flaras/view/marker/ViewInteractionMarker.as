@@ -67,8 +67,8 @@ package flaras.view.marker
 		
 		public function updateSize():void
 		{
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphere, ViewMarker.INTERACTION_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereUnlock, ViewMarker.INTERACTION_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphere, CtrMarker.INTERACTION_MARKER);
+			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereUnlock, CtrMarker.INTERACTION_MARKER);
 			build3DSphere();		
 		}
 		
@@ -88,9 +88,9 @@ package flaras.view.marker
 			aObj3DCoverControlForward.visible = false;
 			aObj3DCoverControlBackward.visible = false;
 			
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverInspector, ViewMarker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlForward, ViewMarker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlBackward, ViewMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverInspector, CtrMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlForward, CtrMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DCoverControlBackward, CtrMarker.INTERACTION_MARKER, null);
 		}
 		
 		private function buildTextureCover(pFilePath:String):DisplayObject3D
@@ -121,8 +121,8 @@ package flaras.view.marker
 			aObj3DSphereUnlock = new Sphere(new WireframeMaterial(0xffe600), _modelInteractionMarker.getSphereSize()+10, 10, 10);
 			aObj3DSphereUnlock.position = new Number3D(0, _modelInteractionMarker.getSphereDistance(), 0);
 			
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphere, ViewMarker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereUnlock, ViewMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DSphere, CtrMarker.INTERACTION_MARKER, null);
+			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereUnlock, CtrMarker.INTERACTION_MARKER, null);
 		}
 		
 		public function change2InspectorMarker():void

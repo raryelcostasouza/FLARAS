@@ -51,6 +51,8 @@ package flaras.view.gui
 		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Camera mirror");
 		private var stopCameraCapture:JCheckBoxMenuItem = new JCheckBoxMenuItem("Stop camera");
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
+		private var refMarkerBaseTypeSphere:JRadioButtonMenuItem = new JRadioButtonMenuItem("Sphere as ref marker base");
+		private var refMarkerBaseTypeRectangle:JRadioButtonMenuItem = new JRadioButtonMenuItem("Rectangle as ref marker base");
 		
 		private var menuAbout:JMenu =  new JMenu("About");
 		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands");
@@ -89,6 +91,31 @@ package flaras.view.gui
 			this.addMenu(menuView);
 			menuView.append(refMarkerPersitence);
 			refMarkerPersitence.addActionListener(actionToggleRefMarkerPersistence);
+			menuView.append(new JSeparator());
+			var bg:ButtonGroup;
+			bg = new ButtonGroup();
+			bg.append(refMarkerBaseTypeSphere);
+			bg.append(refMarkerBaseTypeRectangle);
+			refMarkerBaseTypeRectangle.setSelected(true);
+			
+			refMarkerBaseTypeSphere.addActionListener(
+			function ():void 
+			{
+				_ctrMain.ctrMarker.changeRefMarkerBaseType(CtrMarker.REF_BASE_POINT);
+			});
+			
+			refMarkerBaseTypeRectangle.addActionListener(
+			function ():void
+			{
+				_ctrMain.ctrMarker.changeRefMarkerBaseType(CtrMarker.REF_BASE_RECTANGLE_PLANE);
+			}
+			);
+			
+			
+			menuView.append(refMarkerBaseTypeSphere);
+			menuView.append(refMarkerBaseTypeRectangle);
+			
+			menuView.append(new JSeparator());
 			menuView.append(mirrorScreen);
 			mirrorScreen.addActionListener(actionMirrorScreen);
 			menuView.append(stopCameraCapture);
@@ -147,6 +174,18 @@ package flaras.view.gui
 		public function setStatusJCBRefMarkPersist(enabled:Boolean):void
 		{
 			refMarkerPersitence.setSelected(enabled);
+		}
+		
+		public function setSelectionJRBRefMarkerBaseType(pBaseType:uint):void
+		{
+			if (pBaseType == CtrMarker.REF_BASE_RECTANGLE_PLANE)
+			{
+				refMarkerBaseTypeRectangle.setSelected(true);
+			}
+			else
+			{
+				refMarkerBaseTypeSphere.setSelected(true);
+			}
 		}
 		
 		private function actionMirrorScreen(e:Event):void
