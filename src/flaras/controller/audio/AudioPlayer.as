@@ -65,6 +65,8 @@ package flaras.controller.audio
 		{
 			aObjSoundChannel.stop();
 			aObjSoundChannel.removeEventListener(Event.SOUND_COMPLETE, onSoundPlayingComplete);
+			aObjSound = null;
+			aObjSoundChannel = null;
 		}
 
 		private function onSoundPlayingComplete(event:Event):void 

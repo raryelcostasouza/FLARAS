@@ -82,7 +82,7 @@ package flaras.view.marker
 		}
 		
 		private function initDefaultCover():void
-		{			
+		{	
 			aObj3DCoverInspector = buildTextureCover(SystemFilesPathsConstants.TEXTURE_PATH_INSPECTOR_MARKER);
 			aObj3DCoverControlForward = buildTextureCover(SystemFilesPathsConstants.TEXTURE_PATH_CONTROL_FORWARD_MARKER);
 			aObj3DCoverControlBackward = buildTextureCover(SystemFilesPathsConstants.TEXTURE_PATH_CONTROL_BACKWARD_MARKER);
@@ -101,10 +101,14 @@ package flaras.view.marker
 			var obj3D:DisplayObject3D;
 			var bfm:BitmapFileMaterial;
 			
-			_filePathCurrentIOOperation = pFilePath;
 			bfm = new BitmapFileMaterial(pFilePath);
 			bfm.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
-			bfm.addEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+			bfm.addEventListener(FileLoadEvent.LOAD_ERROR, 
+			function ():void 
+			{ 
+				ErrorHandler.onIOError("ViewInteractionMarker", pFilePath);
+			}
+			);
 			
 			bfm.doubleSided = true;
 			
