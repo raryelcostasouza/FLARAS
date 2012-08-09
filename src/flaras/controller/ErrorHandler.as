@@ -30,49 +30,21 @@
 package flaras.controller 
 {
 	import flaras.view.gui.*;
-	import flash.errors.*;
-	import flash.events.*;
 	
 	public class ErrorHandler 
 	{
-		private static const DEFAULT_IO_ERROR_MESSAGE:String = "It has happened an IOError.\nMore details:\n";
-		private static const DEFAULT_SECURITY_ERROR_MESSAGE:String = "It has happened a SecurityError.\nMore details:\n";
-		
 		public static function onIOError(pClass:String, pFilePath:String):void
 		{
-			notifyError(DEFAULT_IO_ERROR_MESSAGE + "Class: " + pClass + "\nFilePath: " + pFilePath);
+			MessageWindow.errorMessage("It has happened an IOError.\n"+
+						"Class: " + pClass + "\n" +
+						"FilePath: " + pFilePath);
 		}
 		
 		public static function onSecurityError(pClass:String, pFilePath:String):void
 		{
-			notifyError(DEFAULT_SECURITY_ERROR_MESSAGE + "Class: " + pClass + "\nFilePath: " + pFilePath);
-		}
-		
-		/*public static function onIOErrorAsynchronous(e:IOErrorEvent):void
-		{	
-			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOErrorAsynchronous);
-			notifyError(DEFAULT_IO_ERROR_MESSAGE + e.text);
-		}*/
-		
-		public static function onIOErrorSynchronous(ioE:IOError, filePath:String):void
-		{
-			notifyError(DEFAULT_IO_ERROR_MESSAGE + "fileName: "+ filePath + "\n" + ioE.message);
-		}
-		
-		/*public static function onSecurityErrorAsynchronous(e:SecurityErrorEvent):void
-		{
-			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityErrorAsynchronous);
-			notifyError(DEFAULT_SECURITY_ERROR_MESSAGE + e.text);
-		}*/
-		
-		public static function onSecurityErrorSynchronous(se:SecurityError, filePath:String):void
-		{
-			notifyError(DEFAULT_SECURITY_ERROR_MESSAGE + "fileName: "+ filePath + "\n" + se.message);
-		}
-		
-		private static function notifyError(errorMessage:String):void
-		{
-			MessageWindow.errorMessage(errorMessage);
+			MessageWindow.errorMessage("It has happened a SecurityError.\n" +
+						"Class: " + pClass + "\n" +
+						"FilePath: " + pFilePath);
 		}
 	}
 }

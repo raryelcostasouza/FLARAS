@@ -100,11 +100,11 @@ package flaras.controller.io.fileSaver
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, outFile.nativePath);
+				ErrorHandler.onIOError("FileSaver", outFile.nativePath);
 			}
 			catch (se:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(se, outFile.nativePath);
+				ErrorHandler.onSecurityError("FileSaver", outFile.nativePath);
 			}
 		}
 	}

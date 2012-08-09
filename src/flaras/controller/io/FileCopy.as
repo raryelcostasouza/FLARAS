@@ -148,11 +148,11 @@ package flaras.controller.io
 					}
 					catch (ioE:IOError)
 					{
-						ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
+						ErrorHandler.onIOError("FileCopy", f.nativePath);
 					}
 					catch (se:SecurityError)
 					{
-						ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
+						ErrorHandler.onSecurityError("FileCopy", f.nativePath);
 					}
 				}
 				else
@@ -198,11 +198,11 @@ package flaras.controller.io
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
+				ErrorHandler.onIOError("FileCopy", f.nativePath);
 			}
 			catch (se:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
+				ErrorHandler.onSecurityError("FileCopy", f.nativePath);
 			}					
 		}
 		

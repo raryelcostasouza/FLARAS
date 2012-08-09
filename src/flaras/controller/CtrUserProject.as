@@ -207,11 +207,11 @@ package flaras.controller
 				}
 				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, aCurrentProjectTempFolder.resolvePath(item).nativePath);
+					ErrorHandler.onIOError("CtrUserProject", aCurrentProjectTempFolder.resolvePath(item).nativePath);
 				}
 				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorSynchronous(se, aCurrentProjectTempFolder.resolvePath(item).nativePath);
+					ErrorHandler.onSecurityError("CtrUserProject", aCurrentProjectTempFolder.resolvePath(item).nativePath);
 				}
 			}
 		}
@@ -342,11 +342,11 @@ package flaras.controller
 				}
 				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, aProjectFile.nativePath);
+					ErrorHandler.onIOError("CtrUserProject", aProjectFile.nativePath);
 				}
 				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorSynchronous(se, aProjectFile.nativePath);
+					ErrorHandler.onSecurityError("CtrUserProject", aProjectFile.nativePath);
 				}
 				
 				runActionAfterSaving();
@@ -451,11 +451,11 @@ package flaras.controller
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, aCurrentProjectTempFolder.nativePath);
+				ErrorHandler.onIOError("CtrUserProject", aCurrentProjectTempFolder.nativePath);
 			}
 			catch (se:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(se, aCurrentProjectTempFolder.nativePath);
+				ErrorHandler.onSecurityError("CtrUserProject", aCurrentProjectTempFolder.nativePath);
 			}			
 		}
 		
@@ -498,11 +498,11 @@ package flaras.controller
 				}
 				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, savedFile.nativePath);
+					ErrorHandler.onIOError("CtrUserProject", savedFile.nativePath);
 				}
 				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorSynchronous(se, savedFile.nativePath);
+					ErrorHandler.onSecurityError("CtrUserProject", savedFile.nativePath);
 				}				
 			}
 			
@@ -517,11 +517,11 @@ package flaras.controller
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, this._overwriteSituation.FileSource.nativePath);
+				ErrorHandler.onIOError("CtrUserProject", this._overwriteSituation.FileSource.nativePath);
 			}
 			catch (se:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(se, this._overwriteSituation.FileSource.nativePath);
+				ErrorHandler.onSecurityError("CtrUserProject", this._overwriteSituation.FileSource.nativePath);
 			}
 		}
 		

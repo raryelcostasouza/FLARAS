@@ -54,11 +54,11 @@ package flaras.controller.io
 				}
 				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
+					ErrorHandler.onIOError("Zip", f.nativePath);
 				}
 				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
+					ErrorHandler.onSecurityError("Zip", f.nativePath);
 				}				
 			}
 			
@@ -150,11 +150,11 @@ package flaras.controller.io
 				}
 				catch (ioE:IOError)
 				{
-					ErrorHandler.onIOErrorSynchronous(ioE, fDestination.nativePath);
+					ErrorHandler.onIOError("Zip", fDestination.nativePath);
 				}
 				catch (se:SecurityError)
 				{
-					ErrorHandler.onSecurityErrorSynchronous(se, fDestination.nativePath);
+					ErrorHandler.onSecurityError("Zip", fDestination.nativePath);
 				}
 				catch (e:Error)
 				{
@@ -180,11 +180,11 @@ package flaras.controller.io
 			}
 			catch (iE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(iE, zipFile.nativePath);
+				ErrorHandler.onIOError("Zip", zipFile.nativePath);
 			}
 			catch (sE:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(sE, zipFile.nativePath);
+				ErrorHandler.onSecurityError("Zip", zipFile.nativePath);
 			}
 			
 			unzip(baZipFile, destinationFolder2ExtractFiles);			
@@ -208,11 +208,11 @@ package flaras.controller.io
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, folderWithFileName.nativePath);
+				ErrorHandler.onIOError("Zip", folderWithFileName.nativePath);
 			}
 			catch (sE:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(sE, folderWithFileName.nativePath);
+				ErrorHandler.onSecurityError("Zip", folderWithFileName.nativePath);
 			}			
 			
 			unzipFile(zipFile, folderWithFileName);

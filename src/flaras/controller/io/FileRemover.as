@@ -54,11 +54,11 @@ package flaras.controller.io
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, f.nativePath);
+				ErrorHandler.onIOError("FileRemover", f.nativePath);
 			}
 			catch (se:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(se, f.nativePath);
+				ErrorHandler.onSecurityError("FileRemover", f.nativePath);
 			}		
 		}		
 	}

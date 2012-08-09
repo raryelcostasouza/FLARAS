@@ -63,11 +63,11 @@ package flaras.controller.io
 			}
 			catch (ioE:IOError)
 			{
-				ErrorHandler.onIOErrorSynchronous(ioE, zipFile.nativePath);
+				ErrorHandler.onIOError("Zipped3DFileImporter", zipFile.nativePath);
 			}
 			catch (sE:SecurityError)
 			{
-				ErrorHandler.onSecurityErrorSynchronous(sE, zipFile.nativePath);
+				ErrorHandler.onSecurityError("Zipped3DFileImporter", zipFile.nativePath);
 			}
 			
 			return newFilePath;
