@@ -30,7 +30,6 @@
 package flaras.controller.io.fileReader 
 {
 	import flaras.controller.*;
-	import flaras.controller.io.GeneralIOEventHandler;
 	import flaras.model.marker.*;
 	import flash.errors.*;
 	import flash.events.*;
@@ -40,10 +39,12 @@ package flaras.controller.io.fileReader
 	public class FileReaderInteractionSphere 
 	{
 		private var _ctrMarker:CtrMarker;
+		private var _filePath:String;
 		
 		public function FileReaderInteractionSphere(ctrMarker:CtrMarker, filePath:String)
 		{
 			this._ctrMarker = ctrMarker;
+			_filePath = filePath;
 			read(filePath);
 		}
 		
@@ -51,16 +52,29 @@ package flaras.controller.io.fileReader
 		{
 			var fileLoader:URLLoader = new URLLoader(new URLRequest(filePath));
 			
-			fileLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
 			fileLoader.addEventListener(Event.COMPLETE, onComplete);
-            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous); 
-            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, onIOError); 
+            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 		}
 		
 		private function onComplete(e:Event):void
 		{
+			e.target.removeEventListener(Event.COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+			
 			var xml:XML = XML(e.target.data);
 			this._ctrMarker.finishedLoadingInteractionMarkerData(new InteractionSphereData(xml.info.size, xml.info.distanceToMarker));
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("FileReaderInteractionSphere", _filePath);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("FileReaderInteractionSphere", _filePath);
 		}
 	}
 }

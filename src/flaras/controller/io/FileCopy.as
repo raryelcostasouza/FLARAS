@@ -76,11 +76,7 @@ package flaras.controller.io
 		{
 			var fileSource:File = new File();
 			
-			fileSource.addEventListener(Event.SELECT, fileSelected);
-			fileSource.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			fileSource.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			fileSource.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
-			
+			fileSource.addEventListener(Event.SELECT, fileSelected);			
 			fileDestinationSubFolder = pCurrentProjectTempFolder.resolvePath(aDestinationSubFolder);
 			
 			try

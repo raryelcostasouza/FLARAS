@@ -37,6 +37,7 @@ package flaras.view.scene
 	import flash.events.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
+	import org.papervision3d.events.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	
@@ -80,9 +81,9 @@ package flaras.view.scene
 			if (_virtualObjectScene.getPath3DObjectFile().toLowerCase().indexOf(".dae") != -1)
 			{
 				objDAE = new DAE(true, null, true);
-				objDAE.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-				//objDAE.addEventListener(FileLoadEvent.LOAD_COMPLETE, onLoadComplete);
+				objDAE.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+				objDAE.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+				objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 				
 				objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());	
 				_obj3D = objDAE;
@@ -90,8 +91,9 @@ package flaras.view.scene
 			else
 			{
 				objMax3DS = new Max3DS();
-				objMax3DS.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				objMax3DS.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				objMax3DS.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+				objMax3DS.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+				objMax3DS.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 				
 				objMax3DS.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
 				_obj3D = objMax3DS;
@@ -107,8 +109,6 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				super.unLoad();
-				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 				
 				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER);
 				_obj3D = null;
@@ -120,6 +120,23 @@ package flaras.view.scene
 			unLoad();
 			super.destroy();
 			_virtualObjectScene = null;
+		}
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" +_virtualObjectScene.getPath3DObjectFile());
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" +_virtualObjectScene.getPath3DObjectFile());
 		}
 	}
 }

@@ -63,6 +63,7 @@ package flaras.controller
 		// used to check if there are any unsaved modifications on the project before exitting, opening a new
 		// project or creating a new project.
 		private var _unSavedModifications:Boolean;
+		private var _filePathCurrentIOOperation:String;
 		
 		public function CtrUserProject(ctrMain:CtrMain) 
 		{
@@ -247,8 +248,6 @@ package flaras.controller
 			actionNewProject();
 			
 			fileProject2Open = new File();
-			fileProject2Open.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			fileProject2Open.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 			fileProject2Open.addEventListener(Event.SELECT, onFile2OpenSelect);
 			fileProject2Open.browseForOpen("Open FLARAS Project", [new FileFilter("FLARAS Project Files (.flaras)", "*.flaras")]);
 		}
@@ -257,8 +256,6 @@ package flaras.controller
 		{
 			var file2Open:File;
 			
-			e.target.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 			e.target.removeEventListener(Event.SELECT, onFile2OpenSelect);
 			
 			file2Open = File(e.target);
@@ -327,10 +324,8 @@ package flaras.controller
 			{
 				//ask the user where to save
 				file2Save = new File(File.userDirectory.resolvePath("flarasProject.flaras").nativePath);
-				file2Save.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				file2Save.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+				file2Save.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				file2Save.addEventListener(Event.COMPLETE, onProjectSavingComplete);
-				file2Save.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
 				file2Save.addEventListener(Event.CANCEL, onProjectSavingCancel);
 				file2Save.save(ba);
 			}
@@ -370,6 +365,8 @@ package flaras.controller
 		{
 			var file2Save:File = File(e.target);
 			file2Save.removeEventListener(Event.COMPLETE, onProjectSavingComplete);
+			file2Save.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			
 			aProjectFile = file2Save;
 			aSaveAsRequested = false;
 			
@@ -430,9 +427,7 @@ package flaras.controller
 				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);
 				
 				publishFile = File.userDirectory.resolvePath("flarasApp.zip");
-				publishFile.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				publishFile.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-				publishFile.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
+				publishFile.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				publishFile.addEventListener(Event.COMPLETE, onProjectPublishingComplete);
 				publishFile.save(ba);
 			}			
@@ -443,6 +438,8 @@ package flaras.controller
 			var publishFile:File = File(e.target);
 			
 			publishFile.removeEventListener(Event.COMPLETE, onProjectPublishingComplete);
+			publishFile.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			
 			forceSavedFileExtension(publishFile, ".zip");			
 		}
 	
@@ -550,5 +547,10 @@ package flaras.controller
 				this._unSavedModifications = unSavedModifications;
 			}	
 		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("CtrUserProject", _filePathCurrentIOOperation);
+		}	
 	}
 }

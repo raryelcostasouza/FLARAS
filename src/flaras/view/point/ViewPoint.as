@@ -35,6 +35,7 @@ package flaras.view.point
 	import flaras.view.marker.*;
 	import flash.events.*;
 	import org.papervision3d.core.math.*;
+	import org.papervision3d.events.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	import org.papervision3d.objects.primitives.*;
@@ -58,8 +59,9 @@ package flaras.view.point
 			
 			_obj3DAxis = new DAE();
 			_obj3DAxis.load(SystemFilesPathsConstants.OBJ_PATH_AXIS);
-			_obj3DAxis.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			_obj3DAxis.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous)
+			_obj3DAxis.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			_obj3DAxis.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			_obj3DAxis.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError)
 			_obj3DAxis.scale = 10;
 			_obj3DAxis.position = position;
 			_obj3DAxis.visible = false;
@@ -132,6 +134,23 @@ package flaras.view.point
 			_obj3DSphereOfPoint = null;
 			_obj3DAuxSphere = null;
 			_obj3DAxis = null;
+		}
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("ViewPoint", SystemFilesPathsConstants.OBJ_PATH_AXIS);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("ViewPoint", SystemFilesPathsConstants.OBJ_PATH_AXIS);
 		}
 	}
 }

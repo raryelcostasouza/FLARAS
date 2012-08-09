@@ -48,9 +48,9 @@ package flaras.controller.video
 			var urlLoader:URLLoader;
 			
 			urlLoader = new URLLoader(new URLRequest(pVideoPath));
-			urlLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			urlLoader.addEventListener(Event.COMPLETE, onComplete);
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			
 			videoPath = pVideoPath;
 			repeatVideo = pRepeatVideo;
@@ -100,6 +100,23 @@ package flaras.controller.video
 					VideoManager.finishedPlayingVideo(this);
 				}				
 			}
-		}			
+		}	
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(Event.COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("VideoPlayer", videoPath);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("VideoPlayer", videoPath);
+		}
 	}
 }

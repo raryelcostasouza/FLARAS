@@ -49,9 +49,9 @@ package flaras.controller.audio
 			aFilePath = pFilePath;
 			
 			aObjSound = new Sound(new URLRequest(aFilePath));	
-			aObjSound.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
-			aObjSound.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			aObjSound.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
+			aObjSound.addEventListener(Event.COMPLETE, onComplete);
+			aObjSound.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			aObjSound.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			playAudio();
         }
 		
@@ -75,6 +75,23 @@ package flaras.controller.audio
 				aObjSoundChannel.removeEventListener(Event.SOUND_COMPLETE, onSoundPlayingComplete);
 				playAudio();
 			}
-		}		
+		}	
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(Event.COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("AudioPlayer", aFilePath);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("AudioPlayer", aFilePath);
+		}
 	}
 }

@@ -34,11 +34,11 @@ package flaras.controller.io
 	
 	public class GeneralIOEventHandler 
 	{
-		public static function onIOOperationComplete(e:Event):void
+		/*public static function onIOOperationComplete(e:Event):void
 		{
 			e.target.removeEventListener(Event.COMPLETE, onIOOperationComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
 			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-		}			
+		}*/			
 	}
 }

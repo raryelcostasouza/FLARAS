@@ -39,9 +39,12 @@ package flaras.controller.io.fileReader
 	
 	public class FileReaderListOfPoints extends FileReader
 	{
+		private var _filePath:String;
+		
 		public function FileReaderListOfPoints(pFilePath:String, pObjCtrPoint:CtrPoint)
 		{
 			super(pObjCtrPoint);
+			_filePath = pFilePath;
 			readFile(pFilePath);
 		}
 		
@@ -49,15 +52,17 @@ package flaras.controller.io.fileReader
 		{
 			var fileLoader:URLLoader = new URLLoader(new URLRequest(pFilePath));
 			
-			fileLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
 			fileLoader.addEventListener(Event.COMPLETE, onComplete);
-            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous); 
-            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous); 
+            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, onIOError); 
+            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError); 
 		}
 		
 		private function onComplete(e:Event):void
 		{			
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+			
 			aXMLFile = XML(e.target.data);
 			
 			for each (var point:XML in aXMLFile.point) 
@@ -67,6 +72,16 @@ package flaras.controller.io.fileReader
 			
 			aObjCtrPoint.finishedReadingListOfPoints();
 		}	
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("FileReaderListOfPoints", _filePath);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("FileReaderListOfPoints", _filePath);
+		}
 	}
 	
 }

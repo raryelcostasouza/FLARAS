@@ -41,11 +41,13 @@ package flaras.controller.io.fileReader
 	public class FileReaderListOfObjects extends FileReader
 	{		
 		private var aIndexBuffer:uint;
+		private var _filePath:String;
 		
 		public function FileReaderListOfObjects(pIndexBuffer:uint, pFilePath:String, pObjCtrPoint:CtrPoint)
 		{
 			super(pObjCtrPoint);
 			aIndexBuffer = pIndexBuffer;
+			_filePath = pFilePath;
 			readFile(pFilePath);			
 		}
 		
@@ -53,15 +55,17 @@ package flaras.controller.io.fileReader
 		{
 			var fileLoader:URLLoader = new URLLoader(new URLRequest(pFilePath));
 			
-			fileLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete)
 			fileLoader.addEventListener(Event.COMPLETE, onComplete);
-            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous); 
-            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous); 
+            fileLoader.addEventListener(IOErrorEvent.IO_ERROR, onIOError); 
+            fileLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError); 
 		}
 	
 		private function onComplete(e:Event):void
 		{	
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
+			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+			
 			aXMLFile = XML(e.target.data);
 			
 			for each (var obj3D:XML in aXMLFile.object3D) 
@@ -128,6 +132,16 @@ package flaras.controller.io.fileReader
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
 												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection);
 			}
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("FileReaderListOfScenes", _filePath);
+		}
+		
+		private function onSecurityError(e:Event):void
+		{
+			ErrorHandler.onSecurityError("FileReaderListOfScenes", _filePath);
 		}
 	}	
 }

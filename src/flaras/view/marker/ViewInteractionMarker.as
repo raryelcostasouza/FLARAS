@@ -38,6 +38,7 @@ package flaras.view.marker
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;
+	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
@@ -51,6 +52,8 @@ package flaras.view.marker
 		private var aObj3DCoverInspector:DisplayObject3D;
 		private var aObj3DCoverControlForward:DisplayObject3D;
 		private var aObj3DCoverControlBackward:DisplayObject3D;
+		
+		private var _filePathCurrentIOOperation:String;
 		
 		public function ViewInteractionMarker(pModelInteractionMarker:ModelInteractionMarker)
 		{			
@@ -98,12 +101,11 @@ package flaras.view.marker
 			var obj3D:DisplayObject3D;
 			var bfm:BitmapFileMaterial;
 			
-			var urlLoader:URLLoader = new URLLoader(new URLRequest(pFilePath));
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			urlLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);
-			
+			_filePathCurrentIOOperation = pFilePath;
 			bfm = new BitmapFileMaterial(pFilePath);
+			bfm.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			bfm.addEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+			
 			bfm.doubleSided = true;
 			
 			obj3D = new Plane(bfm , 80, 80);
@@ -152,5 +154,16 @@ package flaras.view.marker
 			aObj3DCoverControlForward.scaleX *= -1;
 			aObj3DCoverControlBackward.scaleX *= -1;
 		}
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			e.target.removeEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("ViewInteractonMarker", _filePathCurrentIOOperation);
+		}	
 	}	
 }

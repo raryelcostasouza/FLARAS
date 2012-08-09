@@ -38,6 +38,7 @@ package flaras.view.scene
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;
+	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
@@ -80,13 +81,10 @@ package flaras.view.scene
 			var bfm:BitmapFileMaterial;
 			var urlLoader:URLLoader;
 			
-			//workaround to dispatch io and security exception if some problem happens
-			urlLoader = new URLLoader(new URLRequest(FolderConstants.getFlarasAppCurrentFolder() + "/" + _textureScene.getTextureFilePath()));
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
-			urlLoader.addEventListener(Event.COMPLETE, GeneralIOEventHandler.onIOOperationComplete);			
-			
 			bfm = new BitmapFileMaterial(FolderConstants.getFlarasAppCurrentFolder() + "/" + _textureScene.getTextureFilePath());
+			bfm.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			bfm.addEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+			
 			bfm.doubleSided = true;
 			
 			plane = new Plane(bfm, _textureScene.getWidth(), _textureScene.getHeight());
@@ -105,8 +103,6 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				super.unLoad();
-				_obj3D.removeEventListener(IOErrorEvent.IO_ERROR, ErrorHandler.onIOErrorAsynchronous);
-				_obj3D.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, ErrorHandler.onSecurityErrorAsynchronous);
 				
 				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER);
 				_obj3D = null;
@@ -119,6 +115,17 @@ package flaras.view.scene
 			super.destroy();
 			_textureScene = null;
 		}
+		
+		private function onComplete(e:Event):void
+		{
+			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
+			e.target.removeEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+		}
+		
+		private function onIOError(e:Event):void
+		{
+			ErrorHandler.onIOError("ViewTextureScene", FolderConstants.getFlarasAppCurrentFolder() + "/" + _textureScene.getTextureFilePath());
+		}	
 	}
 
 }
