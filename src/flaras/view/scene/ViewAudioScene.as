@@ -1,7 +1,5 @@
 package flaras.view.scene 
 {
-	import flaras.audio.*;
-	import flaras.constants.*;
 	import flaras.controller.audio.*;
 	import flaras.controller.constants.*;
 	import flaras.model.*;

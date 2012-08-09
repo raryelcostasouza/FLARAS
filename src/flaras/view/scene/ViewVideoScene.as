@@ -1,14 +1,10 @@
 package flaras.view.scene 
 {
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.video.*;
-	import flaras.errorHandler.*;
-	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
-	import flaras.video.*;
 	import flaras.view.marker.*;
 	import flash.events.*;
 	import flash.media.*;

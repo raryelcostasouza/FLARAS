@@ -29,8 +29,6 @@
 
 package flaras.controller 
 {
-	import flaras.entity.*;
-	import flaras.marker.*;
 	import flaras.model.point.*;
 	
 	public class CtrPointInteractionWithKbd 

@@ -1,10 +1,7 @@
 package flaras.model.scene 
 {
-	import flaras.constants.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
-	import flaras.entity.*;
-	import flaras.io.*;
 	import flaras.model.point.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;

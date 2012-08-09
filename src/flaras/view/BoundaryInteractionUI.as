@@ -32,7 +32,6 @@ package flaras.view
 	import flaras.*;
 	import flaras.controller.*;
 	import flaras.controller.util.*;
-	import flaras.util.*;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.ui.*;

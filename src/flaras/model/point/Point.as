@@ -30,22 +30,17 @@
 package flaras.model.point
 {
 	import flaras.*;
-	import flaras.audio.*;
-	import flaras.constants.*;
 	import flaras.controller.*;
-	import flaras.controller.constants.XMLFilesConstants;
-	import flaras.errorHandler.*;
-	import flaras.io.*;
-	import flaras.marker.*;
+	import flaras.controller.constants.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
-	import flaras.util.*;
 	import flash.events.*;
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	import org.papervision3d.objects.primitives.*;
+
 	
 	public class Point
 	{		

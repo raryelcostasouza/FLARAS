@@ -29,12 +29,9 @@
 
 package flaras.controller.multimarkerInteraction 
 {
-	import flaras.boundary.*;
 	import flaras.controller.*;
 	import flaras.controller.util.*;
-	import flaras.marker.*;
 	import flaras.model.marker.*;
-	import flaras.util.*;
 	import flaras.view.point.*;
 	import flash.display.*;
 	import org.papervision3d.core.math.*;

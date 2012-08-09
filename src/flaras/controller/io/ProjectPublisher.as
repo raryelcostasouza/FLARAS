@@ -30,7 +30,6 @@
 package flaras.controller.io 
 {
 	import flaras.*;
-	import flaras.constants.*;
 	import flaras.controller.constants.*;
 	import flash.filesystem.*;
 	import flash.utils.*;

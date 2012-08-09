@@ -30,20 +30,11 @@
 package flaras.controller 
 {
 	import flaras.*;
-	import flaras.constants.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
 	import flaras.controller.io.fileSaver.*;
 	import flaras.controller.video.*;
-	import flaras.entity.*;
-	import flaras.errorHandler.*;
-	import flaras.io.*;
-	import flaras.io.fileReader.*;
-	import flaras.io.fileSaver.*;
-	import flaras.marker.*;
 	import flaras.model.point.*;
-	import flaras.userInterface.graphicUserInterfaceComponents.*;
-	import flaras.video.*;
 	import flaras.view.gui.*;
 	import flash.desktop.*;
 	import flash.errors.*;

@@ -29,7 +29,6 @@
 
 package flaras.controller.io.fileSaver 
 {
-	import flaras.entity.*;
 	import flaras.model.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;

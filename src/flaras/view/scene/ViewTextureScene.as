@@ -1,12 +1,8 @@
 package flaras.view.scene 
 {
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
-	import flaras.errorHandler.*;
-	import flaras.io.*;
-	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flaras.view.marker.*;

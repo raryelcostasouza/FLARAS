@@ -29,17 +29,12 @@
 
 package flaras.controller
 {
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
-	import flaras.entity.*;
-	import flaras.io.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;
-	import flaras.userInterface.*;
-	import flaras.userInterface.graphicUserInterfaceComponents.*;
 	import flaras.view.gui.*;
 	import flaras.view.scene.*;
 	import flash.events.*;

@@ -30,12 +30,7 @@
 package flaras.controller
 {
 	import flaras.*;
-	import flaras.audio.*;
-	import flaras.boundary.*;
 	import flaras.controller.*;
-	import flaras.marker.*;
-	import flaras.userInterface.*;
-	import flaras.util.*;
 	import flaras.view.*;
 	import flash.display.*;
 	import FTK.*;

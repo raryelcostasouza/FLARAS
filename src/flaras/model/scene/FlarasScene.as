@@ -1,8 +1,6 @@
 package flaras.model.scene 
 {
-	import flaras.constants.*;
 	import flaras.controller.constants.*;
-	import flaras.entity.*;
 	import flaras.model.point.*;
 	import flash.errors.*;
 	import org.papervision3d.core.math.*;

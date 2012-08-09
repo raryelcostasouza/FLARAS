@@ -30,18 +30,11 @@
 package flaras.view.marker
 {
 	import flaras.*;
-	import flaras.audio.*;
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
 	import flaras.controller.util.*;
-	import flaras.errorHandler.*;
-	import flaras.io.*;
-	import flaras.marker.*;
 	import flaras.model.marker.*;
-	import flaras.multiMarkerInteraction.*;
-	import flaras.util.*;
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;

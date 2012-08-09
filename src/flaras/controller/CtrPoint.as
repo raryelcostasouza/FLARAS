@@ -30,17 +30,10 @@
 package flaras.controller
 {
 	import flaras.*;
-	import flaras.audio.*;
-	import flaras.boundary.*;
-	import flaras.constants.*;
 	import flaras.controller.audio.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
 	import flaras.controller.io.fileReader.*;
-	import flaras.entity.*;
-	import flaras.io.*;
-	import flaras.io.fileReader.*;
-	import flaras.marker.*;
 	import flaras.model.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;

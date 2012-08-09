@@ -30,18 +30,12 @@
 package flaras.view
 {
 	import flaras.*;
-	import flaras.audio.*;
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.audio.*;
 	import flaras.controller.constants.SystemFilesPathsConstants;
 	import flaras.controller.multimarkerInteraction.*;
-	import flaras.entity.*;
-	import flaras.marker.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
-	import flaras.multiMarkerInteraction.*;
-	import flaras.util.*;
 	import flaras.view.marker.ViewMarker;
 	import flash.events.*;
 	import flash.utils.*;

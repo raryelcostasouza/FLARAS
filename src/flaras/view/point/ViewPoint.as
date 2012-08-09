@@ -29,13 +29,9 @@
 
 package flaras.view.point 
 {
-	import flaras.constants.*;
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.util.*;
-	import flaras.errorHandler.*;
-	import flaras.marker.*;
-	import flaras.util.*;
 	import flaras.view.marker.*;
 	import flash.events.*;
 	import org.papervision3d.core.math.*;

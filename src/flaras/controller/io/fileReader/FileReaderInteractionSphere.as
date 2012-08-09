@@ -31,9 +31,6 @@ package flaras.controller.io.fileReader
 {
 	import flaras.controller.*;
 	import flaras.controller.io.GeneralIOEventHandler;
-	import flaras.errorHandler.*;
-	import flaras.io.*;
-	import flaras.marker.*;
 	import flaras.model.marker.*;
 	import flash.errors.*;
 	import flash.events.*;
