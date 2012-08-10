@@ -103,13 +103,16 @@ package flaras.view.gui
 			centerPanel.setBorder(new TitledBorder(null, "Rotation Axis", 1,TitledBorder.LEFT));
 			
 			jrbX = new JRadioButton("X");
+			jrbX.setForeground(ASColor.RED);
 			jrbX.setSelected(true);
 			jrbX.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			jrbY = new JRadioButton("Y");
+			jrbY.setForeground(ASColor.BLUE);
 			jrbY.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			jrbZ = new JRadioButton("Z");
+			jrbZ.setForeground(ASColor.GREEN.darker().darker());
 			jrbZ.addActionListener(_ctrGUI.updateAnimationProperties);
 			
 			buttonGroup = new ButtonGroup();

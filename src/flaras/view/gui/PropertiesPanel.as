@@ -31,6 +31,7 @@ package flaras.view.gui
 {
 	import flaras.controller.*;
 	import flash.events.*;
+	import flash.text.Font;
 	import org.aswing.*;
 	import org.aswing.geom.*;
 	
@@ -66,8 +67,53 @@ package flaras.view.gui
 		
 		public function PropertiesPanel(pCtrGUI:CtrGUI)
 		{
+			var jlPointX:JLabel;
+			var jlPointY:JLabel;
+			var jlPointZ:JLabel;
+			
+			var jlSceneTrX:JLabel;
+			var jlSceneTrY:JLabel;
+			var jlSceneTrZ:JLabel;
+			
+			var jlSceneRtX:JLabel;
+			var jlSceneRtY:JLabel;
+			var jlSceneRtZ:JLabel;
+			
+			var jlSceneScX:JLabel;
+			var jlSceneScY:JLabel;
+			var jlSceneScZ:JLabel;
+					
 			super(new FlowLayout());
+					
 			setPreferredSize(new IntDimension(210, 470));
+			
+			jlPointX = new JLabel(" X ");
+			jlPointX.setForeground(ASColor.RED);
+			jlPointY = new JLabel(" Y ");
+			jlPointY.setForeground(ASColor.BLUE)
+			jlPointZ = new JLabel(" Z ");
+			jlPointZ.setForeground(ASColor.GREEN.darker().darker());
+			
+			jlSceneTrX = new JLabel(" X ");
+			jlSceneTrX.setForeground(ASColor.RED);
+			jlSceneTrY = new JLabel(" Y ");
+			jlSceneTrY.setForeground(ASColor.BLUE)
+			jlSceneTrZ = new JLabel(" Z ");
+			jlSceneTrZ.setForeground(ASColor.GREEN.darker().darker());
+			
+			jlSceneRtX = new JLabel(" X ");
+			jlSceneRtX.setForeground(ASColor.RED);
+			jlSceneRtY = new JLabel(" Y ");
+			jlSceneRtY.setForeground(ASColor.BLUE)
+			jlSceneRtZ = new JLabel(" Z ");
+			jlSceneRtZ.setForeground(ASColor.GREEN.darker().darker());
+			
+			jlSceneScX = new JLabel(" X ");
+			jlSceneScX.setForeground(ASColor.RED);
+			jlSceneScY = new JLabel(" Y ");
+			jlSceneScY.setForeground(ASColor.BLUE)
+			jlSceneScZ = new JLabel(" Z ");
+			jlSceneScZ.setForeground(ASColor.GREEN.darker().darker());
 			
 			append(new JLabel("Point"));
 			//point properties
@@ -79,19 +125,16 @@ package flaras.view.gui
 			append(btRemovePt = new JButton("x"));
 			btRemovePt.addActionListener(pCtrGUI.removePoint);
 			append(new JLabel("           "));
-			append(new JLabel(" X "));
+			append(jlPointX);
 			append(ptX = new JTextField("", jtfColumns));
-			//ptX.addActionListener(pCtrGUI.textUpdate);
 			ptX.addActionListener(pCtrGUI.updatePointPosition);
 			ptX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Y "));
+			append(jlPointY);
 			append(ptY = new JTextField("", jtfColumns));
-			//ptY.addActionListener(pCtrGUI.textUpdate);
 			ptY.addActionListener(pCtrGUI.updatePointPosition);
 			ptY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Z "));
+			append(jlPointZ);
 			append(ptZ = new JTextField("", jtfColumns));
-			//ptZ.addActionListener(pCtrGUI.textUpdate);
 			ptZ.addActionListener(pCtrGUI.updatePointPosition);
 			ptZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			//object properties
@@ -105,45 +148,41 @@ package flaras.view.gui
 			append(btSwapObj = new JButton("@"));
 			btSwapObj.addActionListener(pCtrGUI.swapObject);
 			append(new JLabel("Translation                                           "));
-			append(new JLabel(" X "));
+			append(jlSceneTrX);
 			append(objTrX = new JTextField("", jtfColumns));
-			//objTrX.addActionListener(pCtrGUI.textUpdate);
 			objTrX.addActionListener(pCtrGUI.updateSceneTranslation);
 			objTrX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Y "));
+			append(jlSceneTrY);
 			append(objTrY = new JTextField("", jtfColumns));
-			//objTrY.addActionListener(pCtrGUI.textUpdate);
 			objTrY.addActionListener(pCtrGUI.updateSceneTranslation);
 			objTrY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Z "));
+			append(jlSceneTrZ);
 			append(objTrZ = new JTextField("", jtfColumns));
-			//objTrZ.addActionListener(pCtrGUI.textUpdate);
 			objTrZ.addActionListener(pCtrGUI.updateSceneTranslation);
 			objTrZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			append(new JLabel("Rotation                                                "));
-			append(new JLabel(" X "));
+			append(jlSceneRtX);
 			append(objRtX = new JTextField("", jtfColumns));
-			//objRtX.addActionListener(pCtrGUI.textUpdate);
 			objRtX.addActionListener(pCtrGUI.updateSceneRotation);
 			objRtX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Y "));
+			append(jlSceneRtY);
 			append(objRtY = new JTextField("", jtfColumns));
 			objRtY.addActionListener(pCtrGUI.updateSceneRotation);
 			objRtY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
-			append(new JLabel(" Z "));
+			append(jlSceneRtZ);
 			append(objRtZ = new JTextField("", jtfColumns));
 			objRtZ.addActionListener(pCtrGUI.updateSceneRotation);
 			objRtZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidCharFromTextField);
 			append(new JLabel("Scale                                                    "));
-			append(new JLabel(" X "));
+			append(jlSceneScX);
 			append(objScX = new JTextField("", jtfColumns));
 			objScX.addActionListener(pCtrGUI.updateSceneScale);
 			objScX.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
-			append(new JLabel(" Y "));
+			append(jlSceneScY);
 			append(objScY = new JTextField("", jtfColumns));
 			objScY.addActionListener(pCtrGUI.updateSceneScale);
 			objScY.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
-			append(new JLabel(" Z "));
+			append(jlSceneScZ);
 			append(objScZ = new JTextField("", jtfColumns));
 			objScZ.addActionListener(pCtrGUI.updateSceneScale);
 			objScZ.addEventListener(KeyboardEvent.KEY_UP, pCtrGUI.filterValidStrictPositiveCharFromTextField);
