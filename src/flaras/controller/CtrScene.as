@@ -394,7 +394,9 @@ package flaras.controller
 				viewScene.unLoad();
 				FileRemover.remove(FolderConstants.getFlarasAppCurrentFolder() + "/" + scene.getAudio().getAudioFilePath());
 				scene.getAudio().setAudioFilePath(audioPath);				
-			}			
+			}		
+			
+			viewScene.showScene(true);
 		}
 		
 		public function updateRemoveAudio(indexScene:uint):void
@@ -614,6 +616,11 @@ package flaras.controller
 			}
 			
 			return null;
+		}
+		
+		public function getNumberOfScenes():uint
+		{
+			return _listOfScenes2.length;
 		}
 		
 		private function getScene(indexScene:uint):FlarasScene
