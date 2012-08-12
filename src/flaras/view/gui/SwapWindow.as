@@ -113,7 +113,7 @@ package flaras.view.gui
 			southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			jbOk = new JButton("OK");
 			jbOk.addActionListener( function(e:Event):void {
-				_ctrGUI.swapFunction(parseInt(jcb.getSelectedItem()));
+				_ctrGUI.listenerConfirmedSwapScene(parseInt(jcb.getSelectedItem()));
 				closeSwapWindow(null);
 			});
 			
