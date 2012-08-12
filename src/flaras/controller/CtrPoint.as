@@ -147,7 +147,7 @@ package flaras.controller
 		{
 			var p:Point;
 			
-			p = new Point(this._listOfPoints.length, pPosition)
+			p = new Point(this._listOfPoints.length, pPosition, "")
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new ViewPoint(p.getPosition()));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
@@ -181,6 +181,16 @@ package flaras.controller
 			}
 		}
 		// end of functions related with adding and removing points -----------------------------------------------------------
+		
+		public function updatePointLabel(indexPoint:uint, pLabel:String):void
+		{
+			var p:Point;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
+			p = _listOfPoints[indexPoint];
+			p.setLabel(pLabel);
+		}
 		
 		public function updatePointPosition(indexPoint:uint, position:Number3D):void
 		{
@@ -244,7 +254,7 @@ package flaras.controller
 			}			
 		}
 		
-		public function goToObject(indexPoint:int, pObjectIndex:uint):void
+		public function goToScene(indexPoint:int, pObjectIndex:uint):void
 		{
 			var p:Point = this._listOfPoints[indexPoint];
 			
@@ -322,7 +332,6 @@ package flaras.controller
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			
 			bndPoint.showAxis();
-			enablePoint(p, true, false);
 		}
 		
 		public function enableAllPoints():void
