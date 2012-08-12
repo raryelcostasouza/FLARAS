@@ -39,9 +39,9 @@ package flaras.model.scene
 		private var _width:Number;
 		private var _height:Number;
 		
-		public function TextureScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D,textureFilePath:String, width:Number, height:Number)
+		public function TextureScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D,textureFilePath:String, width:Number, height:Number, pLabel:String)
 		{
-			super(this, parentPoint, translation, rotation, scale);
+			super(this, parentPoint, translation, rotation, scale, pLabel);
 			_textureFilePath = textureFilePath;
 			_width = width;
 			_height = height;

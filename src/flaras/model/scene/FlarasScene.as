@@ -40,11 +40,12 @@ package flaras.model.scene
 		private var _audio:AudioScene;
 		private var _parentPoint:Point;
 		
+		private var _label:String;
 		private var _translation:Number3D;
 		private var _rotation:Number3D;
 		private var _scale:Number3D;
 		
-		public function FlarasScene(selfReference:FlarasScene, parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D) 
+		public function FlarasScene(selfReference:FlarasScene, parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, pLabel:String) 
 		{
 			//this constructor requires another Object3D as parameter, it is a workaround to forbid direct instantiation
 			//of the FlarasScene, simulating a Java abstract class behaviour.
@@ -58,6 +59,7 @@ package flaras.model.scene
 				_translation = translation;
 				_rotation = rotation;
 				_scale = scale;
+				_label = pLabel;
 			}
 		}
 		
@@ -68,6 +70,7 @@ package flaras.model.scene
 			_animation = null;
 			
 			_parentPoint = null;
+			_label = null;
 			_translation = null;
 			_rotation = null;
 			_scale = null;
@@ -144,6 +147,16 @@ package flaras.model.scene
 		public function setScale(scale:Number3D):void
 		{
 			_scale = scale;
+		}
+		
+		public function getLabel():String 
+		{
+			return _label;
+		}
+		
+		public function setLabel(pLabel:String):void 
+		{
+			_label = pLabel;
 		}
 	}
 }
