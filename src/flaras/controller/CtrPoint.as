@@ -127,6 +127,11 @@ package flaras.controller
 			return _listOfCtrScenes[indexPoint];
 		}
 		
+		public function getLabel(indexPoint:uint):String
+		{
+			return _listOfPoints[indexPoint].getLabel();
+		}
+		
 		public function getPosition(indexPoint:uint):Number3D
 		{
 			return _listOfPoints[indexPoint].getPosition();	
