@@ -78,6 +78,7 @@ package flaras.controller.io.fileReader
 				var obj3DFile:File;
 				var flarasTempFolder:File;
 				var newFilePath:String;
+				var label:String;
 				
 				//old flaras project withoud animation support
 				if (obj3D.animation.hasAnimation == undefined)
@@ -106,6 +107,15 @@ package flaras.controller.io.fileReader
 					}
 				}
 				
+				if (obj3D.label == undefined)
+				{
+					label = "";
+				}
+				else
+				{
+					label = obj3D.label;
+				}
+				
 				//only on FLARAS Developer
 				//import compatibility of old projects that used KMZ loader
 				//unzip files and then use DAE loader
@@ -130,7 +140,7 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection);
+												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection, label);
 			}
 		}
 		
