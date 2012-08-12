@@ -50,16 +50,18 @@ package flaras.model.point
 		private var _indexLastActiveScene:int = 0;
 		private var _interactionLock:Boolean = false;
 		
+		private var _label:String;
 		private var _position:Number3D;
 		private var _listOfFlarasScenes:Vector.<FlarasScene>;
 		
-		public function Point(pID:uint, pPosition:Number3D)
+		public function Point(pID:uint, pPosition:Number3D, pLabel:String)
 		{
 			_listOfFlarasScenes = new Vector.<FlarasScene>();
 			
+			_label = pLabel;
 			_id = pID;
 			_enabled = false;
-			_position = pPosition;
+			_position = pPosition;			
 		}
 		
 		public function getIndexActiveScene():int
@@ -120,6 +122,16 @@ package flaras.model.point
 		public function setPosition(pPosition:Number3D):void
 		{
 			_position = pPosition;
+		}
+		
+		public function getLabel():String 
+		{
+			return _label;
+		}
+		
+		public function setLabel(pLabel:String):void 
+		{
+			_label = pLabel;
 		}
 		
 		public function getFilePathListOfObjects():String
