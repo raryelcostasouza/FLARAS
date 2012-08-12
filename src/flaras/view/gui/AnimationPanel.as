@@ -77,7 +77,7 @@ package flaras.view.gui
 			var northPanel:JPanel;
 			
 			northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			jcbHasAnimation = new JCheckBox("Has animation?");
+			jcbHasAnimation = new JCheckBox("Animation");
 			jcbHasAnimation.addActionListener(hasAnimationListener);
 			
 			northPanel.append(jcbHasAnimation);
@@ -91,7 +91,7 @@ package flaras.view.gui
 			
 			newState = jcbHasAnimation.isSelected();
 			setComponentsStatus(newState);
-			this._ctrGUI.updateAnimationState(newState);
+			this._ctrGUI.listenerUpdateAnimationState(newState);
 		}
 		
 		private function buildLine2():JPanel
@@ -105,15 +105,15 @@ package flaras.view.gui
 			jrbX = new JRadioButton("X");
 			jrbX.setForeground(ASColor.RED);
 			jrbX.setSelected(true);
-			jrbX.addActionListener(_ctrGUI.updateAnimationProperties);
+			jrbX.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
 			
 			jrbY = new JRadioButton("Y");
 			jrbY.setForeground(ASColor.BLUE);
-			jrbY.addActionListener(_ctrGUI.updateAnimationProperties);
+			jrbY.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
 			
 			jrbZ = new JRadioButton("Z");
 			jrbZ.setForeground(ASColor.GREEN.darker().darker());
-			jrbZ.addActionListener(_ctrGUI.updateAnimationProperties);
+			jrbZ.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
 			
 			buttonGroup = new ButtonGroup();
 			buttonGroup.append(jrbX);
@@ -138,7 +138,7 @@ package flaras.view.gui
 			jlRotationSpeed = new JLabel("Rotation period: ");
 			jtfRotationPeriod = new JTextField("10", 5);
 			jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationPeriod.addActionListener(_ctrGUI.updateAnimationProperties);
+			jtfRotationPeriod.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
 			
 			jlRotationUnit = new JLabel("seconds");
 			
@@ -159,7 +159,7 @@ package flaras.view.gui
 			jlRotationRadius = new JLabel("Rotation radius: ");
 			jtfRotationRadius = new JTextField("0", 5);
 			jtfRotationRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			jtfRotationRadius.addActionListener(_ctrGUI.updateAnimationProperties);
+			jtfRotationRadius.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
 			
 			panelLine4.append(jlRotationRadius);
 			panelLine4.append(jtfRotationRadius);
@@ -174,7 +174,7 @@ package flaras.view.gui
 			jcbReverseRotation = new JCheckBox("Reverse rotation");
 			jcbReverseRotation.addActionListener(function():void
 			{
-				_ctrGUI.updateAnimationProperties(null);	
+				_ctrGUI.listenerUpdateAnimationProperties(null);	
 			});
 			jp5.append(jcbReverseRotation);
 			
