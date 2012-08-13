@@ -47,12 +47,6 @@ package flaras.view.gui
 		private var _swapWindow:SwapWindow;
 		private var menu:Menu;
 		
-		private var _propertiesPanel:PropertiesPanel;
-		private var _obj3DPanel:Object3DPopupPanel;
-		private var _texturePanel:ObjectTexturePopupPanel;
-		private var _videoPanel:ObjectVideoPopupPanel;
-		private var _animationPanel:AnimationPanel;
-		
 		private var _projectTreePanel:ViewGUIProjectTree;
 		private var _markerPanel:ViewGUIMarkerPanel;
 		private var _pointPanel:ViewGUIPointPanel;
@@ -95,33 +89,11 @@ package flaras.view.gui
 			menuPanel = new JPanel();
 			menu = new Menu(_ctrMain);
 			menuPanel.append(menu);
-			
-			_propertiesPanel = new PropertiesPanel(ctrGui);
-			_propertiesPanel.setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
-			
-			tabbedPane.appendTab(_propertiesPanel, "Basic", null, "Basic scene development");
-			
-			_animationPanel = new AnimationPanel(ctrGui);
-			tabbedPane.appendTab(_animationPanel, "Animation", null, "Animation effects to the scene");
-		
-			//adding modules object3d, video and texture
-			_obj3DPanel = new Object3DPopupPanel(ctrGui);
-			_videoPanel = new ObjectVideoPopupPanel(ctrGui);
-			_texturePanel = new ObjectTexturePopupPanel(ctrGui);
 		
 			window = new JWindow();
 			window.setContentPane(menuPanel);
 			window.pack();
 			window.show();
-			
-			window2 = new JWindow();
-			window2.setContentPane(tabbedPane);
-			window2.setSizeWH(214, 480);
-			window2.setLocationXY(640, 0);
-			window2.show();
-			window2.alpha = 0.75;
-			
-			//teste da nova interface com jtree
 			
 			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
 			_pointPanel = new ViewGUIPointPanel(ctrGui);
@@ -131,14 +103,14 @@ package flaras.view.gui
 			window3 = new JWindow();
 			window3.setContentPane(_projectTreePanel);
 			window3.setSizeWH(214, 210);
-			window3.setLocationXY(854, 0);
+			window3.setLocationXY(640, 0);
 			window3.alpha = 0.75;
 			window3.show();
 			
 			dynamicWindow = new JWindow();
 			dynamicWindow.setContentPane(_markerPanel);
 			dynamicWindow.setSizeWH(214, 270);
-			dynamicWindow.setLocationXY(854, 210);
+			dynamicWindow.setLocationXY(640, 210);
 			dynamicWindow.alpha = 0.75;
 			dynamicWindow.show();
 		}
@@ -174,7 +146,7 @@ package flaras.view.gui
 		{
 			_cameraSelectWindow = new CameraSelectWindow(_ctrMain);
 			_swapWindow = new SwapWindow(ctrGui);
-			MessageWindow.setParentComponent(_propertiesPanel);			
+			MessageWindow.setParentComponent(_projectTreePanel);			
 		}
 		
 		public function getCameraSelectWindow():CameraSelectWindow
@@ -190,31 +162,6 @@ package flaras.view.gui
 		public function getMenu():Menu
 		{
 			return menu;
-		}
-		
-		public function getPropertiesPanel():PropertiesPanel
-		{
-			return _propertiesPanel;
-		}
-		
-		public function getObj3DPanel():Object3DPopupPanel
-		{
-			return _obj3DPanel;
-		}
-		
-		public function getTexturePanel():ObjectTexturePopupPanel
-		{
-			return _texturePanel;
-		}
-		
-		public function getVideoPanel():ObjectVideoPopupPanel
-		{
-			return _videoPanel;
-		}
-		
-		public function getAnimationPanel():AnimationPanel
-		{
-			return _animationPanel;
 		}	
 		
 		public function getTreePanel():ViewGUIProjectTree
