@@ -79,10 +79,8 @@ package flaras.view.gui
 		{
 			var tabbedPane:JTabbedPane;
 			var menuPanel:JPanel;
-			var window:JWindow;
+			var window1:JWindow;
 			var window2:JWindow;
-			var window3:JWindow;
-			var window4:JWindow;
 		
 			tabbedPane = new JTabbedPane();
 			
@@ -90,22 +88,22 @@ package flaras.view.gui
 			menu = new Menu(_ctrMain);
 			menuPanel.append(menu);
 		
-			window = new JWindow();
-			window.setContentPane(menuPanel);
-			window.pack();
-			window.show();
+			window1 = new JWindow();
+			window1.setContentPane(menuPanel);
+			window1.pack();
+			window1.show();
 			
 			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
 			_pointPanel = new ViewGUIPointPanel(ctrGui);
 			_scenePanel = new ViewGUIScenePanel(ctrGui);			
 			_projectTreePanel = new ViewGUIProjectTree(ctrGui, this);
 			
-			window3 = new JWindow();
-			window3.setContentPane(_projectTreePanel);
-			window3.setSizeWH(214, 210);
-			window3.setLocationXY(640, 0);
-			window3.alpha = 0.75;
-			window3.show();
+			window2 = new JWindow();
+			window2.setContentPane(_projectTreePanel);
+			window2.setSizeWH(214, 210);
+			window2.setLocationXY(640, 0);
+			window2.alpha = 0.75;
+			window2.show();
 			
 			dynamicWindow = new JWindow();
 			dynamicWindow.setContentPane(_markerPanel);
