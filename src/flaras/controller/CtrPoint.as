@@ -349,6 +349,7 @@ package flaras.controller
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			
 			bndPoint.showAxis();
+			bndPoint.hidePointSphere();
 		}
 		
 		public function enableAllPoints():void
