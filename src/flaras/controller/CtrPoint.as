@@ -47,6 +47,8 @@ package flaras.controller
 		private var _listOfBoundaryPoints:Vector.<ViewPoint> = new Vector.<ViewPoint>();
 		private var _listOfCtrScenes:Vector.<CtrScene> = new Vector.<CtrScene>();
 		
+		private var nListOfScenesAlreadyLoaded:uint;
+		
 		private var _ctrMain:CtrMain;
 		
 		public function CtrPoint(ctrMain:CtrMain)
@@ -110,7 +112,17 @@ package flaras.controller
 		public function finishedReadingListOfPoints():void
 		{
 			this._ctrMain.ctrGUI.comboBoxReload();
+			nListOfScenesAlreadyLoaded = 0;
 		}		
+		
+		public function finishedReadingListOfScenes():void
+		{
+			nListOfScenesAlreadyLoaded++;
+			if (nListOfScenesAlreadyLoaded == _listOfPoints.length)
+			{
+				this._ctrMain.ctrGUI.buildTree();
+			}			
+		}
 		
 		public function getListOfPoints():Vector.<Point>
 		{
@@ -138,21 +150,21 @@ package flaras.controller
 		}
 		
 		// functions related with adding and removing points -----------------------------------------------------------
-		public function addPointFromXML(pPosition:Number3D):void
+		public function addPointFromXML(pPosition:Number3D, pLabel:String):void
 		{
 			var p:Point;
 			
-			p = addPoint(pPosition);
+			p = addPoint(pPosition, pLabel);
 			
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
 		}
 		
-		public function addPoint(pPosition:Number3D):Point
+		public function addPoint(pPosition:Number3D, pLabel:String):Point
 		{
 			var p:Point;
 			
-			p = new Point(this._listOfPoints.length, pPosition, "")
+			p = new Point(this._listOfPoints.length, pPosition, pLabel)
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new ViewPoint(p.getPosition()));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
