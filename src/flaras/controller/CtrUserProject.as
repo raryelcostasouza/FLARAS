@@ -181,7 +181,7 @@ package flaras.controller
 			initTempSubFolders();
 			
 			
-			_ctrMain.ctrGUI.comboBoxReload();	
+			_ctrMain.ctrGUI.resetInterface();	
 			
 			
 			_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();
