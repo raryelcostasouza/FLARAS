@@ -67,7 +67,7 @@ package flaras.controller.io.fileReader
 			
 			for each (var point:XML in aXMLFile.point) 
 			{
-				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z));
+				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), point.label);
 			}
 			
 			aObjCtrPoint.finishedReadingListOfPoints();
