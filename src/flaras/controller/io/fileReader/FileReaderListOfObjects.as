@@ -142,6 +142,7 @@ package flaras.controller.io.fileReader
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
 												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection, label);
 			}
+			aObjCtrPoint.finishedReadingListOfScenes();
 		}
 		
 		private function onIOError(e:Event):void
