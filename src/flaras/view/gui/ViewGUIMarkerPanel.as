@@ -9,6 +9,8 @@ package flaras.view.gui
 	{
 		private var _ctrGUI:CtrGUI;
 		private var _jcbRefMarkerPersistence:JCheckBox;
+		private var _jrbRefMarkerBaseSphere:JRadioButton; 
+		private var _jrbRefMarkerBasePlane:JRadioButton;
 		
 		public function ViewGUIMarkerPanel(pCtrGUI:CtrGUI) 
 		{
@@ -26,8 +28,6 @@ package flaras.view.gui
 		{
 			var subPanel:JPanel;
 			var tabProperties:JPanel;
-			var jrbRefMarkerBaseSphere:JRadioButton; 
-			var jrbRefMarkerBasePlane:JRadioButton;
 			var bg:ButtonGroup;
 			
 			tabProperties = new JPanel();
@@ -41,17 +41,17 @@ package flaras.view.gui
 			subPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			subPanel.setBorder(new TitledBorder(null, "Cover type", TitledBorder.TOP, TitledBorder.LEFT));
 			
-			jrbRefMarkerBasePlane = new JRadioButton("Plane");
-			jrbRefMarkerBasePlane.addActionListener(_ctrGUI.listenerSetMarkerBaseTypePlane);
-			jrbRefMarkerBaseSphere = new JRadioButton("Sphere"); 
-			jrbRefMarkerBaseSphere.addActionListener(_ctrGUI.listenerSetMarkerBaseTypeSphere);
-			subPanel.append(jrbRefMarkerBasePlane);
-			subPanel.append(jrbRefMarkerBaseSphere);
-			jrbRefMarkerBasePlane.setSelected(true);
+			_jrbRefMarkerBasePlane = new JRadioButton("Plane");
+			_jrbRefMarkerBasePlane.addActionListener(_ctrGUI.listenerSetMarkerBaseTypePlane);
+			_jrbRefMarkerBaseSphere = new JRadioButton("Sphere"); 
+			_jrbRefMarkerBaseSphere.addActionListener(_ctrGUI.listenerSetMarkerBaseTypeSphere);
+			subPanel.append(_jrbRefMarkerBasePlane);
+			subPanel.append(_jrbRefMarkerBaseSphere);
+			_jrbRefMarkerBasePlane.setSelected(true);
 			
 			bg = new ButtonGroup();
-			bg.append(jrbRefMarkerBasePlane);
-			bg.append(jrbRefMarkerBaseSphere);
+			bg.append(_jrbRefMarkerBasePlane);
+			bg.append(_jrbRefMarkerBaseSphere);
 			
 			tabProperties.append(subPanel);		
 			
@@ -79,8 +79,16 @@ package flaras.view.gui
 			return _jcbRefMarkerPersistence;
 		}
 		
-		
-		
+		public function setJRBMarkerBaseType(pBaseType:uint):void
+		{
+			if (pBaseType == CtrMarker.REF_BASE_RECTANGLE_PLANE)
+			{
+				_jrbRefMarkerBasePlane.setSelected(true);
+			}
+			else
+			{
+				_jrbRefMarkerBaseSphere.setSelected(true);
+			}
+		}		
 	}
-
 }
