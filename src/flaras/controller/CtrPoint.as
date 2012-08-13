@@ -111,7 +111,6 @@ package flaras.controller
 		
 		public function finishedReadingListOfPoints():void
 		{
-			this._ctrMain.ctrGUI.comboBoxReload();
 			nListOfScenesAlreadyLoaded = 0;
 		}		
 		
@@ -120,7 +119,7 @@ package flaras.controller
 			nListOfScenesAlreadyLoaded++;
 			if (nListOfScenesAlreadyLoaded == _listOfPoints.length)
 			{
-				this._ctrMain.ctrGUI.buildTree();
+				this._ctrMain.ctrGUI.initProjectTree();
 			}			
 		}
 		
