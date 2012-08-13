@@ -71,10 +71,12 @@ package flaras.controller.io.fileSaver
 			for each(var p:Point in pListOfPoints)
 			{
 				var position:Number3D = p.getPosition();
+				var label:String = p.getLabel();
 				
 				var newNode:XML = new XML();
 				newNode = 
 				<point>
+					<label>{label}</label>
 					<position>
 						<x>{position.x}</x>
 						<y>{position.y}</y>
@@ -95,12 +97,14 @@ package flaras.controller.io.fileSaver
 			var rotation:Number3D;
 			var scale:Number3D;
 			var pathObj3D:String;
+			var label:String;
 			
 			for each(var scene:FlarasScene in pListOfObjects)
 			{
 				translation = scene.getTranslation();
 				rotation = scene.getRotation();
 				scale = scene.getScale();
+				label = scene.getLabel();
 				
 				if (scene is VirtualObjectScene)
 				{
@@ -114,6 +118,7 @@ package flaras.controller.io.fileSaver
 				var newNode:XML = new XML();
 				newNode = 
 				<object3D>
+					<label>{label}</label>
 					<filePath>{pathObj3D}</filePath>
 					<translation>
 						<x>{translation.x}</x>
