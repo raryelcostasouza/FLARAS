@@ -34,6 +34,7 @@ package flaras.controller
 	import flaras.controller.io.fileReader.*;
 	import flaras.model.marker.*;
 	import flaras.view.marker.*;
+	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
 	public class CtrMarker 
@@ -201,7 +202,16 @@ package flaras.controller
 		
 		public function loadRefMarkerData():void
 		{
-			new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH)
+			var f:File;
+			f = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
+			if (f.exists)
+			{
+				new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
+			}
+			else
+			{
+				finishedLoadingRefMarkerData(CtrMarker.REF_BASE_RECTANGLE_PLANE);
+			}
 		}
 		
 		public function finishedLoadingInteractionMarkerData(intSphereData:InteractionSphereData):void
@@ -214,7 +224,7 @@ package flaras.controller
 		{
 			_modelRefMarker.setBaseType(pRefMarkerBaseType);
 			_viewRefMarker.updateView(_modelRefMarker);
-			_ctrMain.ctrGUI.getGUI().getMenu().setSelectionJRBRefMarkerBaseType(_modelRefMarker.getBaseType());
+			_ctrMain.ctrGUI.getGUI().getMarkerPanel().setJRBMarkerBaseType(_modelRefMarker.getBaseType());
 		}
 		
 		public function toggleRefMarkerPersistence():void
