@@ -228,6 +228,7 @@ package flaras.controller
 				_modelRefMarker.setPersistence(true);
 			}
 			_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBRefMarkPersist(_modelRefMarker.getPersistence());
+			_ctrMain.ctrGUI.getGUI().getMarkerPanel().getJCBRefMarkerPersistence().setSelected(_modelRefMarker.getPersistence());
 		}
 		
 		public function mirrorInteractionMarker():void
