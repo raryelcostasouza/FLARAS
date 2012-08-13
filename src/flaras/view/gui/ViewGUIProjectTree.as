@@ -1,9 +1,11 @@
 package flaras.view.gui
 {
 	import flaras.controller.*;
+	import flaras.model.point.*;
+	import flaras.model.scene.FlarasScene;
 	import flash.events.*;
 	import org.aswing.*;
-	import org.aswing.geom.IntDimension;
+	import org.aswing.geom.*;
 	import org.aswing.tree.*;
 	
 	public class ViewGUIProjectTree extends JPanel
@@ -134,6 +136,21 @@ package flaras.view.gui
 			_tree.updateUI();
 		}
 		
+		public function rebuildPointBranch(indexPoint:uint, pListOfLabels:Vector.<String>):void
+		{
+			var sceneNode:DefaultMutableTreeNode;
+			var pointNode:DefaultMutableTreeNode;
+			
+			pointNode = DefaultMutableTreeNode(_root.getChildAt(indexPoint));
+			for (var i:uint = 0; i < pointNode.getChildCount(); i++)
+			{
+				sceneNode = DefaultMutableTreeNode(pointNode.getChildAt(i));
+				sceneNode.setUserObject("Scene " + (i + 1) + ": " + pListOfLabels[i])				
+			}
+			
+			_tree.updateUI();
+		}
+		
 		public function onSelection(e:Event):void
 		{
 			var node:DefaultMutableTreeNode;
@@ -245,7 +262,6 @@ package flaras.view.gui
 			{
 				return false;
 			}
-		
 		}
 		
 		public function selectPoint(indexPoint:uint):void
@@ -265,6 +281,34 @@ package flaras.view.gui
 			sceneNode = DefaultMutableTreeNode(pointNode.getChildAt(indexScene));
 			
 			_tree.setSelectionPath(new TreePath([_root, pointNode, sceneNode]));
+		}
+		
+		public function resetTree():void
+		{			
+			_root.removeAllChildren();
+			_tree.setSelectionPath(new TreePath([_root]))
+			_tree.updateUI();
+		}
+		
+		public function initTree(listOfPoints:Vector.<Point>):void 
+		{
+			var pointNode:DefaultMutableTreeNode;
+			var sceneNode:DefaultMutableTreeNode;
+			
+			resetTree();
+			trace("NPoints:  " + listOfPoints.length);
+			for each (var p:Point in listOfPoints) 
+			{
+				pointNode = new DefaultMutableTreeNode("Point " + (_root.getChildCount() + 1) +": " + p.getLabel());
+				_root.insert(pointNode, _root.getChildCount());
+				trace("NScenes:  " + p.getListOfFlarasScenes().length);
+				for each (var scene:FlarasScene in p.getListOfFlarasScenes()) 
+				{
+					sceneNode = new DefaultMutableTreeNode("Scene " + (pointNode.getChildCount() + 1) + ": " + scene.getLabel())
+					pointNode.insert(sceneNode, pointNode.getChildCount());
+				}
+			}
+			_tree.updateUI();
 		}
 	}
 }
