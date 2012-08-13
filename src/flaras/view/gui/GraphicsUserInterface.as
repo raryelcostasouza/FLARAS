@@ -53,6 +53,12 @@ package flaras.view.gui
 		private var _videoPanel:ObjectVideoPopupPanel;
 		private var _animationPanel:AnimationPanel;
 		
+		private var _projectTreePanel:ViewGUIProjectTree;
+		private var _markerPanel:ViewGUIMarkerPanel;
+		private var _pointPanel:ViewGUIPointPanel;
+		private var _scenePanel:ViewGUIScenePanel;
+		private var dynamicWindow:JWindow;
+		
 		public static const developmentPanelWidth:uint = 214;
 		
 		public function GraphicsUserInterface(ctrMain:CtrMain, pCtrGUI:CtrGUI)
@@ -81,6 +87,8 @@ package flaras.view.gui
 			var menuPanel:JPanel;
 			var window:JWindow;
 			var window2:JWindow;
+			var window3:JWindow;
+			var window4:JWindow;
 		
 			tabbedPane = new JTabbedPane();
 			
@@ -112,6 +120,54 @@ package flaras.view.gui
 			window2.setLocationXY(640, 0);
 			window2.show();
 			window2.alpha = 0.75;
+			
+			//teste da nova interface com jtree
+			
+			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
+			_pointPanel = new ViewGUIPointPanel(ctrGui);
+			_scenePanel = new ViewGUIScenePanel(ctrGui);			
+			_projectTreePanel = new ViewGUIProjectTree(ctrGui, this);
+			
+			window3 = new JWindow();
+			window3.setContentPane(_projectTreePanel);
+			window3.setSizeWH(214, 210);
+			window3.setLocationXY(854, 0);
+			window3.alpha = 0.75;
+			window3.show();
+			
+			dynamicWindow = new JWindow();
+			dynamicWindow.setContentPane(_markerPanel);
+			dynamicWindow.setSizeWH(214, 270);
+			dynamicWindow.setLocationXY(854, 210);
+			dynamicWindow.alpha = 0.75;
+			dynamicWindow.show();
+		}
+		
+		public function showMarkerPanel():void
+		{
+			if (dynamicWindow.remove(_pointPanel) || dynamicWindow.remove(_scenePanel))
+			{
+				dynamicWindow.setContentPane(_markerPanel);
+				_markerPanel.setSelectedIndex(0);
+			}
+		}
+		
+		public function showPointPanel():void
+		{
+			if (dynamicWindow.remove(_markerPanel) || dynamicWindow.remove(_scenePanel))
+			{
+				dynamicWindow.setContentPane(_pointPanel);
+				_pointPanel.setSelectedIndex(0);
+			}
+		}
+		
+		public function showScenePanel():void
+		{
+			if (dynamicWindow.remove(_pointPanel) || dynamicWindow.remove(_markerPanel))
+			{
+				dynamicWindow.setContentPane(_scenePanel);
+				_scenePanel.setSelectedIndex(0);
+			}
 		}
 		
 		private function initWindows():void
@@ -160,5 +216,25 @@ package flaras.view.gui
 		{
 			return _animationPanel;
 		}	
+		
+		public function getTreePanel():ViewGUIProjectTree
+		{
+			return _projectTreePanel;
+		}
+		
+		public function getPointPanel():ViewGUIPointPanel
+		{
+			return _pointPanel;
+		}
+		
+		public function getScenePanel():ViewGUIScenePanel 
+		{
+			return _scenePanel;
+		}
+		
+		public function getMarkerPanel():ViewGUIMarkerPanel 
+		{
+			return _markerPanel;
+		}
 	}
 }
