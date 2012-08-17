@@ -32,13 +32,16 @@ package flaras.view.point
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.util.*;
+	import flaras.model.point.*;
 	import flaras.view.marker.*;
 	import flash.events.*;
+	import flash.filters.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.events.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
 	import org.papervision3d.objects.primitives.*;
+	import org.papervision3d.view.layer.*;
 	
 	public class ViewPoint 
 	{
@@ -46,15 +49,24 @@ package flaras.view.point
 		private var _obj3DAuxSphere:DisplayObject3D;
 		private var _obj3DAxis:DAE;
 		
+		private var _ctrMain:CtrMain;
+		private var _point:Point;
+		private var  _sphereOfPointLayer:ViewportLayer;
+		
 		public static const RADIUS_SPHERE_OF_POINT:uint = 10;
 		
-		public function ViewPoint(position:Number3D) 
+		public function ViewPoint(pPoint:Point, pCtrMain:CtrMain) 
 		{
+			
+			
+			_ctrMain = pCtrMain;
+			_point = pPoint;
+			
 			_obj3DSphereOfPoint = new Sphere(Color.gray, RADIUS_SPHERE_OF_POINT, 10, 10);
-			_obj3DSphereOfPoint.position = position;
+			_obj3DSphereOfPoint.position = _point.getPosition();			
 			
 			_obj3DAuxSphere = new Sphere(Color.blue, RADIUS_SPHERE_OF_POINT, 10, 10);
-			_obj3DAuxSphere.position = position;
+			_obj3DAuxSphere.position = _point.getPosition();
 			_obj3DAuxSphere.visible = false;
 			
 			_obj3DAxis = new DAE();
@@ -63,12 +75,17 @@ package flaras.view.point
 			_obj3DAxis.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			_obj3DAxis.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError)
 			_obj3DAxis.scale = 10;
-			_obj3DAxis.position = position;
+			_obj3DAxis.position = _point.getPosition();
 			_obj3DAxis.visible = false;
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER , null);
 			MarkerNodeManager.addObj2MarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER, null);
 			MarkerNodeManager.addObj2MarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER, null);
+			
+			_sphereOfPointLayer = _ctrMain.fmmapp.getViewPort().containerSprite.getChildLayer(_obj3DSphereOfPoint, true, true);
+			_sphereOfPointLayer.addEventListener(MouseEvent.CLICK, onMouseClick);
+			_sphereOfPointLayer.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			_sphereOfPointLayer.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 		}
 		
 		public function hidePointSphere():void
@@ -130,6 +147,10 @@ package flaras.view.point
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER);
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER);
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER);
+		
+			_sphereOfPointLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			_sphereOfPointLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			_sphereOfPointLayer.removeEventListener(MouseEvent.CLICK, onMouseClick);
 			
 			_obj3DSphereOfPoint = null;
 			_obj3DAuxSphere = null;
@@ -151,6 +172,21 @@ package flaras.view.point
 		private function onSecurityError(e:Event):void
 		{
 			ErrorHandler.onSecurityError("ViewPoint", SystemFilesPathsConstants.OBJ_PATH_AXIS);
+		}
+		
+		private function onMouseClick(e:MouseEvent):void
+		{
+			_ctrMain.ctrPoint.inspectPoint(_point);
+		}
+		
+		private function onMouseOver(e:MouseEvent):void
+		{
+			e.currentTarget.filters = [new GlowFilter(0xcccc00, 1, 20, 20, 5)];
+		}
+		
+		private function onMouseOut(e:MouseEvent):void
+		{
+			e.currentTarget.filters = [];
 		}
 	}
 }
