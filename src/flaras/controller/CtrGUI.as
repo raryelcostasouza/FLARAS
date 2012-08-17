@@ -724,6 +724,11 @@ package flaras.controller
 			return _ctrMain;
 		}
 		
+		public function actionRefMarkerSelected():void 
+		{
+			_ctrMain.ctrPoint.disableAllPointsUI();
+		}
+		
 		public function actionPointSelected():void
 		{
 			var indexPoint:uint;
