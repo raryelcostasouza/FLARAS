@@ -39,12 +39,12 @@ package flaras.view.gui
 		private var _ctrMain:CtrMain;
 		
 		private var menuArchive:JMenu = new JMenu("File");
-		private var newFlaras:JMenuItem = new JMenuItem("&New");
-		private var openFlaras:JMenuItem = new JMenuItem("&Open");
-		private var publish:JMenuItem = new JMenuItem("&Publish");
-		private var saveFlaras:JMenuItem = new JMenuItem("&Save");
+		private var newFlaras:JMenuItem = new JMenuItem("&New", new LoadIcon("icons/external/new.png"));
+		private var openFlaras:JMenuItem = new JMenuItem("&Open", new LoadIcon("icons/external/open.png"));
+		private var publish:JMenuItem = new JMenuItem("&Publish", new LoadIcon("icons/external/publish.png"));
+		private var saveFlaras:JMenuItem = new JMenuItem("&Save", new LoadIcon("icons/external/save.png"));
 		private var saveAsFlaras:JMenuItem = new JMenuItem("Save &as...");
-		private var exitFlaras:JMenuItem = new JMenuItem("E&xit");
+		private var exitFlaras:JMenuItem = new JMenuItem("E&xit", new LoadIcon("icons/external/exit.png"));
 		
 		private var menuView:JMenu = new JMenu("View");
 		private var refMarkerPersitence:JCheckBoxMenuItem = new JCheckBoxMenuItem("Ref. marker persistence");
@@ -53,8 +53,8 @@ package flaras.view.gui
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
 	
 		private var menuAbout:JMenu =  new JMenu("About");
-		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands");
-		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS");
+		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands", new LoadIcon("icons/external/keyboard.png"));
+		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS", new LoadIcon("icons/flaras16.png"));
 		private var jmiLicense:JMenuItem = new JMenuItem("&License");
 		
 		public function Menu(ctrMain:CtrMain):void
