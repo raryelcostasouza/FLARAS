@@ -393,6 +393,11 @@ package FTK
 			this.addEventListener(Event.ENTER_FRAME, this.run);			
 		}
 		
+		public function getViewPort():Viewport3D
+		{
+			return viewport3d;
+		}
+		
 		private function initRecCameraOff():void
 		{
 			recCameraOff= new Shape();
