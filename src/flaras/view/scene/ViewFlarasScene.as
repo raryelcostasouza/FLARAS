@@ -252,7 +252,15 @@ package flaras.view.scene
 		
 		private function onMouseClick(e:MouseEvent):void
 		{
-			_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_FORWARD);
+			if (e.ctrlKey)
+			{
+				_ctrMain.ctrPoint.inspectPoint(_baseFlarasScene.getParentPoint());
+			}
+			else
+			{
+				_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_FORWARD);
+			}
+			
 		}		
 		
 		private function onMouseRightClick(e:MouseEvent):void
