@@ -1,6 +1,7 @@
 package flaras.view.gui 
 {
 	import flaras.controller.*;
+	import flash.display.LoaderInfo;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
@@ -66,11 +67,11 @@ package flaras.view.gui
 			buildTextureSubPanel();
 			buildVideoSubPanel();
 			
-			appendTab(buildTabBasic(), "Properties", null, "Edition of scene transformantions");			
-			appendTab(buildTabAudio(), "Audio", null, "Edit audio properties");
-			appendTab(buildTabType(), "Type", null, "Scene type");
-			appendTab(buildTabAnimation(), "Animation", null, "Animate scene");
-			appendTab(buildTabOperations(), "Operations", null, "Operations for scene");
+			appendTab(buildTabBasic(), "", new LoadIcon("icons/external/properties.png", 24, 24, true), "Properties");			
+			appendTab(buildTabAudio(), "", new LoadIcon("icons/external/audio.png"), "Audio");
+			appendTab(buildTabType(), "", new LoadIcon("icons/external/type.png"), "Scene type");
+			appendTab(buildTabAnimation(), "", new LoadIcon("icons/external/animation.png"), "Animation");
+			appendTab(buildTabOperations(), "", new LoadIcon("icons/external/operations.png", 24, 24, true), "Operations");
 			
 			setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));			
 		}
@@ -267,14 +268,14 @@ package flaras.view.gui
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			tabOperations.setPreferredSize(new IntDimension(214, 480));
-			jbDeleteScene = new JButton("Delete Scene");
-			jbSwapScenePosition = new JButton("Swap scene position");
+			jbSwapScenePosition = new JButton("Change scene position", new LoadIcon("icons/external/swap.png"));
+			jbDeleteScene = new JButton("Delete Scene", new LoadIcon("icons/external/delete.png"));
 			
 			jbDeleteScene.addActionListener(_ctrGUI.listenerRemoveScene);
 			jbSwapScenePosition.addActionListener(_ctrGUI.listenerSwapScene);
 			
-			tabOperations.append(jbDeleteScene);
 			tabOperations.append(jbSwapScenePosition);			
+			tabOperations.append(jbDeleteScene);
 			
 			return tabOperations;
 		}
