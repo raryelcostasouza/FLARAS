@@ -100,14 +100,17 @@ package flaras.view.gui
 			
 			window2 = new JWindow();
 			window2.setContentPane(_projectTreePanel);
-			window2.setSizeWH(214, 210);
+			//window2.setSizeWH(214, 210);
+			window2.setSizeWH(214, 200);
 			window2.setLocationXY(640, 0);
 			window2.show();
 			
 			dynamicWindow = new JWindow();
 			dynamicWindow.setContentPane(_markerPanel);
-			dynamicWindow.setSizeWH(214, 270);
-			dynamicWindow.setLocationXY(640, 210);
+			//dynamicWindow.setSizeWH(214, 270);
+			dynamicWindow.setSizeWH(214, 280);
+			//dynamicWindow.setLocationXY(640, 210);
+			dynamicWindow.setLocationXY(640, 200);
 			dynamicWindow.show();
 		}
 		
