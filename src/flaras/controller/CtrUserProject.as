@@ -542,10 +542,7 @@ package flaras.controller
 		
 		public function setUnsavedModifications(unSavedModifications:Boolean):void
 		{
-			if (this._unSavedModifications != unSavedModifications)
-			{
-				this._unSavedModifications = unSavedModifications;
-			}	
+			this._unSavedModifications = unSavedModifications;
 		}
 		
 		private function onIOError(e:Event):void
