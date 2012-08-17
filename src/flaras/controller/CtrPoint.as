@@ -101,6 +101,7 @@ package flaras.controller
 			bndPoint = _listOfBoundaryPoints[p.getID()];
 			bndPoint.destroy();
 			bndPoint = null;
+			p.destroy();
 			p = null;			
 		}
 		
@@ -275,7 +276,7 @@ package flaras.controller
 			}			
 		}
 		
-		public function goToScene(indexPoint:int, pObjectIndex:uint):void
+		public function goToScene(indexPoint:int, pSceneIndex:uint):void
 		{
 			var p:Point = this._listOfPoints[indexPoint];
 			
@@ -286,14 +287,14 @@ package flaras.controller
 			
 			getCtrScene(p.getID()).disableScene(p.getIndexActiveScene());
 			
-			p.setIndexActiveScene(pObjectIndex);
-			getCtrScene(p.getID()).enableScene(pObjectIndex, true);
+			p.setIndexActiveScene(pSceneIndex);
+			getCtrScene(p.getID()).enableScene(pSceneIndex, true);
 			
 		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
 		
 		// functions related with enabling and disabling points
-		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean):void
+		private function enablePoint(p:Point, pPlayAudio:Boolean, pPlaySystemAudio:Boolean, pShowScene:Boolean = true):void
 		{			
 			var listOfFlarasScenes:Vector.<FlarasScene>;
 			var bndPoint:ViewPoint;
@@ -308,13 +309,28 @@ package flaras.controller
 				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_ENABLE);
 			}			
 			
-			listOfFlarasScenes = p.getListOfFlarasScenes();
-			if (listOfFlarasScenes.length > 0)
+			if (pShowScene)
 			{
-				p.setIndexActiveScene(p.getIndexLastActiveScene());
+				listOfFlarasScenes = p.getListOfFlarasScenes();
+				if (listOfFlarasScenes.length > 0)
+				{
+					p.setIndexActiveScene(p.getIndexLastActiveScene());
 				
-				getCtrScene(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio);
-			}
+					getCtrScene(p.getID()).enableScene(p.getIndexActiveScene(), pPlayAudio);
+				}
+			}			
+		}
+		
+		public function enablePointUI(indexPoint:int):void
+		{
+			var p:Point = this._listOfPoints[indexPoint];
+			var bndPoint:ViewPoint;
+			
+			bndPoint = _listOfBoundaryPoints[p.getID()];			
+			bndPoint.showAxis();
+			//bndPoint.hidePointSphere();
+			//p.setEnabled(true);
+			enablePoint(p, false, false, false);
 		}
 		
 		private function disablePoint(p:Point, pPlayAudio:Boolean):void
@@ -344,17 +360,6 @@ package flaras.controller
 				getCtrScene(p.getID()).disableScene(p.getIndexActiveScene());
 			}
 		}	
-		
-		public function enablePointUI(indexPoint:int):void
-		{
-			var p:Point = this._listOfPoints[indexPoint];
-			var bndPoint:ViewPoint;
-			
-			bndPoint = _listOfBoundaryPoints[p.getID()];
-			
-			bndPoint.showAxis();
-			bndPoint.hidePointSphere();
-		}
 		
 		public function enableAllPoints():void
 		{
