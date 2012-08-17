@@ -18,8 +18,8 @@ package flaras.view.gui
 			
 			_ctrGUI = pCtrGUI;
 			
-			appendTab(buildTabProperties(), "Properties", null, "Edition of ref. marker properties");
-			appendTab(buildTabOperations(), "Operations", null, "Operations for ref. marker");
+			appendTab(buildTabProperties(), "", new LoadIcon("icons/external/properties.png", 24, 24, true), "Properties");
+			appendTab(buildTabOperations(), "", new LoadIcon("icons/external/operations.png", 24, 24, true), "Operations");
 			
 			setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
 		}
@@ -30,13 +30,13 @@ package flaras.view.gui
 			var tabProperties:JPanel;
 			var bg:ButtonGroup;
 			
-			tabProperties = new JPanel();
+			tabProperties = new JPanel(new BorderLayout());
 			tabProperties.setPreferredSize(new IntDimension(214, 480));
 			
 			_jcbRefMarkerPersistence = new JCheckBox("Base persistence");
 			_jcbRefMarkerPersistence.addActionListener(_ctrGUI.listenerToggleRefMarkerPersistence);
 			
-			tabProperties.append(_jcbRefMarkerPersistence);
+			tabProperties.append(_jcbRefMarkerPersistence, BorderLayout.NORTH);
 			
 			subPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			subPanel.setBorder(new TitledBorder(null, "Cover type", TitledBorder.TOP, TitledBorder.LEFT));
@@ -45,6 +45,7 @@ package flaras.view.gui
 			_jrbRefMarkerBasePlane.addActionListener(_ctrGUI.listenerSetMarkerBaseTypePlane);
 			_jrbRefMarkerBaseSphere = new JRadioButton("Sphere"); 
 			_jrbRefMarkerBaseSphere.addActionListener(_ctrGUI.listenerSetMarkerBaseTypeSphere);
+			
 			subPanel.append(_jrbRefMarkerBasePlane);
 			subPanel.append(_jrbRefMarkerBaseSphere);
 			_jrbRefMarkerBasePlane.setSelected(true);
@@ -53,7 +54,7 @@ package flaras.view.gui
 			bg.append(_jrbRefMarkerBasePlane);
 			bg.append(_jrbRefMarkerBaseSphere);
 			
-			tabProperties.append(subPanel);		
+			tabProperties.append(subPanel, BorderLayout.CENTER);		
 			
 			return tabProperties;
 		}
@@ -66,7 +67,7 @@ package flaras.view.gui
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			tabOperations.setPreferredSize(new IntDimension(214, 480));
 			
-			jbAddPoint = new JButton("Add new point");
+			jbAddPoint = new JButton("Add new point", new LoadIcon("icons/external/add-point.png", 48, 48));
 			jbAddPoint.addActionListener(_ctrGUI.listenerAddPoint);
 			
 			tabOperations.append(jbAddPoint);
