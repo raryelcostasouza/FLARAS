@@ -39,7 +39,6 @@ package flaras.controller
 	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;
-	import org.aswing.plaf.UIResource;
 	import org.papervision3d.core.math.*;
 	
 	public class CtrGUI
@@ -158,6 +157,7 @@ package flaras.controller
 					{
 						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(), "", new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()), new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()), new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())), false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(), _gui.getScenePanel().getJCBAudioRepeat().isSelected(), true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
+					fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 				}
 			}
 		}
