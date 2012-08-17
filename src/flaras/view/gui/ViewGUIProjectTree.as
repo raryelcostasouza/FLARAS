@@ -32,7 +32,7 @@ package flaras.view.gui
 			_tree.addSelectionListener(onSelection);
 			
 			jsp = new JScrollPane(_tree, JScrollPane.SCROLLBAR_ALWAYS, JScrollPane.SCROLLBAR_ALWAYS);
-			jsp.setPreferredSize(new IntDimension(208, 204));
+			jsp.setPreferredSize(new IntDimension(208, 194));
 			append(jsp);
 		}
 		
@@ -167,6 +167,7 @@ package flaras.view.gui
 				if (nodeName.indexOf("Ref. Marker") != -1)
 				{
 					_gui.showMarkerPanel();
+					_ctrGUI.actionRefMarkerSelected();
 				}
 				else
 				{
