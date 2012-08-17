@@ -796,7 +796,7 @@ package flaras.controller
 		
 		public function listenerRemovePoint(e:Event):void
 		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this point?\nAll child scenes will also be deleted.", null, _gui.getTreePanel(), true, null, JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemovePoint);
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this point?\nAll child scenes will also be deleted.", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemovePoint);
 		}
 		
 		public function listenerConfirmedRemovePoint(e:Event):void
@@ -924,7 +924,7 @@ package flaras.controller
 		
 		public function listenerRemoveScene(e:Event):void
 		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this scene?", null, _gui.getScenePanel(), true, null, JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemoveScene);
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this scene?", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemoveScene);
 		}
 		
 		private function listenerConfirmedRemoveScene(e:Event):void
