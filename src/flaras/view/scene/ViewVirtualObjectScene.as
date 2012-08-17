@@ -40,14 +40,15 @@ package flaras.view.scene
 	import org.papervision3d.events.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
+	import org.papervision3d.view.layer.ViewportLayer;
 	
 	public class ViewVirtualObjectScene extends ViewFlarasScene
 	{		
 		private var _virtualObjectScene:VirtualObjectScene;
 		
-		public function ViewVirtualObjectScene(virtualObjectScene:VirtualObjectScene) 
+		public function ViewVirtualObjectScene(virtualObjectScene:VirtualObjectScene, pCtrMain:CtrMain) 
 		{
-			super(this, virtualObjectScene);
+			super(this, virtualObjectScene, pCtrMain);
 			_virtualObjectScene = virtualObjectScene;
 		}
 		
@@ -123,10 +124,12 @@ package flaras.view.scene
 		}
 		
 		private function onComplete(e:Event):void
-		{
+		{			
 			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
+			
+			setupMouseInteraction();
 		}
 		
 		private function onIOError(e:Event):void

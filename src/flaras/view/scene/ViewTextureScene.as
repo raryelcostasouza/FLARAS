@@ -47,9 +47,9 @@ package flaras.view.scene
 	{		
 		private var _textureScene:TextureScene;
 		
-		public function ViewTextureScene(textureScene:TextureScene) 
+		public function ViewTextureScene(textureScene:TextureScene, pCtrMain:CtrMain) 
 		{
-			super(this, textureScene);
+			super(this, textureScene, pCtrMain);
 			_textureScene = textureScene;
 		}
 		
@@ -85,6 +85,7 @@ package flaras.view.scene
 			bfm.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
 			bfm.addEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
 			
+			bfm.interactive = true;
 			bfm.doubleSided = true;
 			
 			plane = new Plane(bfm, _textureScene.getWidth(), _textureScene.getHeight());
@@ -120,6 +121,8 @@ package flaras.view.scene
 		{
 			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
 			e.target.removeEventListener(FileLoadEvent.LOAD_ERROR, onIOError);
+			
+			setupMouseInteraction();
 		}
 		
 		private function onIOError(e:Event):void

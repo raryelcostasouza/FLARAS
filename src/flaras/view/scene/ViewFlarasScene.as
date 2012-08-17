@@ -29,11 +29,16 @@
 
 package flaras.view.scene 
 {
+	import flaras.controller.CtrMain;
+	import flaras.controller.CtrMarker;
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flash.errors.*;
+	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
+	import org.papervision3d.view.layer.ViewportLayer;
 	
 	public class ViewFlarasScene 
 	{
@@ -42,8 +47,10 @@ package flaras.view.scene
 		
 		protected var _obj3D:DisplayObject3D;
 		private var _baseFlarasScene:FlarasScene;
+		private var _ctrMain:CtrMain;	
+		private var _obj3DLayer:ViewportLayer;
 		
-		public function ViewFlarasScene(selfReference:ViewFlarasScene, baseFlarasScene:FlarasScene) 
+		public function ViewFlarasScene(selfReference:ViewFlarasScene, baseFlarasScene:FlarasScene, pCtrMain:CtrMain) 
 		{
 			if (this != selfReference)
 			{
@@ -51,6 +58,7 @@ package flaras.view.scene
 			}
 			else
 			{
+				_ctrMain = pCtrMain;
 				_baseFlarasScene = baseFlarasScene;
 			}
 		}
@@ -207,6 +215,11 @@ package flaras.view.scene
 		
 		public function destroy():void
 		{
+			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			_obj3DLayer.removeEventListener(MouseEvent.CLICK, onMouseClick);
+			_obj3DLayer.removeEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
+			
 			if (_viewAnimation)
 			{
 				_viewAnimation.destroy();
@@ -216,6 +229,35 @@ package flaras.view.scene
 			{
 				_viewAudio.destroy();
 			}
+		}
+		
+		protected function setupMouseInteraction():void
+		{			
+			_obj3DLayer = _ctrMain.fmmapp.getViewPort().containerSprite.getChildLayer(_obj3D, true, true);
+			_obj3DLayer.addEventListener(MouseEvent.CLICK, onMouseClick);
+			_obj3DLayer.addEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
+			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+		}
+		
+		private function onMouseOver(e:MouseEvent):void
+		{
+			e.currentTarget.filters = [new GlowFilter(0xcccc00, 1, 20, 20, 5)];
+		}
+		
+		private function onMouseOut(e:MouseEvent):void
+		{
+			e.currentTarget.filters = [];
+		}
+		
+		private function onMouseClick(e:MouseEvent):void
+		{
+			_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_FORWARD);
+		}		
+		
+		private function onMouseRightClick(e:MouseEvent):void
+		{
+			_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_BACKWARD);
 		}
 	}
 }

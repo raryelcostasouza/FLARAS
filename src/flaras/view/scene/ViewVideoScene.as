@@ -42,6 +42,7 @@ package flaras.view.scene
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
+	import org.papervision3d.view.layer.ViewportLayer;
 
 	public class ViewVideoScene extends ViewFlarasScene
 	{
@@ -50,9 +51,9 @@ package flaras.view.scene
 		private var _netStream:NetStream;
 		private var _videoScene:VideoScene;
 		
-		public function ViewVideoScene(videoScene:VideoScene) 
+		public function ViewVideoScene(videoScene:VideoScene, pCtrMain:CtrMain) 
 		{
-			super(this, videoScene);
+			super(this, videoScene, pCtrMain);
 			_videoScene = videoScene;
 		}
 		
@@ -78,12 +79,14 @@ package flaras.view.scene
 		{
 			var plane:Plane;
 			var vsm:VideoStreamMaterial;
+			var obj3DLayer:ViewportLayer;
 			
 			var videoManagerElements:Array = VideoManager.playVideo(
 					FolderConstants.getFlarasAppCurrentFolder()+ "/" + _videoScene.getVideoFilePath(), _videoScene.getWidth(), _videoScene.getHeight(), _videoScene.getRepeatVideo());
 			
 			_netStream = videoManagerElements[1];
 			vsm = new VideoStreamMaterial(videoManagerElements[0], videoManagerElements[1]);
+			vsm.interactive = true;
 			vsm.doubleSided = true;
 			
 			plane = new Plane(vsm, _videoScene.getWidth(), _videoScene.getHeight());
@@ -96,6 +99,7 @@ package flaras.view.scene
 			setMirrorScaleFactor(CtrMirror.MIRRORED_SCALE_FACTOR);
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER, null);
+			setupMouseInteraction();			
 		}
 		
 		override public function unLoad():void
