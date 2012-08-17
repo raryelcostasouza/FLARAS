@@ -153,21 +153,24 @@ package flaras.controller
 		{
 			var p:Point;
 			
-			p = addPoint(pPosition, pLabel);
+			p = addPoint(pPosition, pLabel, true);
 			
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
 		}
 		
-		public function addPoint(pPosition:Number3D, pLabel:String):Point
+		public function addPoint(pPosition:Number3D, pLabel:String, pFromXML:Boolean=false):Point
 		{
 			var p:Point;
 			
-			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			if (!pFromXML)
+			{
+				_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			}			
 			
 			p = new Point(this._listOfPoints.length, pPosition, pLabel)
 			this._listOfPoints.push(p);
-			this._listOfBoundaryPoints.push(new ViewPoint(p.getPosition()));
+			this._listOfBoundaryPoints.push(new ViewPoint(p, _ctrMain));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
 			
 			return p;
