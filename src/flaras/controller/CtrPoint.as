@@ -163,6 +163,8 @@ package flaras.controller
 		{
 			var p:Point;
 			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
 			p = new Point(this._listOfPoints.length, pPosition, pLabel)
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new ViewPoint(p.getPosition()));
