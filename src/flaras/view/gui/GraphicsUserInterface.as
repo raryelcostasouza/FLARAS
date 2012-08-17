@@ -102,14 +102,12 @@ package flaras.view.gui
 			window2.setContentPane(_projectTreePanel);
 			window2.setSizeWH(214, 210);
 			window2.setLocationXY(640, 0);
-			window2.alpha = 0.75;
 			window2.show();
 			
 			dynamicWindow = new JWindow();
 			dynamicWindow.setContentPane(_markerPanel);
 			dynamicWindow.setSizeWH(214, 270);
 			dynamicWindow.setLocationXY(640, 210);
-			dynamicWindow.alpha = 0.75;
 			dynamicWindow.show();
 		}
 		
@@ -144,7 +142,6 @@ package flaras.view.gui
 		{
 			_cameraSelectWindow = new CameraSelectWindow(_ctrMain);
 			_swapWindow = new SwapWindow(ctrGui);
-			MessageWindow.setParentComponent(_projectTreePanel);			
 		}
 		
 		public function getCameraSelectWindow():CameraSelectWindow
