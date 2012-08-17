@@ -105,6 +105,8 @@ package flaras.controller
 		
 		public function changeRefMarkerBaseType(pBaseType:uint):void
 		{
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
 			_modelRefMarker.setBaseType(pBaseType);
 			_viewRefMarker.updateView(_modelRefMarker);
 		}
