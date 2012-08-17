@@ -21,8 +21,8 @@ package flaras.view.gui
 			
 			_ctrGUI = pCtrGUI;
 			
-			appendTab(buildTabProperties(), "Properties", null, "Edition of point properties");
-			appendTab(buildTabOperations(), "Operations", null, "Operations for points")
+			appendTab(buildTabProperties(), "", new LoadIcon("icons/external/properties.png", 24, 24, true), "Properties");
+			appendTab(buildTabOperations(), "", new LoadIcon("icons/external/operations.png", 24, 24, true), "Operations")
 			
 			setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
 		}
@@ -91,20 +91,22 @@ package flaras.view.gui
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			tabOperations.setPreferredSize(new IntDimension(214,480));
 			
-			jbRemPoint = new JButton("Delete point");
-			jbAdd3DObjScene = new JButton("Add 3D Obj Scene");
-			jbAddTextureScene = new JButton("Add Texture Scene");
-			jbAddVideoScene = new JButton("Add Video Scene");
+			jbAdd3DObjScene = new JButton("Add 3D Obj Scene", new LoadIcon("icons/external/obj3d.png", 48, 48));
+			jbAddTextureScene = new JButton("Add Texture Scene", new LoadIcon("icons/external/texture.png", 48, 48));
+			jbAddVideoScene = new JButton("Add Video Scene", new LoadIcon("icons/external/video.png", 48, 48));
+			jbRemPoint = new JButton("Delete point", new LoadIcon("icons/external/delete.png", 48, 48));
+			//jbRemPoint.setVerticalTextPosition(AbstractButton.BOTTOM);
+			//jbRemPoint.setHorizontalTextPosition(AbstractButton.CENTER);
 			
-			jbRemPoint.addActionListener(_ctrGUI.listenerRemovePoint);
 			jbAdd3DObjScene.addActionListener(_ctrGUI.listenerAddObj3DScene);
 			jbAddTextureScene.addActionListener(_ctrGUI.listenerAddTextureScene);
 			jbAddVideoScene.addActionListener(_ctrGUI.listenerAddVideoScene);
+			jbRemPoint.addActionListener(_ctrGUI.listenerRemovePoint);
 			
-			tabOperations.append(jbRemPoint);
 			tabOperations.append(jbAdd3DObjScene);			
 			tabOperations.append(jbAddTextureScene);			
 			tabOperations.append(jbAddVideoScene);			
+			tabOperations.append(jbRemPoint);
 			
 			return tabOperations;
 		}	
