@@ -64,6 +64,13 @@ package flaras.model.point
 			_position = pPosition;			
 		}
 		
+		public function destroy():void
+		{
+			_listOfFlarasScenes = null;
+			_label = null;
+			_position = null;
+		}
+		
 		public function getIndexActiveScene():int
 		{
 			return _indexActiveScene;
