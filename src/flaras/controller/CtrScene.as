@@ -202,15 +202,15 @@ package flaras.controller
 			
 			if (scene is VirtualObjectScene)
 			{
-				viewFlarasScene = new ViewVirtualObjectScene(VirtualObjectScene(scene));
+				viewFlarasScene = new ViewVirtualObjectScene(VirtualObjectScene(scene), _ctrMain);
 			}
 			else if (scene is TextureScene)
 			{
-				viewFlarasScene = new ViewTextureScene(TextureScene(scene));
+				viewFlarasScene = new ViewTextureScene(TextureScene(scene), _ctrMain);
 			}
 			else
 			{
-				viewFlarasScene = new ViewVideoScene(VideoScene(scene));
+				viewFlarasScene = new ViewVideoScene(VideoScene(scene), _ctrMain);
 			}
 			
 			if (scene.getAudio())
