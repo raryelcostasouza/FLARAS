@@ -42,7 +42,7 @@ package flaras.view.gui
 		
 		public function SwapWindow(ctrGUI:CtrGUI) 
 		{
-			super(null, "Swap Scene Position", true);
+			super(null, "Change Scene Position", true);
 			this._ctrGUI = ctrGUI;
 			
 			var mainPanel:JPanel;
