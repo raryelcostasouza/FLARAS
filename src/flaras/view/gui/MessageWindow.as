@@ -35,45 +35,39 @@ package flaras.view.gui
 	
 	public class MessageWindow 
 	{
-		private static var parentComponentForWindows:Component;
 		public static const OBJ3D_INVALID_FILENAME:String = "The obj3D file inside this zipped file has an invalid filename!";
-		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";
-		
-		public static function setParentComponent(pParentComponent:Component):void
-		{
-			parentComponentForWindows = pParentComponent;
-		}		
+		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";	
 		
 		public static function messageSaveSuccess():void
 		{
-			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, parentComponentForWindows, true, new LoadIcon("icons/ok.png", 32, 32));
+			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, null, true, new LoadIcon("icons/external/check.png", 48, 48));
 		}
 		
 		public static function messageFileAlreadyExists(fileName:String):void
 		{
 			JOptionPane.showMessageDialog("Warning!", "There is already another file with the name: \"" + 
 			fileName + "\" on the project.\nFLARAS does not allow that one file is associated with more than one object." +
-			"\nRename your file and you'll be able to add it to the project.", null, parentComponentForWindows);
+			"\nRename your file and you'll be able to add it to the project.", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
 		}
 		
 		public static function messageInvalidDAEFile():void
 		{
-			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE) on the selected file", null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE) on the selected file", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function messageInvalidZipFile():void
 		{
-			JOptionPane.showMessageDialog("Error!", "Invalid/corrupted zip file! One possible cause for this problem may be that the zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Error!", "Invalid/corrupted zip file! One possible cause for this problem may be that the zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function messageInvalidFileName(type:String):void
 		{
-			JOptionPane.showMessageDialog("Error!", type + "\nOnly the following characters are allowed for filenames: \n\na-z \nA-Z \n0-9 \n-(hyphen) \n_(underscore) \n\nFilenames with spaces and special characters are NOT allowed.", null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Error!", type + "\nOnly the following characters are allowed for filenames: \n\na-z \nA-Z \n0-9 \n-(hyphen) \n_(underscore) \n\nFilenames with spaces and special characters are NOT allowed.", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function messageProjectNotSaved2Publish():void
 		{
-			JOptionPane.showMessageDialog("Warning!", "You must save your project before trying to publish it!", null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Warning!", "You must save your project before trying to publish it!", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
 		}
 		
 		//message window called before opening a project or creating a new project
@@ -104,8 +98,8 @@ package flaras.view.gui
 				buttons2show += JOptionPane.CANCEL;
 			}
 			
-			var jop:JOptionPane = JOptionPane.showMessageDialog("Confirmation", msg, null, parentComponentForWindows,
-			true, null, buttons2show);
+			var jop:JOptionPane = JOptionPane.showMessageDialog("Confirmation", msg, null, null,
+			true, new LoadIcon("icons/external/warning.png", 48, 48), buttons2show);
 			
 			jop.getYesButton().addActionListener(yesAction);
 			jop.getNoButton().addActionListener(noAction);			
@@ -114,7 +108,7 @@ package flaras.view.gui
 		
 		public static function errorMessage(errorMessage:String):void
 		{
-			JOptionPane.showMessageDialog("Error!", errorMessage, null, parentComponentForWindows);
+			JOptionPane.showMessageDialog("Error!", errorMessage, null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function keyboardCommands():void
@@ -145,7 +139,7 @@ package flaras.view.gui
 			
 			"Others keys:\n" +
 			"F3: Toggle mirror screen\n" +
-			"P: Toggle reference marker persistence\n\n", null, parentComponentForWindows);
+			"P: Toggle reference marker persistence\n\n", null, null);
 		}
 		
 		
@@ -166,7 +160,7 @@ package flaras.view.gui
 
 			"You should have received a copy of the GNU General Public License\n"+
 			"along with this program.  If not, see <http://www.gnu.org/licenses/>."
-			, null, parentComponentForWindows);
+			, null, null);
 		}
 		
 		public static function aboutFlaras():void
@@ -186,7 +180,7 @@ package flaras.view.gui
 			"Research scholarship by FAPEMIG (Fundação de Amparo à Pesquisa no Estado de Minas Gerais) and\n" +
 			"CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico)\n"
 			
-			, null, parentComponentForWindows, true, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
+			, null, null, true, new LoadIcon("icons/flaras128.png", 128, 128), JOptionPane.OK | JOptionPane.CANCEL);
 			
 			jop.getOkButton().setText("Open FLARAS Website");
 			jop.getCancelButton().setText("Close");
