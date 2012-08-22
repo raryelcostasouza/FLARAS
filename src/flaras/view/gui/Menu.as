@@ -183,6 +183,6 @@ package flaras.view.gui
 		private function licenseFlarasFunction(e:Event):void
 		{
 			MessageWindow.licenseFlaras();
-		}		
+		}	
 	}
 }
