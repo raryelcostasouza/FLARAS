@@ -159,7 +159,7 @@ package flaras.view.scene
 			{
 				_obj3D.rotationX = rotation.x;
 				_obj3D.rotationY = rotation.y;
-				_obj3D.rotationZ = rotation.z;				
+				_obj3D.rotationZ = rotation.z;
 			}
 		}
 		
