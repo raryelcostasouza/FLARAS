@@ -38,6 +38,11 @@ package flaras.view.gui
 		public static const OBJ3D_INVALID_FILENAME:String = "The obj3D file inside this zipped file has an invalid filename!";
 		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";	
 		
+		public static function messageWarningField(pValue:String, pFieldName:String):void
+		{
+			JOptionPane.showMessageDialog("Warning!","Invalid number '" + pValue + "' on field " + pFieldName+ ".\nYour changes will not be applied until this field have a valid value!", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
+		}
+		
 		public static function messageSaveSuccess():void
 		{
 			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, null, true, new LoadIcon("icons/external/check.png", 48, 48));
