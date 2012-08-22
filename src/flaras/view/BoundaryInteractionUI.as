@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,12 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
@@ -66,58 +66,64 @@ package flaras.view
 					
 					_ctrMain.ctrPointInterWithKbd.selectPoint(index);
 				}
+				else
+				{
+					switch (ke.keyCode)
+					{
+						case 65: //A
+							_ctrMain.ctrPoint.enableAllPoints();
+							break;
+						case 67: //C
+							_ctrMain.ctrMarker.changeControlMarkerType();
+							break;
+						case 81: //Q
+							_ctrMain.ctrPoint.disableAllPoints(true);
+							break;
+						case 77: //M
+							_ctrMain.ctrMarker.changeMarkerType();
+							break;
+						case 80: //P
+							_ctrMain.ctrMarker.toggleRefMarkerPersistence();
+							break;
+					}
+				}				
 			}
 			else
 			{
-				switch(ke.keyCode)
+				switch (ke.keyCode)
 				{
-					case 65: //A
-						_ctrMain.ctrPoint.enableAllPoints();
-						break;
-					case 67: //C
-						_ctrMain.ctrMarker.changeControlMarkerType();
-						break;
-					case 81: //Q
-						_ctrMain.ctrPoint.disableAllPoints(true);
-						break;
-					case 77: //M
-						_ctrMain.ctrMarker.changeMarkerType();
-						break;
-					case 80: //P
-						_ctrMain.ctrMarker.toggleRefMarkerPersistence();
-						break;
-					case Keyboard.F1:
+					case Keyboard.F1: 
 						_ctrMain.ctrPoint.toggleVisibleAuxSphereOfPoints();
 						break;
-					case Keyboard.F3:
+					case Keyboard.F3: 
 						_ctrMain.ctrMirror.toggleMirror(true);
 						break;
-					case Keyboard.F4:
+					case Keyboard.F4: 
 						_ctrMain.ctrMarker.changeInteractionSphereSize(-1);
 						break;
-					case Keyboard.F5:
+					case Keyboard.F5: 
 						_ctrMain.ctrMarker.changeInteractionSphereSize(+1);
 						break;
-					case Keyboard.F6:
+					case Keyboard.F6: 
 						_ctrMain.ctrMarker.changeInteractionSphereDistance(-1);
 						break;
-					case Keyboard.F7:
+					case Keyboard.F7: 
 						_ctrMain.ctrMarker.changeInteractionSphereDistance(+1);
 						break
-					case Keyboard.F8:
+					case Keyboard.F8: 
 						_ctrMain.ctrMarker.resetInteractionMarkerSphereProperties();
 						break;
-					case Keyboard.PAGE_DOWN:
-						_ctrMain.ctrPointInterWithKbd.controlForwardInteractionWithSelectedPoint();	
+					case Keyboard.PAGE_DOWN: 
+						_ctrMain.ctrPointInterWithKbd.controlForwardInteractionWithSelectedPoint();
 						break;
-					case Keyboard.PAGE_UP:
-						_ctrMain.ctrPointInterWithKbd.controlBackwardInteractionWithSelectedPoint();	
+					case Keyboard.PAGE_UP: 
+						_ctrMain.ctrPointInterWithKbd.controlBackwardInteractionWithSelectedPoint();
 						break;
-					case Keyboard.END:
+					case Keyboard.END: 
 						_ctrMain.ctrPointInterWithKbd.deselectAllPoints();
 						break;
-				}	
+				}
 			}
 		}
-	}	
+	}
 }
