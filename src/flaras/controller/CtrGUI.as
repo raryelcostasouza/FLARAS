@@ -35,6 +35,7 @@ package flaras.controller
 	import flaras.model.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;
+	import flaras.model.util.*;
 	import flaras.view.gui.*;
 	import flaras.view.scene.*;
 	import flash.events.*;
@@ -822,41 +823,92 @@ package flaras.controller
 		
 		public function listenerUpdateSceneTranslation(e:Event):void
 		{
-			var x:Number;
-			var y:Number;
-			var z:Number;
+			var strX:String;
+			var strY:String;
+			var strZ:String;
+			var allFieldsValid:Boolean;
 			
-			x = Number(_gui.getScenePanel().getJTFSceneTrX().getText());
-			y = Number(_gui.getScenePanel().getJTFSceneTrY().getText());
-			z = Number(_gui.getScenePanel().getJTFSceneTrZ().getText());
+			strX = _gui.getScenePanel().getJTFSceneTrX().getText();
+			strY = _gui.getScenePanel().getJTFSceneTrY().getText();
+			strZ = _gui.getScenePanel().getJTFSceneTrZ().getText();
 			
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTranslation(getCurrentSelectedScene2(), new Number3D(x, y, z));
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Translation X", strX),
+														new FieldData("Translation Y", strY),
+														new FieldData("Translation Z", strZ));
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTranslation(getCurrentSelectedScene2(), new Number3D(Number(strX), Number(strY), Number(strZ)));	
+			}			
 		}
 		
 		public function listenerUpdateSceneRotation(e:Event):void
 		{
-			var rotX:Number;
-			var rotY:Number;
-			var rotZ:Number;
+			var strRotX:String;
+			var strRotY:String;
+			var strRotZ:String;
+			var allFieldsValid:Boolean;
 			
-			rotX = Number(_gui.getScenePanel().getJTFSceneRotX().getText());
-			rotY = Number(_gui.getScenePanel().getJTFSceneRotY().getText());
-			rotZ = Number(_gui.getScenePanel().getJTFSceneRotZ().getText());
+			strRotX = _gui.getScenePanel().getJTFSceneRotX().getText()
+			strRotY = _gui.getScenePanel().getJTFSceneRotY().getText()
+			strRotZ = _gui.getScenePanel().getJTFSceneRotZ().getText()
 			
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRotation(getCurrentSelectedScene2(), new Number3D(rotX, rotY, rotZ));
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Rotation X", strRotX),
+														new FieldData("Rotation Y", strRotY),
+														new FieldData("Rotation Z", strRotZ));
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRotation(getCurrentSelectedScene2(), new Number3D(Number(strRotX), Number(strRotY), Number(strRotZ)));	
+			}			
 		}
 		
 		public function listenerUpdateSceneScale(e:Event):void
 		{
-			var scX:Number;
-			var scY:Number;
-			var scZ:Number;
+			var strScX:String;
+			var strScY:String;
+			var strScZ:String;
+			var allFieldsValid:Boolean;
 			
-			scX = Number(_gui.getScenePanel().getJTFSceneScX().getText());
-			scY = Number(_gui.getScenePanel().getJTFSceneScY().getText());
-			scZ = Number(_gui.getScenePanel().getJTFSceneScZ().getText());
+			strScX = _gui.getScenePanel().getJTFSceneScX().getText();
+			strScY = _gui.getScenePanel().getJTFSceneScY().getText();
+			strScZ = _gui.getScenePanel().getJTFSceneScZ().getText();
 			
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateScale(getCurrentSelectedScene2(), new Number3D(scX, scY, scZ));
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Scale X", strScX),
+														new FieldData("Scale Y", strScY),
+														new FieldData("Scale Z", strScZ));			
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateScale(getCurrentSelectedScene2(), new Number3D(Number(strScX), Number(strScY), Number(strScZ)));
+			}			
+		}
+		
+		private function generalNumericFieldValidator(...args):Boolean
+		{
+			var fieldData:FieldData;
+			var fieldName:String;
+			var fieldValue:String;
+			var numericValue:Number;
+			var allFieldsHaveValidNumbers:Boolean;
+			
+			allFieldsHaveValidNumbers = true;
+			
+			for (var i:uint = 0; i < args.length; i++)
+			{
+				fieldData = args[i];
+				fieldName = fieldData.getName();
+				fieldValue = fieldData.getValue();
+				
+				numericValue = Number(fieldValue);
+				if (isNaN(numericValue))
+				{
+					MessageWindow.messageWarningField(fieldValue, fieldName);
+					allFieldsHaveValidNumbers = false;
+				}
+			}
+			
+			return allFieldsHaveValidNumbers;
 		}
 		
 		public function listenerUpdateSceneLabel(e:Event):void
