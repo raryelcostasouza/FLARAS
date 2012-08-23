@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,19 +15,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.view.scene 
+package flaras.view.scene
 {
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
@@ -43,10 +43,10 @@ package flaras.view.scene
 	import org.papervision3d.view.layer.ViewportLayer;
 	
 	public class ViewVirtualObjectScene extends ViewFlarasScene
-	{		
+	{
 		private var _virtualObjectScene:VirtualObjectScene;
 		
-		public function ViewVirtualObjectScene(virtualObjectScene:VirtualObjectScene, pCtrMain:CtrMain) 
+		public function ViewVirtualObjectScene(virtualObjectScene:VirtualObjectScene, pCtrMain:CtrMain)
 		{
 			super(this, virtualObjectScene, pCtrMain);
 			_virtualObjectScene = virtualObjectScene;
@@ -86,7 +86,7 @@ package flaras.view.scene
 				objDAE.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				objDAE.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 				
-				objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());	
+				objDAE.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
 				_obj3D = objDAE;
 			}
 			else
@@ -96,7 +96,8 @@ package flaras.view.scene
 				objMax3DS.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				objMax3DS.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 				
-				objMax3DS.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
+				objMax3DS.load(FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile(),
+					null, FolderConstants.getFlarasAppCurrentFolder() + "/" + Util.getMax3DSTextureFolder(_virtualObjectScene.getPath3DObjectFile()));
 				_obj3D = objMax3DS;
 			}
 			
@@ -113,10 +114,10 @@ package flaras.view.scene
 				
 				MarkerNodeManager.removeObjFromMarkerNode(_obj3D, CtrMarker.REFERENCE_MARKER);
 				_obj3D = null;
-			}			
-		}	
+			}
+		}
 		
-		override public function destroy():void 
+		override public function destroy():void
 		{
 			unLoad();
 			super.destroy();
@@ -124,7 +125,7 @@ package flaras.view.scene
 		}
 		
 		private function onComplete(e:Event):void
-		{			
+		{
 			e.target.removeEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
@@ -134,12 +135,12 @@ package flaras.view.scene
 		
 		private function onIOError(e:Event):void
 		{
-			ErrorHandler.onIOError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" +_virtualObjectScene.getPath3DObjectFile());
+			ErrorHandler.onIOError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
 		}
 		
 		private function onSecurityError(e:Event):void
 		{
-			ErrorHandler.onSecurityError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" +_virtualObjectScene.getPath3DObjectFile());
+			ErrorHandler.onSecurityError("ViewVirtualObjectScene", FolderConstants.getFlarasAppCurrentFolder() + "/" + _virtualObjectScene.getPath3DObjectFile());
 		}
 	}
 }
