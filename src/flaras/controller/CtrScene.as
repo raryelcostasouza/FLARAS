@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,19 +15,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.controller 
+package flaras.controller
 {
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
@@ -38,7 +38,7 @@ package flaras.controller
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
-	public class CtrScene 
+	public class CtrScene
 	{
 		private var _point:Point;
 		private var _ctrMain:CtrMain;
@@ -59,22 +59,20 @@ package flaras.controller
 			return _listOfScenes2;
 		}
 		
-		public function addScene(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
-										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
-										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
-										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint,
-										pAnimationRadius:uint, pAnimationRotationDirection:int, pLabel:String):void
+		public function addScene(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, pScale:Number3D,
+			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
+			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
+			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
+			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String):void
 		{
 			var scene:FlarasScene;
 			
 			_ctrMain.ctrUserProject.setUnsavedModifications(true);
 			
-			scene = buildScene(pFilePath, pTranslation, pRotation,
-									absScale(pScale), pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 
-									pHasAudio, pAudioPath, pRepeatAudio, 
-									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo,
-									pHasAnimation, pAnimationPeriod, pAnimationRotationAxis, pAnimationRadius, pAnimationRotationDirection, pLabel);
+			scene = buildScene(pFilePath, pTranslation, pRotation, absScale(pScale), pHasTexture, pTexturePath,
+				pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio, pHasVideo, pVideoPath,
+				pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pAnimationPeriod, pAnimationRotationAxis,
+				pAnimationRadius, pAnimationRotationDirection, pLabel);
 			
 			_listOfScenes2.push(scene);
 			_listOfViewFlarasScenes.push(buildViewScene(scene));
@@ -85,27 +83,29 @@ package flaras.controller
 			return new Number3D(Math.abs(scale.x), Math.abs(scale.y), Math.abs(scale.z));
 		}
 		
-		private function buildScene(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
-										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
-										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
-										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint,
-										pAnimationRadius:uint, pAnimationRotationDirection:int, pLabel:String):FlarasScene
+		private function buildScene(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, pScale:Number3D,
+			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
+			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
+			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
+			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String):FlarasScene
 		{
 			var flarasScene:FlarasScene;
 			
 			if (pHasVideo)
 			{
-				flarasScene = new VideoScene(_point, pTranslation, pRotation, absScale(pScale), pVideoPath, pRepeatVideo, pVideoWidth, pVideoHeight, pLabel);
+				flarasScene = new VideoScene(_point, pTranslation, pRotation, absScale(pScale), pVideoPath,
+					pRepeatVideo, pVideoWidth, pVideoHeight, pLabel);
 			}
 			else if (pHasTexture)
 			{
-				flarasScene = new TextureScene(_point, pTranslation, pRotation, absScale(pScale), pTexturePath, pTextureWidth, pTextureHeight, pLabel);
-			}	
+				flarasScene = new TextureScene(_point, pTranslation, pRotation, absScale(pScale), pTexturePath,
+					pTextureWidth, pTextureHeight, pLabel);
+			}
 			else
 			{
-				flarasScene = new VirtualObjectScene(_point, pTranslation, pRotation, absScale(pScale), pFilePath, pLabel);
-			}	
+				flarasScene = new VirtualObjectScene(_point, pTranslation, pRotation, absScale(pScale),
+					pFilePath, pLabel);
+			}
 			
 			if (pHasAudio)
 			{
@@ -114,18 +114,19 @@ package flaras.controller
 			
 			if (pHasAnimation)
 			{
-				flarasScene.setAnimation(new AnimationScene(pAnimationPeriod, pAnimationRotationAxis, pAnimationRadius, pAnimationRotationDirection));
+				flarasScene.setAnimation(new AnimationScene(pAnimationPeriod, pAnimationRotationAxis,
+					pAnimationRadius, pAnimationRotationDirection));
 			}
 			
 			return flarasScene;
 		}
 		
-		public function updateRebuildScene(indexScene:uint, pFilePath:String, pTranslation:Number3D, pRotation:Number3D, 
-										pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, 
-										pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String,
-										pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean,
-										pHasAnimation:Boolean, pAnimationPeriod:Number, pAnimationRotationAxis:uint,
-										pAnimationRadius:uint, pAnimationRotationDirection:int, pLabel:String):void
+		public function updateRebuildScene(indexScene:uint, pFilePath:String, pTranslation:Number3D,
+			pRotation:Number3D, pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number,
+			pTextureHeight:Number, pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean,
+			pVideoPath:String, pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean,
+			pAnimationPeriod:Number, pAnimationRotationAxis:uint, pAnimationRadius:uint, pAnimationRotationDirection:int,
+			pLabel:String):void
 		{
 			var scene:FlarasScene;
 			var viewFlarasScene:ViewFlarasScene;
@@ -165,13 +166,13 @@ package flaras.controller
 			else
 			{
 				/*critical change happened:
-			    object type before -> object type after
-				1) Object3D -> Texture or
-				2) Object3D -> Video or
-				3) Texture -> Object3D or
-				4) Texture -> Video or
-				5) Video -> Object3D or
-				6) Video -> Texture*/
+				   object type before -> object type after
+				   1) Object3D -> Texture or
+				   2) Object3D -> Video or
+				   3) Texture -> Object3D or
+				   4) Texture -> Video or
+				   5) Video -> Object3D or
+				 6) Video -> Texture*/
 				
 				viewFlarasScene.destroy();
 				FileRemover.remove(scene.getBaseSceneFilePath());
@@ -181,19 +182,18 @@ package flaras.controller
 				_listOfViewFlarasScenes.splice(indexScene, 1);
 				
 				//building new scene
-				scene = buildScene(pFilePath, pTranslation, pRotation,
-									absScale(pScale), pHasTexture, pTexturePath, pTextureWidth, pTextureHeight, 
-									pHasAudio, pAudioPath, pRepeatAudio, 
-									pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo,
-									pHasAnimation, pAnimationPeriod, pAnimationRotationAxis, pAnimationRadius, pAnimationRotationDirection, pLabel);
+				scene = buildScene(pFilePath, pTranslation, pRotation, absScale(pScale), pHasTexture,
+					pTexturePath, pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio,
+					pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pAnimationPeriod,
+					pAnimationRotationAxis, pAnimationRadius, pAnimationRotationDirection, pLabel);
 				viewFlarasScene = buildViewScene(scene);
 				
 				//updating scene lists
-				_listOfScenes2[indexScene] =scene;
-				_listOfViewFlarasScenes[indexScene] = viewFlarasScene;				
-			}	
+				_listOfScenes2[indexScene] = scene;
+				_listOfViewFlarasScenes[indexScene] = viewFlarasScene;
+			}
 			
-			viewFlarasScene.showScene(true);			
+			viewFlarasScene.showScene(true);
 		}
 		
 		private function buildViewScene(scene:FlarasScene):ViewFlarasScene
@@ -231,7 +231,7 @@ package flaras.controller
 			var viewFlarasScene:ViewFlarasScene;
 			
 			viewFlarasScene = _listOfViewFlarasScenes[indexScene];
-			viewFlarasScene.showScene(playAudio);			
+			viewFlarasScene.showScene(playAudio);
 		}
 		
 		public function disableScene(indexScene:uint):void
@@ -240,7 +240,7 @@ package flaras.controller
 			
 			viewFlarasScene = _listOfViewFlarasScenes[indexScene];
 			viewFlarasScene.hideScene();
-		}	
+		}
 		
 		public function destroyScene(indexScene:uint):void
 		{
@@ -249,7 +249,7 @@ package flaras.controller
 			viewFlarasScene = getViewScene(indexScene);
 			viewFlarasScene.destroy();
 		}
-
+		
 		public function removeScene(indexScene:uint):void
 		{
 			var flarasScene:FlarasScene;
@@ -268,7 +268,7 @@ package flaras.controller
 			listOfFilesAndDirs = flarasScene.getListOfFilesAndDirs();
 			
 			//removing data from disk
-			for each (var item:String in listOfFilesAndDirs) 
+			for each (var item:String in listOfFilesAndDirs)
 			{
 				FileRemover.remove(item);
 			}
@@ -295,7 +295,7 @@ package flaras.controller
 			//adds the source element on the destination position
 			_listOfScenes2.splice(indexSceneDestination, 0, flarasScene);
 			_listOfViewFlarasScenes.splice(indexSceneDestination, 0, viewFlarasScene);
-		}		
+		}
 		
 		public function updateLabel(pIndexScene:uint, pLabel:String):void
 		{
@@ -318,7 +318,7 @@ package flaras.controller
 			viewScene = getViewScene(indexScene);
 			
 			scene.setTranslation(translation);
-			viewScene.setTranslation(translation);			
+			viewScene.setTranslation(translation);
 		}
 		
 		public function updateReloadPointPosition(indexScene:uint):void
@@ -326,7 +326,7 @@ package flaras.controller
 			var viewScene:ViewFlarasScene;
 			
 			viewScene = getViewScene(indexScene);
-			viewScene.reloadPointPosition();			
+			viewScene.reloadPointPosition();
 		}
 		
 		public function updateRotation(indexScene:uint, rotation:Number3D):void
@@ -394,7 +394,7 @@ package flaras.controller
 			if (!scene.getAudio())
 			{
 				audioScene = new AudioScene(scene, audioPath, repeatAudio);
-				scene.setAudio(audioScene);	
+				scene.setAudio(audioScene);
 				
 				viewAudioScene = new ViewAudioScene(audioScene);
 				viewScene.setViewAudio(viewAudioScene);
@@ -403,8 +403,8 @@ package flaras.controller
 			{
 				viewScene.unLoad();
 				FileRemover.remove(FolderConstants.getFlarasAppCurrentFolder() + "/" + scene.getAudio().getAudioFilePath());
-				scene.getAudio().setAudioFilePath(audioPath);				
-			}		
+				scene.getAudio().setAudioFilePath(audioPath);
+			}
 			
 			viewScene.showScene(true);
 		}
@@ -440,8 +440,8 @@ package flaras.controller
 				TextureScene(scene).setSize(width, height);
 				viewScene.unLoad();
 				viewScene.showScene(true);
-			}			
-		}	
+			}
+		}
 		
 		public function updateVideoSize(indexScene:uint, width:Number, height:Number):void
 		{
@@ -458,8 +458,8 @@ package flaras.controller
 				VideoScene(scene).setSize(width, height);
 				viewScene.unLoad();
 				viewScene.showScene(true);
-			}			
-		}		
+			}
+		}
 		
 		public function updateVideoRepeat(indexScene:uint, videoRepeat:Boolean):void
 		{
@@ -478,7 +478,8 @@ package flaras.controller
 			}
 		}
 		
-		public function updateAddAnimation(indexScene:uint, period:Number, rotationAxis:uint, radius:uint, rotationDirection:int):void
+		public function updateAddAnimation(indexScene:uint, period:Number, rotationAxis:uint, radius:Number,
+			rotationDirection:int):void
 		{
 			var viewScene:ViewFlarasScene;
 			var scene:FlarasScene;
@@ -493,13 +494,14 @@ package flaras.controller
 			animationScene = new AnimationScene(period, rotationAxis, radius, rotationDirection);
 			scene.setAnimation(animationScene);
 			
-			viewAnimationScene = new ViewAnimationScene(animationScene, viewScene);			
-			viewScene.setViewAnimation(viewAnimationScene);	
+			viewAnimationScene = new ViewAnimationScene(animationScene, viewScene);
+			viewScene.setViewAnimation(viewAnimationScene);
 			
 			viewScene.showScene(true);
 		}
 		
-		public function updateAnimationProperties(indexScene:uint, period:Number, rotationAxis:uint, radius:uint, rotationDirection:int):void
+		public function updateAnimationProperties(indexScene:uint, period:Number, rotationAxis:uint,
+			radius:Number, rotationDirection:int):void
 		{
 			var scene:FlarasScene;
 			var viewScene:ViewFlarasScene;
@@ -513,7 +515,7 @@ package flaras.controller
 			{
 				viewScene.getViewAnimation().unLoad();
 				scene.getAnimation().setAnimationProperties(period, rotationAxis, radius, rotationDirection);
-			}	
+			}
 			viewScene.showScene(true);
 		}
 		
@@ -531,20 +533,20 @@ package flaras.controller
 			{
 				viewScene.getViewAnimation().unLoad();
 				viewScene.setViewAnimation(null);
-				scene.setAnimation(null);		
+				scene.setAnimation(null);
 			}
 			
 			viewScene.showScene(true);
-		}		
+		}
 		
 		public function toggleMirrorScenes():void
-		{			
-			for each (var viewScene:ViewFlarasScene in _listOfViewFlarasScenes) 
+		{
+			for each (var viewScene:ViewFlarasScene in _listOfViewFlarasScenes)
 			{
 				if (viewScene is ViewTextureScene || viewScene is ViewVideoScene)
 				{
 					viewScene.toggleMirror();
-				}				
+				}
 			}
 		}
 		
@@ -646,6 +648,6 @@ package flaras.controller
 		private function getViewScene(indexScene:uint):ViewFlarasScene
 		{
 			return _listOfViewFlarasScenes[indexScene];
-		}		
+		}
 	}
 }
