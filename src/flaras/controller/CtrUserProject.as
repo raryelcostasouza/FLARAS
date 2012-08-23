@@ -129,6 +129,7 @@ package flaras.controller
 		
 		private function actionCloseFlaras():void
 		{
+			_ctrMain.fmmapp.stopCamera();
 			VideoManager.closeStream();
 			removeTmpFiles();
 			NativeApplication.nativeApplication.exit();
