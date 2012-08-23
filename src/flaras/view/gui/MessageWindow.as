@@ -57,7 +57,7 @@ package flaras.view.gui
 		
 		public static function messageInvalidDAEFile():void
 		{
-			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE) on the selected file", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
+			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE or 3DS) on the selected file", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function messageInvalidZipFile():void
