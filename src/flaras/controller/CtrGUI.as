@@ -872,13 +872,18 @@ package flaras.controller
 			var strY:String;
 			var strZ:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strX = _gui.getScenePanel().getJTFSceneTrX().getText();
 			strY = _gui.getScenePanel().getJTFSceneTrY().getText();
 			strZ = _gui.getScenePanel().getJTFSceneTrZ().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Translation X", strX), new FieldData("Translation Y",
-				strY), new FieldData("Translation Z", strZ));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Translation X", strX));
+			vectFieldData.push(new FieldData("Translation Y", strY));
+			vectFieldData.push(new FieldData("Translation Z", strZ));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
 			
 			if (allFieldsValid)
 			{
@@ -893,13 +898,18 @@ package flaras.controller
 			var strRotY:String;
 			var strRotZ:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strRotX = _gui.getScenePanel().getJTFSceneRotX().getText()
 			strRotY = _gui.getScenePanel().getJTFSceneRotY().getText()
 			strRotZ = _gui.getScenePanel().getJTFSceneRotZ().getText()
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Rotation X", strRotX), new FieldData("Rotation Y",
-				strRotY), new FieldData("Rotation Z", strRotZ));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Rotation X", strRotX));
+			vectFieldData.push(new FieldData("Rotation Y", strRotY));
+			vectFieldData.push(new FieldData("Rotation Z", strRotZ));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
 			
 			if (allFieldsValid)
 			{
@@ -914,13 +924,18 @@ package flaras.controller
 			var strScY:String;
 			var strScZ:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strScX = _gui.getScenePanel().getJTFSceneScX().getText();
 			strScY = _gui.getScenePanel().getJTFSceneScY().getText();
 			strScZ = _gui.getScenePanel().getJTFSceneScZ().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Scale X", strScX), new FieldData("Scale Y",
-				strScY), new FieldData("Scale Z", strScZ));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Scale X", strScX));
+			vectFieldData.push(new FieldData("Scale Y", strScY));
+			vectFieldData.push(new FieldData("Scale Z", strScZ));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
 			
 			if (allFieldsValid)
 			{
@@ -929,7 +944,7 @@ package flaras.controller
 			}
 		}
 		
-		private function generalNumericFieldValidator(... args):Boolean
+		private function generalNumericFieldValidator(vectFieldData:Vector.<FieldData>):Boolean
 		{
 			var fieldData:FieldData;
 			var fieldName:String;
@@ -939,9 +954,9 @@ package flaras.controller
 			
 			allFieldsHaveValidNumbers = true;
 			
-			for (var i:uint = 0; i < args.length; i++)
+			for (var i:uint = 0; i < vectFieldData.length; i++)
 			{
-				fieldData = args[i];
+				fieldData = vectFieldData[i];
 				fieldName = fieldData.getName();
 				fieldValue = fieldData.getValue();
 				
@@ -971,12 +986,17 @@ package flaras.controller
 			var strWidth:String;
 			var strHeight:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strWidth = _gui.getScenePanel().getJTFTextureWidth().getText();
 			strHeight = _gui.getScenePanel().getJTFTextureHeight().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Texture Width", strWidth), new FieldData("Texture Height",
-				strHeight));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Texture Width", strWidth));
+			vectFieldData.push(new FieldData("Texture Height", strHeight));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
+			
 			if (allFieldsValid)
 			{
 				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTextureSize(getCurrentSelectedScene2(),
@@ -989,12 +1009,16 @@ package flaras.controller
 			var strWidth:String;
 			var strHeight:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strWidth = _gui.getScenePanel().getJTFVideoWidth().getText();
 			strHeight = _gui.getScenePanel().getJTFVideoHeight().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Video Width", strWidth), new FieldData("Video Height",
-				strHeight));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Video Width", strWidth));
+			vectFieldData.push(new FieldData("Video Height", strHeight));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);			
 			
 			if (allFieldsValid)
 			{
@@ -1040,12 +1064,16 @@ package flaras.controller
 			var strRadius:String;
 			var strPeriod:String;
 			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
 			
 			strRadius = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText();
 			strPeriod = _gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Radius", strRadius), new FieldData("Period",
-				strPeriod));
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Radius", strRadius));
+			vectFieldData.push(new FieldData("Period", strPeriod));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
 			
 			if (allFieldsValid)
 			{
