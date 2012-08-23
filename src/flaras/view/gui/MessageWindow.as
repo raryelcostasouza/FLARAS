@@ -120,8 +120,8 @@ package flaras.view.gui
 		{
 			JOptionPane.showMessageDialog("FLARAS Keys", 
 			"Keys related with points:\n"+
-			"A: Enable all points\n" +
-			"Q: Disable all points\n" +
+			"Ctrl + A: Enable all points\n" +
+			"Ctrl + Q: Disable all points\n" +
 			"F1: Toggle aux points (available only for enable points). It will appear a blue sphere on the point position.\n\n" +
 			"\nCtrl + 1: apply an inspection interaction to the point 1 and select it for keyboard interaction.\n" +
 			"Ctrl + 2: apply an inspection interaction to the point 2...\n"+
@@ -132,8 +132,8 @@ package flaras.view.gui
 			"End: unselect the previously selected point (Page Down and Page Up will have no more effect).\n\n"+
 			
 			"Keys related with the interaction marker:\n"+
-			"M: Toggle marker type (inspector/control)\n" +
-			"C: Toggle control marker type (backward/forward) (only available if the marker type is control)\n\n" +
+			"Ctrl + M: Toggle marker type (inspector/control)\n" +
+			"Ctrl + C: Toggle control marker type (backward/forward) (only available if the marker type is control)\n\n" +
 			
 			"Keys related with the interaction sphere:\n"+
 			"F4: Decrease size\n" +
@@ -144,7 +144,7 @@ package flaras.view.gui
 			
 			"Others keys:\n" +
 			"F3: Toggle mirror screen\n" +
-			"P: Toggle reference marker persistence\n\n", null, null);
+			"Ctrl + P: Toggle reference marker persistence\n\n", null, null);
 		}
 		
 		
