@@ -56,10 +56,10 @@ package flaras.controller
 		
 		public function init():void
 		{
-			/*_gui.getPropertiesPanel().getPtList().setSelectedIndex(0);
-			_gui.getPropertiesPanel().getRd3dObject().setSelected(true);
-			radioObj3DSelected(null);*/
-			//_gui.getTreePanel().resetTree();
+		/*_gui.getPropertiesPanel().getPtList().setSelectedIndex(0);
+		   _gui.getPropertiesPanel().getRd3dObject().setSelected(true);
+		 radioObj3DSelected(null);*/
+			 //_gui.getTreePanel().resetTree();
 		}
 		
 		/*public function finishedFileCopying(path:String, destiny:String):void
@@ -121,15 +121,23 @@ package flaras.controller
 			{
 				if (pCopyDestination == FolderConstants.COLLADA_FOLDER)
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene(pFilePath, Number3D.ZERO, Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, false, "", 0, 0, false, false, 0, 0, 0, 0, "");
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene(pFilePath, Number3D.ZERO,
+						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, false,
+						"", 0, 0, false, false, 0, 0, 0, 0, "");
 				}
 				if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO, Number3D.ZERO, new Number3D(1, 1, 1), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false, false, 0, 0, 0, 0, "");
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
+						Number3D.ZERO, new Number3D(1, 1, 1), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH,
+						GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false,
+						false, 0, 0, 0, 0, "");
 				}
 				if (pCopyDestination == FolderConstants.VIDEO_FOLDER)
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO, Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, false, 0, 0, 0, 0, "");
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
+						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, true,
+						pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
+						false, false, 0, 0, 0, 0, "");
 				}
 				
 				_gui.getTreePanel().addScene(getCurrentSelectedPoint2());
@@ -140,7 +148,8 @@ package flaras.controller
 			{
 				if (pCopyDestination == FolderConstants.AUDIO_FOLDER)
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAudio(getCurrentSelectedScene2(), pFilePath, _gui.getScenePanel().getJCBAudioRepeat().isSelected());
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAudio(getCurrentSelectedScene2(),
+						pFilePath, _gui.getScenePanel().getJCBAudioRepeat().isSelected());
 					_gui.getScenePanel().getJTFAudioPath().setText(pFilePath);
 					_gui.getScenePanel().getJCBAudioRepeat().setEnabled(true);
 				}
@@ -148,15 +157,50 @@ package flaras.controller
 				{
 					if (pCopyDestination == FolderConstants.COLLADA_FOLDER)
 					{
-						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(), pFilePath, new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()), new Number(_gui.getScenePanel().getJTFSceneTrY().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()), new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()), new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())), false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(), _gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(),
+							pFilePath, new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneTrY().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())),
+							false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
+							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
+							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 					{
-						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(), "", new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()), new Number(_gui.getScenePanel().getJTFSceneTrY().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()), new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()), new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(), _gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(),
+							"", new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneTrY().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())),
+							true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT,
+							_gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
+							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
+							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else
 					{
-						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(), "", new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()), new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())), new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()), new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())), false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(), _gui.getScenePanel().getJCBAudioRepeat().isSelected(), true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+						_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRebuildScene(getCurrentSelectedScene2(),
+							"", new Number3D(new Number(_gui.getScenePanel().getJTFSceneTrX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneTrZ().getText()), new Number(_gui.getScenePanel().getJTFSceneTrZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneRotX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneRotY().getText()), new Number(_gui.getScenePanel().getJTFSceneRotZ().getText())),
+							new Number3D(new Number(_gui.getScenePanel().getJTFSceneScX().getText()),
+							new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())),
+							false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
+							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH,
+							GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(),
+							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
+							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 				}
@@ -164,61 +208,61 @@ package flaras.controller
 		}
 		
 		/*public function updatePointPosition(e:Event):void
-		{
-			_ctrMain.ctrPoint.updatePointPosition(getCurrentSelectedPoint(), new Number3D(new Number(_gui.getPropertiesPanel().getPtX().getText()), new Number(_gui.getPropertiesPanel().getPtY().getText()), new Number(_gui.getPropertiesPanel().getPtZ().getText())));
-		}
+		   {
+		   _ctrMain.ctrPoint.updatePointPosition(getCurrentSelectedPoint(), new Number3D(new Number(_gui.getPropertiesPanel().getPtX().getText()), new Number(_gui.getPropertiesPanel().getPtY().getText()), new Number(_gui.getPropertiesPanel().getPtZ().getText())));
+		   }
 		
-		public function updateSceneTranslation(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateTranslation(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjTrX().getText()), new Number(_gui.getPropertiesPanel().getObjTrY().getText()), new Number(_gui.getPropertiesPanel().getObjTrZ().getText())));
-		}
+		   public function updateSceneTranslation(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateTranslation(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjTrX().getText()), new Number(_gui.getPropertiesPanel().getObjTrY().getText()), new Number(_gui.getPropertiesPanel().getObjTrZ().getText())));
+		   }
 		
-		public function updateSceneRotation(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRotation(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjRtX().getText()), new Number(_gui.getPropertiesPanel().getObjRtY().getText()), new Number(_gui.getPropertiesPanel().getObjRtZ().getText())));
-		}
+		   public function updateSceneRotation(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRotation(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjRtX().getText()), new Number(_gui.getPropertiesPanel().getObjRtY().getText()), new Number(_gui.getPropertiesPanel().getObjRtZ().getText())));
+		   }
 		
-		public function updateSceneScale(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateScale(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjScX().getText()), new Number(_gui.getPropertiesPanel().getObjScY().getText()), new Number(_gui.getPropertiesPanel().getObjScZ().getText())));
-		}
+		   public function updateSceneScale(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateScale(getCurrentSelectedScene(), new Number3D(new Number(_gui.getPropertiesPanel().getObjScX().getText()), new Number(_gui.getPropertiesPanel().getObjScY().getText()), new Number(_gui.getPropertiesPanel().getObjScZ().getText())));
+		   }
 		
-		public function updateSceneVideoSize(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateVideoSize(getCurrentSelectedScene(), new Number(_gui.getVideoPanel().getObjVideoWidth().getText()), new Number(_gui.getVideoPanel().getObjVideoHeight().getText()));
-		}
+		   public function updateSceneVideoSize(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateVideoSize(getCurrentSelectedScene(), new Number(_gui.getVideoPanel().getObjVideoWidth().getText()), new Number(_gui.getVideoPanel().getObjVideoHeight().getText()));
+		   }
 		
-		public function updateSceneTextureSize(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateTextureSize(getCurrentSelectedScene(), new Number(_gui.getTexturePanel().getObjTextureWidth().getText()), new Number(_gui.getTexturePanel().getObjTextureHeight().getText()));
-		}
+		   public function updateSceneTextureSize(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateTextureSize(getCurrentSelectedScene(), new Number(_gui.getTexturePanel().getObjTextureWidth().getText()), new Number(_gui.getTexturePanel().getObjTextureHeight().getText()));
+		   }
 		
-		public function updateAnimationState(newState:Boolean):void
-		{
-			if (newState)
-			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAddAnimation(getCurrentSelectedScene(), _gui.getAnimationPanel().getAnimationPeriod(), _gui.getAnimationPanel().getAnimationRotationAxis(), _gui.getAnimationPanel().getAnimationRadius(), _gui.getAnimationPanel().getAnimationDirection());
-			}
-			else
-			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRemoveAnimation(getCurrentSelectedScene());
-			}
-		}
+		   public function updateAnimationState(newState:Boolean):void
+		   {
+		   if (newState)
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAddAnimation(getCurrentSelectedScene(), _gui.getAnimationPanel().getAnimationPeriod(), _gui.getAnimationPanel().getAnimationRotationAxis(), _gui.getAnimationPanel().getAnimationRadius(), _gui.getAnimationPanel().getAnimationDirection());
+		   }
+		   else
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRemoveAnimation(getCurrentSelectedScene());
+		   }
+		   }
 		
-		public function updateAnimationProperties(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAnimationProperties(getCurrentSelectedScene(), _gui.getAnimationPanel().getAnimationPeriod(), _gui.getAnimationPanel().getAnimationRotationAxis(), _gui.getAnimationPanel().getAnimationRadius(), _gui.getAnimationPanel().getAnimationDirection());
-		}
+		   public function updateAnimationProperties(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAnimationProperties(getCurrentSelectedScene(), _gui.getAnimationPanel().getAnimationPeriod(), _gui.getAnimationPanel().getAnimationRotationAxis(), _gui.getAnimationPanel().getAnimationRadius(), _gui.getAnimationPanel().getAnimationDirection());
+		   }
 		
-		public function setRepeatAudio(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAudioRepeat(getCurrentSelectedScene(), _gui.getPropertiesPanel().getAudioRpt().isSelected());
-		}
+		   public function setRepeatAudio(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateAudioRepeat(getCurrentSelectedScene(), _gui.getPropertiesPanel().getAudioRpt().isSelected());
+		   }
 		
-		public function setRepeatVideo(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateVideoRepeat(getCurrentSelectedScene(), _gui.getVideoPanel().getObjVideoRpt().isSelected());
-		}*/
+		   public function setRepeatVideo(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateVideoRepeat(getCurrentSelectedScene(), _gui.getVideoPanel().getObjVideoRpt().isSelected());
+		 }*/
 		
 		public function filterValidCharFromTextField(ke:KeyboardEvent):void
 		{
@@ -277,29 +321,29 @@ package flaras.controller
 		public function resetInterface():void
 		{
 			/*_gui.getPropertiesPanel().getPtList().setSelectedIndex(0);
-			cleanPointFields();
-			cleanSceneFields();
-			comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
-			comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), new Vector.<FlarasScene>);*/
+			   cleanPointFields();
+			   cleanSceneFields();
+			   comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
+			 comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), new Vector.<FlarasScene>);*/
 			
 			_gui.getTreePanel().resetTree();
 		}
 		
 		public function initProjectTree():void
 		{
-			_gui.getTreePanel().initTree(_ctrMain.ctrPoint.getListOfPoints());	
+			_gui.getTreePanel().initTree(_ctrMain.ctrPoint.getListOfPoints());
 		}
 		
 		/*public function comboBoxContentsUpdate(comboBox:JComboBox, numberOfPoints:uint):void
-		{
-			var array:Array = new Array();
-			array.push("New");
-			for (var i:int = 1; i <= numberOfPoints; i++)
-			{
-				array.push(i);
-			}
-			comboBox.setListData(array);
-		}*/
+		   {
+		   var array:Array = new Array();
+		   array.push("New");
+		   for (var i:int = 1; i <= numberOfPoints; i++)
+		   {
+		   array.push(i);
+		   }
+		   comboBox.setListData(array);
+		 }*/
 		
 		public function audioLoad(e:Event):void
 		{
@@ -307,413 +351,413 @@ package flaras.controller
 		}
 		
 		/*public function fileLoad(e:Event):void
-		{
-			if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
-			{
-				var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
-				_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
-				_gui.getTreePanel().addPoint();
-				comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
-				_gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
-			}
-			FileCopy.colladaCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
-		}
+		   {
+		   if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
+		   {
+		   var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
+		   _ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
+		   _gui.getTreePanel().addPoint();
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
+		   _gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
+		   }
+		   FileCopy.colladaCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
+		   }
 		
-		public function videoLoad(e:Event):void
-		{
-			if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
-			{
-				var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
-				_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
-				_gui.getTreePanel().addPoint();
-				comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
-				_gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
-			}
-			FileCopy.videoCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
-		}
+		   public function videoLoad(e:Event):void
+		   {
+		   if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
+		   {
+		   var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
+		   _ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
+		   _gui.getTreePanel().addPoint();
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
+		   _gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
+		   }
+		   FileCopy.videoCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
+		   }
 		
-		public function textureLoad(e:Event):void
-		{
-			if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
-			{
-				var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
-				_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
-				_gui.getTreePanel().addPoint();
-				comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
-				_gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
-			}
-			FileCopy.textureCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
-		}
+		   public function textureLoad(e:Event):void
+		   {
+		   if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
+		   {
+		   var tempindex:int = _gui.getPropertiesPanel().getPtList().getItemCount();
+		   _ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
+		   _gui.getTreePanel().addPoint();
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
+		   _gui.getPropertiesPanel().getPtList().setSelectedIndex(tempindex);
+		   }
+		   FileCopy.textureCopy(_ctrMain.ctrUserProject.getCurrentProjectTempFolder(), this);
+		   }
 		
-		public function removePoint(e:Event):void
-		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this point?", null, _gui.getPropertiesPanel(), true, null, 12).getYesButton().addActionListener(remPt);
-		}
+		   public function removePoint(e:Event):void
+		   {
+		   JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this point?", null, _gui.getPropertiesPanel(), true, null, 12).getYesButton().addActionListener(remPt);
+		   }
 		
-		private function remPt(e:Event):void
-		{
-			_ctrMain.ctrPoint.removePoint(getCurrentSelectedPoint());
-			_gui.getTreePanel().removePoint(getCurrentSelectedPoint());
-			comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
-			_gui.getPropertiesPanel().getPtList().setSelectedIndex(0);
-		}
+		   private function remPt(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.removePoint(getCurrentSelectedPoint());
+		   _gui.getTreePanel().removePoint(getCurrentSelectedPoint());
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getPtList(), _ctrMain.ctrPoint.getNumberOfPoints());
+		   _gui.getPropertiesPanel().getPtList().setSelectedIndex(0);
+		   }
 		
-		public function removeObject(e:Event):void
-		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this scene?", null, _gui.getPropertiesPanel(), true, null, 12).getYesButton().addActionListener(remObj);
-		}
+		   public function removeObject(e:Event):void
+		   {
+		   JOptionPane.showMessageDialog("Confirmation", "Are you sure about erasing this scene?", null, _gui.getPropertiesPanel(), true, null, 12).getYesButton().addActionListener(remObj);
+		   }
 		
-		private function remObj(e:Event):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).removeScene(getCurrentSelectedScene());
-			_gui.getTreePanel().removeScene(getCurrentSelectedPoint(), getCurrentSelectedScene());
-			comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
-			_gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
-		}
+		   private function remObj(e:Event):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).removeScene(getCurrentSelectedScene());
+		   _gui.getTreePanel().removeScene(getCurrentSelectedPoint(), getCurrentSelectedScene());
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
+		   _gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
+		   }
 		
-		public function swapObject(e:Event):void
-		{
-			var numberOfScenes:uint;
-			var currentScenePos:uint;
-			
-			//-1 for not couting the New string
-			numberOfScenes = _gui.getPropertiesPanel().getObjList().getItemCount() - 1;
-			currentScenePos = _gui.getPropertiesPanel().getObjList().getSelectedIndex();
-			
-			_gui.getSwapWindow().openSwapWindow(numberOfScenes, currentScenePos);
-		}
+		   public function swapObject(e:Event):void
+		   {
+		   var numberOfScenes:uint;
+		   var currentScenePos:uint;
 		
-		public function swapFunction(pos2Swap:uint):void
-		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).swapScenePositionTo(getCurrentSelectedScene(), pos2Swap - 1)
-			
-			comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
-			_gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
-		}
+		   //-1 for not couting the New string
+		   numberOfScenes = _gui.getPropertiesPanel().getObjList().getItemCount() - 1;
+		   currentScenePos = _gui.getPropertiesPanel().getObjList().getSelectedIndex();
 		
-		private function cleanPointFields():void
-		{
-			_gui.getPropertiesPanel().getPtX().setText("");
-			_gui.getPropertiesPanel().getPtY().setText("");
-			_gui.getPropertiesPanel().getPtZ().setText("");
-		}
+		   _gui.getSwapWindow().openSwapWindow(numberOfScenes, currentScenePos);
+		   }
 		
-		private function cleanSceneFields():void
-		{
-			_gui.getPropertiesPanel().getObjTrX().setText("");
-			_gui.getPropertiesPanel().getObjTrY().setText("");
-			_gui.getPropertiesPanel().getObjTrZ().setText("");
-			_gui.getPropertiesPanel().getObjRtX().setText("");
-			_gui.getPropertiesPanel().getObjRtY().setText("");
-			_gui.getPropertiesPanel().getObjRtZ().setText("");
-			_gui.getPropertiesPanel().getObjScX().setText("");
-			_gui.getPropertiesPanel().getObjScY().setText("");
-			_gui.getPropertiesPanel().getObjScZ().setText("");
-			_gui.getPropertiesPanel().getAudioFilePath().setText("");
-			
-			_gui.getPropertiesPanel().getAudioRpt().setSelected(false);
-			_gui.getPropertiesPanel().getAudioCheck().setSelected(false);
-			
-			//disabling audio related buttons
-			_gui.getPropertiesPanel().getbtAudioLoad().setEnabled(false);
-			_gui.getPropertiesPanel().getAudioFilePath().setEnabled(false);
-			_gui.getPropertiesPanel().getAudioRpt().setEnabled(false);
-			
-			_gui.getObj3DPanel().getObjFile().setText("");
-			
-			_gui.getVideoPanel().getObjVideo().setText("");
-			_gui.getVideoPanel().getObjVideoHeight().setText("");
-			_gui.getVideoPanel().getObjVideoWidth().setText("");
-			_gui.getVideoPanel().getObjVideoRpt().setSelected(false);
-			
-			_gui.getTexturePanel().getObjTexture().setText("");
-			_gui.getTexturePanel().getObjTextureHeight().setText("");
-			_gui.getTexturePanel().getObjTextureWidth().setText("");
-			
-			_gui.getAnimationPanel().setHasAnimation(false);
-			_gui.getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
-			_gui.getAnimationPanel().setAnimationPeriod(10);
-			_gui.getAnimationPanel().setAnimationRadius(0);
-			_gui.getAnimationPanel().setAnimationRotationDirection(1);
-		}
+		   public function swapFunction(pos2Swap:uint):void
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).swapScenePositionTo(getCurrentSelectedScene(), pos2Swap - 1)
 		
-		public function audioSelected(e:Event):void
-		{
-			//if the has audio checkbox was marked
-			if (_gui.getPropertiesPanel().getAudioCheck().isSelected())
-			{
-				setEnabledAudioPropertiesFields(true);
-			}
-			//if the has audio checkbox was unmarked
-			else
-			{
-				var audioData:AudioScene;
-				audioData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAudioData(getCurrentSelectedScene());
-				
-				if (audioData)
-				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRemoveAudio(getCurrentSelectedScene());
-				}
-				_gui.getPropertiesPanel().getAudioFilePath().setText("");
-				setEnabledAudioPropertiesFields(false);
-			}
-		}
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
+		   _gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
+		   }
 		
-		public function radioObj3DSelected(e:Event):void
-		{
-			_gui.getPropertiesPanel().remove(_gui.getVideoPanel());
-			_gui.getPropertiesPanel().remove(_gui.getTexturePanel());
-			
-			_gui.getPropertiesPanel().append(_gui.getObj3DPanel());
-			_gui.getObj3DPanel().show();
-		}
+		   private function cleanPointFields():void
+		   {
+		   _gui.getPropertiesPanel().getPtX().setText("");
+		   _gui.getPropertiesPanel().getPtY().setText("");
+		   _gui.getPropertiesPanel().getPtZ().setText("");
+		   }
 		
-		public function radioVideoSelected(e:Event):void
-		{
-			_gui.getPropertiesPanel().remove(_gui.getObj3DPanel());
-			_gui.getPropertiesPanel().remove(_gui.getTexturePanel());
-			
-			_gui.getPropertiesPanel().append(_gui.getVideoPanel());
-			_gui.getVideoPanel().show();
-			
-			if (_gui.getVideoPanel().getObjVideo().getText() == "")
-			{
-				setEnabledVideoPropertiesFields(false);
-			}
-			else
-			{
-				setEnabledVideoPropertiesFields(true);
-			}
-		}
+		   private function cleanSceneFields():void
+		   {
+		   _gui.getPropertiesPanel().getObjTrX().setText("");
+		   _gui.getPropertiesPanel().getObjTrY().setText("");
+		   _gui.getPropertiesPanel().getObjTrZ().setText("");
+		   _gui.getPropertiesPanel().getObjRtX().setText("");
+		   _gui.getPropertiesPanel().getObjRtY().setText("");
+		   _gui.getPropertiesPanel().getObjRtZ().setText("");
+		   _gui.getPropertiesPanel().getObjScX().setText("");
+		   _gui.getPropertiesPanel().getObjScY().setText("");
+		   _gui.getPropertiesPanel().getObjScZ().setText("");
+		   _gui.getPropertiesPanel().getAudioFilePath().setText("");
 		
-		public function radioTextureSelected(e:Event):void
-		{
-			_gui.getPropertiesPanel().remove(_gui.getObj3DPanel());
-			_gui.getPropertiesPanel().remove(_gui.getVideoPanel());
-			
-			_gui.getPropertiesPanel().append(_gui.getTexturePanel());
-			_gui.getTexturePanel().show();
-			
-			if (_gui.getTexturePanel().getObjTexture().getText() == "")
-			{
-				setEnabledTexturePropertiesFields(false);
-			}
-			else
-			{
-				setEnabledTexturePropertiesFields(true);
-			}
-		}
+		   _gui.getPropertiesPanel().getAudioRpt().setSelected(false);
+		   _gui.getPropertiesPanel().getAudioCheck().setSelected(false);
 		
-		public function pointSelected(e:Event):void
-		{
-			var position:Number3D;
-			
-			cleanPointFields();
-			if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
-			{
-				setEnabledPointPropertiesFields(false);
-				_ctrMain.ctrPoint.disableAllPointsUI();
-				comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), new Vector.<FlarasScene>());
-				_gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
-			}
-			else
-			{
-				setEnabledPointPropertiesFields(true);
-				
-				_ctrMain.ctrPoint.disableAllPointsUI();
-				_ctrMain.ctrPoint.enablePointUI(getCurrentSelectedPoint());
-				
-				position = _ctrMain.ctrPoint.getPosition(getCurrentSelectedPoint());
-				_gui.getPropertiesPanel().getPtX().setText(position.x + "");
-				_gui.getPropertiesPanel().getPtY().setText(position.y + "");
-				_gui.getPropertiesPanel().getPtZ().setText(position.z + "");
-				
-				comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
-				
-				_gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
-			}
-		}
+		   //disabling audio related buttons
+		   _gui.getPropertiesPanel().getbtAudioLoad().setEnabled(false);
+		   _gui.getPropertiesPanel().getAudioFilePath().setEnabled(false);
+		   _gui.getPropertiesPanel().getAudioRpt().setEnabled(false);
 		
-		public function objectSelected(e:Event):void
-		{
-			var translation:Number3D;
-			var rotation:Number3D;
-			var scale:Number3D;
-			var audioData:AudioScene;
-			var videoData:VideoScene;
-			var textureData:TextureScene;
-			var virtualObjectData:VirtualObjectScene;
-			var animationData:AnimationScene;
-			
-			cleanSceneFields();
-			if (String(_gui.getPropertiesPanel().getObjList().getSelectedItem()) == "New")
-			{
-				setEnabledScenePropertiesFields(false);
-				_ctrMain.ctrPoint.disableAllPoints(false);
-			}
-			else
-			{
-				setEnabledScenePropertiesFields(true);
-				_ctrMain.ctrPoint.disableAllPoints(false);
-				fillPropertiesFields();
-				_ctrMain.ctrPoint.goToScene(getCurrentSelectedPoint(), getCurrentSelectedScene());
-			}
-		}
+		   _gui.getObj3DPanel().getObjFile().setText("");
 		
-		public function fillPropertiesFields():void
-		{
-			var translation:Number3D;
-			var rotation:Number3D;
-			var scale:Number3D;
-			var audioData:AudioScene;
-			var videoData:VideoScene;
-			var textureData:TextureScene;
-			var virtualObjectData:VirtualObjectScene;
-			var animationData:AnimationScene;
-			
-			cleanSceneFields();
-			
-			translation = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getTranslation(getCurrentSelectedScene());
-			rotation = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getRotation(getCurrentSelectedScene());
-			scale = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getScale(getCurrentSelectedScene());
-			
-			virtualObjectData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getVirtualObjectData(getCurrentSelectedScene());
-			videoData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getVideoData(getCurrentSelectedScene());
-			textureData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getTextureData(getCurrentSelectedScene());
-			audioData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAudioData(getCurrentSelectedScene());
-			animationData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAnimationData(getCurrentSelectedScene());
-			
-			_gui.getPropertiesPanel().getObjTrX().setText(translation.x + "");
-			_gui.getPropertiesPanel().getObjTrY().setText(translation.y + "");
-			_gui.getPropertiesPanel().getObjTrZ().setText(translation.z + "");
-			_gui.getPropertiesPanel().getObjRtX().setText(rotation.x + "");
-			_gui.getPropertiesPanel().getObjRtY().setText(rotation.y + "");
-			_gui.getPropertiesPanel().getObjRtZ().setText(rotation.z + "");
-			_gui.getPropertiesPanel().getObjScX().setText(scale.x + "");
-			_gui.getPropertiesPanel().getObjScY().setText(scale.y + "");
-			_gui.getPropertiesPanel().getObjScZ().setText(scale.z + "");
-			
-			if (animationData)
-			{
-				_gui.getAnimationPanel().setHasAnimation(true);
-				_gui.getAnimationPanel().setAnimationPeriod(animationData.getPeriod());
-				_gui.getAnimationPanel().setAnimationRotationAxis(animationData.getRotationAxis());
-				_gui.getAnimationPanel().setAnimationRadius(animationData.getRadius());
-				_gui.getAnimationPanel().setAnimationRotationDirection(animationData.getRotationDirection());
-			}
-			if (audioData)
-			{
-				_gui.getPropertiesPanel().getAudioCheck().setSelected(true);
-				_gui.getPropertiesPanel().getAudioFilePath().setEnabled(true);
-				_gui.getPropertiesPanel().getAudioFilePath().setText(audioData.getAudioFilePath());
-				_gui.getPropertiesPanel().getAudioRpt().setEnabled(true);
-				_gui.getPropertiesPanel().getAudioRpt().setSelected(audioData.getRepeatAudio());
-				_gui.getPropertiesPanel().getbtAudioLoad().setEnabled(true);
-			}
-			
-			if (videoData)
-			{
-				_gui.getPropertiesPanel().getRdVideoObject().setSelected(true);
-				radioVideoSelected(null);
-				_gui.getVideoPanel().getObjVideo().setEnabled(true);
-				_gui.getVideoPanel().getObjVideo().setText(videoData.getVideoFilePath());
-				_gui.getVideoPanel().getObjVideoHeight().setEnabled(true);
-				_gui.getVideoPanel().getObjVideoHeight().setText(videoData.getHeight().toString());
-				_gui.getVideoPanel().getObjVideoWidth().setEnabled(true);
-				_gui.getVideoPanel().getObjVideoWidth().setText(videoData.getWidth().toString());
-				_gui.getVideoPanel().getObjVideoRpt().setEnabled(true);
-				_gui.getVideoPanel().getObjVideoRpt().setSelected(videoData.getRepeatVideo());
-				_gui.getVideoPanel().getBtnVideoLoad().setEnabled(true);
-			}
-			else if (textureData)
-			{
-				_gui.getPropertiesPanel().getRdTextureObject().setSelected(true);
-				radioTextureSelected(null);
-				_gui.getTexturePanel().getObjTexture().setEnabled(true);
-				_gui.getTexturePanel().getObjTexture().setText(textureData.getTextureFilePath());
-				_gui.getTexturePanel().getObjTextureHeight().setEnabled(true);
-				_gui.getTexturePanel().getObjTextureHeight().setText(textureData.getHeight().toString());
-				_gui.getTexturePanel().getObjTextureWidth().setEnabled(true);
-				_gui.getTexturePanel().getObjTextureWidth().setText(textureData.getWidth().toString());
-				_gui.getTexturePanel().getBtnTextureLoad().setEnabled(true);
-			}
-			else
-			{
-				_gui.getPropertiesPanel().getRd3dObject().setSelected(true);
-				radioObj3DSelected(null);
-				_gui.getObj3DPanel().getObjFile().setEnabled(true);
-				_gui.getObj3DPanel().getObjFile().setText(virtualObjectData.getPath3DObjectFile());
-				_gui.getObj3DPanel().getBtnObject3dLoad().setEnabled(true);
-			}
-		}
+		   _gui.getVideoPanel().getObjVideo().setText("");
+		   _gui.getVideoPanel().getObjVideoHeight().setText("");
+		   _gui.getVideoPanel().getObjVideoWidth().setText("");
+		   _gui.getVideoPanel().getObjVideoRpt().setSelected(false);
 		
-		public function getListOfPoints():Vector.<Point>
-		{
-			return _ctrMain.ctrPoint.getListOfPoints();
-		}
+		   _gui.getTexturePanel().getObjTexture().setText("");
+		   _gui.getTexturePanel().getObjTextureHeight().setText("");
+		   _gui.getTexturePanel().getObjTextureWidth().setText("");
 		
-		private function getCurrentSelectedPoint():uint
-		{
-			return _gui.getPropertiesPanel().getPtList().getSelectedIndex() - 1;
-		}
+		   _gui.getAnimationPanel().setHasAnimation(false);
+		   _gui.getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
+		   _gui.getAnimationPanel().setAnimationPeriod(10);
+		   _gui.getAnimationPanel().setAnimationRadius(0);
+		   _gui.getAnimationPanel().setAnimationRotationDirection(1);
+		   }
 		
-		private function getCurrentSelectedScene():uint
-		{
-			return _gui.getPropertiesPanel().getObjList().getSelectedIndex() - 1;
-		}
+		   public function audioSelected(e:Event):void
+		   {
+		   //if the has audio checkbox was marked
+		   if (_gui.getPropertiesPanel().getAudioCheck().isSelected())
+		   {
+		   setEnabledAudioPropertiesFields(true);
+		   }
+		   //if the has audio checkbox was unmarked
+		   else
+		   {
+		   var audioData:AudioScene;
+		   audioData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAudioData(getCurrentSelectedScene());
 		
-		private function setEnabledPointPropertiesFields(enabled:Boolean):void
-		{
-			_gui.getPropertiesPanel().getPtX().setEnabled(enabled);
-			_gui.getPropertiesPanel().getPtY().setEnabled(enabled);
-			_gui.getPropertiesPanel().getPtZ().setEnabled(enabled);
-			_gui.getPropertiesPanel().getbtRemovePt().setEnabled(enabled);
-		}
+		   if (audioData)
+		   {
+		   _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).updateRemoveAudio(getCurrentSelectedScene());
+		   }
+		   _gui.getPropertiesPanel().getAudioFilePath().setText("");
+		   setEnabledAudioPropertiesFields(false);
+		   }
+		   }
 		
-		private function setEnabledScenePropertiesFields(enabled:Boolean):void
-		{
-			_gui.getPropertiesPanel().getbtRemoveObj().setEnabled(enabled);
-			_gui.getPropertiesPanel().getbtSwapObj().setEnabled(enabled);
-			
-			_gui.getPropertiesPanel().getObjTrX().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjTrY().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjTrZ().setEnabled(enabled);
-			
-			_gui.getPropertiesPanel().getObjRtX().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjRtY().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjRtZ().setEnabled(enabled);
-			
-			_gui.getPropertiesPanel().getObjScX().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjScY().setEnabled(enabled);
-			_gui.getPropertiesPanel().getObjScZ().setEnabled(enabled);
-			
-			setEnabledVideoPropertiesFields(enabled);
-			setEnabledTexturePropertiesFields(enabled);
-			
-			_gui.getPropertiesPanel().getAudioCheck().setEnabled(enabled);
-			
-			_gui.getAnimationPanel().getJcbHasAnimation().setEnabled(enabled);
-		}
+		   public function radioObj3DSelected(e:Event):void
+		   {
+		   _gui.getPropertiesPanel().remove(_gui.getVideoPanel());
+		   _gui.getPropertiesPanel().remove(_gui.getTexturePanel());
 		
-		private function setEnabledVideoPropertiesFields(enabled:Boolean):void
-		{
-			_gui.getVideoPanel().getObjVideoWidth().setEnabled(enabled)
-			_gui.getVideoPanel().getObjVideoHeight().setEnabled(enabled)
-			_gui.getVideoPanel().getObjVideoRpt().setEnabled(enabled);
-		}
+		   _gui.getPropertiesPanel().append(_gui.getObj3DPanel());
+		   _gui.getObj3DPanel().show();
+		   }
 		
-		private function setEnabledTexturePropertiesFields(enabled:Boolean):void
-		{
-			_gui.getTexturePanel().getObjTextureWidth().setEnabled(enabled);
-			_gui.getTexturePanel().getObjTextureHeight().setEnabled(enabled);
-		}
+		   public function radioVideoSelected(e:Event):void
+		   {
+		   _gui.getPropertiesPanel().remove(_gui.getObj3DPanel());
+		   _gui.getPropertiesPanel().remove(_gui.getTexturePanel());
 		
-		private function setEnabledAudioPropertiesFields(enabled:Boolean):void
-		{
-			_gui.getPropertiesPanel().getbtAudioLoad().setEnabled(enabled);
-			_gui.getPropertiesPanel().getAudioFilePath().setEnabled(enabled);
-			_gui.getPropertiesPanel().getAudioRpt().setEnabled(enabled);
-		}*/
+		   _gui.getPropertiesPanel().append(_gui.getVideoPanel());
+		   _gui.getVideoPanel().show();
+		
+		   if (_gui.getVideoPanel().getObjVideo().getText() == "")
+		   {
+		   setEnabledVideoPropertiesFields(false);
+		   }
+		   else
+		   {
+		   setEnabledVideoPropertiesFields(true);
+		   }
+		   }
+		
+		   public function radioTextureSelected(e:Event):void
+		   {
+		   _gui.getPropertiesPanel().remove(_gui.getObj3DPanel());
+		   _gui.getPropertiesPanel().remove(_gui.getVideoPanel());
+		
+		   _gui.getPropertiesPanel().append(_gui.getTexturePanel());
+		   _gui.getTexturePanel().show();
+		
+		   if (_gui.getTexturePanel().getObjTexture().getText() == "")
+		   {
+		   setEnabledTexturePropertiesFields(false);
+		   }
+		   else
+		   {
+		   setEnabledTexturePropertiesFields(true);
+		   }
+		   }
+		
+		   public function pointSelected(e:Event):void
+		   {
+		   var position:Number3D;
+		
+		   cleanPointFields();
+		   if (_gui.getPropertiesPanel().getPtList().getSelectedItem() == "New")
+		   {
+		   setEnabledPointPropertiesFields(false);
+		   _ctrMain.ctrPoint.disableAllPointsUI();
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), new Vector.<FlarasScene>());
+		   _gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
+		   }
+		   else
+		   {
+		   setEnabledPointPropertiesFields(true);
+		
+		   _ctrMain.ctrPoint.disableAllPointsUI();
+		   _ctrMain.ctrPoint.enablePointUI(getCurrentSelectedPoint());
+		
+		   position = _ctrMain.ctrPoint.getPosition(getCurrentSelectedPoint());
+		   _gui.getPropertiesPanel().getPtX().setText(position.x + "");
+		   _gui.getPropertiesPanel().getPtY().setText(position.y + "");
+		   _gui.getPropertiesPanel().getPtZ().setText(position.z + "");
+		
+		   comboBoxContentsUpdate(_gui.getPropertiesPanel().getObjList(), _ctrMain.ctrPoint.getListOfPoints()[getCurrentSelectedPoint()].getListOfFlarasScenes().length);
+		
+		   _gui.getPropertiesPanel().getObjList().setSelectedIndex(0);
+		   }
+		   }
+		
+		   public function objectSelected(e:Event):void
+		   {
+		   var translation:Number3D;
+		   var rotation:Number3D;
+		   var scale:Number3D;
+		   var audioData:AudioScene;
+		   var videoData:VideoScene;
+		   var textureData:TextureScene;
+		   var virtualObjectData:VirtualObjectScene;
+		   var animationData:AnimationScene;
+		
+		   cleanSceneFields();
+		   if (String(_gui.getPropertiesPanel().getObjList().getSelectedItem()) == "New")
+		   {
+		   setEnabledScenePropertiesFields(false);
+		   _ctrMain.ctrPoint.disableAllPoints(false);
+		   }
+		   else
+		   {
+		   setEnabledScenePropertiesFields(true);
+		   _ctrMain.ctrPoint.disableAllPoints(false);
+		   fillPropertiesFields();
+		   _ctrMain.ctrPoint.goToScene(getCurrentSelectedPoint(), getCurrentSelectedScene());
+		   }
+		   }
+		
+		   public function fillPropertiesFields():void
+		   {
+		   var translation:Number3D;
+		   var rotation:Number3D;
+		   var scale:Number3D;
+		   var audioData:AudioScene;
+		   var videoData:VideoScene;
+		   var textureData:TextureScene;
+		   var virtualObjectData:VirtualObjectScene;
+		   var animationData:AnimationScene;
+		
+		   cleanSceneFields();
+		
+		   translation = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getTranslation(getCurrentSelectedScene());
+		   rotation = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getRotation(getCurrentSelectedScene());
+		   scale = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getScale(getCurrentSelectedScene());
+		
+		   virtualObjectData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getVirtualObjectData(getCurrentSelectedScene());
+		   videoData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getVideoData(getCurrentSelectedScene());
+		   textureData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getTextureData(getCurrentSelectedScene());
+		   audioData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAudioData(getCurrentSelectedScene());
+		   animationData = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint()).getAnimationData(getCurrentSelectedScene());
+		
+		   _gui.getPropertiesPanel().getObjTrX().setText(translation.x + "");
+		   _gui.getPropertiesPanel().getObjTrY().setText(translation.y + "");
+		   _gui.getPropertiesPanel().getObjTrZ().setText(translation.z + "");
+		   _gui.getPropertiesPanel().getObjRtX().setText(rotation.x + "");
+		   _gui.getPropertiesPanel().getObjRtY().setText(rotation.y + "");
+		   _gui.getPropertiesPanel().getObjRtZ().setText(rotation.z + "");
+		   _gui.getPropertiesPanel().getObjScX().setText(scale.x + "");
+		   _gui.getPropertiesPanel().getObjScY().setText(scale.y + "");
+		   _gui.getPropertiesPanel().getObjScZ().setText(scale.z + "");
+		
+		   if (animationData)
+		   {
+		   _gui.getAnimationPanel().setHasAnimation(true);
+		   _gui.getAnimationPanel().setAnimationPeriod(animationData.getPeriod());
+		   _gui.getAnimationPanel().setAnimationRotationAxis(animationData.getRotationAxis());
+		   _gui.getAnimationPanel().setAnimationRadius(animationData.getRadius());
+		   _gui.getAnimationPanel().setAnimationRotationDirection(animationData.getRotationDirection());
+		   }
+		   if (audioData)
+		   {
+		   _gui.getPropertiesPanel().getAudioCheck().setSelected(true);
+		   _gui.getPropertiesPanel().getAudioFilePath().setEnabled(true);
+		   _gui.getPropertiesPanel().getAudioFilePath().setText(audioData.getAudioFilePath());
+		   _gui.getPropertiesPanel().getAudioRpt().setEnabled(true);
+		   _gui.getPropertiesPanel().getAudioRpt().setSelected(audioData.getRepeatAudio());
+		   _gui.getPropertiesPanel().getbtAudioLoad().setEnabled(true);
+		   }
+		
+		   if (videoData)
+		   {
+		   _gui.getPropertiesPanel().getRdVideoObject().setSelected(true);
+		   radioVideoSelected(null);
+		   _gui.getVideoPanel().getObjVideo().setEnabled(true);
+		   _gui.getVideoPanel().getObjVideo().setText(videoData.getVideoFilePath());
+		   _gui.getVideoPanel().getObjVideoHeight().setEnabled(true);
+		   _gui.getVideoPanel().getObjVideoHeight().setText(videoData.getHeight().toString());
+		   _gui.getVideoPanel().getObjVideoWidth().setEnabled(true);
+		   _gui.getVideoPanel().getObjVideoWidth().setText(videoData.getWidth().toString());
+		   _gui.getVideoPanel().getObjVideoRpt().setEnabled(true);
+		   _gui.getVideoPanel().getObjVideoRpt().setSelected(videoData.getRepeatVideo());
+		   _gui.getVideoPanel().getBtnVideoLoad().setEnabled(true);
+		   }
+		   else if (textureData)
+		   {
+		   _gui.getPropertiesPanel().getRdTextureObject().setSelected(true);
+		   radioTextureSelected(null);
+		   _gui.getTexturePanel().getObjTexture().setEnabled(true);
+		   _gui.getTexturePanel().getObjTexture().setText(textureData.getTextureFilePath());
+		   _gui.getTexturePanel().getObjTextureHeight().setEnabled(true);
+		   _gui.getTexturePanel().getObjTextureHeight().setText(textureData.getHeight().toString());
+		   _gui.getTexturePanel().getObjTextureWidth().setEnabled(true);
+		   _gui.getTexturePanel().getObjTextureWidth().setText(textureData.getWidth().toString());
+		   _gui.getTexturePanel().getBtnTextureLoad().setEnabled(true);
+		   }
+		   else
+		   {
+		   _gui.getPropertiesPanel().getRd3dObject().setSelected(true);
+		   radioObj3DSelected(null);
+		   _gui.getObj3DPanel().getObjFile().setEnabled(true);
+		   _gui.getObj3DPanel().getObjFile().setText(virtualObjectData.getPath3DObjectFile());
+		   _gui.getObj3DPanel().getBtnObject3dLoad().setEnabled(true);
+		   }
+		   }
+		
+		   public function getListOfPoints():Vector.<Point>
+		   {
+		   return _ctrMain.ctrPoint.getListOfPoints();
+		   }
+		
+		   private function getCurrentSelectedPoint():uint
+		   {
+		   return _gui.getPropertiesPanel().getPtList().getSelectedIndex() - 1;
+		   }
+		
+		   private function getCurrentSelectedScene():uint
+		   {
+		   return _gui.getPropertiesPanel().getObjList().getSelectedIndex() - 1;
+		   }
+		
+		   private function setEnabledPointPropertiesFields(enabled:Boolean):void
+		   {
+		   _gui.getPropertiesPanel().getPtX().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getPtY().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getPtZ().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getbtRemovePt().setEnabled(enabled);
+		   }
+		
+		   private function setEnabledScenePropertiesFields(enabled:Boolean):void
+		   {
+		   _gui.getPropertiesPanel().getbtRemoveObj().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getbtSwapObj().setEnabled(enabled);
+		
+		   _gui.getPropertiesPanel().getObjTrX().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjTrY().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjTrZ().setEnabled(enabled);
+		
+		   _gui.getPropertiesPanel().getObjRtX().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjRtY().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjRtZ().setEnabled(enabled);
+		
+		   _gui.getPropertiesPanel().getObjScX().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjScY().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getObjScZ().setEnabled(enabled);
+		
+		   setEnabledVideoPropertiesFields(enabled);
+		   setEnabledTexturePropertiesFields(enabled);
+		
+		   _gui.getPropertiesPanel().getAudioCheck().setEnabled(enabled);
+		
+		   _gui.getAnimationPanel().getJcbHasAnimation().setEnabled(enabled);
+		   }
+		
+		   private function setEnabledVideoPropertiesFields(enabled:Boolean):void
+		   {
+		   _gui.getVideoPanel().getObjVideoWidth().setEnabled(enabled)
+		   _gui.getVideoPanel().getObjVideoHeight().setEnabled(enabled)
+		   _gui.getVideoPanel().getObjVideoRpt().setEnabled(enabled);
+		   }
+		
+		   private function setEnabledTexturePropertiesFields(enabled:Boolean):void
+		   {
+		   _gui.getTexturePanel().getObjTextureWidth().setEnabled(enabled);
+		   _gui.getTexturePanel().getObjTextureHeight().setEnabled(enabled);
+		   }
+		
+		   private function setEnabledAudioPropertiesFields(enabled:Boolean):void
+		   {
+		   _gui.getPropertiesPanel().getbtAudioLoad().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getAudioFilePath().setEnabled(enabled);
+		   _gui.getPropertiesPanel().getAudioRpt().setEnabled(enabled);
+		 }*/
 		
 		public function getGUI():GraphicsUserInterface
 		{
@@ -725,7 +769,7 @@ package flaras.controller
 			return _ctrMain;
 		}
 		
-		public function actionRefMarkerSelected():void 
+		public function actionRefMarkerSelected():void
 		{
 			_ctrMain.ctrPoint.disableAllPointsUI();
 		}
@@ -797,7 +841,8 @@ package flaras.controller
 		
 		public function listenerRemovePoint(e:Event):void
 		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this point?\nAll child scenes will also be deleted.", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemovePoint);
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this point?\nAll child scenes will also be deleted.",
+				null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemovePoint);
 		}
 		
 		public function listenerConfirmedRemovePoint(e:Event):void
@@ -832,14 +877,14 @@ package flaras.controller
 			strY = _gui.getScenePanel().getJTFSceneTrY().getText();
 			strZ = _gui.getScenePanel().getJTFSceneTrZ().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Translation X", strX),
-														new FieldData("Translation Y", strY),
-														new FieldData("Translation Z", strZ));
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Translation X", strX), new FieldData("Translation Y",
+				strY), new FieldData("Translation Z", strZ));
 			
 			if (allFieldsValid)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTranslation(getCurrentSelectedScene2(), new Number3D(Number(strX), Number(strY), Number(strZ)));	
-			}			
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTranslation(getCurrentSelectedScene2(),
+					new Number3D(Number(strX), Number(strY), Number(strZ)));
+			}
 		}
 		
 		public function listenerUpdateSceneRotation(e:Event):void
@@ -853,14 +898,14 @@ package flaras.controller
 			strRotY = _gui.getScenePanel().getJTFSceneRotY().getText()
 			strRotZ = _gui.getScenePanel().getJTFSceneRotZ().getText()
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Rotation X", strRotX),
-														new FieldData("Rotation Y", strRotY),
-														new FieldData("Rotation Z", strRotZ));
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Rotation X", strRotX), new FieldData("Rotation Y",
+				strRotY), new FieldData("Rotation Z", strRotZ));
 			
 			if (allFieldsValid)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRotation(getCurrentSelectedScene2(), new Number3D(Number(strRotX), Number(strRotY), Number(strRotZ)));	
-			}			
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRotation(getCurrentSelectedScene2(),
+					new Number3D(Number(strRotX), Number(strRotY), Number(strRotZ)));
+			}
 		}
 		
 		public function listenerUpdateSceneScale(e:Event):void
@@ -874,17 +919,17 @@ package flaras.controller
 			strScY = _gui.getScenePanel().getJTFSceneScY().getText();
 			strScZ = _gui.getScenePanel().getJTFSceneScZ().getText();
 			
-			allFieldsValid = generalNumericFieldValidator(new FieldData("Scale X", strScX),
-														new FieldData("Scale Y", strScY),
-														new FieldData("Scale Z", strScZ));			
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Scale X", strScX), new FieldData("Scale Y",
+				strScY), new FieldData("Scale Z", strScZ));
 			
 			if (allFieldsValid)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateScale(getCurrentSelectedScene2(), new Number3D(Number(strScX), Number(strScY), Number(strScZ)));
-			}			
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateScale(getCurrentSelectedScene2(),
+					new Number3D(Number(strScX), Number(strScY), Number(strScZ)));
+			}
 		}
 		
-		private function generalNumericFieldValidator(...args):Boolean
+		private function generalNumericFieldValidator(... args):Boolean
 		{
 			var fieldData:FieldData;
 			var fieldName:String;
@@ -916,35 +961,52 @@ package flaras.controller
 			var label:String;
 			
 			label = _gui.getScenePanel().getJTFSceneLabel().getText();
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateLabel(getCurrentSelectedScene2(), label);			
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateLabel(getCurrentSelectedScene2(),
+				label);
 			_gui.getTreePanel().updateSceneLabel(label);
 		}
 		
 		public function listenerUpdateSceneTextureSize(e:Event):void
 		{
-			var width:Number;
-			var height:Number;
+			var strWidth:String;
+			var strHeight:String;
+			var allFieldsValid:Boolean;
 			
-			width = Number(_gui.getScenePanel().getJTFTextureWidth().getText());
-			height = Number(_gui.getScenePanel().getJTFTextureHeight().getText());
+			strWidth = _gui.getScenePanel().getJTFTextureWidth().getText();
+			strHeight = _gui.getScenePanel().getJTFTextureHeight().getText();
 			
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTextureSize(getCurrentSelectedScene2(), width, height);
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Texture Width", strWidth), new FieldData("Texture Height",
+				strHeight));
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateTextureSize(getCurrentSelectedScene2(),
+					Number(strWidth), Number(strHeight));
+			}
 		}
 		
 		public function listenerUpdateSceneVideoSize(e:Event):void
 		{
-			var width:Number;
-			var height:Number;
+			var strWidth:String;
+			var strHeight:String;
+			var allFieldsValid:Boolean;
 			
-			width = Number(_gui.getScenePanel().getJTFVideoWidth().getText());
-			height = Number(_gui.getScenePanel().getJTFVideoHeight().getText());
+			strWidth = _gui.getScenePanel().getJTFVideoWidth().getText();
+			strHeight = _gui.getScenePanel().getJTFVideoHeight().getText();
 			
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateVideoSize(getCurrentSelectedScene2(), width, height);
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Video Width", strWidth), new FieldData("Video Height",
+				strHeight));
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateVideoSize(getCurrentSelectedScene2(),
+					Number(strWidth), Number(strHeight));
+			}
 		}
 		
 		public function listenerUpdateVideoRepeat(e:Event):void
 		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateVideoRepeat(getCurrentSelectedScene2(), _gui.getScenePanel().getJCBVideoRepeat().isSelected());
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateVideoRepeat(getCurrentSelectedScene2(),
+				_gui.getScenePanel().getJCBVideoRepeat().isSelected());
 		}
 		
 		public function listenerAddAudio(e:Event):void
@@ -954,14 +1016,18 @@ package flaras.controller
 		
 		public function listenerUpdateAudioRepeat(e:Event):void
 		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAudioRepeat(getCurrentSelectedScene2(), _gui.getScenePanel().getJCBAudioRepeat().isSelected());
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAudioRepeat(getCurrentSelectedScene2(),
+				_gui.getScenePanel().getJCBAudioRepeat().isSelected());
 		}
 		
 		public function listenerUpdateAnimationState(newState:Boolean):void
 		{
 			if (newState)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAnimation(getCurrentSelectedScene2(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAnimation(getCurrentSelectedScene2(),
+					Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
+					_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
+					_gui.getScenePanel().getAnimationPanel().getAnimationDirection());
 			}
 			else
 			{
@@ -971,12 +1037,30 @@ package flaras.controller
 		
 		public function listenerUpdateAnimationProperties(e:Event):void
 		{
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAnimationProperties(getCurrentSelectedScene2(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getAnimationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+			var strRadius:String;
+			var strPeriod:String;
+			var allFieldsValid:Boolean;
+			
+			strRadius = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText();
+			strPeriod = _gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText();
+			
+			allFieldsValid = generalNumericFieldValidator(new FieldData("Radius", strRadius), new FieldData("Period",
+				strPeriod));
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAnimationProperties(getCurrentSelectedScene2(),
+					Number(strPeriod), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(),
+					Number(strRadius), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+			}
+		
+			//_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAnimationProperties(getCurrentSelectedScene2(), _gui.getScenePanel().getAnimationPanel().getAnimationPeriod(), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), _gui.getScenePanel().getAnimationPanel().getJTFRotationRadius(), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
 		}
 		
 		public function listenerRemoveScene(e:Event):void
 		{
-			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this scene?", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemoveScene);
+			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this scene?",
+				null, null, true, new LoadIcon("icons/external/warning.png", 48, 48), JOptionPane.YES + JOptionPane.NO).getYesButton().addActionListener(listenerConfirmedRemoveScene);
 		}
 		
 		private function listenerConfirmedRemoveScene(e:Event):void
@@ -1003,12 +1087,13 @@ package flaras.controller
 			var point2Swap:uint;
 			
 			point2Swap = getCurrentSelectedPoint2();
-			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).swapScenePositionTo(getCurrentSelectedScene2(), pos2Swap - 1);
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).swapScenePositionTo(getCurrentSelectedScene2(),
+				pos2Swap - 1);
 			listOfSceneLabels = new Vector.<String>();
 			for (var i:uint = 0; i < _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).getNumberOfScenes(); i++)
 			{
 				listOfSceneLabels.push(_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).getLabel(i));
-			}			
+			}
 			
 			_gui.getTreePanel().rebuildPointBranch(getCurrentSelectedPoint2(), listOfSceneLabels);
 			_gui.getTreePanel().selectPoint(point2Swap);
@@ -1110,7 +1195,7 @@ package flaras.controller
 				//listenerRadioSelect3DObj(null);
 				//_gui.getScenePanel().get().setEnabled(true);
 				_gui.getScenePanel().getJTF3DObjPath().setText(virtualObjectData.getPath3DObjectFile());
-				//_gui.getScenePanel().getBtnObject3dLoad().setEnabled(true);
+					//_gui.getScenePanel().getBtnObject3dLoad().setEnabled(true);
 			}
 		}
 		
@@ -1140,7 +1225,7 @@ package flaras.controller
 			_gui.getScenePanel().getJTFTextureWidth().setText("");
 			_gui.getScenePanel().getJTFTextureHeight().setEnabled(false);
 			_gui.getScenePanel().getJTFTextureHeight().setText("");
-		
+			
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
 			_gui.getScenePanel().getAnimationPanel().setAnimationPeriod(10);
