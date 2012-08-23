@@ -234,11 +234,6 @@ package flaras.view.gui
 			setComponentsStatus(hasAnimation);
 		}
 		
-		public function setAnimationPeriod(animationPeriod:Number):void
-		{
-			_jtfRotationPeriod.setText(animationPeriod+"")
-		}
-		
 		public function setAnimationRotationAxis(rotationAxis:uint):void
 		{
 			if (rotationAxis == ViewAnimationScene.X_ROTATION_AXIS)
@@ -253,11 +248,6 @@ package flaras.view.gui
 			{
 				_jrbZ.setSelected(true);
 			}
-		}
-		
-		public function setAnimationRadius(animationRadius:uint):void
-		{
-			_jtfRotationRadius.setText(animationRadius+"");
 		}
 		
 		public function setAnimationRotationDirection(rotationDirection:int):void
