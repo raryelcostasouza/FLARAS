@@ -34,6 +34,7 @@ package flaras.view
 	import flaras.controller.audio.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.multimarkerInteraction.*;
+	import flaras.controller.util.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
 	import flash.events.*;
@@ -43,7 +44,6 @@ package flaras.view
 	public class  BoundaryMultiMarkerInteraction extends MultiMarkerInteraction
 	{
 		private var _ctrMain:CtrMain;
-		//private var aObjInteractionMarker:InteractionMarker;
 		private var _modelInteractionMarker:ModelInteractionMarker;
 		private var listOfPoints:Vector.<Point>;
 		
@@ -53,11 +53,8 @@ package flaras.view
 			
 			_ctrMain = ctrMain;
 			_modelInteractionMarker = _ctrMain.ctrMarker.getModelInteractionMarker();
-			//aObjInteractionMarker = _ctrMain.ctrMarker.interactionMarker;
-			
-			timer = new Timer(20);
-			timer.addEventListener(TimerEvent.TIMER, loopCheckInteractionAreas);
-			timer.start();
+		
+			StageReference.getStage().addEventListener(Event.ENTER_FRAME, loopCheckInteractionAreas);
 		}
 
 		private function loopCheckInteractionAreas(e:Event):void
