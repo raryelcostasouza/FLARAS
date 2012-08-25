@@ -183,7 +183,10 @@ package flaras.view.scene
 		
 		public function toggleMirror():void
 		{
-			_obj3D.scaleX *= -1;
+			if (_obj3D)
+			{
+				_obj3D.scaleX *= -1;
+			}			
 		}
 		
 		public function unLoad():void
