@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,20 +15,21 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.view.scene 
+package flaras.view.scene
 {
+	import flaras.controller.util.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flash.events.*;
@@ -36,7 +37,7 @@ package flaras.view.scene
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
 	
-	public class ViewAnimationScene 
+	public class ViewAnimationScene
 	{
 		public static const X_ROTATION_AXIS:uint = 0;
 		public static const Y_ROTATION_AXIS:uint = 1;
@@ -46,11 +47,12 @@ package flaras.view.scene
 		private var _animationScene:AnimationScene;
 		private var _obj3DToAnimate:DisplayObject3D;
 		
-		private var _timer:Timer;
 		private var _increaseAngleStep:Number;
 		private var _angSumDegree:Number;
-				
-		public function ViewAnimationScene(animationScene:AnimationScene, viewFlarasScene:ViewFlarasScene) 
+		private var _running:Boolean;
+		private var _frameRate:Number;
+		
+		public function ViewAnimationScene(animationScene:AnimationScene, viewFlarasScene:ViewFlarasScene)
 		{
 			_animationScene = animationScene;
 			_viewFlarasScene = viewFlarasScene;
@@ -61,29 +63,34 @@ package flaras.view.scene
 		private function initAnimVars():void
 		{
 			_obj3DToAnimate = _viewFlarasScene.getObj3D();
+			_running = false;
+			_frameRate = StageReference.getStage().frameRate;
 		}
 		
 		public function showScene():void
 		{
-			if (_animationScene.getPeriod() != 0 && _timer == null)
+			if (_animationScene.getPeriod() != 0 && !_running)
 			{
 				initAnimVars();
-				_timer = new Timer(33); //30 fps... 1 frap aprox every 33 ms
-		
+				
 				//360º                - period (s)
-				//increaseAngleStep   - 0.033 (s) (1 frame)
-				_increaseAngleStep = _animationScene.getRotationDirection()*(360 * 0.03) / _animationScene.getPeriod();
+				//increaseAngleStep   - 1.0/_frameRate (seconds) - (1 frame)
+				_increaseAngleStep = _animationScene.getRotationDirection() * (360 * 1.0 / _frameRate) / _animationScene.getPeriod();
 				_angSumDegree = 0;
-			
-				_timer.addEventListener(TimerEvent.TIMER, animation);
-				_timer.start();
+				
+				StageReference.getStage().addEventListener(Event.ENTER_FRAME, animation);
+				_running = true;
 			}
 		}
 		
 		public function hideScene():void
 		{
-			unLoad();
-		}		
+			if (_running)
+			{
+				_running = false;
+				StageReference.getStage().removeEventListener(Event.ENTER_FRAME, animation);
+			}
+		}
 		
 		private function animation(e:Event):void
 		{
@@ -97,7 +104,7 @@ package flaras.view.scene
 				_obj3DToAnimate.y = getCurrentTranslation().y + _animationScene.getRadius() * Math.cos(angSumRad);
 				_obj3DToAnimate.z = getCurrentTranslation().z + _animationScene.getRadius() * Math.sin(angSumRad);
 				
-				_obj3DToAnimate.rotationX = getCurrentRotation().x + _angSumDegree;				
+				_obj3DToAnimate.rotationX = getCurrentRotation().x + _angSumDegree;
 			}
 			else if (_animationScene.getRotationAxis() == Y_ROTATION_AXIS)
 			{
@@ -117,20 +124,16 @@ package flaras.view.scene
 		
 		public function unLoad():void
 		{
-			if (_timer != null)
-			{
-				_timer.removeEventListener(TimerEvent.TIMER, animation);
-				_timer.stop();
-				_timer = null;
-				
-				_obj3DToAnimate.rotationX = getCurrentRotation().x;
-				_obj3DToAnimate.rotationY = getCurrentRotation().y;
-				_obj3DToAnimate.rotationZ = getCurrentRotation().z;
-				
-				_obj3DToAnimate.x = getCurrentTranslation().x;
-				_obj3DToAnimate.y = getCurrentTranslation().y;
-				_obj3DToAnimate.z = getCurrentTranslation().z;
-			}
+			_running = false;
+			StageReference.getStage().removeEventListener(Event.ENTER_FRAME, animation);
+			
+			_obj3DToAnimate.rotationX = getCurrentRotation().x;
+			_obj3DToAnimate.rotationY = getCurrentRotation().y;
+			_obj3DToAnimate.rotationZ = getCurrentRotation().z;
+			
+			_obj3DToAnimate.x = getCurrentTranslation().x;
+			_obj3DToAnimate.y = getCurrentTranslation().y;
+			_obj3DToAnimate.z = getCurrentTranslation().z;		
 		}
 		
 		public function destroy():void
