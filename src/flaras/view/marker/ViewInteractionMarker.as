@@ -38,7 +38,7 @@ package flaras.view.marker
 	import flash.events.*;
 	import flash.net.*;
 	import org.papervision3d.core.math.*;
-	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.events.*;
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
@@ -48,7 +48,6 @@ package flaras.view.marker
 		private var _modelInteractionMarker:ModelInteractionMarker;
 		
 		private var aObj3DSphere:DisplayObject3D;
-		private var aObj3DSphereUnlock:DisplayObject3D;
 		private var aObj3DCoverInspector:DisplayObject3D;
 		private var aObj3DCoverControlForward:DisplayObject3D;
 		private var aObj3DCoverControlBackward:DisplayObject3D;
@@ -71,14 +70,12 @@ package flaras.view.marker
 		public function updateSize():void
 		{
 			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphere, CtrMarker.INTERACTION_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(aObj3DSphereUnlock, CtrMarker.INTERACTION_MARKER);
 			build3DSphere();		
 		}
 		
 		public function updateDistance():void
 		{
 			aObj3DSphere.y = _modelInteractionMarker.getSphereDistance();
-			aObj3DSphereUnlock.y = _modelInteractionMarker.getSphereDistance();	
 		}
 		
 		private function initDefaultCover():void
@@ -121,14 +118,10 @@ package flaras.view.marker
 		
 		private function build3DSphere():void
 		{			
-			aObj3DSphere = new Sphere(Color.green, _modelInteractionMarker.getSphereSize(), 10, 10);
+			aObj3DSphere = new Sphere(Color.yellow, _modelInteractionMarker.getSphereSize(), 10, 10);
 			aObj3DSphere.position = new Number3D(0, _modelInteractionMarker.getSphereDistance(), 0);
-			
-			aObj3DSphereUnlock = new Sphere(new WireframeMaterial(0xffe600), _modelInteractionMarker.getSphereSize()+10, 10, 10);
-			aObj3DSphereUnlock.position = new Number3D(0, _modelInteractionMarker.getSphereDistance(), 0);
-			
+		
 			MarkerNodeManager.addObj2MarkerNode(aObj3DSphere, CtrMarker.INTERACTION_MARKER, null);
-			MarkerNodeManager.addObj2MarkerNode(aObj3DSphereUnlock, CtrMarker.INTERACTION_MARKER, null);
 		}
 		
 		public function change2InspectorMarker():void
