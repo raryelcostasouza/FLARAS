@@ -34,6 +34,9 @@ package flaras.controller.constants
 	{
 		public static const AUDIO_PATH_DISABLE:String = "system-audios/disable.mp3";
 		public static const AUDIO_PATH_ENABLE:String = "system-audios/enable.mp3";
+		public static const AUDIO_PATH_CONTROL_INTERACTION_FORWARD:String = "system-audios/control-interaction-forward.mp3";
+		public static const AUDIO_PATH_CONTROL_INTERACTION_BACKWARD:String = "system-audios/control-interaction-backward.mp3";
+		
 		public static const AUDIO_PATH_CONTROL_MARKER:String = "system-audios/controlMarker.mp3";
 		public static const AUDIO_PATH_INSPECTOR_MARKER:String = "system-audios/inspectorMarker.mp3";
 		public static const AUDIO_PATH_CONTROL_BACKWARD_MARKER:String = "system-audios/controlBackward.mp3";

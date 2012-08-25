@@ -260,6 +260,15 @@ package flaras.controller
 				p.setIndexActiveScene(indexActiveObject + pDirection)
 				indexActiveObject = p.getIndexActiveScene();
 				
+				if (pDirection == CtrMarker.CONTROL_FORWARD)
+				{
+					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_INTERACTION_FORWARD);
+				}
+				else
+				{
+					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_INTERACTION_BACKWARD);
+				}
+				
 				if (indexActiveObject > listOfScenes.length - 1)
 				{
 					p.setIndexActiveScene(0);
