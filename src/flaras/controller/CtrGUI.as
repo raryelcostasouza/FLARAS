@@ -1257,7 +1257,7 @@ package flaras.controller
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
 			_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(10+"");
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().setText(0);
+			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().setText(0+"");
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(1);
 		}
 		
