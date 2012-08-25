@@ -36,7 +36,7 @@ package flaras.controller.multimarkerInteraction
 	import flash.display.*;
 	import org.papervision3d.core.math.*;
 	
-	public class MultiMarkerInteraction extends Sprite
+	public class MultiMarkerInteraction
 	{				
 		//convert the coordinates of a marker 1 relative to the camera to 
 		//coordinates relative to another marker of reference (marker 2)
