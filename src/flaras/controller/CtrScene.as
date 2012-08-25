@@ -390,6 +390,8 @@ package flaras.controller
 			viewScene = getViewScene(indexScene);
 			scene = getScene(indexScene);
 			
+			viewScene.hideScene();
+			
 			//if does not have audio
 			if (!scene.getAudio())
 			{
@@ -401,7 +403,6 @@ package flaras.controller
 			}
 			else
 			{
-				viewScene.unLoad();
 				FileRemover.remove(FolderConstants.getFlarasAppCurrentFolder() + "/" + scene.getAudio().getAudioFilePath());
 				scene.getAudio().setAudioFilePath(audioPath);
 			}
