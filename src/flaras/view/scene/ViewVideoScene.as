@@ -42,12 +42,10 @@ package flaras.view.scene
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.primitives.*;
-	import org.papervision3d.view.layer.ViewportLayer;
+	import org.papervision3d.view.layer.*;
 
 	public class ViewVideoScene extends ViewFlarasScene
-	{
-		private var _obj3DAlreadyLoaded:Boolean;
-		
+	{		
 		private var _netStream:NetStream;
 		private var _videoScene:VideoScene;
 		
@@ -92,7 +90,6 @@ package flaras.view.scene
 			plane = new Plane(vsm, _videoScene.getWidth(), _videoScene.getHeight());
 			
 			_obj3D = plane;
-			_obj3DAlreadyLoaded = true;
 			
 			//set position, rotation and scale
 			setObj3DProperties(_videoScene, _obj3D);	
@@ -107,7 +104,7 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				super.unLoad();
-				_obj3DAlreadyLoaded = false;
+				
 				_netStream.pause();
 				_netStream.close();	
 				
