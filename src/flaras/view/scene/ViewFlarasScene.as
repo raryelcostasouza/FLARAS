@@ -29,16 +29,15 @@
 
 package flaras.view.scene 
 {
-	import flaras.controller.CtrMain;
-	import flaras.controller.CtrMarker;
+	import flaras.controller.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flash.errors.*;
-	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
+	import flash.events.*;
+	import flash.filters.*;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.objects.*;
-	import org.papervision3d.view.layer.ViewportLayer;
+	import org.papervision3d.view.layer.*;
 	
 	public class ViewFlarasScene 
 	{

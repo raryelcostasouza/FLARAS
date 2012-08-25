@@ -40,7 +40,6 @@ package flaras.view.scene
 	import org.papervision3d.events.*;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.objects.parsers.*;
-	import org.papervision3d.view.layer.ViewportLayer;
 	
 	public class ViewVirtualObjectScene extends ViewFlarasScene
 	{
