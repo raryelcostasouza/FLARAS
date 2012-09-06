@@ -59,6 +59,8 @@ package flaras.controller.io.fileReader
 		
 		private function onComplete(e:Event):void
 		{			
+			var label:String;
+			
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
@@ -67,7 +69,16 @@ package flaras.controller.io.fileReader
 			
 			for each (var point:XML in aXMLFile.point) 
 			{
-				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), point.label);
+				if (point.label == undefined)
+				{
+					label = "";
+				}
+				else
+				{
+					label = point.label;
+				}
+				
+				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label);
 			}
 			
 			aObjCtrPoint.finishedReadingListOfPoints();
