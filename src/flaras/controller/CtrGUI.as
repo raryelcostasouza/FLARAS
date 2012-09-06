@@ -1188,7 +1188,6 @@ package flaras.controller
 			if (audioData)
 			{
 				_gui.getScenePanel().getJCBAudio().setSelected(true);
-				_gui.getScenePanel().getJTFAudioPath().setEnabled(true);
 				_gui.getScenePanel().getJTFAudioPath().setText(audioData.getAudioFilePath());
 				_gui.getScenePanel().getJCBAudioRepeat().setEnabled(true);
 				_gui.getScenePanel().getJCBAudioRepeat().setSelected(audioData.getRepeatAudio());
@@ -1230,17 +1229,18 @@ package flaras.controller
 		private function cleanSceneFields2():void
 		{
 			_gui.getScenePanel().getJTFSceneLabel().setText("");
+			
 			_gui.getScenePanel().getJCBAudio().setSelected(false);
 			_gui.getScenePanel().getJTFAudioPath().setText("");
 			_gui.getScenePanel().getJCBAudioRepeat().setSelected(false);
-			
-			//disabling audio related buttons
 			_gui.getScenePanel().getJBAddAudioFile().setEnabled(false);
 			_gui.getScenePanel().getJCBAudioRepeat().setEnabled(false);
 			
 			_gui.getScenePanel().getJTF3DObjPath().setText("");
+			_gui.getScenePanel().getJTF3DObjPath().setEnabled(false);
 			
 			_gui.getScenePanel().getJTFVideoPath().setText("");
+			_gui.getScenePanel().getJTFVideoPath().setEnabled(false);
 			_gui.getScenePanel().getJTFVideoWidth().setEnabled(false);
 			_gui.getScenePanel().getJTFVideoWidth().setText("");
 			_gui.getScenePanel().getJTFVideoHeight().setEnabled(false);
@@ -1249,6 +1249,7 @@ package flaras.controller
 			_gui.getScenePanel().getJCBVideoRepeat().setSelected(false);
 			
 			_gui.getScenePanel().getJTFTexturePath().setText("");
+			_gui.getScenePanel().getJTFTexturePath().setEnabled(false);
 			_gui.getScenePanel().getJTFTextureWidth().setEnabled(false);
 			_gui.getScenePanel().getJTFTextureWidth().setText("");
 			_gui.getScenePanel().getJTFTextureHeight().setEnabled(false);
@@ -1280,7 +1281,7 @@ package flaras.controller
 				}
 				_gui.getScenePanel().getJTFAudioPath().setText("");
 				_gui.getScenePanel().getJCBAudioRepeat().setSelected(false);
-				_gui.getScenePanel().getJCBAudioRepeat().setEnabled(false);
+				
 				setEnabledAudioPropertiesFields2(false);
 			}
 		}
@@ -1313,6 +1314,7 @@ package flaras.controller
 		{
 			_gui.getScenePanel().getJBAddAudioFile().setEnabled(enabled);
 			_gui.getScenePanel().getJTFAudioPath().setEnabled(enabled);
+			_gui.getScenePanel().getJCBAudioRepeat().setEnabled(enabled);
 		}
 		
 		public function getCurrentSelectedPoint2():uint
