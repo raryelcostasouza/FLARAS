@@ -297,12 +297,10 @@ package flaras.view.gui
 			var sceneNode:DefaultMutableTreeNode;
 			
 			resetTree();
-			trace("NPoints:  " + listOfPoints.length);
 			for each (var p:Point in listOfPoints) 
 			{
 				pointNode = new DefaultMutableTreeNode("Point " + (_root.getChildCount() + 1) +": " + p.getLabel());
 				_root.insert(pointNode, _root.getChildCount());
-				trace("NScenes:  " + p.getListOfFlarasScenes().length);
 				for each (var scene:FlarasScene in p.getListOfFlarasScenes()) 
 				{
 					sceneNode = new DefaultMutableTreeNode("Scene " + (pointNode.getChildCount() + 1) + ": " + scene.getLabel())
