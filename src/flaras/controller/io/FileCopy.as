@@ -99,6 +99,7 @@ package flaras.controller.io
 			var path:String;
 			var indexFileExtensionDot:uint;
 			var fileNameWithoutExtension:String;
+			var validFileName:String;
 			
 			fileSource = File(e.target);
 			fileSource.removeEventListener(Event.SELECT, fileSelected);
@@ -107,57 +108,61 @@ package flaras.controller.io
 			
 			if (hasValidFileName(f.name))
 			{
-				indexFileExtensionDot = f.name.lastIndexOf(".");
-				fileNameWithoutExtension = f.name.slice(0, indexFileExtensionDot);	
+				fileNameWithoutExtension = getFileNameWithoutExtension(f);	
 				
-				// if there is no other file/folder with the same name
-				if ((!f.exists && !isObj3DFile(f)) || 
-					//extracted folder does not exist
-					(!f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
+				// if there is another file/folder with the same name
+				if ((f.exists && !isObj3DFile(f)) ||
+					//extracted folder already exists
+					(f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
 				{
-					try
-					{
-						fileSource.copyTo(fileDestinationSubFolder.resolvePath(fileSource.name), false);
-						
-						//if it was selected a 3d model file
-						if (isObj3DFile(f))
-						{
-							path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(fileSource.name));
-							
-							if (path == null)
-							{
-								MessageWindow.messageInvalidDAEFile();
-								//remove the extracted folder
-								FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
-							}
-							else if (!hasValidFileName(getFileNameFromPath(path)))
-							{
-								MessageWindow.messageInvalidFileName(MessageWindow.OBJ3D_INVALID_FILENAME);
-							}
-							else
-							{
-								aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
-							}
-						}
-						//if it was copied a texture, video or audio
-						else
-						{
-							path = fileSource.name;
-							aCtrGUI.finishedFileCopying(aDestinationSubFolder+path, aDestinationSubFolder);	
-						}
-					}
-					catch (ioE:IOError)
-					{
-						ErrorHandler.onIOError("FileCopy", f.nativePath);
-					}
-					catch (se:SecurityError)
-					{
-						ErrorHandler.onSecurityError("FileCopy", f.nativePath);
-					}
+					validFileName = generateFileNameWithUniqueSuffix(fileSource, fileDestinationSubFolder, isObj3DFile(f));
+					f = new File(fileDestinationSubFolder.resolvePath(validFileName).nativePath);
+					fileNameWithoutExtension = getFileNameWithoutExtension(f);
 				}
 				else
 				{
-					MessageWindow.messageFileAlreadyExists(fileSource.name);
+					validFileName = fileSource.name;
+				}
+				
+				try
+				{
+					fileSource.copyTo(f, false);
+					
+					//if it was selected a 3d model file
+					if (isObj3DFile(f))
+					{
+						//unzip the file and get the path to the file
+						path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(validFileName));
+						
+						//if it is a invalid dae/3ds file
+						if (path == null)
+						{
+							MessageWindow.messageInvalidDAEFile();
+							//remove the extracted folder
+							FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
+						}
+						else if (!hasValidFileName(getFileNameFromPath(path)))
+						{
+							MessageWindow.messageInvalidFileName(MessageWindow.OBJ3D_INVALID_FILENAME);
+						}
+						else
+						{
+							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+						}
+					}
+					//if it was copied a texture, video or audio
+					else
+					{
+						aCtrGUI.finishedFileCopying(aDestinationSubFolder+validFileName, aDestinationSubFolder);	
+					}
+				}
+				catch (ioE:IOError)
+				{
+					ErrorHandler.onIOError("FileCopy", f.nativePath);
+				}
+				catch (se:SecurityError)
+				{
+					ErrorHandler.onSecurityError("FileCopy", f.nativePath);
 				}
 			}
 			else
@@ -237,5 +242,43 @@ package flaras.controller.io
 			// it's a valid filename if the string matched has the same lenght of the filename
 			return (match.length == fileName.length);
 		}
+		
+		private static function getFileNameWithoutExtension(f:File):String
+		{
+			var indexFileExtensionDot:uint;
+			
+			indexFileExtensionDot = f.name.lastIndexOf(".");
+			return f.name.slice(0, indexFileExtensionDot);
+		}
+		
+		private static function generateFileNameWithUniqueSuffix(pF:File, destFolder:File, is3DObj:Boolean):String
+		{
+			var nSuffix:uint;
+			var fileNameWithoutExtension:String;
+			var name:String;
+			var f:File;
+			
+			fileNameWithoutExtension = getFileNameWithoutExtension(pF);
+			nSuffix = 0;
+			do
+			{
+				if (is3DObj)
+				{
+					//check if there is another folder with the obj3d file name without the extension
+					f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix).nativePath);
+					name = f.name + "." + pF.extension;
+				}
+				else
+				{
+					f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix + "." + f.extension).nativePath);
+					name = f.name;
+				}
+				
+				nSuffix++;
+			}while (f.exists);	
+			
+			return name; 
+		}
+		
 	}
 }
