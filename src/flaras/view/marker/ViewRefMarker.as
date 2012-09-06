@@ -51,7 +51,7 @@ package flaras.view.marker
 			_obj3DRefBaseRectanglePlane.visible = false;
 			MarkerNodeManager.addObj2MarkerNode(_obj3DRefBaseRectanglePlane, CtrMarker.REFERENCE_MARKER, null);
 			
-			_obj3DRefBasePoint = new Sphere(Color.white, 10, 10, 10);
+			_obj3DRefBasePoint = new Sphere(Color.white, 5, 10, 10);
 			_obj3DRefBasePoint.position = Number3D.ZERO;
 			_obj3DRefBasePoint.visible = false;
 			MarkerNodeManager.addObj2MarkerNode(_obj3DRefBasePoint, CtrMarker.REFERENCE_MARKER, null);
