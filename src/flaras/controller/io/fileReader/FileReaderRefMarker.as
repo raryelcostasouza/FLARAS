@@ -36,9 +36,10 @@ package flaras.controller.io.fileReader
 			this._ctrMarker.finishedLoadingRefMarkerData(xml.baseType);
 		}
 		
+		//if it's an older flaras project version the file will not be find and generate an IOError
 		private function onIOError(e:Event):void
 		{
-			ErrorHandler.onIOError("FileReaderRefMarker", _filePath);
+			this._ctrMarker.finishedLoadingRefMarkerData(CtrMarker.REF_BASE_RECTANGLE_PLANE);
 		}
 		
 		private function onSecurityError(e:Event):void

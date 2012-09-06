@@ -2,12 +2,12 @@
  * FLARAS - Flash Augmented Reality Authoring System
  * --------------------------------------------------------------------------------
  * Copyright (C) 2011-2012 Raryel, Hipolito, Claudio
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,12 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * --------------------------------------------------------------------------------
  * Developers:
  * Raryel Costa Souza - raryel.costa[at]gmail.com
  * Hipolito Douglas Franca Moreira - hipolitodouglas[at]gmail.com
- * 
+ *
  * Advisor: Claudio Kirner - ckirner[at]gmail.com
  * http://www.ckirner.com/flaras
  * Developed at UNIFEI - Federal University of Itajuba (www.unifei.edu.br) - Minas Gerais - Brazil
@@ -37,8 +37,8 @@ package flaras.controller
 	import flash.filesystem.*;
 	import org.papervision3d.core.math.*;
 	
-	public class CtrMarker 
-	{		
+	public class CtrMarker
+	{
 		private var _ctrMain:CtrMain;
 		private var _viewRefMarker:ViewRefMarker;
 		private var _viewInteractionMarker:ViewInteractionMarker;
@@ -61,7 +61,7 @@ package flaras.controller
 		public static const REF_BASE_RECTANGLE_PLANE:uint = 0;
 		public static const REF_BASE_POINT:uint = 1;
 		
-		public function CtrMarker(ctrMain:CtrMain) 
+		public function CtrMarker(ctrMain:CtrMain)
 		{
 			this._ctrMain = ctrMain;
 			
@@ -69,16 +69,17 @@ package flaras.controller
 			this._viewRefMarker = new ViewRefMarker();
 			_viewRefMarker.updateView(_modelRefMarker);
 			
-			this._modelInteractionMarker = new ModelInteractionMarker(DEFAULT_SPHERE_SIZE, DEFAULT_SPHERE_DISTANCE, INSPECTOR_MARKER, CONTROL_FORWARD);
-			this._viewInteractionMarker = new ViewInteractionMarker(_modelInteractionMarker);			
-		}			
+			this._modelInteractionMarker = new ModelInteractionMarker(DEFAULT_SPHERE_SIZE, DEFAULT_SPHERE_DISTANCE,
+				INSPECTOR_MARKER, CONTROL_FORWARD);
+			this._viewInteractionMarker = new ViewInteractionMarker(_modelInteractionMarker);
+		}
 		
 		public function getModelInteractionMarker():ModelInteractionMarker
 		{
 			return _modelInteractionMarker;
 		}
 		
-		public function getModelRefMarker():ModelRefMarker 
+		public function getModelRefMarker():ModelRefMarker
 		{
 			return _modelRefMarker;
 		}
@@ -88,7 +89,7 @@ package flaras.controller
 			return _viewInteractionMarker.getWorldMatrixObj3DSphere();
 		}
 		
-		public function resetBaseType():void 
+		public function resetBaseType():void
 		{
 			_modelRefMarker.setBaseType(REF_BASE_RECTANGLE_PLANE);
 			_viewRefMarker.updateView(_modelRefMarker);
@@ -148,7 +149,7 @@ package flaras.controller
 			{
 				// if it's forward control marker
 				if (_modelInteractionMarker.getControlMarkerType() == CtrMarker.CONTROL_FORWARD)
-				{	
+				{
 					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_BACKWARD_MARKER);
 					//change it to backward control marker
 					_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_BACKWARD);
@@ -175,7 +176,7 @@ package flaras.controller
 				
 				_modelInteractionMarker.setSphereSize(newSize);
 				_viewInteractionMarker.updateSize();
-			}			
+			}
 		}
 		
 		public function changeInteractionSphereDistance(deltaDistance:int):void
@@ -188,8 +189,8 @@ package flaras.controller
 				
 				_modelInteractionMarker.setSphereDistance(newDistance);
 				_viewInteractionMarker.updateDistance();
-			}	
-		}	
+			}
+		}
 		
 		public function setInteractionSphereData(distance:uint, size:uint):void
 		{
@@ -202,22 +203,12 @@ package flaras.controller
 		
 		public function loadInteractionMarkerData():void
 		{
-			new FileReaderInteractionSphere(this, FolderConstants.getFlarasAppCurrentFolder() + "/"
-													+ XMLFilesConstants.INTERACTION_SPHERE_PATH );
+			new FileReaderInteractionSphere(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.INTERACTION_SPHERE_PATH);
 		}
 		
 		public function loadRefMarkerData():void
 		{
-			var f:File;
-			f = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
-			if (f.exists)
-			{
-				new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
-			}
-			else
-			{
-				finishedLoadingRefMarkerData(CtrMarker.REF_BASE_RECTANGLE_PLANE);
-			}
+			new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
 		}
 		
 		public function finishedLoadingInteractionMarkerData(intSphereData:InteractionSphereData):void
@@ -250,6 +241,6 @@ package flaras.controller
 		public function mirrorInteractionMarker():void
 		{
 			_viewInteractionMarker.mirror();
-		}		
+		}
 	}
 }

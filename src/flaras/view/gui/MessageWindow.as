@@ -140,6 +140,15 @@ package flaras.view.gui
 			"Ctrl + P: Toggle reference marker persistence\n\n", null, null);
 		}
 		
+		public static function mouseCommands():void
+		{
+			JOptionPane.showMessageDialog("FLARAS Mouse Interaction Commands", 
+			"Left click on a point: enable the point\n" +
+			"Left click on a scene (video, texture, obj3d): control forward interaction (go to the next scene)\n" +
+			"Right click on a scene: control backward interaction (go to the previous scene)\n" +
+			"Ctrl + click on a scene: disable the point\n", null, null);
+		}
+		
 		
 		public static function licenseFlaras():void
 		{
