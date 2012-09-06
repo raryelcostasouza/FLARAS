@@ -476,7 +476,8 @@ package flaras.controller
 			{
 				VideoScene(scene).setRepeatVideo(videoRepeat);
 				viewScene.unLoad();
-			}
+				viewScene.showScene(true);
+			}			
 		}
 		
 		public function updateAddAnimation(indexScene:uint, period:Number, rotationAxis:uint, radius:Number,
