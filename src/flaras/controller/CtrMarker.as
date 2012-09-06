@@ -171,6 +171,8 @@ package flaras.controller
 			
 			if (newSize > 0)
 			{
+				_ctrMain.ctrUserProject.setUnsavedModifications(true);
+				
 				_modelInteractionMarker.setSphereSize(newSize);
 				_viewInteractionMarker.updateSize();
 			}			
@@ -182,6 +184,8 @@ package flaras.controller
 			
 			if (newDistance > 0)
 			{
+				_ctrMain.ctrUserProject.setUnsavedModifications(true);
+				
 				_modelInteractionMarker.setSphereDistance(newDistance);
 				_viewInteractionMarker.updateDistance();
 			}	
