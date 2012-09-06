@@ -39,6 +39,11 @@ package flaras.controller.constants
 		
 		public static const TEMPLATE_PUBLISH_FOLDER:String = "template-publish/";
 		
+		public static const DATA_FOLDER:String = "Data/";
+		public static const ICONS_FOLDER:String = "icons/";
+		public static const SYSTEM_AUDIOS_FOLDER:String = "system-audios/";
+		public static const SYSTEM_TEXTURES_FOLDER:String = "system-textures/";
+		
 		public static const FLARASAPP_FOLDER:String = FOLDER_NAME_FLARASAPP+ "/";
 		public static const FLARASAPPDATA_FOLDER:String = FLARASAPP_FOLDER + "flarasAppData/";
 		

@@ -41,8 +41,17 @@ package flaras.controller.io
 		{		
 			var ba:ByteArray;
 			var folders2Zip:Vector.<File>;
+			var flarasSystemFolders2Copy:Vector.<File>;
+			
+			flarasSystemFolders2Copy  = new Vector.<File>();
+			flarasSystemFolders2Copy.push(File.applicationDirectory.resolvePath(FolderConstants.DATA_FOLDER));
+			flarasSystemFolders2Copy.push(File.applicationDirectory.resolvePath(FolderConstants.ICONS_FOLDER));
+			flarasSystemFolders2Copy.push(File.applicationDirectory.resolvePath(FolderConstants.SYSTEM_AUDIOS_FOLDER));
+			flarasSystemFolders2Copy.push(File.applicationDirectory.resolvePath(FolderConstants.SYSTEM_TEXTURES_FOLDER));
+			
 			//copy the template to the temp folder
 			FileCopy.copyFolder(File.applicationDirectory.resolvePath(FolderConstants.TEMPLATE_PUBLISH_FOLDER), pCurrentTmpFolder, FolderConstants.FOLDER_NAME_FLARASAPP);
+			FileCopy.copyMultipleFolders2SameDestination(flarasSystemFolders2Copy, pCurrentTmpFolder.resolvePath(FolderConstants.FLARASAPP_FOLDER));
 			
 			//copying project files to the template folder
 			var folders2Copy:Vector.<File> = new Vector.<File>();
