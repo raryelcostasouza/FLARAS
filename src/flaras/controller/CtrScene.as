@@ -515,7 +515,7 @@ package flaras.controller
 			
 			if (scene.getAnimation())
 			{
-				viewScene.hideScene();
+				viewScene.getViewAnimation().unLoad();
 				scene.getAnimation().setAnimationProperties(period, rotationAxis, radius, rotationDirection);
 			}
 			viewScene.showScene(true);
