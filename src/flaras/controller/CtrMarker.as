@@ -211,12 +211,6 @@ package flaras.controller
 			new FileReaderRefMarker(this, FolderConstants.getFlarasAppCurrentFolder() + "/" + XMLFilesConstants.REF_MARKER_PROPERTIES_PATH);
 		}
 		
-		public function finishedLoadingInteractionMarkerData(intSphereData:InteractionSphereData):void
-		{
-			_viewInteractionMarker.updateDistance();
-			_viewInteractionMarker.updateDistance();
-		}
-		
 		public function finishedLoadingRefMarkerData(pRefMarkerBaseType:uint):void
 		{
 			_modelRefMarker.setBaseType(pRefMarkerBaseType);

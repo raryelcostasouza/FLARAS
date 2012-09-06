@@ -64,7 +64,7 @@ package flaras.controller.io.fileReader
 			e.target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			
 			var xml:XML = XML(e.target.data);
-			this._ctrMarker.finishedLoadingInteractionMarkerData(new InteractionSphereData(xml.info.size, xml.info.distanceToMarker));
+			this._ctrMarker.setInteractionSphereData(xml.info.distanceToMarker, xml.info.size);
 		}
 		
 		private function onIOError(e:Event):void
