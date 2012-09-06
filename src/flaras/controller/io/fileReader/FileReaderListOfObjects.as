@@ -140,7 +140,7 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection, label);
+												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection, label, true);
 			}
 			aObjCtrPoint.finishedReadingListOfScenes();
 		}

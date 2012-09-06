@@ -63,11 +63,14 @@ package flaras.controller
 			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
 			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
-			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String):void
+			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String, pFromXML:Boolean=false):void
 		{
 			var scene:FlarasScene;
 			
-			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			if (!pFromXML)
+			{
+				_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			}			
 			
 			scene = buildScene(pFilePath, pTranslation, pRotation, absScale(pScale), pHasTexture, pTexturePath,
 				pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio, pHasVideo, pVideoPath,
