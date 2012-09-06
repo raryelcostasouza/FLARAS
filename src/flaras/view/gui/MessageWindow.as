@@ -48,13 +48,6 @@ package flaras.view.gui
 			JOptionPane.showMessageDialog("Project saved", "The project was succesfully saved!", null, null, true, new LoadIcon("icons/external/check.png", 48, 48));
 		}
 		
-		public static function messageFileAlreadyExists(fileName:String):void
-		{
-			JOptionPane.showMessageDialog("Warning!", "There is already another file with the name: \"" + 
-			fileName + "\" on the project.\nFLARAS does not allow that one file is associated with more than one object." +
-			"\nRename your file and you'll be able to add it to the project.", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
-		}
-		
 		public static function messageInvalidDAEFile():void
 		{
 			JOptionPane.showMessageDialog("Error!", "There is no valid virtual object file (DAE or 3DS) on the selected file", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
