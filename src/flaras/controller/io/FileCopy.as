@@ -270,7 +270,7 @@ package flaras.controller.io
 				}
 				else
 				{
-					f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix + "." + f.extension).nativePath);
+					f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix + "." + pF.extension).nativePath);
 					name = f.name;
 				}
 				
