@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/2.6">
+  <id>FLARAS</id>
+  <versionNumber>2.0</versionNumber>
+  <filename>FLARAS</filename>
+  <initialWindow>
+    <title>FLARAS</title>
+    <content>FLARAS.swf</content>
+    <systemChrome>standard</systemChrome>
+    <transparent>false</transparent>
+    <visible>true</visible>
+    <minimizable>true</minimizable>
+    <maximizable>false</maximizable>
+    <resizable>false</resizable>
+    <renderMode>auto</renderMode>
+    <autoOrients>true</autoOrients>
+  </initialWindow>
+  <!-- 
+	More options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	-->
+  <supportedProfiles>desktop</supportedProfiles>
+  <name>FLARAS</name>
+  <description>Flash Augmented Reality Authoring System</description>
+  <copyright>Raryel Costa Souza, Hipolito Douglas Franca Moreira, Claudio Kirner</copyright>
+  <programMenuFolder>FLARAS</programMenuFolder>
+  <versionLabel>2.0-r1296</versionLabel>
+  <customUpdateUI>false</customUpdateUI>
+  <icon>
+    <image16x16>icons/flaras16.png</image16x16>
+    <image29x29>icons/flaras29.png</image29x29>
+    <image32x32>icons/flaras32.png</image32x32>
+    <image36x36>icons/flaras36.png</image36x36>
+    <image48x48>icons/flaras48.png</image48x48>
+    <image57x57>icons/flaras57.png</image57x57>
+    <image128x128>icons/flaras128.png</image128x128>
+    <image512x512>icons/flaras512.png</image512x512>
+    <image72x72>icons/flaras72.png</image72x72>
+  </icon>
+  <allowBrowserInvocation>false</allowBrowserInvocation>
+  <fileTypes>
+    <fileType>
+      <name>FLARAS</name>
+      <extension>flaras</extension>
+      <contentType>application/x-compressed</contentType>
+      <icon>
+        <image16x16>icons/flaras16.png</image16x16>
+        <image29x29>icons/flaras29.png</image29x29>
+        <image32x32>icons/flaras32.png</image32x32>
+        <image36x36>icons/flaras36.png</image36x36>
+        <image48x48>icons/flaras48.png</image48x48>
+        <image128x128>icons/flaras128.png</image128x128>
+        <image512x512>icons/flaras512.png</image512x512>
+      </icon>
+    </fileType>
+  </fileTypes>
+</application>

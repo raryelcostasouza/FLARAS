@@ -1,0 +1,26 @@
+video - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/mimetypes/video-x-generic.png
+texture - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/mimetypes/image-x-generic.png
+3d obj - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/art_of_illusion.png
+
+operation - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/mimetypes/xfce4-style/application-octet-stream.png
+delete - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/edit-delete-6.png
+
+check - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/dialog-ok-apply-4.png
+error - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/status/dialog-error-7.png
+warning - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/status/dialog-important.png
+
+add-point - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/edit-add.png
+audio - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/juk-2.png
+
+animation - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/games-solve.png
+swap - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/system-software-update-4.png
+type -  http://www.iconfinder.com/browse/iconset/customicondesign-office6-shadow/#readme
+
+--
+exit - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/application-exit-5.png
+save - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/document-save-5.png
+new - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/document-new-6.png
+open - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/document-open-7.png
+publish - http://www.iconarchive.com/show/refresh-cl-icons-by-tpdkdesign.net/System-Package-icon.html
+
+keyboard - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/accessories-character-map-3.png

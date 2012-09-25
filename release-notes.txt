@@ -1,0 +1,82 @@
+-------------------------------
+FLARAS-2.0-r1296 - September 20, 2012
+
+Completely redesigned development interface
+
+Added mouse interaction support:
+	- Left click on a point: enable point
+	- Left click on a scene: go to the next scene
+	- Right click on a scene: go back to the previous scene
+	- Ctrl + click on a scene: disable the point
+
+Added support for 3DS files with textures:
+	- put the .3ds file and its textures on the SAME folder.
+	- zip them and load the zipfile on FLARAS.
+
+Added validation of numeric text fields
+Added audio feedback for control forward and control backward interaction
+
+Changed policy for treating files that was already added to the flaras project: 
+	-Default policy before this flaras release: ask the user to rename
+	-Default policy on this release: automatically rename them when the user inserts them.
+
+Points and scenes can have labels
+Ref. marker now supports two kind of bases/covers: white sphere and white plane
+
+Changes on keyboard commands: 
+	- check the new commands at FLARAS: "About" > "Keyboard Commands"
+
+Simplification of interaction sphere design
+Clearer error messages
+Minor bug fixes and optimizations
+
+-------------------------------
+FLARAS-1.0-r1115 - July 19, 2012
+AddedSupport for .3DS files (zip the file and insert it into FLARAS)
+
+Optimization on loading 3D object files (much faster to load)
+Support for DAE animations (after finished they will be automatically restarted)
+
+Fixed bug: filenames (of obj3D, textures, videos and audios) with special characters and spaces used to cause instabilities. From now on there is a previous validation of the file before it be inserted to FLARAS Project.
+
+-------------------------------
+FLARAS-1.0-r1090 - June 10, 2012
+Added 3D axis to assist on scene edition
+Added two new properties for animations (radius and reverse rotation direction)
+Added popup window to indicate successful saving of the project
+Added the possibility to keep the 3D scene after removing the ref. marker from the camera view field (Ref. marker persistence)
+Added the possibility to select on specific camera to use on FLARAS
+Added the possibility to stop camera capture (for saving processing/battery power)
+Added new menu "View"
+
+Fixed bug: it was not asking to save the project before exiting/opening project/creating new project after making modifications on animation parameters
+
+Minor optimizations
+
+-------------------------------
+FLARAS-1.0-r1067 - June 7, 2012
+Fixed bug on loading 3D objects when the screen is mirrored (the object was being mirrored, showing invalid behaviour)
+
+-------------------------------
+FLARAS-1.0-r1064 - May 23, 2012
+Optimizations on 3D Object loading
+Added support for circular animation (3D Objects, Textures and Videos)
+Added support for inspection and control actions via keyboard
+Added capability to load a flaras project file just clicking twice on it's icon
+Textures and Videos are now visible from both sides
+Mirrors videos and textures when the screen is mirrored.
+
+Fixed bug on "swap object position to" (instead of swapping the object position, it was swapping the position of the 2 objects involved)
+Fixed performance bugs on loaded objects management
+
+Added modifications control (don't ask to save the project when it's not needed)
+
+Graphical Interface improvements
+FLARAS Developer control panel is no more over the webcam image (it's on the right side)
+Minor usability improvements
+Filtering and blocking of invalid characters on the form fields
+Redesigned window for "swap object position"
+Redesigned "About" window
+-------------------------------
+
+
