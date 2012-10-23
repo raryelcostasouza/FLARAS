@@ -415,6 +415,7 @@ package flaras.controller
 		{
 			var ba:ByteArray;
 			var publishFile:File;
+			var projectFileNameWithoutExtension:String;
 			
 			if (!aAlreadySavedBefore)
 			{
@@ -425,9 +426,12 @@ package flaras.controller
 				//save the project before publishing to avoid the possibility of publishing the app with unsaved modifications
 				saveProject();
 				
-				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);
 				
-				publishFile = File.userDirectory.resolvePath("flarasApp.zip");
+				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);			
+				
+				projectFileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(aProjectFile);
+				publishFile = File.userDirectory.resolvePath(projectFileNameWithoutExtension + "-published.zip");
+				
 				publishFile.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				publishFile.addEventListener(Event.COMPLETE, onProjectPublishingComplete);
 				publishFile.save(ba);
