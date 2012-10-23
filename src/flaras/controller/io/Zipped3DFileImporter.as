@@ -46,7 +46,7 @@ package flaras.controller.io
 			
 			fileDestinationSubFolder = flarasTempFolder.resolvePath(FolderConstants.COLLADA_FOLDER);
 			strFolderExtractedFile = Zip.unzipToFileNameFolder(zipFile, fileDestinationSubFolder);
-			obj3DFileFound = FileSearch.recursiveSearch3DFile(fileDestinationSubFolder.resolvePath(strFolderExtractedFile));
+			obj3DFileFound = FileUtil.recursiveSearch3DFile(fileDestinationSubFolder.resolvePath(strFolderExtractedFile));
 			
 			if (obj3DFileFound != null)
 			{
