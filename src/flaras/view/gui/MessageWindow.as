@@ -35,7 +35,6 @@ package flaras.view.gui
 	
 	public class MessageWindow 
 	{
-		public static const OBJ3D_INVALID_FILENAME:String = "The obj3D file inside this zipped file has an invalid filename!";
 		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";	
 		
 		public static function messageWarningField(pValue:String, pFieldName:String):void
