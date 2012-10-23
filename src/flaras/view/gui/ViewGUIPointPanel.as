@@ -95,8 +95,10 @@ package flaras.view.gui
 			jbAddTextureScene = new JButton("Add Texture Scene", new LoadIcon("icons/external/texture.png", 48, 48));
 			jbAddVideoScene = new JButton("Add Video Scene", new LoadIcon("icons/external/video.png", 48, 48));
 			jbRemPoint = new JButton("Delete point", new LoadIcon("icons/external/delete.png", 48, 48));
-			//jbRemPoint.setVerticalTextPosition(AbstractButton.BOTTOM);
-			//jbRemPoint.setHorizontalTextPosition(AbstractButton.CENTER);
+			
+			jbAdd3DObjScene.setPreferredWidth(150);
+			jbAddVideoScene.setPreferredWidth(150);
+			jbRemPoint.setPreferredWidth(150);
 			
 			jbAdd3DObjScene.addActionListener(_ctrGUI.listenerAddObj3DScene);
 			jbAddTextureScene.addActionListener(_ctrGUI.listenerAddTextureScene);

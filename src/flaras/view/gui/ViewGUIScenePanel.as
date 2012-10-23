@@ -270,6 +270,7 @@ package flaras.view.gui
 			tabOperations.setPreferredSize(new IntDimension(214, 480));
 			jbSwapScenePosition = new JButton("Change scene position", new LoadIcon("icons/external/swap.png"));
 			jbDeleteScene = new JButton("Delete Scene", new LoadIcon("icons/external/delete.png"));
+			jbDeleteScene.setPreferredWidth(167);
 			
 			jbDeleteScene.addActionListener(_ctrGUI.listenerRemoveScene);
 			jbSwapScenePosition.addActionListener(_ctrGUI.listenerSwapScene);
