@@ -108,7 +108,7 @@ package flaras.controller.io
 			
 			if (hasValidFileName(f.name))
 			{
-				fileNameWithoutExtension = getFileNameWithoutExtension(f);	
+				fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);	
 				
 				// if there is another file/folder with the same name
 				if ((f.exists && !isObj3DFile(f)) ||
@@ -117,7 +117,7 @@ package flaras.controller.io
 				{
 					validFileName = generateFileNameWithUniqueSuffix(fileSource, fileDestinationSubFolder, isObj3DFile(f));
 					f = new File(fileDestinationSubFolder.resolvePath(validFileName).nativePath);
-					fileNameWithoutExtension = getFileNameWithoutExtension(f);
+					fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);
 				}
 				else
 				{
@@ -243,14 +243,6 @@ package flaras.controller.io
 			return (match.length == fileName.length);
 		}
 		
-		private static function getFileNameWithoutExtension(f:File):String
-		{
-			var indexFileExtensionDot:uint;
-			
-			indexFileExtensionDot = f.name.lastIndexOf(".");
-			return f.name.slice(0, indexFileExtensionDot);
-		}
-		
 		private static function generateFileNameWithUniqueSuffix(pF:File, destFolder:File, is3DObj:Boolean):String
 		{
 			var nSuffix:uint;
@@ -258,7 +250,7 @@ package flaras.controller.io
 			var name:String;
 			var f:File;
 			
-			fileNameWithoutExtension = getFileNameWithoutExtension(pF);
+			fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(pF);
 			nSuffix = 0;
 			do
 			{
