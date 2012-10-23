@@ -143,7 +143,11 @@ package flaras.controller.io
 						}
 						else if (!hasValidFileName(getFileNameFromPath(path)))
 						{
-							MessageWindow.messageInvalidFileName(MessageWindow.OBJ3D_INVALID_FILENAME);
+							//rename the 3d object file to a valid default name
+							path = renameDAE3DSFile(path);
+							
+							//and continue...
+							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
 						}
 						else
 						{
@@ -270,6 +274,28 @@ package flaras.controller.io
 			}while (f.exists);	
 			
 			return name; 
+		}
+		
+		private static function renameDAE3DSFile(pOldPathTo3DFile:String):String
+		{
+			var newPathTo3DFile:String;
+			var parentFolder:File;
+			var oldFile:File;
+			var newFile:File;
+			var fileExtension:String;
+			
+			//old file with invalid characters
+			oldFile = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + pOldPathTo3DFile);
+			fileExtension = oldFile.extension;
+			parentFolder = oldFile.parent;
+			
+			newFile = parentFolder.resolvePath("obj3dFile." + fileExtension);
+			oldFile.moveTo(newFile, true);
+			
+			newPathTo3DFile = new File(FolderConstants.getFlarasAppCurrentFolder()).getRelativePath(newFile);
+			trace("newPath: " + newPathTo3DFile);
+			
+			return newPathTo3DFile;
 		}
 		
 	}
