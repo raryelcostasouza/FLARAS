@@ -34,9 +34,7 @@ package flaras.view.gui
 	import org.aswing.*;
 	
 	public class MessageWindow 
-	{
-		public static const OTHER_TYPE_INVALID_FILENAME:String = "Invalid filename!";	
-		
+	{		
 		public static function messageWarningField(pValue:String, pFieldName:String):void
 		{
 			JOptionPane.showMessageDialog("Warning!","Invalid number '" + pValue + "' on field " + pFieldName+ ".\nYour changes will not be applied until this field have a valid value!", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
@@ -55,11 +53,6 @@ package flaras.view.gui
 		public static function messageInvalidZipFile():void
 		{
 			JOptionPane.showMessageDialog("Error!", "Invalid/corrupted zip file! One possible cause for this problem may be that the zip file contains filenames with accented/special characters. \nFLARAS just works with non-accented filenames. \nRename these files before trying to insert this zip file on FLARAS again.", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
-		}
-		
-		public static function messageInvalidFileName(type:String):void
-		{
-			JOptionPane.showMessageDialog("Error!", type + "\nOnly the following characters are allowed for filenames: \n\na-z \nA-Z \n0-9 \n-(hyphen) \n_(underscore) \n\nFilenames with spaces and special characters are NOT allowed.", null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
 		}
 		
 		public static function messageProjectNotSaved2Publish():void

@@ -106,73 +106,73 @@ package flaras.controller.io
 						
 			f = new File(fileDestinationSubFolder.resolvePath(fileSource.name).nativePath);
 			
-			if (hasValidFileName(f.name))
+			//check if the filename contain invalid characters
+			if (!hasValidFileName(f.name))
 			{
-				fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);	
-				
-				// if there is another file/folder with the same name
-				if ((f.exists && !isObj3DFile(f)) ||
-					//extracted folder already exists
-					(f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
-				{
-					validFileName = generateFileNameWithUniqueSuffix(fileSource, fileDestinationSubFolder, isObj3DFile(f));
-					f = new File(fileDestinationSubFolder.resolvePath(validFileName).nativePath);
-					fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);
-				}
-				else
-				{
-					validFileName = fileSource.name;
-				}
-				
-				try
-				{
-					fileSource.copyTo(f, false);
-					
-					//if it was selected a 3d model file
-					if (isObj3DFile(f))
-					{
-						//unzip the file and get the path to the file
-						path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(validFileName));
-						
-						//if it is a invalid dae/3ds file
-						if (path == null)
-						{
-							MessageWindow.messageInvalidDAEFile();
-							//remove the extracted folder
-							FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
-						}
-						else if (!hasValidFileName(getFileNameFromPath(path)))
-						{
-							//rename the 3d object file to a valid default name
-							path = renameDAE3DSFile(path);
-							
-							//and continue...
-							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
-						}
-						else
-						{
-							aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
-						}
-					}
-					//if it was copied a texture, video or audio
-					else
-					{
-						aCtrGUI.finishedFileCopying(aDestinationSubFolder+validFileName, aDestinationSubFolder);	
-					}
-				}
-				catch (ioE:IOError)
-				{
-					ErrorHandler.onIOError("FileCopy", f.nativePath);
-				}
-				catch (se:SecurityError)
-				{
-					ErrorHandler.onSecurityError("FileCopy", f.nativePath);
-				}
+				//if it has invalid characters, rename it removing the invalid chars!
+				f = renameFileWithInvalidChar(f);
+			}
+			
+			fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);	
+			
+			// if there is another file/folder with the same name
+			if ((f.exists && !isObj3DFile(f)) ||
+				//extracted folder already exists
+				(f.parent.resolvePath(fileNameWithoutExtension).exists) && isObj3DFile(f))
+			{
+				validFileName = generateFileNameWithUniqueSuffix(fileSource, fileDestinationSubFolder, isObj3DFile(f));
+				f = new File(fileDestinationSubFolder.resolvePath(validFileName).nativePath);
+				fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(f);
 			}
 			else
 			{
-				MessageWindow.messageInvalidFileName(MessageWindow.OTHER_TYPE_INVALID_FILENAME);
-			}			
+				validFileName = f.name;
+			}
+			
+			try
+			{
+				fileSource.copyTo(f, false);
+				
+				//if it was selected a 3d model file
+				if (isObj3DFile(f))
+				{
+					//unzip the file and get the path to the file
+					path = Zipped3DFileImporter.importFile(fileDestinationSubFolder.resolvePath(validFileName));
+					
+					//if it is a invalid dae/3ds file
+					if (path == null)
+					{
+						MessageWindow.messageInvalidDAEFile();
+						//remove the extracted folder
+						FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
+					}
+					else if (!hasValidFileName(getFileNameFromPath(path)))
+					{
+						//rename the 3d object file to a valid default name
+						path = renameDAE3DSFile(path);
+						
+						//and continue...
+						aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+					}
+					else
+					{
+						aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
+					}
+				}
+				//if it was copied a texture, video or audio
+				else
+				{
+					aCtrGUI.finishedFileCopying(aDestinationSubFolder+validFileName, aDestinationSubFolder);	
+				}
+			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOError("FileCopy", f.nativePath);
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityError("FileCopy", f.nativePath);
+			}	
 		}
 		
 		public static function copyFolder(folder2Copy:File, destinationFolder:File, pCopiedFolderNewName:String = ""):void
@@ -243,8 +243,9 @@ package flaras.controller.io
 			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_]+[.][0-9a-zA-Z]+/
 			var match:String = regExpValidFileName.exec(fileName);
 			
-			// it's a valid filename if the string matched has the same lenght of the filename
-			return (match.length == fileName.length);
+			// if match is null... then it is an invalid filename
+			// else, it's a valid filename if the string matched has the same lenght of the filename
+			return !match ? false : (match.length == fileName.length);
 		}
 		
 		private static function generateFileNameWithUniqueSuffix(pF:File, destFolder:File, is3DObj:Boolean):String
@@ -296,6 +297,38 @@ package flaras.controller.io
 			trace("newPath: " + newPathTo3DFile);
 			
 			return newPathTo3DFile;
+		}
+		
+		private static function renameFileWithInvalidChar(pOldFile:File):File
+		{
+			var oldFileName:String;
+			var newFile:File;
+			var newFileName:String;
+			var char:String;
+			var parentFolder:File;
+			
+			oldFileName = pOldFile.name;
+			newFileName = new String();
+			for (var i:uint = 0; i < oldFileName.length; i++ )
+			{
+				char = oldFileName.charAt(i);
+				//only add to the new file name the following ascii characters: a-z, A-Z, 0-9, _, - and .
+				if ((char >= "a" && char <= "z") ||
+					(char >= "A" && char <= "Z") ||
+					(char >= "0" && char <= "9") ||
+					(char == "_") || 
+					(char == ".") || 
+					(char == "-"))
+				{
+					newFileName = newFileName.concat(char);
+				}
+			}
+			
+			parentFolder = pOldFile.parent;
+			
+			newFile = parentFolder.resolvePath(newFileName);
+			
+			return newFile;
 		}
 		
 	}
