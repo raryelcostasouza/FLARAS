@@ -88,7 +88,7 @@ package flaras.controller.io
 		//check if the filename contains only letters A-Z/a-z, digits 0-9 and -/_
 		public static function hasValidFileName(fileName:String):Boolean
 		{
-			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_]+[.][0-9a-zA-Z]+/
+			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_ ]+[.][0-9a-zA-Z]+/
 			var match:String = regExpValidFileName.exec(fileName);
 			
 			// if match is null... then it is an invalid filename
