@@ -31,9 +31,11 @@ package flaras.controller
 {
 	import flaras.*;
 	import flaras.controller.*;
+	import flaras.controller.util.*;
 	import flaras.view.*;
 	import flash.display.*;
 	import FTK.*;
+	import org.aswing.*;
 	
 	public class CtrMain
 	{		
@@ -48,6 +50,7 @@ package flaras.controller
 			
 		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
 		{
+			initASWing();
 			_fmmapp = pFMMApp;
 			this._ctrMarker = new CtrMarker(this);
 			this._ctrPoint = new CtrPoint(this);
@@ -57,6 +60,17 @@ package flaras.controller
 			this._ctrMirror = new CtrMirror(this, pFMMApp);
 			this._ctrCamera = new CtrCamera(this);
 			initUI();
+		}
+		
+		private function initASWing():void
+		{
+			var stage:Stage;
+			
+			stage = StageReference.getStage();
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.stageFocusRect = true;
+			
+			AsWingManager.setRoot(stage);
 		}
 		
 		private function initUI():void
