@@ -41,7 +41,6 @@ package flaras.view.gui
 	{
 		//control variables
 		private var _ctrMain:CtrMain;
-		private var aStage:Stage;
 		private var ctrGui:CtrGUI;
 		private var _cameraSelectWindow:CameraSelectWindow;
 		private var _swapWindow:SwapWindow;
@@ -58,13 +57,7 @@ package flaras.view.gui
 		public function GraphicsUserInterface(ctrMain:CtrMain, pCtrGUI:CtrGUI)
 		{
 			_ctrMain = ctrMain;
-			aStage = StageReference.getStage();
 			ctrGui = pCtrGUI;
-			
-			aStage.scaleMode = StageScaleMode.NO_SCALE;
-			aStage.stageFocusRect = true;
-			
-			AsWingManager.setRoot(aStage);
 			
 			initComponents(); 
 			initWindows();
