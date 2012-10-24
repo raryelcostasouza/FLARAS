@@ -172,6 +172,7 @@ package flaras.controller
 			
 			if (aCurrentProjectTempFolder != null)
 			{
+				VideoManager.closeStream();
 				removeTmpFiles();
 				_ctrMain.ctrPoint.destroyListOfPoints();
 			}
