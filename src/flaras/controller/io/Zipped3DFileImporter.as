@@ -70,6 +70,13 @@ package flaras.controller.io
 				ErrorHandler.onSecurityError("Zipped3DFileImporter", zipFile.nativePath);
 			}
 			
+			//if the extracted file has invalid characters
+			if (!FileUtil.hasValidFileName(newFilePath))
+			{
+				//rename the 3d object file to a valid default name
+				newFilePath = renameObj3DFile(newFilePath);
+			}
+			
 			return newFilePath;
 		}
 		
@@ -91,6 +98,27 @@ package flaras.controller.io
 			extractedFolderPath = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + FolderConstants.COLLADA_FOLDER + extractedFolderName);
 			
 			return extractedFolderPath;
+		}
+		
+		private static function renameObj3DFile(pOldPathTo3DFile:String):String
+		{
+			var newPathTo3DFile:String;
+			var parentFolder:File;
+			var oldFile:File;
+			var newFile:File;
+			var fileExtension:String;
+			
+			//old file with invalid characters
+			oldFile = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + pOldPathTo3DFile);
+			fileExtension = oldFile.extension;
+			parentFolder = oldFile.parent;
+			
+			newFile = parentFolder.resolvePath("obj3dFile." + fileExtension);
+			oldFile.moveTo(newFile, true);
+			
+			newPathTo3DFile = new File(FolderConstants.getFlarasAppCurrentFolder()).getRelativePath(newFile);
+			
+			return newPathTo3DFile;
 		}
 	}
 }

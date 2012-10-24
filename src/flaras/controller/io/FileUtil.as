@@ -84,5 +84,16 @@ package flaras.controller.io
 			indexFileExtensionDot = f.name.lastIndexOf(".");
 			return f.name.slice(0, indexFileExtensionDot);
 		}
+		
+		//check if the filename contains only letters A-Z/a-z, digits 0-9 and -/_
+		public static function hasValidFileName(fileName:String):Boolean
+		{
+			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_]+[.][0-9a-zA-Z]+/
+			var match:String = regExpValidFileName.exec(fileName);
+			
+			// if match is null... then it is an invalid filename
+			// else, it's a valid filename if the string matched has the same lenght of the filename
+			return !match ? false : (match.length == fileName.length);
+		}
 	}
 }

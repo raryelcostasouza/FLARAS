@@ -107,7 +107,7 @@ package flaras.controller.io
 			f = new File(fileDestinationSubFolder.resolvePath(fileSource.name).nativePath);
 			
 			//check if the filename contain invalid characters
-			if (!hasValidFileName(f.name))
+			if (!FileUtil.hasValidFileName(f.name))
 			{
 				//if it has invalid characters, rename it removing the invalid chars!
 				f = renameFileWithInvalidChar(f);
@@ -145,14 +145,6 @@ package flaras.controller.io
 						MessageWindow.messageInvalidDAEFile();
 						//remove the extracted folder
 						FileRemover.remove(f.parent.resolvePath(fileNameWithoutExtension).nativePath);
-					}
-					else if (!hasValidFileName(getFileNameFromPath(path)))
-					{
-						//rename the 3d object file to a valid default name
-						path = renameDAE3DSFile(path);
-						
-						//and continue...
-						aCtrGUI.finishedFileCopying(path, aDestinationSubFolder);	
 					}
 					else
 					{
@@ -237,17 +229,6 @@ package flaras.controller.io
 			return path.slice(indexOfLastSlash + 1, path.length);		
 		}
 		
-		//check if the filename contains only letters A-Z/a-z, digits 0-9 and -/_
-		private static function hasValidFileName(fileName:String):Boolean
-		{
-			var regExpValidFileName:RegExp = /[0-9a-zA-Z-_]+[.][0-9a-zA-Z]+/
-			var match:String = regExpValidFileName.exec(fileName);
-			
-			// if match is null... then it is an invalid filename
-			// else, it's a valid filename if the string matched has the same lenght of the filename
-			return !match ? false : (match.length == fileName.length);
-		}
-		
 		private static function generateFileNameWithUniqueSuffix(pF:File, destFolder:File, is3DObj:Boolean):String
 		{
 			var nSuffix:uint;
@@ -275,28 +256,6 @@ package flaras.controller.io
 			}while (f.exists);	
 			
 			return name; 
-		}
-		
-		private static function renameDAE3DSFile(pOldPathTo3DFile:String):String
-		{
-			var newPathTo3DFile:String;
-			var parentFolder:File;
-			var oldFile:File;
-			var newFile:File;
-			var fileExtension:String;
-			
-			//old file with invalid characters
-			oldFile = new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + pOldPathTo3DFile);
-			fileExtension = oldFile.extension;
-			parentFolder = oldFile.parent;
-			
-			newFile = parentFolder.resolvePath("obj3dFile." + fileExtension);
-			oldFile.moveTo(newFile, true);
-			
-			newPathTo3DFile = new File(FolderConstants.getFlarasAppCurrentFolder()).getRelativePath(newFile);
-			trace("newPath: " + newPathTo3DFile);
-			
-			return newPathTo3DFile;
 		}
 		
 		private static function renameFileWithInvalidChar(pOldFile:File):File
