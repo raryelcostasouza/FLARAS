@@ -254,15 +254,14 @@ package flaras.view.scene
 		
 		private function onMouseClick(e:MouseEvent):void
 		{
-			if (e.ctrlKey)
+			if (_ctrMain.ctrMarker.getModelInteractionMarker().getMarkerType() == CtrMarker.INSPECTOR_MARKER)
 			{
 				_ctrMain.ctrPoint.inspectPoint(_baseFlarasScene.getParentPoint());
 			}
 			else
 			{
-				_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_FORWARD);
+				_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), _ctrMain.ctrMarker.getModelInteractionMarker().getControlMarkerType());
 			}
-			
 		}		
 		
 		private function onMouseRightClick(e:MouseEvent):void
