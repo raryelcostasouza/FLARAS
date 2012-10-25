@@ -7,7 +7,7 @@
     <movie path="bin\FLARAS.swf" />
     <movie fps="30" />
     <movie width="854" />
-    <movie height="580" />
+    <movie height="540" />
     <movie version="2" />
     <movie minorVersion="6" />
     <movie platform="AIR" />

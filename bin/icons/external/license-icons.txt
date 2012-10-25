@@ -24,3 +24,16 @@ open - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/document
 publish - http://www.iconarchive.com/show/refresh-cl-icons-by-tpdkdesign.net/System-Package-icon.html
 
 keyboard - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/accessories-character-map-3.png
+	
+--
+right arrow - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/arrow-right-3.png
+left arrow - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/arrow-left-3.png
+
+inspection - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/apps/conduit.png
+	
+enable - http://findicons.com/icon/177347/bulb_yellow?width=48
+disable - http://findicons.com/icon/177357/bulb?width=48
+
+camera-mirror - http://www.iconspedia.com/icon/webcam-1635.html
+aux-sphere - http://www.iconspedia.com/icon/blue-ball-icon-35628.html
+	
