@@ -33,9 +33,11 @@ package flaras.view.gui
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
+	
 	public class ViewGUIInteraction 
 	{
 		private var _ctrGUI:CtrGUI;
+		private var _viewWindowInteractionSphere:JFrame;
 		
 		public function ViewGUIInteraction(ctrGUI:CtrGUI) 
 		{
@@ -43,10 +45,11 @@ package flaras.view.gui
 			var mainPanel:JPanel;
 			
 			this._ctrGUI = ctrGUI;
+			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere();
 			
 			jw = new JWindow();
 			jw.setContentPane(buildMainPanel());
-			jw.setSizeWH(640, 100);
+			jw.setSizeWH(640, 60);
 			jw.setLocationXY(0, 480);
 			jw.show();
 		}
@@ -54,22 +57,30 @@ package flaras.view.gui
 		private function buildMainPanel():JPanel
 		{
 			var mainPanel:JPanel = new JPanel();
+			var jtbar:JToolBar = new JToolBar();
 			
-			mainPanel.append(buildInteractionPanel());
-			mainPanel.append(buildViewPanel());
-			mainPanel.append(buildAllPointsPanel());
+			buildInteractionPanel(jtbar);
+			buildViewPanel(jtbar);
+			buildAllPointsPanel(jtbar);
+			
+			mainPanel.append(jtbar);
 			
 			return mainPanel
 		}
 		
-		private function buildInteractionPanel():JPanel
+		private function buildInteractionPanel(pJToolBar:JToolBar):void
 		{
-			var jpInteractionPanel:JPanel = new JPanel();
-			jpInteractionPanel.setBorder(new TitledBorder(null, "Interaction"));
+			/*var jpInteractionPanel:JPanel = new JPanel();
+			jpInteractionPanel.setBorder(new TitledBorder(null, "Interaction"));*/
 			
-			var jtbControlBackward:JToggleButton = new JToggleButton("Control Backward");
-			var jtbControlForward:JToggleButton = new JToggleButton("Control Forward");
-			var jtbInspection:JToggleButton = new JToggleButton("Inspection");
+			var jtbControlBackward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
+			var jtbControlForward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
+			var jtbInspection:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
+			jtbInspection.setSelected(true);
+			
+			jtbControlBackward.setToolTipText("Backward");
+			jtbControlForward.setToolTipText("Forward");
+			jtbInspection.setToolTipText("Inspection");
 			
 			jtbControlBackward.addActionListener(function(e:Event):void
 			{
@@ -78,9 +89,8 @@ package flaras.view.gui
 					jtbControlForward.setSelected(false);
 					jtbInspection.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.changeControlMarkerType();
+					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlBackward();
 				}
-				
 			});
 			jtbControlForward.addActionListener(function(e:Event):void
 			{
@@ -89,35 +99,45 @@ package flaras.view.gui
 					jtbControlBackward.setSelected(false);
 					jtbInspection.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.changeControlMarkerType();
+					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlForward();
 				}
 			});
 			jtbInspection.addActionListener(function(e:Event):void
 			{
-				if (jtbInspection.isSelected)
+				if (jtbInspection.isSelected())
 				{
 					jtbControlBackward.setSelected(false);
 					jtbControlForward.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.changeMarkerType();
+					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2Inspection();
 				}
 			});
 			
-			jpInteractionPanel.append(jtbInspection);
+			/*jpInteractionPanel.append(jtbInspection);
 			jpInteractionPanel.append(jtbControlBackward);
-			jpInteractionPanel.append(jtbControlForward);			
+			jpInteractionPanel.append(jtbControlForward);			*/
 			
-			return jpInteractionPanel;
+			pJToolBar.append(jtbInspection);
+			pJToolBar.append(jtbControlBackward);
+			pJToolBar.append(jtbControlForward);
+			
+			//return jpInteractionPanel;
 		}
 		
-		private function buildViewPanel():JPanel
+		private function buildViewPanel(pJToolBar:JToolBar):void
 		{
-			var jpViewPanel:JPanel = new JPanel();
-			jpViewPanel.setBorder(new TitledBorder(null, "View"));
+			/*var jpViewPanel:JPanel = new JPanel();
+			jpViewPanel.setBorder(new TitledBorder(null, "View"));*/
 			
-			var jtbMirrorScreen:JToggleButton = new JToggleButton("Mirror");
-			var jtbMarkerPersistence:JToggleButton = new JToggleButton("Marker persistence");
-			var jtbAuxSphere:JToggleButton = new JToggleButton("Aux sphere");
+			var jtbMirrorScreen:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/camera-mirror.png"));			
+			var jtbMarkerPersistence:JToggleButton = new JToggleButton(null, new LoadIcon("icons/markerIcon.png"));			
+			var jtbAuxSphere:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/aux-sphere.png"));
+			var jbInteractionMarker:JButton = new JButton(null, new LoadIcon("icons/interactionMarkerIcon.png"));
+			
+			jtbMirrorScreen.setToolTipText("Mirror camera");
+			jtbMarkerPersistence.setToolTipText("Marker persistence");
+			jtbAuxSphere.setToolTipText("Toggle aux. spheres");
+			jbInteractionMarker.setToolTipText("Interaction marker properties");
 			
 			jtbMirrorScreen.addActionListener(function(e:Event):void
 			{
@@ -131,21 +151,35 @@ package flaras.view.gui
 			{
 				_ctrGUI.getCtrMain().ctrPoint.toggleVisibleAuxSphereOfPoints();
 			});
+			jbInteractionMarker.addActionListener(function(e:Event):void
+			{
+				_viewWindowInteractionSphere.setVisible(true);
+			});
 			
-			jpViewPanel.append(jtbMirrorScreen);
+			
+			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
+			pJToolBar.append(jtbMirrorScreen);
+			pJToolBar.append(jtbMarkerPersistence);
+			pJToolBar.append(jtbAuxSphere);
+			pJToolBar.append(jbInteractionMarker);
+			
+			/*jpViewPanel.append(jtbMirrorScreen);
 			jpViewPanel.append(jtbMarkerPersistence);
 			jpViewPanel.append(jtbAuxSphere);
 			
-			return jpViewPanel;
+			return jpViewPanel;*/
 		}
 		
-		private function buildAllPointsPanel():JPanel
+		private function buildAllPointsPanel(pJToolBar:JToolBar):void
 		{
-			var jpAllPointsPanel:JPanel = new JPanel();
-			jpAllPointsPanel.setBorder(new TitledBorder(null, "All points"));
+			/*var jpAllPointsPanel:JPanel = new JPanel();
+			jpAllPointsPanel.setBorder(new TitledBorder(null, "All points"));*/
 			
-			var jbEnableAll:JButton = new JButton("Enable");
-			var jbDisableAll:JButton = new JButton("Disable");
+			var jbEnableAll:JButton = new JButton(null, new LoadIcon("icons/external/enable.png"));
+			var jbDisableAll:JButton = new JButton(null, new LoadIcon("icons/external/disable.png"));
+			
+			jbEnableAll.setToolTipText("Enable all points");
+			jbDisableAll.setToolTipText("Disable all points");
 			
 			jbEnableAll.addActionListener(function(e:Event):void
 			{
@@ -156,10 +190,14 @@ package flaras.view.gui
 				_ctrGUI.getCtrMain().ctrPoint.disableAllPoints(true);
 			});
 			
-			jpAllPointsPanel.append(jbEnableAll);
+			/*jpAllPointsPanel.append(jbEnableAll);
 			jpAllPointsPanel.append(jbDisableAll);
 			
-			return jpAllPointsPanel;
+			return jpAllPointsPanel;*/
+			
+			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
+			pJToolBar.append(jbEnableAll);
+			pJToolBar.append(jbDisableAll);
 		}		
 	}
 }
