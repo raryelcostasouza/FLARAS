@@ -69,10 +69,7 @@ package flaras.view.gui
 		}
 		
 		private function buildInteractionPanel(pJToolBar:JToolBar):void
-		{
-			/*var jpInteractionPanel:JPanel = new JPanel();
-			jpInteractionPanel.setBorder(new TitledBorder(null, "Interaction"));*/
-			
+		{			
 			var jtbControlBackward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
 			var jtbControlForward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
 			var jtbInspection:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
@@ -113,22 +110,13 @@ package flaras.view.gui
 				}
 			});
 			
-			/*jpInteractionPanel.append(jtbInspection);
-			jpInteractionPanel.append(jtbControlBackward);
-			jpInteractionPanel.append(jtbControlForward);			*/
-			
 			pJToolBar.append(jtbInspection);
 			pJToolBar.append(jtbControlBackward);
 			pJToolBar.append(jtbControlForward);
-			
-			//return jpInteractionPanel;
 		}
 		
 		private function buildViewPanel(pJToolBar:JToolBar):void
-		{
-			/*var jpViewPanel:JPanel = new JPanel();
-			jpViewPanel.setBorder(new TitledBorder(null, "View"));*/
-			
+		{			
 			var jtbMirrorScreen:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/camera-mirror.png"));			
 			var jtbMarkerPersistence:JToggleButton = new JToggleButton(null, new LoadIcon("icons/markerIcon.png"));			
 			var jbInteractionMarker:JButton = new JButton(null, new LoadIcon("icons/interactionMarkerIcon.png"));
@@ -155,19 +143,10 @@ package flaras.view.gui
 			pJToolBar.append(jtbMirrorScreen);
 			pJToolBar.append(jtbMarkerPersistence);
 			pJToolBar.append(jbInteractionMarker);
-			
-			/*jpViewPanel.append(jtbMirrorScreen);
-			jpViewPanel.append(jtbMarkerPersistence);
-			jpViewPanel.append(jtbAuxSphere);
-			
-			return jpViewPanel;*/
 		}
 		
 		private function buildAllPointsPanel(pJToolBar:JToolBar):void
-		{
-			/*var jpAllPointsPanel:JPanel = new JPanel();
-			jpAllPointsPanel.setBorder(new TitledBorder(null, "All points"));*/
-			
+		{			
 			var jbEnableAll:JButton = new JButton(null, new LoadIcon("icons/external/enable.png"));
 			var jbDisableAll:JButton = new JButton(null, new LoadIcon("icons/external/disable.png"));
 			
@@ -182,11 +161,6 @@ package flaras.view.gui
 			{
 				_ctrGUI.getCtrMain().ctrPoint.disableAllPoints(true);
 			});
-			
-			/*jpAllPointsPanel.append(jbEnableAll);
-			jpAllPointsPanel.append(jbDisableAll);
-			
-			return jpAllPointsPanel;*/
 			
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(jbEnableAll);
