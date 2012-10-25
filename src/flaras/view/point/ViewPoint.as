@@ -46,7 +46,6 @@ package flaras.view.point
 	public class ViewPoint 
 	{
 		private var _obj3DSphereOfPoint:DisplayObject3D;
-		private var _obj3DAuxSphere:DisplayObject3D;
 		private var _obj3DAxis:DAE;
 		
 		private var _ctrMain:CtrMain;
@@ -65,10 +64,6 @@ package flaras.view.point
 			_obj3DSphereOfPoint = new Sphere(Color.gray, RADIUS_SPHERE_OF_POINT, 10, 10);
 			_obj3DSphereOfPoint.position = _point.getPosition();			
 			
-			_obj3DAuxSphere = new Sphere(Color.blue, RADIUS_SPHERE_OF_POINT, 10, 10);
-			_obj3DAuxSphere.position = _point.getPosition();
-			_obj3DAuxSphere.visible = false;
-			
 			_obj3DAxis = new DAE();
 			_obj3DAxis.load(SystemFilesPathsConstants.OBJ_PATH_AXIS);
 			_obj3DAxis.addEventListener(FileLoadEvent.LOAD_COMPLETE, onComplete);
@@ -79,7 +74,6 @@ package flaras.view.point
 			_obj3DAxis.visible = false;
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER , null);
-			MarkerNodeManager.addObj2MarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER, null);
 			MarkerNodeManager.addObj2MarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER, null);
 			
 			_sphereOfPointLayer = _ctrMain.fmmapp.getViewPort().containerSprite.getChildLayer(_obj3DSphereOfPoint, true, true);
@@ -97,29 +91,7 @@ package flaras.view.point
 		{
 			_obj3DSphereOfPoint.visible = true;
 		}
-		
-		public function hideAuxSphere():void
-		{
-			_obj3DAuxSphere.visible = false;
-		}
-		
-		public function showAuxSphere():void
-		{
-			_obj3DAuxSphere.visible = true;
-		}
-		
-		public function toggleVisibleAuxSphere():void
-		{
-			if (_obj3DAuxSphere.visible)
-			{
-				_obj3DAuxSphere.visible = false;
-			}
-			else
-			{
-				_obj3DAuxSphere.visible = true;
-			}
-		}
-		
+				
 		public function hideAxis():void
 		{
 			_obj3DAxis.visible = false;
@@ -138,14 +110,12 @@ package flaras.view.point
 		public function setPosition(position:Number3D):void
 		{
 			_obj3DSphereOfPoint.position = position;
-			_obj3DAuxSphere.position = position;
 			_obj3DAxis.position = position;
 		}
 		
 		public function destroy():void
 		{
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereOfPoint, CtrMarker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAuxSphere, CtrMarker.REFERENCE_MARKER);
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DAxis, CtrMarker.REFERENCE_MARKER);
 		
 			_sphereOfPointLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
@@ -153,7 +123,6 @@ package flaras.view.point
 			_sphereOfPointLayer.removeEventListener(MouseEvent.CLICK, onMouseClick);
 			
 			_obj3DSphereOfPoint = null;
-			_obj3DAuxSphere = null;
 			_obj3DAxis = null;
 		}
 		

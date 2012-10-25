@@ -353,8 +353,6 @@ package flaras.controller
 				bndPoint.showPointSphere();
 			}
 			
-			bndPoint.hideAuxSphere();
-			
 			p.setEnabled(false);
 			
 			if (pPlayAudio)
@@ -404,20 +402,6 @@ package flaras.controller
 			}
 		}
 		//end of functions related with enabling and disabling points
-		
-		public function toggleVisibleAuxSphereOfPoints():void
-		{
-			var bndPoint:ViewPoint;
-			
-			for each(var p:Point in this._listOfPoints)
-			{
-				bndPoint = _listOfBoundaryPoints[p.getID()];
-				if (p.isEnabled())
-				{
-					bndPoint.toggleVisibleAuxSphere();
-				}				
-			}
-		}
 		
 		public function toggleMirrorPointsScenes():void
 		{

@@ -131,12 +131,10 @@ package flaras.view.gui
 			
 			var jtbMirrorScreen:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/camera-mirror.png"));			
 			var jtbMarkerPersistence:JToggleButton = new JToggleButton(null, new LoadIcon("icons/markerIcon.png"));			
-			var jtbAuxSphere:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/aux-sphere.png"));
 			var jbInteractionMarker:JButton = new JButton(null, new LoadIcon("icons/interactionMarkerIcon.png"));
 			
 			jtbMirrorScreen.setToolTipText("Mirror camera");
 			jtbMarkerPersistence.setToolTipText("Marker persistence");
-			jtbAuxSphere.setToolTipText("Toggle aux. spheres");
 			jbInteractionMarker.setToolTipText("Interaction marker properties");
 			
 			jtbMirrorScreen.addActionListener(function(e:Event):void
@@ -147,10 +145,6 @@ package flaras.view.gui
 			{
 				_ctrGUI.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
 			});
-			jtbAuxSphere.addActionListener(function(e:Event):void
-			{
-				_ctrGUI.getCtrMain().ctrPoint.toggleVisibleAuxSphereOfPoints();
-			});
 			jbInteractionMarker.addActionListener(function(e:Event):void
 			{
 				_viewWindowInteractionSphere.setVisible(true);
@@ -160,7 +154,6 @@ package flaras.view.gui
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(jtbMirrorScreen);
 			pJToolBar.append(jtbMarkerPersistence);
-			pJToolBar.append(jtbAuxSphere);
 			pJToolBar.append(jbInteractionMarker);
 			
 			/*jpViewPanel.append(jtbMirrorScreen);
