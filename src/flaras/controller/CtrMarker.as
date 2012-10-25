@@ -112,58 +112,30 @@ package flaras.controller
 			_viewRefMarker.updateView(_modelRefMarker);
 		}
 		
-		public function changeMarkerType():void
+		public function setMarkerType2Inspection():void
 		{
-			// if the marker is inspector marker
-			if (_modelInteractionMarker.getMarkerType() == CtrMarker.INSPECTOR_MARKER)
-			{
-				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_MARKER);
-				
-				//change it to control marker
-				_modelInteractionMarker.setMarkerType(CtrMarker.CONTROL_MARKER);
-				if (_modelInteractionMarker.getControlMarkerType() == CtrMarker.CONTROL_BACKWARD)
-				{
-					_viewInteractionMarker.change2ControlMarkerBackward();
-				}
-				else
-				{
-					_viewInteractionMarker.change2ControlMarkerForward();
-				}
-			}
-			// if the marker is the control marker
-			else
-			{
-				AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_INSPECTOR_MARKER);
-				
-				//change it to inspector marker
-				_modelInteractionMarker.setMarkerType(CtrMarker.INSPECTOR_MARKER);
-				_viewInteractionMarker.change2InspectorMarker();
-				
-			}
+			AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_INSPECTOR_MARKER);
+			
+			_modelInteractionMarker.setMarkerType(CtrMarker.INSPECTOR_MARKER);
+			_viewInteractionMarker.change2InspectorMarker();
 		}
 		
-		public function changeControlMarkerType():void
+		public function setMarkerType2ControlBackward():void
 		{
-			//only does something if the marker type is control marker
-			if (_modelInteractionMarker.getMarkerType() == CtrMarker.CONTROL_MARKER)
-			{
-				// if it's forward control marker
-				if (_modelInteractionMarker.getControlMarkerType() == CtrMarker.CONTROL_FORWARD)
-				{
-					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_BACKWARD_MARKER);
-					//change it to backward control marker
-					_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_BACKWARD);
-					_viewInteractionMarker.change2ControlMarkerBackward();
-				}
-				// if it's backward control marker
-				else
-				{
-					AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_FORWARD_MARKER);
-					//change it to forward control marker
-					_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_FORWARD);
-					_viewInteractionMarker.change2ControlMarkerForward();
-				}
-			}
+			AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_BACKWARD_MARKER);
+			
+			_modelInteractionMarker.setMarkerType(CtrMarker.CONTROL_MARKER);
+			_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_BACKWARD);
+			_viewInteractionMarker.change2ControlMarkerBackward();
+		}
+		
+		public function setMarkerType2ControlForward():void
+		{
+			AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_CONTROL_FORWARD_MARKER);
+			
+			_modelInteractionMarker.setMarkerType(CtrMarker.CONTROL_MARKER);
+			_modelInteractionMarker.setControlMarkerType(CtrMarker.CONTROL_FORWARD);
+			_viewInteractionMarker.change2ControlMarkerForward();
 		}
 		
 		public function changeInteractionSphereSize(deltaSize:int):void
