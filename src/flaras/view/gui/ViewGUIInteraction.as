@@ -37,7 +37,7 @@ package flaras.view.gui
 	public class ViewGUIInteraction 
 	{
 		private var _ctrGUI:CtrGUI;
-		private var _viewWindowInteractionSphere:JFrame;
+		private var _viewWindowInteractionSphere:ViewWindowInteractionSphere;
 		
 		public function ViewGUIInteraction(ctrGUI:CtrGUI) 
 		{
@@ -45,7 +45,7 @@ package flaras.view.gui
 			var mainPanel:JPanel;
 			
 			this._ctrGUI = ctrGUI;
-			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere();
+			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere(_ctrGUI);
 			
 			jw = new JWindow();
 			jw.setContentPane(buildMainPanel());
@@ -165,6 +165,11 @@ package flaras.view.gui
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(jbEnableAll);
 			pJToolBar.append(jbDisableAll);
-		}		
+		}
+		
+		public function getViewWindowInteractionSphere():ViewWindowInteractionSphere 
+		{ 
+			return _viewWindowInteractionSphere; 
+		}
 	}
 }

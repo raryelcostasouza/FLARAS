@@ -46,8 +46,8 @@ package flaras.controller
 		private var _modelInteractionMarker:ModelInteractionMarker;
 		private var _modelRefMarker:ModelRefMarker;
 		
-		private static const DEFAULT_SPHERE_SIZE:uint = 20;
-		private static const DEFAULT_SPHERE_DISTANCE:uint = 140;
+		public static const DEFAULT_SPHERE_SIZE:uint = 20;
+		public static const DEFAULT_SPHERE_DISTANCE:uint = 140;
 		public static const DEFAULT_RADIUS_DIFFERENCE:uint = 10;
 		
 		public static const CONTROL_FORWARD:int = 1;
@@ -138,30 +138,18 @@ package flaras.controller
 			_viewInteractionMarker.change2ControlMarkerForward();
 		}
 		
-		public function changeInteractionSphereSize(deltaSize:int):void
+		public function updateInteractionSphereSize(size:int):void
 		{
-			var newSize:uint = _modelInteractionMarker.getSphereSize() + deltaSize;
-			
-			if (newSize > 0)
-			{
-				_ctrMain.ctrUserProject.setUnsavedModifications(true);
-				
-				_modelInteractionMarker.setSphereSize(newSize);
-				_viewInteractionMarker.updateSize();
-			}
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			_modelInteractionMarker.setSphereSize(size);
+			_viewInteractionMarker.updateSize();
 		}
 		
-		public function changeInteractionSphereDistance(deltaDistance:int):void
+		public function updateInteractionSphereDistance(distance:int):void
 		{
-			var newDistance:uint = _modelInteractionMarker.getSphereDistance() + deltaDistance;
-			
-			if (newDistance > 0)
-			{
-				_ctrMain.ctrUserProject.setUnsavedModifications(true);
-				
-				_modelInteractionMarker.setSphereDistance(newDistance);
-				_viewInteractionMarker.updateDistance();
-			}
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			_modelInteractionMarker.setSphereDistance(distance);
+			_viewInteractionMarker.updateDistance();
 		}
 		
 		public function setInteractionSphereData(distance:uint, size:uint):void
@@ -171,6 +159,8 @@ package flaras.controller
 			
 			_viewInteractionMarker.updateDistance();
 			_viewInteractionMarker.updateSize();
+			_ctrMain.ctrGUI.getInteractionGUI().getViewWindowInteractionSphere().setSliderDistance(distance);
+			_ctrMain.ctrGUI.getInteractionGUI().getViewWindowInteractionSphere().setSliderSize(size);
 		}
 		
 		public function loadInteractionMarkerData():void
@@ -207,6 +197,16 @@ package flaras.controller
 		public function mirrorInteractionMarker():void
 		{
 			_viewInteractionMarker.mirror();
+		}
+		
+		public function getInteractionSphereSize():int
+		{
+			return _modelInteractionMarker.getSphereSize();
+		}
+		
+		public function getInteractionSphereDistance():int
+		{
+			return _modelInteractionMarker.getSphereDistance();
 		}
 	}
 }

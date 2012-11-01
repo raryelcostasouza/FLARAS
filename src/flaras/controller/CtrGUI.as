@@ -55,6 +55,11 @@ package flaras.controller
 			_interactionGUI = new ViewGUIInteraction(this);
 		}
 		
+		public function getInteractionGUI():ViewGUIInteraction
+		{
+			return _interactionGUI;
+		}
+		
 		public function finishedFileCopying(pFilePath:String, pCopyDestination:String):void
 		{
 			var indexNewScene:uint;
