@@ -47,7 +47,6 @@ package flaras.view.gui
 		private var exitFlaras:JMenuItem = new JMenuItem("E&xit", new LoadIcon("icons/external/exit.png"));
 		
 		private var menuView:JMenu = new JMenu("View");
-		private var refMarkerPersitence:JCheckBoxMenuItem = new JCheckBoxMenuItem("Ref. marker persistence");
 		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Camera mirror");
 		private var stopCameraCapture:JCheckBoxMenuItem = new JCheckBoxMenuItem("Stop camera");
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
@@ -88,8 +87,6 @@ package flaras.view.gui
 			exitFlaras.addActionListener(exitFunction);
 			
 			this.addMenu(menuView);
-			menuView.append(refMarkerPersitence);
-			refMarkerPersitence.addActionListener(actionToggleRefMarkerPersistence);			
 			menuView.append(new JSeparator());
 			menuView.append(mirrorScreen);
 			mirrorScreen.addActionListener(actionMirrorScreen);
@@ -141,16 +138,6 @@ package flaras.view.gui
 		private function exitFunction(e:Event):void 
 		{
 			_ctrMain.ctrUserProject.closingFlaras();
-		}
-		
-		private function actionToggleRefMarkerPersistence(e:Event):void
-		{
-			_ctrMain.ctrMarker.toggleRefMarkerPersistence();
-		}
-		
-		public function setStatusJCBRefMarkPersist(enabled:Boolean):void
-		{
-			refMarkerPersitence.setSelected(enabled);
 		}
 		
 		private function actionMirrorScreen(e:Event):void

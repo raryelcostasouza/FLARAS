@@ -8,7 +8,6 @@ package flaras.view.gui
 	public class ViewGUIMarkerPanel extends JTabbedPane
 	{
 		private var _ctrGUI:CtrGUI;
-		private var _jcbRefMarkerPersistence:JCheckBox;
 		private var _jrbRefMarkerBaseSphere:JRadioButton; 
 		private var _jrbRefMarkerBasePlane:JRadioButton;
 		
@@ -32,11 +31,6 @@ package flaras.view.gui
 			
 			tabProperties = new JPanel(new BorderLayout());
 			tabProperties.setPreferredSize(new IntDimension(214, 480));
-			
-			_jcbRefMarkerPersistence = new JCheckBox("Base persistence");
-			_jcbRefMarkerPersistence.addActionListener(_ctrGUI.listenerToggleRefMarkerPersistence);
-			
-			tabProperties.append(_jcbRefMarkerPersistence, BorderLayout.NORTH);
 			
 			subPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			subPanel.setBorder(new TitledBorder(null, "Cover type", TitledBorder.TOP, TitledBorder.LEFT));
@@ -73,11 +67,6 @@ package flaras.view.gui
 			tabOperations.append(jbAddPoint);
 			
 			return tabOperations;
-		}
-		
-		public function getJCBRefMarkerPersistence():JCheckBox 
-		{
-			return _jcbRefMarkerPersistence;
 		}
 		
 		public function setJRBMarkerBaseType(pBaseType:uint):void
