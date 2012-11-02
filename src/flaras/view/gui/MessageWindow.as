@@ -99,48 +99,7 @@ package flaras.view.gui
 		public static function errorMessage(errorMessage:String):void
 		{
 			JOptionPane.showMessageDialog("Error!", errorMessage, null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
-		}
-		
-		public static function keyboardCommands():void
-		{
-			JOptionPane.showMessageDialog("FLARAS Keys", 
-			"Keys related with points:\n"+
-			"Ctrl + A: Enable all points\n" +
-			"Ctrl + Q: Disable all points\n" +
-			"F1: Toggle aux points (available only for enable points). It will appear a blue sphere on the point position.\n\n" +
-			"\nCtrl + 1: apply an inspection interaction to the point 1 and select it for keyboard interaction.\n" +
-			"Ctrl + 2: apply an inspection interaction to the point 2...\n"+
-			"...\n" +
-			"Ctrl + 0: ... to the point 10\n"+
-			"Page Down: apply control forward interaction to the selected point.\n" +
-			"Page Up: apply control backward interaction to the selected point.\n" +
-			"End: unselect the previously selected point (Page Down and Page Up will have no more effect).\n\n"+
-			
-			"Keys related with the interaction marker:\n"+
-			"Ctrl + M: Toggle marker type (inspector/control)\n" +
-			"Ctrl + C: Toggle control marker type (backward/forward) (only available if the marker type is control)\n\n" +
-			
-			"Keys related with the interaction sphere:\n"+
-			"F4: Decrease size\n" +
-			"F5: Increase size\n" +
-			"F6: Decrease distance\n" +
-			"F7: Increase distance\n" +
-			"F8: Reset properties\n\n" +
-			
-			"Others keys:\n" +
-			"F3: Toggle mirror screen\n" +
-			"Ctrl + P: Toggle reference marker persistence\n\n", null, null);
-		}
-		
-		public static function mouseCommands():void
-		{
-			JOptionPane.showMessageDialog("FLARAS Mouse Interaction Commands", 
-			"Left click on a point: enable the point\n" +
-			"Left click on a scene (video, texture, obj3d): control forward interaction (go to the next scene)\n" +
-			"Right click on a scene: control backward interaction (go to the previous scene)\n" +
-			"Ctrl + click on a scene: disable the point\n", null, null);
-		}
-		
+		}		
 		
 		public static function licenseFlaras():void
 		{

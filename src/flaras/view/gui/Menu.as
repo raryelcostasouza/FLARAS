@@ -52,8 +52,6 @@ package flaras.view.gui
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
 	
 		private var menuAbout:JMenu =  new JMenu("About");
-		private var jmiKeys:JMenuItem = new JMenuItem("&Keyboard commands", new LoadIcon("icons/external/keyboard.png"));
-		private var jmiMouseInteraction:JMenuItem = new JMenuItem("&Mouse commands");
 		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS", new LoadIcon("icons/flaras16.png"));
 		private var jmiLicense:JMenuItem = new JMenuItem("&License");
 		
@@ -97,10 +95,6 @@ package flaras.view.gui
 			chooseCaptureCamera.addActionListener(actionChooseCaptureCamera);
 			
 			this.addMenu(menuAbout);
-			menuAbout.append(jmiKeys);
-			jmiKeys.addActionListener(flarasKeys);
-			menuAbout.append(jmiMouseInteraction);
-			jmiMouseInteraction.addActionListener(flarasMouseInteraction)
 			menuAbout.append(jmiLicense);
 			jmiLicense.addActionListener(licenseFlarasFunction);
 			menuAbout.append(jmiAboutFlaras);
@@ -158,16 +152,6 @@ package flaras.view.gui
 		public function setStatusJCBMirrorScreen(enabled:Boolean):void
 		{
 			mirrorScreen.setSelected(enabled);
-		}
-		
-		private function flarasKeys(e:Event):void
-		{
-			MessageWindow.keyboardCommands();
-		}
-		
-		private function flarasMouseInteraction(e:Event):void
-		{
-			MessageWindow.mouseCommands();
 		}
 		
 		private function aboutFlarasFunction(e:Event):void
