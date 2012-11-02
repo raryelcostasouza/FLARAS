@@ -1,5 +1,6 @@
 package flaras.controller 
 {
+	import flaras.controller.util.Point3D;
 	import flaras.model.point.Point;
 	import flaras.view.gui.*;
 	import flaras.view.scene.ViewFlarasScene;
@@ -25,7 +26,15 @@ package flaras.controller
 			return _viewGUIInteraction;
 		}
 		
-		public function mouseClick(p:Point, vfs:ViewFlarasScene):void
+		public function mouseClickPoint(p:Point):void
+		{
+			if (_viewGUIInteraction.isInspectionSelected())
+			{
+				_ctrMain.ctrPoint.inspectPoint(p);
+			}
+		}
+		
+		public function mouseClickScene(p:Point, vfs:ViewFlarasScene):void
 		{
 			if (_viewGUIInteraction.isInspectionSelected())
 			{
@@ -43,11 +52,15 @@ package flaras.controller
 			{
 				vfs.setupMoveInteraction();
 			}
-			else
+			else if (_viewGUIInteraction.isResetSelected())
 			{
-				
+				vfs.resetScenePosition();
 			}
-			
+		}
+		
+		public function resetAllScenesPosition():void
+		{
+			_ctrMain.ctrPoint.resetAllScenesPosition();
 		}
 	}
 }
