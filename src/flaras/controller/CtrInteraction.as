@@ -2,6 +2,7 @@ package flaras.controller
 {
 	import flaras.model.point.Point;
 	import flaras.view.gui.*;
+	import flaras.view.scene.ViewFlarasScene;
 	
 	public class CtrInteraction 
 	{		
@@ -24,7 +25,7 @@ package flaras.controller
 			return _viewGUIInteraction;
 		}
 		
-		public function mouseClick(p:Point):void
+		public function mouseClick(p:Point, vfs:ViewFlarasScene):void
 		{
 			if (_viewGUIInteraction.isInspectionSelected())
 			{
@@ -40,7 +41,7 @@ package flaras.controller
 			}
 			else if (_viewGUIInteraction.isMoveSelected())
 			{
-				
+				vfs.setupMoveInteraction();
 			}
 			else
 			{

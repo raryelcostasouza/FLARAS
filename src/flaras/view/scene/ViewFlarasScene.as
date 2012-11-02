@@ -30,22 +30,20 @@
 package flaras.view.scene 
 {
 	import flaras.controller.*;
-	import flaras.controller.util.StageReference;
+	import flaras.controller.util.*;
 	import flaras.model.*;
 	import flaras.model.scene.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filters.*;
-	import flash.geom.Point;
-	import org.libspark.flartoolkit.support.pv3d.FLARBaseNode;
-	import org.papervision3d.cameras.Camera3D;
+	import flash.geom.*;
 	import org.papervision3d.core.math.*;
-	import org.papervision3d.core.render.data.RenderHitData;
-	import org.papervision3d.materials.ColorMaterial;
+	import org.papervision3d.core.render.data.*;
+	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.*;
-	import org.papervision3d.objects.primitives.Plane;
+	import org.papervision3d.objects.primitives.*;
+	import org.papervision3d.view.*;
 	import org.papervision3d.view.layer.*;
-	import org.papervision3d.view.Viewport3D;
 	
 	public class ViewFlarasScene 
 	{
@@ -56,6 +54,9 @@ package flaras.view.scene
 		private var _baseFlarasScene:FlarasScene;
 		private var _ctrMain:CtrMain;	
 		private var _obj3DLayer:ViewportLayer;
+		private var _dragPlane:Plane;
+		private var _dragging:Boolean;
+		private var _viewport:Viewport3D;
 		
 		public function ViewFlarasScene(selfReference:ViewFlarasScene, baseFlarasScene:FlarasScene, pCtrMain:CtrMain) 
 		{
@@ -227,7 +228,7 @@ package flaras.view.scene
 		{
 			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-			_obj3DLayer.removeEventListener(MouseEvent.CLICK, onMouseClick);
+			_obj3DLayer.removeEventListener(MouseEvent.CLICK, onMouseDown);
 			
 			if (_viewAnimation)
 			{
@@ -242,73 +243,79 @@ package flaras.view.scene
 		
 		protected function setupMouseInteraction():void
 		{			
-			_obj3DLayer = _ctrMain.fmmapp.getViewPort().containerSprite.getChildLayer(_obj3D, true, true);
-			_obj3DLayer.addEventListener(MouseEvent.CLICK, onMouseClick);
+			_viewport = _ctrMain.fmmapp.getViewPort();
+			_obj3DLayer = _viewport.containerSprite.getChildLayer(_obj3D, true, true);
+			_obj3DLayer.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			
-			//_obj3DLayer.addEventListener(MouseEvent.MOUSE_DOWN, startDrag);
-			//StageReference.getStage().addEventListener(MouseEvent.MOUSE_UP, stopDrag);
+			_dragPlane = new Plane(new ColorMaterial(0x00FF00, 0), 1500, 1500, 6, 6);
+			_dragPlane.material.doubleSided = true;
+			_dragging = false;
+		}
+
+		public function setupMoveInteraction():void
+		{
+			if (!_dragging)
+			{
+				_dragging = true;
+				StageReference.getStage().addEventListener(MouseEvent.MOUSE_UP, stopDrag);
+				
+				_dragPlane.material.interactive = true;
+				
+				_dragPlane.copyPosition(_obj3D);
+				MarkerNodeManager.addObj2MarkerNode(_dragPlane, CtrMarker.REFERENCE_MARKER, null);
+				StageReference.getStage().addEventListener(Event.ENTER_FRAME, drag);
+			}
 		}
 		
-		/*public var dragPlane:Plane = new Plane(new ColorMaterial(0x00FF00, 1), 200, 200, 6, 6);
-		private var isdrag:Boolean = false;
+		private function drag(e:Event):void
+		{
+			var rh:RenderHitData;
+			var eulerAngles:Number3D; 
+			var mousePosRelative2RefMarker:Number3D;
+			var refMarkerPosRelative2Camera:Number3D; 
+			
+			//copy the object position to the plane
+			_dragPlane.copyPosition(_obj3D);
+			
+			//return the 3d coordinates of the point where the mouse hits the 3D plane
+			rh = _viewport.hitTestPoint2D(new Point(_viewport.containerSprite.mouseX, _viewport.containerSprite.mouseY));
+			
+			//check if happened a collision with the invisible plane
+			if (rh.hasHit && rh.displayObject3D == _dragPlane)
+			{
+				//get the ref. marker position relative to the camera
+				refMarkerPosRelative2Camera = MarkerNodeManager.getPosition(CtrMarker.REFERENCE_MARKER);
+				
+				//vector mousePosRelative2RefMarker + vector refMarkerPosRelative2Camera = vector rh
+				//so... vector mousePosRelative2RefMarker = vector rh - vector refMarkerPosRelative2Camera
+				mousePosRelative2RefMarker = Number3D.sub(new Number3D(rh.x, rh.y, rh.z), refMarkerPosRelative2Camera);
+				
+				//get euler angles to convert the coordinates to the ref marker reference system
+				eulerAngles = org.papervision3d.core.math.Matrix3D.matrix2euler(MarkerNodeManager.getWorldTransfMatrix(CtrMarker.REFERENCE_MARKER));
+
+				//apply the rotations...
+				mousePosRelative2RefMarker.rotateX(eulerAngles.x);
+				mousePosRelative2RefMarker.rotateY(eulerAngles.y);
+				mousePosRelative2RefMarker.rotateZ(eulerAngles.z);
+			
+				//drag the object in the XY plane
+				_obj3D.x = mousePosRelative2RefMarker.x;
+				_obj3D.y = mousePosRelative2RefMarker.y;
+			}			
+		}
 		
 		private function stopDrag(e:Event):void
 		{
-			isdrag = false;
-			StageReference.getStage().removeEventListener(Event.ENTER_FRAME, frame);
-		}
-		
-		private function startDrag(e:Event):void
-		{
-			if (!isdrag)
-			{
-				isdrag = true;
-				
-				dragPlane.material.interactive = true;
-				dragPlane.material.doubleSided = true;
-				dragPlane.y = 100;
-				MarkerNodeManager.addObj2MarkerNode(dragPlane, 0, null);
-				
-
-				
-				StageReference.getStage().addEventListener(Event.ENTER_FRAME, frame);
-				//frame(null);
-			}			
-		}
-		
-		private function frame(e:Event):void
-		{
-			var viewport:Viewport3D;
+			_dragging = false;
+			_dragPlane.material.interactive = false;
 			
-			dragPlane.copyPosition(_obj3D);
+			MarkerNodeManager.removeObjFromMarkerNode(_dragPlane, CtrMarker.REFERENCE_MARKER);
 			
-			viewport = _ctrMain.fmmapp.getViewPort();
-			var rh:RenderHitData = viewport.hitTestPoint2D(new Point(viewport.containerSprite.mouseX, viewport.containerSprite.mouseY));
-			//subtrair coordenadas marcador 
-			if (rh.hasHit)
-			{
-				trace("---");
-				trace("RH:", rh.x, rh.y, rh.z);
-				
-				var refMarkerPos:Number3D = _ctrMain.fmmapp.getRefMarker().position;
-				trace("REF:", refMarkerPos.x, refMarkerPos.y, refMarkerPos.z);
-				var sub:Number3D = Number3D.sub(new Number3D(rh.x, rh.y, rh.z), refMarkerPos);
-				trace("SUB:", sub.x, sub.y, sub.z);
-				
-				
-				var angulosEuler:Number3D = Matrix3D.matrix2euler(MarkerNodeManager.getWorldTransfMatrix(CtrMarker.REFERENCE_MARKER));
-				trace("EULER:", angulosEuler.z)
-
-				sub.rotateX(angulosEuler.x);
-				sub.rotateY(angulosEuler.y);
-				sub.rotateZ(angulosEuler.z);
-				trace("SUB_ROT:", sub.x, sub.y, sub.z);
-				_obj3D.x = sub.x;
-				_obj3D.y = sub.y;
-			}			
-		}*/
+			StageReference.getStage().removeEventListener(Event.ENTER_FRAME, drag);
+			StageReference.getStage().removeEventListener(MouseEvent.MOUSE_UP, stopDrag);
+		}
 		
 		private function onMouseOver(e:MouseEvent):void
 		{
@@ -320,9 +327,9 @@ package flaras.view.scene
 			e.currentTarget.filters = [];
 		}
 		
-		private function onMouseClick(e:MouseEvent):void
+		private function onMouseDown(e:MouseEvent):void
 		{
-			_ctrMain.ctrInteraction.mouseClick(_baseFlarasScene.getParentPoint());
+			_ctrMain.ctrInteraction.mouseClick(_baseFlarasScene.getParentPoint(), this);
 		}
 	}
 }

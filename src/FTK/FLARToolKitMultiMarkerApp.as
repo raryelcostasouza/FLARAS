@@ -399,16 +399,6 @@ package FTK
 			return viewport3d;
 		}
 		
-		/*public function getCamera():Camera3D
-		{
-			return camera3d;
-		}
-		
-		public function getRefMarker():FLARBaseNode
-		{
-			return markerNodeList[0];
-		}*/
-		
 		private function initRecCameraOff():void
 		{
 			recCameraOff= new Shape();
