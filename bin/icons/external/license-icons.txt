@@ -33,5 +33,7 @@ enable - http://findicons.com/icon/177347/bulb_yellow?width=48
 disable - http://findicons.com/icon/177357/bulb?width=48
 camera-mirror - http://www.iconspedia.com/icon/webcam-1635.html
 move icon - http://www.iconfinder.com/icondetails/61008/32/move_icon
+reset-scene icon - http://openiconlibrary.sourceforge.net/gallery2/open_icon_library-full/icons/png/32x32/actions/edit-undo-3.png
+reset-all - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/view-refresh-5.png
 	
 	
