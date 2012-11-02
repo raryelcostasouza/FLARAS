@@ -48,6 +48,7 @@ package FTK
 	import org.libspark.flartoolkit.core.transmat.*;
 	import org.libspark.flartoolkit.detector.*;
 	import org.libspark.flartoolkit.support.pv3d.*;
+	import org.papervision3d.cameras.Camera3D;
 	import org.papervision3d.objects.*;
 	import org.papervision3d.render.*;
 	import org.papervision3d.scenes.*;
@@ -397,6 +398,16 @@ package FTK
 		{
 			return viewport3d;
 		}
+		
+		/*public function getCamera():Camera3D
+		{
+			return camera3d;
+		}
+		
+		public function getRefMarker():FLARBaseNode
+		{
+			return markerNodeList[0];
+		}*/
 		
 		private function initRecCameraOff():void
 		{
