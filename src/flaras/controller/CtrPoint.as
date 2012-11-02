@@ -130,6 +130,7 @@ package flaras.controller
 			if (nListOfScenesAlreadyLoaded == _listOfPoints.length)
 			{
 				this._ctrMain.ctrGUI.initProjectTree();
+				enableAllPoints();
 			}
 		}
 		
