@@ -127,6 +127,11 @@ package flaras.view.scene
 			}
 		}
 		
+		public function resetScenePosition():void
+		{
+			_obj3D.position = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
+		}
+		
 		protected function setObj3DProperties(flarasScene:FlarasScene, obj3D:DisplayObject3D):void
 		{
 			var rotation:Number3D;
@@ -329,7 +334,7 @@ package flaras.view.scene
 		
 		private function onMouseDown(e:MouseEvent):void
 		{
-			_ctrMain.ctrInteraction.mouseClick(_baseFlarasScene.getParentPoint(), this);
+			_ctrMain.ctrInteraction.mouseClickScene(_baseFlarasScene.getParentPoint(), this);
 		}
 	}
 }
