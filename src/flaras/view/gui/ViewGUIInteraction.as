@@ -73,11 +73,14 @@ package flaras.view.gui
 			var jtbControlBackward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
 			var jtbControlForward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
 			var jtbInspection:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
+			var jtbMove:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/move.png"));
+			
 			jtbInspection.setSelected(true);
 			
 			jtbControlBackward.setToolTipText("Backward");
 			jtbControlForward.setToolTipText("Forward");
 			jtbInspection.setToolTipText("Inspection");
+			jtbMove.setToolTipText("Move");
 			
 			jtbControlBackward.addActionListener(function(e:Event):void
 			{
@@ -85,6 +88,7 @@ package flaras.view.gui
 				{
 					jtbControlForward.setSelected(false);
 					jtbInspection.setSelected(false);
+					jtbMove.setSelected(false);
 					
 					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlBackward();
 				}
@@ -95,6 +99,7 @@ package flaras.view.gui
 				{
 					jtbControlBackward.setSelected(false);
 					jtbInspection.setSelected(false);
+					jtbMove.setSelected(false);
 					
 					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlForward();
 				}
@@ -105,14 +110,25 @@ package flaras.view.gui
 				{
 					jtbControlBackward.setSelected(false);
 					jtbControlForward.setSelected(false);
+					jtbMove.setSelected(false);
 					
 					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2Inspection();
+				}
+			});
+			jtbMove.addActionListener(function(e:Event):void
+			{
+				if (jtbMove.isSelected())
+				{
+					jtbControlBackward.setSelected(false);
+					jtbControlForward.setSelected(false);
+					jtbInspection.setSelected(false);
 				}
 			});
 			
 			pJToolBar.append(jtbInspection);
 			pJToolBar.append(jtbControlBackward);
 			pJToolBar.append(jtbControlForward);
+			pJToolBar.append(jtbMove);
 		}
 		
 		private function buildViewPanel(pJToolBar:JToolBar):void
