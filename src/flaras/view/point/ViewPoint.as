@@ -145,7 +145,7 @@ package flaras.view.point
 		
 		private function onMouseClick(e:MouseEvent):void
 		{
-			_ctrMain.ctrPoint.inspectPoint(_point);
+			_ctrMain.ctrInteraction.mouseClickPoint(_point);
 		}
 		
 		private function onMouseOver(e:MouseEvent):void
