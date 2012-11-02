@@ -46,18 +46,11 @@ package flaras.controller
 	{
 		private var _ctrMain:CtrMain;
 		private var _gui:GraphicsUserInterface;
-		private var _interactionGUI:ViewGUIInteraction;
 		
 		public function CtrGUI(ctrMain:CtrMain)
 		{
 			_ctrMain = ctrMain;
 			_gui = new GraphicsUserInterface(ctrMain, this);
-			_interactionGUI = new ViewGUIInteraction(this);
-		}
-		
-		public function getInteractionGUI():ViewGUIInteraction
-		{
-			return _interactionGUI;
 		}
 		
 		public function finishedFileCopying(pFilePath:String, pCopyDestination:String):void

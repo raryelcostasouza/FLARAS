@@ -36,15 +36,15 @@ package flaras.view.gui
 	
 	public class ViewWindowInteractionSphere extends JFrame
 	{
-		private var _ctrGUI:CtrGUI;
+		private var _ctrInteraction:CtrInteraction;
 		private var jSlSphereDistance:JSlider;
 		private var jSlSphereSize:JSlider;
 		
-		public function ViewWindowInteractionSphere(ctrGUI:CtrGUI) 
+		public function ViewWindowInteractionSphere(ctrInteraction:CtrInteraction) 
 		{
 			super(null, "Interaction Sphere Properties", true);
 			
-			this._ctrGUI = ctrGUI;
+			this._ctrInteraction = ctrInteraction;
 			
 			setDefaultCloseOperation(HIDE_ON_CLOSE);
 			setResizable(false);
@@ -111,7 +111,7 @@ package flaras.view.gui
 		
 		private function listenerReset(e:Event):void
 		{
-			_ctrGUI.getCtrMain().ctrMarker.resetInteractionMarkerSphereProperties();
+			_ctrInteraction.getCtrMain().ctrMarker.resetInteractionMarkerSphereProperties();
 			jSlSphereDistance.setValue(CtrMarker.DEFAULT_SPHERE_DISTANCE);
 			jSlSphereSize.setValue(CtrMarker.DEFAULT_SPHERE_SIZE);
 		}
@@ -121,7 +121,7 @@ package flaras.view.gui
 			var size:int;
 			
 			size = jSlSphereSize.getValue();
-			_ctrGUI.getCtrMain().ctrMarker.updateInteractionSphereSize(size);
+			_ctrInteraction.getCtrMain().ctrMarker.updateInteractionSphereSize(size);
 		}
 		
 		private function listenerSliderDistance(e:Event):void
@@ -129,7 +129,7 @@ package flaras.view.gui
 			var distance:int;
 			
 			distance = jSlSphereDistance.getValue();			
-			_ctrGUI.getCtrMain().ctrMarker.updateInteractionSphereDistance(distance);
+			_ctrInteraction.getCtrMain().ctrMarker.updateInteractionSphereDistance(distance);
 		}
 		
 		public function setSliderDistance(distance:int):void

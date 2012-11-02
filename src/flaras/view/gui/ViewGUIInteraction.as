@@ -36,16 +36,20 @@ package flaras.view.gui
 	
 	public class ViewGUIInteraction 
 	{
-		private var _ctrGUI:CtrGUI;
+		private var _ctrInteraction:CtrInteraction;
 		private var _viewWindowInteractionSphere:ViewWindowInteractionSphere;
+		private var _jtbControlBackward:JToggleButton;
+		private var _jtbControlForward:JToggleButton;
+		private var _jtbInspection:JToggleButton;
+		private var _jtbMove:JToggleButton
 		
-		public function ViewGUIInteraction(ctrGUI:CtrGUI) 
+		public function ViewGUIInteraction(ctrInteraction:CtrInteraction) 
 		{
 			var jw:JWindow;
 			var mainPanel:JPanel;
 			
-			this._ctrGUI = ctrGUI;
-			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere(_ctrGUI);
+			this._ctrInteraction = ctrInteraction;
+			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere(_ctrInteraction);
 			
 			jw = new JWindow();
 			jw.setContentPane(buildMainPanel());
@@ -70,65 +74,65 @@ package flaras.view.gui
 		
 		private function buildInteractionPanel(pJToolBar:JToolBar):void
 		{			
-			var jtbControlBackward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
-			var jtbControlForward:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
-			var jtbInspection:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
-			var jtbMove:JToggleButton = new JToggleButton(null, new LoadIcon("icons/external/move.png"));
+			_jtbControlBackward = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
+			_jtbControlForward = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
+			_jtbInspection = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
+			_jtbMove = new JToggleButton(null, new LoadIcon("icons/external/move.png"));
 			
-			jtbInspection.setSelected(true);
+			_jtbInspection.setSelected(true);
 			
-			jtbControlBackward.setToolTipText("Backward");
-			jtbControlForward.setToolTipText("Forward");
-			jtbInspection.setToolTipText("Inspection");
-			jtbMove.setToolTipText("Move");
+			_jtbControlBackward.setToolTipText("Backward");
+			_jtbControlForward.setToolTipText("Forward");
+			_jtbInspection.setToolTipText("Inspection");
+			_jtbMove.setToolTipText("Move");
 			
-			jtbControlBackward.addActionListener(function(e:Event):void
+			_jtbControlBackward.addActionListener(function(e:Event):void
 			{
-				if (jtbControlBackward.isSelected())
+				if (_jtbControlBackward.isSelected())
 				{
-					jtbControlForward.setSelected(false);
-					jtbInspection.setSelected(false);
-					jtbMove.setSelected(false);
+					_jtbControlForward.setSelected(false);
+					_jtbInspection.setSelected(false);
+					_jtbMove.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlBackward();
+					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2ControlBackward();
 				}
 			});
-			jtbControlForward.addActionListener(function(e:Event):void
+			_jtbControlForward.addActionListener(function(e:Event):void
 			{
-				if (jtbControlForward.isSelected())
+				if (_jtbControlForward.isSelected())
 				{
-					jtbControlBackward.setSelected(false);
-					jtbInspection.setSelected(false);
-					jtbMove.setSelected(false);
+					_jtbControlBackward.setSelected(false);
+					_jtbInspection.setSelected(false);
+					_jtbMove.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2ControlForward();
+					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2ControlForward();
 				}
 			});
-			jtbInspection.addActionListener(function(e:Event):void
+			_jtbInspection.addActionListener(function(e:Event):void
 			{
-				if (jtbInspection.isSelected())
+				if (_jtbInspection.isSelected())
 				{
-					jtbControlBackward.setSelected(false);
-					jtbControlForward.setSelected(false);
-					jtbMove.setSelected(false);
+					_jtbControlBackward.setSelected(false);
+					_jtbControlForward.setSelected(false);
+					_jtbMove.setSelected(false);
 					
-					_ctrGUI.getCtrMain().ctrMarker.setMarkerType2Inspection();
+					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2Inspection();
 				}
 			});
-			jtbMove.addActionListener(function(e:Event):void
+			_jtbMove.addActionListener(function(e:Event):void
 			{
-				if (jtbMove.isSelected())
+				if (_jtbMove.isSelected())
 				{
-					jtbControlBackward.setSelected(false);
-					jtbControlForward.setSelected(false);
-					jtbInspection.setSelected(false);
+					_jtbControlBackward.setSelected(false);
+					_jtbControlForward.setSelected(false);
+					_jtbInspection.setSelected(false);
 				}
 			});
 			
-			pJToolBar.append(jtbInspection);
-			pJToolBar.append(jtbControlBackward);
-			pJToolBar.append(jtbControlForward);
-			pJToolBar.append(jtbMove);
+			pJToolBar.append(_jtbInspection);
+			pJToolBar.append(_jtbControlBackward);
+			pJToolBar.append(_jtbControlForward);
+			pJToolBar.append(_jtbMove);
 		}
 		
 		private function buildViewPanel(pJToolBar:JToolBar):void
@@ -143,11 +147,11 @@ package flaras.view.gui
 			
 			jtbMirrorScreen.addActionListener(function(e:Event):void
 			{
-				_ctrGUI.getCtrMain().ctrMirror.toggleMirror(true);
+				_ctrInteraction.getCtrMain().ctrMirror.toggleMirror(true);
 			});
 			jtbMarkerPersistence.addActionListener(function(e:Event):void
 			{
-				_ctrGUI.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
+				_ctrInteraction.getCtrMain().ctrMarker.toggleRefMarkerPersistence();
 			});
 			jbInteractionMarker.addActionListener(function(e:Event):void
 			{
@@ -171,11 +175,11 @@ package flaras.view.gui
 			
 			jbEnableAll.addActionListener(function(e:Event):void
 			{
-				_ctrGUI.getCtrMain().ctrPoint.enableAllPoints();
+				_ctrInteraction.getCtrMain().ctrPoint.enableAllPoints();
 			});
 			jbDisableAll.addActionListener(function(e:Event):void
 			{
-				_ctrGUI.getCtrMain().ctrPoint.disableAllPoints(true);
+				_ctrInteraction.getCtrMain().ctrPoint.disableAllPoints(true);
 			});
 			
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
@@ -186,6 +190,26 @@ package flaras.view.gui
 		public function getViewWindowInteractionSphere():ViewWindowInteractionSphere 
 		{ 
 			return _viewWindowInteractionSphere; 
+		}
+		
+		public function isInspectionSelected():Boolean
+		{
+			return _jtbInspection.isSelected();
+		}
+		
+		public function isControlBackwardSelected():Boolean
+		{
+			return _jtbControlBackward.isSelected();
+		}
+		
+		public function isControlForwardSelected():Boolean
+		{
+			return _jtbControlForward.isSelected();
+		}
+		
+		public function isMoveSelected():Boolean
+		{
+			return _jtbMove.isSelected();
 		}
 	}
 }

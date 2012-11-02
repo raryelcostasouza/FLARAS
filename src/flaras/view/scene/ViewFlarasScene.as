@@ -228,7 +228,6 @@ package flaras.view.scene
 			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_obj3DLayer.removeEventListener(MouseEvent.CLICK, onMouseClick);
-			_obj3DLayer.removeEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
 			
 			if (_viewAnimation)
 			{
@@ -245,7 +244,6 @@ package flaras.view.scene
 		{			
 			_obj3DLayer = _ctrMain.fmmapp.getViewPort().containerSprite.getChildLayer(_obj3D, true, true);
 			_obj3DLayer.addEventListener(MouseEvent.CLICK, onMouseClick);
-			_obj3DLayer.addEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
 			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			_obj3DLayer.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			
@@ -324,19 +322,7 @@ package flaras.view.scene
 		
 		private function onMouseClick(e:MouseEvent):void
 		{
-			if (_ctrMain.ctrMarker.getModelInteractionMarker().getMarkerType() == CtrMarker.INSPECTOR_MARKER)
-			{
-				_ctrMain.ctrPoint.inspectPoint(_baseFlarasScene.getParentPoint());
-			}
-			else
-			{
-				_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), _ctrMain.ctrMarker.getModelInteractionMarker().getControlMarkerType());
-			}
-		}		
-		
-		private function onMouseRightClick(e:MouseEvent):void
-		{
-			_ctrMain.ctrPoint.controlPoint(_baseFlarasScene.getParentPoint(), CtrMarker.CONTROL_BACKWARD);
+			_ctrMain.ctrInteraction.mouseClick(_baseFlarasScene.getParentPoint());
 		}
 	}
 }

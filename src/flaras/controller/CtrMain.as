@@ -45,6 +45,7 @@ package flaras.controller
 		private var _ctrGUI:CtrGUI;
 		private var _ctrMirror:CtrMirror;
 		private var _ctrCamera:CtrCamera;
+		private var _ctrInteraction:CtrInteraction;
 		private var _fmmapp:FLARToolKitMultiMarkerApp;
 			
 		public function CtrMain(pFMMApp:FLARToolKitMultiMarkerApp)
@@ -57,6 +58,7 @@ package flaras.controller
 			this._ctrGUI = new CtrGUI(this);
 			this._ctrMirror = new CtrMirror(this, pFMMApp);
 			this._ctrCamera = new CtrCamera(this);
+			this._ctrInteraction = new CtrInteraction(this);
 			initUI();
 		}
 		
@@ -100,6 +102,11 @@ package flaras.controller
 		public function get ctrMarker():CtrMarker
 		{
 			return this._ctrMarker;
+		}
+		
+		public function get ctrInteraction():CtrInteraction
+		{
+			return this._ctrInteraction;
 		}
 		
 		public function get ctrMirror():CtrMirror

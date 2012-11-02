@@ -159,8 +159,8 @@ package flaras.controller
 			
 			_viewInteractionMarker.updateDistance();
 			_viewInteractionMarker.updateSize();
-			_ctrMain.ctrGUI.getInteractionGUI().getViewWindowInteractionSphere().setSliderDistance(distance);
-			_ctrMain.ctrGUI.getInteractionGUI().getViewWindowInteractionSphere().setSliderSize(size);
+			_ctrMain.ctrInteraction.getViewGUIInteraction().getViewWindowInteractionSphere().setSliderDistance(distance);
+			_ctrMain.ctrInteraction.getViewGUIInteraction().getViewWindowInteractionSphere().setSliderSize(size);
 		}
 		
 		public function loadInteractionMarkerData():void
