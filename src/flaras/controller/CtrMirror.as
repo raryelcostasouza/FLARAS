@@ -58,18 +58,6 @@ package flaras.controller
 			}
 			_ctrMain.ctrMarker.mirrorInteractionMarker();
 			_ctrMain.ctrPoint.toggleMirrorPointsScenes();
-			
-			if (actionfiredFromKeyboard)
-			{
-				if (MIRRORED_SCALE_FACTOR == 1)
-				{
-					_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBMirrorScreen(true);
-				}
-				else
-				{
-					_ctrMain.ctrGUI.getGUI().getMenu().setStatusJCBMirrorScreen(false);
-				}				
-			}
 		}		
 	}
 }

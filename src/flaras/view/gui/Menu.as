@@ -39,21 +39,20 @@ package flaras.view.gui
 		private var _ctrMain:CtrMain;
 		
 		private var menuArchive:JMenu = new JMenu("File");
-		private var newFlaras:JMenuItem = new JMenuItem("&New", new LoadIcon("icons/external/new.png"));
-		private var openFlaras:JMenuItem = new JMenuItem("&Open", new LoadIcon("icons/external/open.png"));
-		private var publish:JMenuItem = new JMenuItem("&Publish", new LoadIcon("icons/external/publish.png"));
-		private var saveFlaras:JMenuItem = new JMenuItem("&Save", new LoadIcon("icons/external/save.png"));
-		private var saveAsFlaras:JMenuItem = new JMenuItem("Save &as...");
-		private var exitFlaras:JMenuItem = new JMenuItem("E&xit", new LoadIcon("icons/external/exit.png"));
+		private var newFlaras:JMenuItem = new JMenuItem("New", new LoadIcon("icons/external/new.png"));
+		private var openFlaras:JMenuItem = new JMenuItem("Open", new LoadIcon("icons/external/open.png"));
+		private var publish:JMenuItem = new JMenuItem("Publish", new LoadIcon("icons/external/publish.png"));
+		private var saveFlaras:JMenuItem = new JMenuItem("Save", new LoadIcon("icons/external/save.png"));
+		private var saveAsFlaras:JMenuItem = new JMenuItem("Save as...");
+		private var exitFlaras:JMenuItem = new JMenuItem("Exit", new LoadIcon("icons/external/exit.png"));
 		
 		private var menuView:JMenu = new JMenu("View");
-		private var mirrorScreen:JCheckBoxMenuItem = new JCheckBoxMenuItem("Camera mirror");
 		private var stopCameraCapture:JCheckBoxMenuItem = new JCheckBoxMenuItem("Stop camera");
 		private var chooseCaptureCamera:JMenuItem = new JMenuItem("Choose camera");
 	
 		private var menuAbout:JMenu =  new JMenu("About");
-		private var jmiAboutFlaras:JMenuItem = new JMenuItem("&About FLARAS", new LoadIcon("icons/flaras16.png"));
-		private var jmiLicense:JMenuItem = new JMenuItem("&License");
+		private var jmiAboutFlaras:JMenuItem = new JMenuItem("About FLARAS", new LoadIcon("icons/flaras16.png"));
+		private var jmiLicense:JMenuItem = new JMenuItem("License");
 		
 		public function Menu(ctrMain:CtrMain):void
 		{
@@ -86,8 +85,6 @@ package flaras.view.gui
 			
 			this.addMenu(menuView);
 			menuView.append(new JSeparator());
-			menuView.append(mirrorScreen);
-			mirrorScreen.addActionListener(actionMirrorScreen);
 			menuView.append(stopCameraCapture);
 			stopCameraCapture.addActionListener(actionStopCameraCapture);
 			menuView.append(new JSeparator());
@@ -134,11 +131,6 @@ package flaras.view.gui
 			_ctrMain.ctrUserProject.closingFlaras();
 		}
 		
-		private function actionMirrorScreen(e:Event):void
-		{
-			_ctrMain.ctrMirror.toggleMirror(false);
-		}
-		
 		private function actionStopCameraCapture(e:Event):void
 		{
 			_ctrMain.ctrCamera.setCameraStatus(stopCameraCapture.isSelected());
@@ -147,11 +139,6 @@ package flaras.view.gui
 		private function actionChooseCaptureCamera(e:Event):void
 		{
 			_ctrMain.ctrCamera.selectCameraToCapture();
-		}
-		
-		public function setStatusJCBMirrorScreen(enabled:Boolean):void
-		{
-			mirrorScreen.setSelected(enabled);
 		}
 		
 		private function aboutFlarasFunction(e:Event):void
