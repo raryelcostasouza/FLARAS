@@ -59,6 +59,14 @@ package flaras.controller
 			return _listOfScenes2;
 		}
 		
+		public function resetAllScenesPosition():void
+		{
+			for each (var vfs:ViewFlarasScene in _listOfViewFlarasScenes) 
+			{
+				vfs.resetScenePosition();
+			}
+		}
+		
 		public function addScene(pFilePath:String, pTranslation:Number3D, pRotation:Number3D, pScale:Number3D,
 			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,

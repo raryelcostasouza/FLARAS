@@ -56,6 +56,14 @@ package flaras.controller
 			this._ctrMain = ctrMain;
 		}
 		
+		public function resetAllScenesPosition():void
+		{
+			for each (var ctr:CtrScene in _listOfCtrScenes) 
+			{
+				ctr.resetAllScenesPosition();
+			}
+		}
+		
 		public function destroyListOfPoints():void
 		{
 			if (this._listOfPoints.length != 0)
