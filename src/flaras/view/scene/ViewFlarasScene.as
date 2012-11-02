@@ -231,9 +231,17 @@ package flaras.view.scene
 		
 		public function destroy():void
 		{
-			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-			_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-			_obj3DLayer.removeEventListener(MouseEvent.CLICK, onMouseDown);
+			if (_obj3DLayer)
+			{
+				_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				_obj3DLayer.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				_obj3DLayer.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			}
+			
+			if (_dragPlane)
+			{
+				_dragPlane = null;
+			}
 			
 			if (_viewAnimation)
 			{

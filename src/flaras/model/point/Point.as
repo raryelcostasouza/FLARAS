@@ -53,15 +53,17 @@ package flaras.model.point
 		private var _label:String;
 		private var _position:Number3D;
 		private var _listOfFlarasScenes:Vector.<FlarasScene>;
+		private var _moveInteractionForScenes:Boolean;
 		
-		public function Point(pID:uint, pPosition:Number3D, pLabel:String)
+		public function Point(pID:uint, pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean)
 		{
 			_listOfFlarasScenes = new Vector.<FlarasScene>();
 			
 			_label = pLabel;
 			_id = pID;
 			_enabled = false;
-			_position = pPosition;			
+			_position = pPosition;
+			_moveInteractionForScenes = pMoveInteractionForScenes;
 		}
 		
 		public function destroy():void
@@ -139,6 +141,16 @@ package flaras.model.point
 		public function setLabel(pLabel:String):void 
 		{
 			_label = pLabel;
+		}
+		
+		public function isMoveInteractionForScenes():Boolean
+		{
+			return _moveInteractionForScenes;
+		}
+		
+		public function setMoveInteractionForScenes(pMoveInteractionForScenes:Boolean):void
+		{
+			_moveInteractionForScenes = pMoveInteractionForScenes;
 		}
 		
 		public function getFilePathListOfObjects():String

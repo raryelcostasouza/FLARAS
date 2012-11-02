@@ -72,11 +72,22 @@ package flaras.controller.io.fileSaver
 			{
 				var position:Number3D = p.getPosition();
 				var label:String = p.getLabel();
+				var moveInteractionForScenes:uint;
+				
+				if (p.isMoveInteractionForScenes())
+				{
+					moveInteractionForScenes = 1;
+				}
+				else
+				{
+					moveInteractionForScenes = 0;
+				}				
 				
 				var newNode:XML = new XML();
 				newNode = 
 				<point>
 					<label>{label}</label>
+					<moveInteractionForScenes>{moveInteractionForScenes}</moveInteractionForScenes>
 					<position>
 						<x>{position.x}</x>
 						<y>{position.y}</y>

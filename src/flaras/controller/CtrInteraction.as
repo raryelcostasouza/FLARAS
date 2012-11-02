@@ -50,7 +50,14 @@ package flaras.controller
 			}
 			else if (_viewGUIInteraction.isMoveSelected())
 			{
-				vfs.setupMoveInteraction();
+				if (p.isMoveInteractionForScenes())
+				{
+					vfs.setupMoveInteraction();
+				}
+				else
+				{
+					MessageWindow.messageMoveInteractionNotAllowed();
+				}
 			}
 			else if (_viewGUIInteraction.isResetSelected())
 			{

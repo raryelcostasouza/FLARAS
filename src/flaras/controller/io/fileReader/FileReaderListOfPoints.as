@@ -60,6 +60,7 @@ package flaras.controller.io.fileReader
 		private function onComplete(e:Event):void
 		{			
 			var label:String;
+			var moveInteractionForScenes:Boolean;
 			
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
@@ -78,7 +79,16 @@ package flaras.controller.io.fileReader
 					label = point.label;
 				}
 				
-				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label);
+				if (point.moveInteractionForScenes == undefined)
+				{
+					moveInteractionForScenes = false;
+				}
+				else
+				{
+					moveInteractionForScenes = Boolean(parseInt(point.moveInteractionForScenes));
+				}
+				
+				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes);
 			}
 			
 			aObjCtrPoint.finishedReadingListOfPoints();

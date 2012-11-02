@@ -34,6 +34,7 @@ package flaras.controller
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
 	import flaras.controller.io.fileReader.*;
+	import flaras.controller.util.Point3D;
 	import flaras.model.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;
@@ -157,18 +158,23 @@ package flaras.controller
 			return _listOfPoints[indexPoint].getPosition();	
 		}
 		
+		public function getMoveInteractionForScenes(indexPoint:uint):Boolean
+		{
+			return _listOfPoints[indexPoint].isMoveInteractionForScenes();
+		}
+		
 		// functions related with adding and removing points -----------------------------------------------------------
-		public function addPointFromXML(pPosition:Number3D, pLabel:String):void
+		public function addPointFromXML(pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean):void
 		{
 			var p:Point;
 			
-			p = addPoint(pPosition, pLabel, true);
+			p = addPoint(pPosition, pLabel, pMoveInteractionForScenes, true);
 			
 			//read the list of objects associated to the point p
 			new FileReaderListOfObjects(p.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + p.getFilePathListOfObjects(), this);
 		}
 		
-		public function addPoint(pPosition:Number3D, pLabel:String, pFromXML:Boolean=false):Point
+		public function addPoint(pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean, pFromXML:Boolean=false):Point
 		{
 			var p:Point;
 			
@@ -177,7 +183,7 @@ package flaras.controller
 				_ctrMain.ctrUserProject.setUnsavedModifications(true);
 			}			
 			
-			p = new Point(this._listOfPoints.length, pPosition, pLabel)
+			p = new Point(this._listOfPoints.length, pPosition, pLabel, pMoveInteractionForScenes)
 			this._listOfPoints.push(p);
 			this._listOfBoundaryPoints.push(new ViewPoint(p, _ctrMain));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, p));
@@ -220,6 +226,16 @@ package flaras.controller
 			
 			p = _listOfPoints[indexPoint];
 			p.setLabel(pLabel);
+		}
+		
+		public function updatePointMoveInteractionForScenes(indexPoint:uint, moveInteractionForScenes:Boolean):void
+		{
+			var p:Point;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
+			p = _listOfPoints[indexPoint];
+			p.setMoveInteractionForScenes(moveInteractionForScenes);
 		}
 		
 		public function updatePointPosition(indexPoint:uint, position:Number3D):void

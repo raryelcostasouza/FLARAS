@@ -149,5 +149,10 @@ package flaras.view.gui
 				navigateToURL(new URLRequest("http://www.ckirner.com/flaras"));
 			});
 		}
+		
+		public static function messageMoveInteractionNotAllowed():void
+		{
+			JOptionPane.showMessageDialog("Warning!", "Move interaction is not allowed for the scenes of this point!", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
+		}
 	}
 }

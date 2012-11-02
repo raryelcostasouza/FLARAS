@@ -13,6 +13,7 @@ package flaras.view.gui
 		private var _jtfPointTrX:JTextField;
 		private var _jtfPointTrY:JTextField;
 		private var _jtfPointTrZ:JTextField;
+		private var _jcbMovableScenes:JCheckBox;
 			
 		
 		public function ViewGUIPointPanel(pCtrGUI:CtrGUI) 
@@ -77,6 +78,11 @@ package flaras.view.gui
 			
 			tabProperties.append(subPanel2);
 			
+			_jcbMovableScenes = new JCheckBox("Enable move interaction for scenes");
+			_jcbMovableScenes.addActionListener(_ctrGUI.listenerUpdateMoveInteractionForScenes);
+			
+			tabProperties.append(_jcbMovableScenes);
+			
 			return tabProperties;
 		}
 		
@@ -131,6 +137,11 @@ package flaras.view.gui
 		public function getJTFPointTrZ():JTextField 
 		{
 			return _jtfPointTrZ;
+		}
+		
+		public function getJCBMoveInteractionForScenes():JCheckBox
+		{
+			return _jcbMovableScenes;
 		}
 	}
 

@@ -258,7 +258,7 @@ package flaras.controller
 		
 		public function listenerAddPoint(e:Event):void
 		{
-			_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "");
+			_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "", false);
 			_gui.getTreePanel().addPoint();
 			_gui.getTreePanel().selectPoint(_ctrMain.ctrPoint.getNumberOfPoints() - 1);
 		}
@@ -286,6 +286,15 @@ package flaras.controller
 			
 			_ctrMain.ctrPoint.updatePointLabel(getCurrentSelectedPoint2(), label);
 			_gui.getTreePanel().updatePointLabel(label);
+		}
+		
+		public function listenerUpdateMoveInteractionForScenes(e:Event):void
+		{
+			var moveInteractionForScenes:Boolean;
+			
+			moveInteractionForScenes = _gui.getPointPanel().getJCBMoveInteractionForScenes().isSelected();
+			
+			_ctrMain.ctrPoint.updatePointMoveInteractionForScenes(getCurrentSelectedPoint2(), moveInteractionForScenes);
 		}
 		
 		public function listenerUpdatePointPosition(e:Event):void
@@ -593,14 +602,17 @@ package flaras.controller
 		{
 			var pointTranslation:Number3D;
 			var label:String;
+			var moveInteractionForScenes:Boolean;
 			
 			pointTranslation = _ctrMain.ctrPoint.getPosition(indexPoint);
 			label = _ctrMain.ctrPoint.getLabel(indexPoint);
+			moveInteractionForScenes = _ctrMain.ctrPoint.getMoveInteractionForScenes(indexPoint);
 			
 			_gui.getPointPanel().getJTFPointLabel().setText(label);
 			_gui.getPointPanel().getJTFPointTrX().setText(String(pointTranslation.x));
 			_gui.getPointPanel().getJTFPointTrY().setText(String(pointTranslation.y));
 			_gui.getPointPanel().getJTFPointTrZ().setText(String(pointTranslation.z));
+			_gui.getPointPanel().getJCBMoveInteractionForScenes().setSelected(moveInteractionForScenes);
 		}
 		
 		private function fillSceneGUI(indexPoint:uint, indexScene:uint):void
