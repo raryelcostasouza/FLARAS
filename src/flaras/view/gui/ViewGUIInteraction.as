@@ -83,7 +83,7 @@ package flaras.view.gui
 			_jtbResetScenePos = new JToggleButton(null, new LoadIcon("icons/external/reset-scene.png"));
 			_jbResetAll = new JButton(null, new LoadIcon("icons/external/reset-all.png"));
 			
-			_jtbInspection.setSelected(true);
+			_jtbControlForward.setSelected(true);
 			
 			_jtbControlBackward.setToolTipText("Backward");
 			_jtbControlForward.setToolTipText("Forward");
