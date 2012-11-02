@@ -252,6 +252,7 @@ package flaras.controller
 			_ctrMain.ctrPoint.disableAllPointsUI();
 			_ctrMain.ctrPoint.enablePointUI(getCurrentSelectedPoint2());
 			_ctrMain.ctrPoint.goToScene(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).resetAllScenesPosition();
 			fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 		}
 		
