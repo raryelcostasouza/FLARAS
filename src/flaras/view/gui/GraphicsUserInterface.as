@@ -39,9 +39,9 @@ package flaras.view.gui
 	
 	public class GraphicsUserInterface
 	{
-		//control variables
 		private var _ctrMain:CtrMain;
 		private var ctrGui:CtrGUI;
+		
 		private var _cameraSelectWindow:CameraSelectWindow;
 		private var _swapWindow:SwapWindow;
 		private var menu:Menu;
@@ -50,9 +50,8 @@ package flaras.view.gui
 		private var _markerPanel:ViewGUIMarkerPanel;
 		private var _pointPanel:ViewGUIPointPanel;
 		private var _scenePanel:ViewGUIScenePanel;
-		private var dynamicWindow:JWindow;
-		
-		public static const developmentPanelWidth:uint = 214;
+		private var _developmentWindow:JWindow;
+		private var _developmentPanel:JPanel;
 		
 		public function GraphicsUserInterface(ctrMain:CtrMain, pCtrGUI:CtrGUI)
 		{
@@ -91,46 +90,51 @@ package flaras.view.gui
 			_scenePanel = new ViewGUIScenePanel(ctrGui);			
 			_projectTreePanel = new ViewGUIProjectTree(ctrGui, this);
 			
-			window2 = new JWindow();
-			window2.setContentPane(_projectTreePanel);
-			//window2.setSizeWH(214, 210);
-			window2.setSizeWH(214, 200);
-			window2.setLocationXY(640, 0);
-			window2.show();
+			_developmentWindow = new JWindow();
+			_developmentWindow.setSizeWH(214, 540);
+			_developmentWindow.setLocationXY(640, 0);
+			_developmentWindow.setContentPane(buildDevelopmentPanel());
+			_developmentWindow.show();
+		}
+		
+		public function buildDevelopmentPanel():JPanel
+		{
+			var projectTreePanel:JPanel;
 			
-			dynamicWindow = new JWindow();
-			dynamicWindow.setContentPane(_markerPanel);
-			//dynamicWindow.setSizeWH(214, 270);
-			dynamicWindow.setSizeWH(214, 280);
-			//dynamicWindow.setLocationXY(640, 210);
-			dynamicWindow.setLocationXY(640, 200);
-			dynamicWindow.show();
+			_developmentPanel = new JPanel(new GridLayout(2, 1));
+			_developmentPanel.append(_projectTreePanel);
+			_developmentPanel.append(_markerPanel);
+			
+			return _developmentPanel;
 		}
 		
 		public function showMarkerPanel():void
 		{
-			if (dynamicWindow.remove(_pointPanel) || dynamicWindow.remove(_scenePanel))
+			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_scenePanel))
 			{
-				dynamicWindow.setContentPane(_markerPanel);
+				_developmentPanel.append(_markerPanel);
 				_markerPanel.setSelectedIndex(0);
+				_developmentPanel.revalidateIfNecessary();
 			}
 		}
 		
 		public function showPointPanel():void
 		{
-			if (dynamicWindow.remove(_markerPanel) || dynamicWindow.remove(_scenePanel))
+			if (_developmentPanel.remove(_markerPanel) || _developmentPanel.remove(_scenePanel))
 			{
-				dynamicWindow.setContentPane(_pointPanel);
+				_developmentPanel.append(_pointPanel);
 				_pointPanel.setSelectedIndex(0);
+				_developmentPanel.revalidateIfNecessary();
 			}
 		}
 		
 		public function showScenePanel():void
 		{
-			if (dynamicWindow.remove(_pointPanel) || dynamicWindow.remove(_markerPanel))
+			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_markerPanel))
 			{
-				dynamicWindow.setContentPane(_scenePanel);
+				_developmentPanel.append(_scenePanel);
 				_scenePanel.setSelectedIndex(0);
+				_developmentPanel.revalidateIfNecessary();
 			}
 		}
 		

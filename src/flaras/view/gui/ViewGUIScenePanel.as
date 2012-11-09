@@ -142,7 +142,6 @@ package flaras.view.gui
 			_jtfSceneScZ.addActionListener(_ctrGUI.listenerUpdateSceneScale);
 			
 			tabBasic = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			tabBasic.setPreferredSize(new IntDimension(214, 480));
 						
 			subPanelLabel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			subPanelLabel.setBorder(new TitledBorder(null, "Scene label", TitledBorder.TOP, TitledBorder.LEFT));
@@ -192,7 +191,6 @@ package flaras.view.gui
 			var subPanel2:JPanel;
 			
 			tabAudio = new JPanel(new BorderLayout());
-			tabAudio.setPreferredSize(new IntDimension(214, 480));
 			
 			subPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			_jcbAudio = new JCheckBox("Audio");	
@@ -225,7 +223,6 @@ package flaras.view.gui
 			var topPanel:JPanel;
 			
 			_tabType = new JPanel(new BorderLayout());
-			_tabType.setPreferredSize(new IntDimension(214, 480));
 			
 			topPanel = new JPanel();
 			topPanel.setBorder(new TitledBorder(null, "Scene type", TitledBorder.TOP, TitledBorder.LEFT));
@@ -267,7 +264,7 @@ package flaras.view.gui
 			var jbSwapScenePosition:JButton;
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			tabOperations.setPreferredSize(new IntDimension(214, 480));
+			
 			jbSwapScenePosition = new JButton("Change scene position", new LoadIcon("icons/external/swap.png"));
 			jbDeleteScene = new JButton("Delete Scene", new LoadIcon("icons/external/delete.png"));
 			jbDeleteScene.setPreferredWidth(167);

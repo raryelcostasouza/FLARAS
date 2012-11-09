@@ -8,7 +8,7 @@ package flaras.view.gui
 	import org.aswing.geom.*;
 	import org.aswing.tree.*;
 	
-	public class ViewGUIProjectTree extends JPanel
+	public class ViewGUIProjectTree extends JScrollPane
 	{
 		private var _tree:JTree;
 		private var _root:DefaultMutableTreeNode;
@@ -20,7 +20,6 @@ package flaras.view.gui
 		{
 			var root:DefaultMutableTreeNode;
 			var jsp:JScrollPane;
-			super();
 			
 			_ctrGUI = pCtrGUI;
 			_gui = pGUI;
@@ -31,9 +30,9 @@ package flaras.view.gui
 			_tree.getSelectionModel().setSelectionMode(DefaultTreeSelectionModel.SINGLE_TREE_SELECTION);
 			_tree.addSelectionListener(onSelection);
 			
-			jsp = new JScrollPane(_tree, JScrollPane.SCROLLBAR_ALWAYS, JScrollPane.SCROLLBAR_ALWAYS);
-			jsp.setPreferredSize(new IntDimension(208, 194));
-			append(jsp);
+			setVerticalScrollBarPolicy(JScrollPane.SCROLLBAR_ALWAYS);
+			setHorizontalScrollBarPolicy(JScrollPane.SCROLLBAR_ALWAYS);
+			setView(_tree);
 		}
 		
 		public function addPoint():void

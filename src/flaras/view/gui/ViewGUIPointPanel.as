@@ -38,7 +38,6 @@ package flaras.view.gui
 			var jlPointTrZ:JLabel;
 			
 			tabProperties = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			tabProperties.setPreferredSize(new IntDimension(214, 480));
 			
 			subPanel = new JPanel();
 			subPanel.setBorder(new TitledBorder(null, "Point label", TitledBorder.TOP, TitledBorder.LEFT));
@@ -95,7 +94,6 @@ package flaras.view.gui
 			var jbAddVideoScene:JButton;
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			tabOperations.setPreferredSize(new IntDimension(214,480));
 			
 			jbAdd3DObjScene = new JButton("Add 3D Obj Scene", new LoadIcon("icons/external/obj3d.png", 48, 48));
 			jbAddTextureScene = new JButton("Add Texture Scene", new LoadIcon("icons/external/texture.png", 48, 48));

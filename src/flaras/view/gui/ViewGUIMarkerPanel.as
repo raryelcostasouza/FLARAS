@@ -30,7 +30,6 @@ package flaras.view.gui
 			var bg:ButtonGroup;
 			
 			tabProperties = new JPanel(new BorderLayout());
-			tabProperties.setPreferredSize(new IntDimension(214, 480));
 			
 			subPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			subPanel.setBorder(new TitledBorder(null, "Cover type", TitledBorder.TOP, TitledBorder.LEFT));
@@ -59,7 +58,6 @@ package flaras.view.gui
 			var jbAddPoint:JButton;
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			tabOperations.setPreferredSize(new IntDimension(214, 480));
 			
 			jbAddPoint = new JButton("Add new point", new LoadIcon("icons/external/add-point.png", 48, 48));
 			jbAddPoint.addActionListener(_ctrGUI.listenerAddPoint);
