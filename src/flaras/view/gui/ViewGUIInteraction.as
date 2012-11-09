@@ -31,6 +31,7 @@ package flaras.view.gui
 {
 	import flaras.controller.*;
 	import flash.events.*;
+	import mx.core.ButtonAsset;
 	import org.aswing.*;
 	import org.aswing.border.*;
 	
@@ -41,7 +42,8 @@ package flaras.view.gui
 		private var _jtbControlBackward:JToggleButton;
 		private var _jtbControlForward:JToggleButton;
 		private var _jtbInspection:JToggleButton;
-		private var _jtbMove:JToggleButton
+		private var _jtbMoveXY:JToggleButton;
+		private var _jtbMoveZ:JToggleButton;
 		private var _jtbResetScenePos:JToggleButton;
 		private var _jbResetAll:JButton;
 		
@@ -63,10 +65,19 @@ package flaras.view.gui
 		{
 			var mainPanel:JPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			var jtbar:JToolBar = new JToolBar();
+			var bg:ButtonGroup;			
 			
 			buildInteractionPanel(jtbar);
 			buildViewPanel(jtbar);
 			buildAllPointsPanel(jtbar);
+			
+			bg = new ButtonGroup();
+			bg.append(_jtbInspection);
+			bg.append(_jtbControlBackward);
+			bg.append(_jtbControlForward);
+			bg.append(_jtbMoveXY);
+			bg.append(_jtbMoveZ);
+			bg.append(_jtbResetScenePos);
 			
 			mainPanel.append(jtbar);
 			
@@ -78,7 +89,8 @@ package flaras.view.gui
 			_jtbControlBackward = new JToggleButton(null, new LoadIcon("icons/external/backward.png"));
 			_jtbControlForward = new JToggleButton(null, new LoadIcon("icons/external/forward.png"));
 			_jtbInspection = new JToggleButton(null, new LoadIcon("icons/external/inspection.png"));
-			_jtbMove = new JToggleButton(null, new LoadIcon("icons/external/move.png"));
+			_jtbMoveXY = new JToggleButton(null, new LoadIcon("icons/external/move_xy.png"));
+			_jtbMoveZ = new JToggleButton(null, new LoadIcon("icons/external/move_z.png"));
 			_jtbResetScenePos = new JToggleButton(null, new LoadIcon("icons/external/reset-scene.png"));
 			_jbResetAll = new JButton(null, new LoadIcon("icons/external/reset-all.png"));
 			
@@ -87,64 +99,30 @@ package flaras.view.gui
 			_jtbControlBackward.setToolTipText("Backward");
 			_jtbControlForward.setToolTipText("Forward");
 			_jtbInspection.setToolTipText("Inspection");
-			_jtbMove.setToolTipText("Move");
+			_jtbMoveXY.setToolTipText("Move on XY plane");
+			_jtbMoveZ.setToolTipText("Move on Z axis");
 			_jtbResetScenePos.setToolTipText("Reset scene position");
 			_jbResetAll.setToolTipText("Reset all scenes positions");
 			
 			_jtbControlBackward.addActionListener(function(e:Event):void
 			{
 				if (_jtbControlBackward.isSelected())
-				{
-					_jtbControlForward.setSelected(false);
-					_jtbInspection.setSelected(false);
-					_jtbMove.setSelected(false);
-					_jtbResetScenePos.setSelected(false);
-					
+				{	
 					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2ControlBackward();
 				}
 			});
 			_jtbControlForward.addActionListener(function(e:Event):void
 			{
 				if (_jtbControlForward.isSelected())
-				{
-					_jtbControlBackward.setSelected(false);
-					_jtbInspection.setSelected(false);
-					_jtbMove.setSelected(false);
-					_jtbResetScenePos.setSelected(false);
-					
+				{	
 					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2ControlForward();
 				}
 			});
 			_jtbInspection.addActionListener(function(e:Event):void
 			{
 				if (_jtbInspection.isSelected())
-				{
-					_jtbControlBackward.setSelected(false);
-					_jtbControlForward.setSelected(false);
-					_jtbMove.setSelected(false);
-					_jtbResetScenePos.setSelected(false);
-					
+				{		
 					_ctrInteraction.getCtrMain().ctrMarker.setMarkerType2Inspection();
-				}
-			});
-			_jtbMove.addActionListener(function(e:Event):void
-			{
-				if (_jtbMove.isSelected())
-				{
-					_jtbControlBackward.setSelected(false);
-					_jtbControlForward.setSelected(false);
-					_jtbInspection.setSelected(false);
-					_jtbResetScenePos.setSelected(false);
-				}
-			});
-			_jtbResetScenePos.addActionListener(function(e:Event):void
-			{
-				if (_jtbResetScenePos.isSelected())
-				{
-					_jtbControlBackward.setSelected(false);
-					_jtbControlForward.setSelected(false);
-					_jtbInspection.setSelected(false);
-					_jtbMove.setSelected(false);
 				}
 			});
 			_jbResetAll.addActionListener(function(e:Event):void
@@ -156,7 +134,8 @@ package flaras.view.gui
 			pJToolBar.append(_jtbControlBackward);
 			pJToolBar.append(_jtbControlForward);
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
-			pJToolBar.append(_jtbMove);
+			pJToolBar.append(_jtbMoveXY);
+			pJToolBar.append(_jtbMoveZ);
 			pJToolBar.append(_jtbResetScenePos);
 			pJToolBar.append(_jbResetAll);
 		}
@@ -235,7 +214,7 @@ package flaras.view.gui
 		
 		public function isMoveSelected():Boolean
 		{
-			return _jtbMove.isSelected();
+			return _jtbMoveXY.isSelected();
 		}
 		
 		public function isResetSelected():Boolean
