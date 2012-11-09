@@ -130,7 +130,7 @@ package flaras.controller
 			if (nListOfScenesAlreadyLoaded == _listOfPoints.length)
 			{
 				this._ctrMain.ctrGUI.initProjectTree();
-				enableAllPoints();
+				enableAllPoints(false);
 			}
 		}
 		
@@ -393,13 +393,13 @@ package flaras.controller
 			}
 		}	
 		
-		public function enableAllPoints():void
+		public function enableAllPoints(pPlaySystemAudio:Boolean):void
 		{
 			for each(var p:Point in this._listOfPoints)
 			{
 				if (!p.isEnabled())
 				{
-					enablePoint(p,false,true);
+					enablePoint(p,pPlaySystemAudio,true);
 				}
 			}
 		}

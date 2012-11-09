@@ -202,7 +202,7 @@ package flaras.view.gui
 			
 			jbEnableAll.addActionListener(function(e:Event):void
 			{
-				_ctrInteraction.getCtrMain().ctrPoint.enableAllPoints();
+				_ctrInteraction.getCtrMain().ctrPoint.enableAllPoints(true);
 			});
 			jbDisableAll.addActionListener(function(e:Event):void
 			{
