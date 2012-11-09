@@ -48,21 +48,20 @@ package flaras.view.gui
 		public function ViewGUIInteraction(ctrInteraction:CtrInteraction) 
 		{
 			var jw:JWindow;
-			var mainPanel:JPanel;
 			
 			this._ctrInteraction = ctrInteraction;
 			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere(_ctrInteraction);
-			
+						
 			jw = new JWindow();
 			jw.setContentPane(buildMainPanel());
 			jw.setSizeWH(640, 60);
-			jw.setLocationXY(0, 480);
+			jw.setLocationXY(0 , 480);
 			jw.show();
 		}
 		
 		private function buildMainPanel():JPanel
 		{
-			var mainPanel:JPanel = new JPanel();
+			var mainPanel:JPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			var jtbar:JToolBar = new JToolBar();
 			
 			buildInteractionPanel(jtbar);
