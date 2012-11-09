@@ -69,21 +69,21 @@ package flaras.controller
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene(pFilePath, Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, false,
-						"", 0, 0, false, false, 0, 0, 0, 0, "");
+						"", 0, 0, false, false, 0, 0, 0, 0, 0, "");
 				}
 				if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH,
 						GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false,
-						false, 0, 0, 0, 0, "");
+						false, 0, 0, 0, 0, 0, "");
 				}
 				if (pCopyDestination == FolderConstants.VIDEO_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, true,
 						pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
-						false, false, 0, 0, 0, 0, "");
+						false, false, 0, 0, 0, 0, 0, "");
 				}
 				
 				_gui.getTreePanel().addScene(getCurrentSelectedPoint2());
@@ -113,8 +113,8 @@ package flaras.controller
 							false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
 							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
+							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 					{
@@ -129,8 +129,8 @@ package flaras.controller
 							_gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
 							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA()),
+							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else
 					{
@@ -145,8 +145,8 @@ package flaras.controller
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH,
 							GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(),
 							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
+							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 				}
@@ -523,8 +523,8 @@ package flaras.controller
 			{
 				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAnimation(getCurrentSelectedScene2(),
 					Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-					_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText()),
-					_gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+					_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
+					Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
 			}
 			else
 			{
@@ -534,17 +534,20 @@ package flaras.controller
 		
 		public function listenerUpdateAnimationProperties(e:Event):void
 		{
-			var strRadius:String;
+			var strRadiusA:String;
+			var strRadiusB:String;
 			var strPeriod:String;
 			var allFieldsValid:Boolean;
 			var vectFieldData:Vector.<FieldData>;
 			
-			strRadius = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().getText();
+			strRadiusA = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText();
 			strPeriod = _gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText();
+			strRadiusB = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText();
 			
 			vectFieldData = new Vector.<FieldData>();
-			vectFieldData.push(new FieldData("Radius", strRadius));
-			vectFieldData.push(new FieldData("Period", strPeriod));
+			vectFieldData.push(new FieldData("Radius A", strRadiusA));
+			vectFieldData.push(new FieldData("Radius B", strRadiusB));
+			vectFieldData.push(new FieldData("Period", strPeriod));			
 			
 			allFieldsValid = generalNumericFieldValidator(vectFieldData);
 			
@@ -552,7 +555,7 @@ package flaras.controller
 			{
 				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAnimationProperties(getCurrentSelectedScene2(),
 					Number(strPeriod), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(),
-					Number(strRadius), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+					Number(strRadiusA), Number(strRadiusB), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
 			}
 		}
 		
@@ -656,7 +659,7 @@ package flaras.controller
 				_gui.getScenePanel().getAnimationPanel().setHasAnimation(true);
 				_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(animationData.getPeriod()+"");
 				_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(animationData.getRotationAxis());
-				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().setText(animationData.getRadius()+"");
+				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(animationData.getRadiusA()+"");
 				_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(animationData.getRotationDirection());
 			}
 			if (audioData)
@@ -725,7 +728,7 @@ package flaras.controller
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
 			_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(10+"");
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadius().setText(0+"");
+			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(0+"");
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(1);
 		}
 		

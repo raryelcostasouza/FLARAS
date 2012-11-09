@@ -278,7 +278,8 @@ package flaras.controller.io.fileSaver
 			var hasAnimation:uint;
 			var period:Number;
 			var rotationAxis:uint;
-			var radius:uint;
+			var radiusA:Number;
+			var radiusB:Number;
 			var rotationDirection:int;
 			
 			if (scene.getAnimation())
@@ -287,7 +288,8 @@ package flaras.controller.io.fileSaver
 				hasAnimation = 1;
 				period = animationScene.getPeriod();
 				rotationAxis = animationScene.getRotationAxis();
-				radius = animationScene.getRadius();
+				radiusA = animationScene.getRadiusA();
+				radiusB = animationScene.getRadiusB();
 				rotationDirection = animationScene.getRotationDirection();
 			}
 			else
@@ -295,7 +297,8 @@ package flaras.controller.io.fileSaver
 				hasAnimation = 0;
 				period = 0;
 				rotationAxis = 0;
-				radius = 0;
+				radiusA = 0;
+				radiusB = 0;
 				rotationDirection = 0;
 			}
 			
@@ -306,7 +309,8 @@ package flaras.controller.io.fileSaver
 						<hasAnimation>{hasAnimation}</hasAnimation>
 						<period>{period}</period>
 						<rotationAxis>{rotationAxis}</rotationAxis>
-						<radius>{radius}</radius>
+						<radius>{radiusA}</radius>
+						<radiusB>{radiusB}</radiusB>
 						<rotationDirection>{rotationDirection}</rotationDirection>
 					</animation>
 					

@@ -33,27 +33,31 @@ package flaras.model.scene
 	{
 		private var _period:Number;
 		private var _rotationAxis:uint;
-		private var _radius:Number;
+		private var _radiusA:Number;
+		private var _radiusB:Number;
 		private var _rotationDirection:int;
 		
-		public function AnimationScene(period:Number, rotationAxis:uint, radius:Number, rotationDirection:int) 
+		public function AnimationScene(period:Number, rotationAxis:uint, radiusA:Number, radiusB:Number, rotationDirection:int) 
 		{
 			_period = period;
 			_rotationAxis = rotationAxis;
-			_radius = radius;
+			_radiusA = radiusA;
+			_radiusB = radiusB;
 			_rotationDirection = rotationDirection;
 		}
 		
 		public function getPeriod():Number { return _period; }
 		public function getRotationAxis():uint { return _rotationAxis; }
-		public function getRadius():Number { return _radius; }
+		public function getRadiusA():Number { return _radiusA; }
+		public function getRadiusB():Number { return _radiusB; }		
 		public function getRotationDirection():int { return _rotationDirection; }
 		
-		public function setAnimationProperties(period:Number, rotationAxis:uint, radius:Number, rotationDirection:int):void
+		public function setAnimationProperties(period:Number, rotationAxis:uint, radiusA:Number, radiusB:Number, rotationDirection:int):void
 		{
 			_period = period;
 			_rotationAxis = rotationAxis;
-			_radius = radius;
+			_radiusA = radiusA;
+			_radiusB = radiusB;
 			_rotationDirection = rotationDirection;
 		}
 	}

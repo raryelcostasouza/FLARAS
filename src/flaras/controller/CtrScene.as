@@ -71,7 +71,7 @@ package flaras.controller
 			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
 			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
-			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String, pFromXML:Boolean=false):void
+			pAnimationRotationAxis:uint, pAnimationRadiusA:Number, pAnimationRadiusB:Number, pAnimationRotationDirection:int, pLabel:String, pFromXML:Boolean=false):void
 		{
 			var scene:FlarasScene;
 			
@@ -83,7 +83,7 @@ package flaras.controller
 			scene = buildScene(pFilePath, pTranslation, pRotation, absScale(pScale), pHasTexture, pTexturePath,
 				pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio, pHasVideo, pVideoPath,
 				pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pAnimationPeriod, pAnimationRotationAxis,
-				pAnimationRadius, pAnimationRotationDirection, pLabel);
+				pAnimationRadiusA, pAnimationRadiusB, pAnimationRotationDirection, pLabel);
 			
 			_listOfScenes2.push(scene);
 			_listOfViewFlarasScenes.push(buildViewScene(scene));
@@ -98,7 +98,7 @@ package flaras.controller
 			pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number, pTextureHeight:Number, pHasAudio:Boolean,
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
 			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
-			pAnimationRotationAxis:uint, pAnimationRadius:Number, pAnimationRotationDirection:int, pLabel:String):FlarasScene
+			pAnimationRotationAxis:uint, pAnimationRadiusA:Number, pAnimationRadiusB:Number, pAnimationRotationDirection:int, pLabel:String):FlarasScene
 		{
 			var flarasScene:FlarasScene;
 			
@@ -126,7 +126,7 @@ package flaras.controller
 			if (pHasAnimation)
 			{
 				flarasScene.setAnimation(new AnimationScene(pAnimationPeriod, pAnimationRotationAxis,
-					pAnimationRadius, pAnimationRotationDirection));
+					pAnimationRadiusA, pAnimationRadiusB, pAnimationRotationDirection));
 			}
 			
 			return flarasScene;
@@ -136,7 +136,7 @@ package flaras.controller
 			pRotation:Number3D, pScale:Number3D, pHasTexture:Boolean, pTexturePath:String, pTextureWidth:Number,
 			pTextureHeight:Number, pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean,
 			pVideoPath:String, pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean,
-			pAnimationPeriod:Number, pAnimationRotationAxis:uint, pAnimationRadius:uint, pAnimationRotationDirection:int,
+			pAnimationPeriod:Number, pAnimationRotationAxis:uint, pAnimationRadiusA:Number, pAnimationRadiusB:Number, pAnimationRotationDirection:int,
 			pLabel:String):void
 		{
 			var scene:FlarasScene;
@@ -196,7 +196,7 @@ package flaras.controller
 				scene = buildScene(pFilePath, pTranslation, pRotation, absScale(pScale), pHasTexture,
 					pTexturePath, pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio,
 					pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pAnimationPeriod,
-					pAnimationRotationAxis, pAnimationRadius, pAnimationRotationDirection, pLabel);
+					pAnimationRotationAxis, pAnimationRadiusA, pAnimationRadiusB, pAnimationRotationDirection, pLabel);
 				viewFlarasScene = buildViewScene(scene);
 				
 				//updating scene lists
@@ -491,8 +491,8 @@ package flaras.controller
 			}			
 		}
 		
-		public function updateAddAnimation(indexScene:uint, period:Number, rotationAxis:uint, radius:Number,
-			rotationDirection:int):void
+		public function updateAddAnimation(indexScene:uint, period:Number, rotationAxis:uint, radiusA:Number,
+					radiusB:Number, rotationDirection:int):void
 		{
 			var viewScene:ViewFlarasScene;
 			var scene:FlarasScene;
@@ -504,7 +504,7 @@ package flaras.controller
 			scene = getScene(indexScene);
 			viewScene = getViewScene(indexScene);
 			
-			animationScene = new AnimationScene(period, rotationAxis, radius, rotationDirection);
+			animationScene = new AnimationScene(period, rotationAxis, radiusA, radiusB, rotationDirection);
 			scene.setAnimation(animationScene);
 			
 			viewAnimationScene = new ViewAnimationScene(animationScene, viewScene);
@@ -514,7 +514,7 @@ package flaras.controller
 		}
 		
 		public function updateAnimationProperties(indexScene:uint, period:Number, rotationAxis:uint,
-			radius:Number, rotationDirection:int):void
+			radiusA:Number, radiusB:Number, rotationDirection:int):void
 		{
 			var scene:FlarasScene;
 			var viewScene:ViewFlarasScene;
@@ -527,7 +527,7 @@ package flaras.controller
 			if (scene.getAnimation())
 			{
 				viewScene.getViewAnimation().unLoad();
-				scene.getAnimation().setAnimationProperties(period, rotationAxis, radius, rotationDirection);
+				scene.getAnimation().setAnimationProperties(period, rotationAxis, radiusA, radiusB, rotationDirection);
 			}
 			viewScene.showScene(true);
 		}

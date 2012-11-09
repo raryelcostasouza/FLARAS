@@ -43,8 +43,10 @@ package flaras.view.gui
 		private var _jrbY:JRadioButton;
 		private var _jrbZ:JRadioButton;
 		private var _jtfRotationPeriod:JTextField;
-		private var _jtfRotationRadius:JTextField;
+		private var _jtfRotationRadiusA:JTextField;
+		private var _jtfRotationRadiusB:JTextField;		
 		private var _jcbReverseRotation:JCheckBox;
+		private var _jcbRadiusBCloneRadiusA:JCheckBox;
 		
 		private var _ctrGUI:CtrGUI;
 		
@@ -58,6 +60,7 @@ package flaras.view.gui
 			addRow(buildLine3());
 			addRow(buildLine4());
 			addRow(buildLine5());
+			addRow(buildLine6());
 			
 			setComponentsStatus(false);
 		}
@@ -68,7 +71,7 @@ package flaras.view.gui
 			_jrbX.setEnabled(status);
 			_jrbY.setEnabled(status);
 			_jrbZ.setEnabled(status);
-			_jtfRotationRadius.setEnabled(status);
+			_jtfRotationRadiusA.setEnabled(status);
 			_jcbReverseRotation.setEnabled(status);
 		}
 		
@@ -156,29 +159,73 @@ package flaras.view.gui
 			
 			panelLine4 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			
-			jlRotationRadius = new JLabel("Rotation radius: ");
-			_jtfRotationRadius = new JTextField("0", 5);
-			_jtfRotationRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			_jtfRotationRadius.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
+			jlRotationRadius = new JLabel("Rotation radius a: ");
+			_jtfRotationRadiusA = new JTextField("0", 5);
+			_jtfRotationRadiusA.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
+			_jtfRotationRadiusA.addActionListener(function(e:Event):void
+			{
+				if (_jcbRadiusBCloneRadiusA.isSelected())
+				{
+					_jtfRotationRadiusB.setText(_jtfRotationRadiusA.getText());
+				}
+			});
+			_jtfRotationRadiusA.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
+			
+			
 			
 			panelLine4.append(jlRotationRadius);
-			panelLine4.append(_jtfRotationRadius);
+			panelLine4.append(_jtfRotationRadiusA);
 			
 			return panelLine4;			
 		}
 		
 		public function buildLine5():JPanel
 		{
-			var jp5:JPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			var panelLine5:JPanel;
+			var jlRotationRadius:JLabel;
+			
+			panelLine5 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			
+			jlRotationRadius = new JLabel("Rotation radius b: ");
+			_jtfRotationRadiusB = new JTextField("0", 5);
+			_jtfRotationRadiusB.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
+			_jtfRotationRadiusB.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
+			
+			_jcbRadiusBCloneRadiusA = new JCheckBox("Clone");
+			_jcbRadiusBCloneRadiusA.setToolTipText("Clone 'radius a' value.\nUseful for circular animation");
+			_jcbRadiusBCloneRadiusA.addActionListener(function(e:Event):void
+			{
+				if (_jcbRadiusBCloneRadiusA.isSelected())
+				{
+					_jtfRotationRadiusB.setText(_jtfRotationRadiusA.getText());
+					_jtfRotationRadiusB.setEnabled(false);					
+				}
+				else
+				{
+					_jtfRotationRadiusB.setEnabled(true);
+				}
+			});
+			
+			panelLine5.append(jlRotationRadius);
+			panelLine5.append(_jtfRotationRadiusB);
+			panelLine5.append(_jcbRadiusBCloneRadiusA);
+			
+			return panelLine5;			
+		}
+		
+		
+		public function buildLine6():JPanel
+		{
+			var jp6:JPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				
 			_jcbReverseRotation = new JCheckBox("Reverse rotation");
 			_jcbReverseRotation.addActionListener(function():void
 			{
 				_ctrGUI.listenerUpdateAnimationProperties(null);	
 			});
-			jp5.append(_jcbReverseRotation);
+			jp6.append(_jcbReverseRotation);
 			
-			return jp5;
+			return jp6;
 		}
 		
 		public function getHasAnimation():Boolean
@@ -207,9 +254,14 @@ package flaras.view.gui
 			}
 		}
 		
-		public function getJTFRotationRadius():JTextField
+		public function getJTFRotationRadiusA():JTextField
 		{
-			return _jtfRotationRadius;
+			return _jtfRotationRadiusA;
+		}
+		
+		public function getJTFRotationRadiusB():JTextField
+		{
+			return _jtfRotationRadiusB;
 		}
 		
 		public function getAnimationDirection():int

@@ -73,12 +73,13 @@ package flaras.controller.io.fileReader
 				var hasAnimation:Boolean;
 				var animationPeriod:Number;
 				var animationAxis:uint;
-				var animationRadius:uint;
+				var animationRadiusA:Number;
+				var animationRadiusB:Number;
 				var animationRotDirection:int;
 				var obj3DFile:File;
 				var flarasTempFolder:File;
 				var newFilePath:String;
-				var label:String;
+				var label:String;				
 				
 				//old flaras project withoud animation support
 				if (obj3D.animation.hasAnimation == undefined)
@@ -96,14 +97,23 @@ package flaras.controller.io.fileReader
 					//flaras project with partial animation support	
 					if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
 					{
-						animationRadius = 0;
+						animationRadiusA = 0;
+						animationRadiusB = 0;
 						animationRotDirection = 1;
 					}
-					//latest flaras project (support for radius and rotationDirection)
+					//previous flaras project (support for radius and rotationDirection)
+					else if (obj3D.animation.radiusB == undefined)
+					{
+						animationRadiusA = obj3D.animation.radius;
+						animationRadiusB = obj3D.animation.radius;
+						animationRotDirection = obj3D.animation.rotationDirection;
+					}
+					//latest flaras project - elliptical animation
 					else
 					{
-						animationRadius = obj3D.animation.radius;
-						animationRotDirection = obj3D.animation.rotationDirection
+						animationRadiusA = obj3D.animation.radius;
+						animationRadiusB = obj3D.animation.radiusB;
+						animationRotDirection = obj3D.animation.rotationDirection;
 					}
 				}
 				
@@ -128,7 +138,7 @@ package flaras.controller.io.fileReader
 				else
 				{
 					newFilePath = obj3D.filePath;
-				}				
+				}
 				//end only on FLARAS Developer
 												
 				aObjCtrPoint.getCtrScene(aIndexBuffer).addScene(newFilePath, 
@@ -140,7 +150,7 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												hasAnimation, animationPeriod, animationAxis, animationRadius, animationRotDirection, label, true);
+												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, label, true);
 			}
 			aObjCtrPoint.finishedReadingListOfScenes();
 		}
