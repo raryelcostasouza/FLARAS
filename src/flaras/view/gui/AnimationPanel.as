@@ -53,7 +53,6 @@ package flaras.view.gui
 		public function AnimationPanel(ctrGUI:CtrGUI) 
 		{						
 			this._ctrGUI = ctrGUI;
-			setBackgroundDecorator(new SolidBackground(UIManager.getColor("window")));
 			
 			addRow(buildLine1());
 			addRow(buildLine2());
