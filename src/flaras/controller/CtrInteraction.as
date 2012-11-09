@@ -48,16 +48,27 @@ package flaras.controller
 			{
 				_ctrMain.ctrPoint.controlPoint(p, CtrMarker.CONTROL_BACKWARD);
 			}
-			else if (_viewGUIInteraction.isMoveSelected())
+			else if (_viewGUIInteraction.isMoveXYSelected())
 			{
 				if (p.isMoveInteractionForScenes())
 				{
-					vfs.setupMoveInteraction();
+					vfs.setupMoveXYInteraction();
 				}
 				else
 				{
 					MessageWindow.messageMoveInteractionNotAllowed();
 				}
+			}
+			else if (_viewGUIInteraction.isMoveZSelected())
+			{
+				/*if (p.isMoveInteractionForScenes())
+				{
+					vfs.setupMoveZInteraction();
+				}
+				else
+				{
+					MessageWindow.messageMoveInteractionNotAllowed();
+				}*/
 			}
 			else if (_viewGUIInteraction.isResetSelected())
 			{

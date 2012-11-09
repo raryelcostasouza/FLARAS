@@ -135,7 +135,7 @@ package flaras.view.gui
 			pJToolBar.append(_jtbControlForward);
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(_jtbMoveXY);
-			pJToolBar.append(_jtbMoveZ);
+			//pJToolBar.append(_jtbMoveZ);
 			pJToolBar.append(_jtbResetScenePos);
 			pJToolBar.append(_jbResetAll);
 		}
@@ -212,9 +212,14 @@ package flaras.view.gui
 			return _jtbControlForward.isSelected();
 		}
 		
-		public function isMoveSelected():Boolean
+		public function isMoveXYSelected():Boolean
 		{
 			return _jtbMoveXY.isSelected();
+		}
+		
+		public function isMoveZSelected():Boolean
+		{
+			return _jtbMoveZ.isSelected();
 		}
 		
 		public function isResetSelected():Boolean
