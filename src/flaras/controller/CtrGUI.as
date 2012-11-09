@@ -659,7 +659,16 @@ package flaras.controller
 				_gui.getScenePanel().getAnimationPanel().setHasAnimation(true);
 				_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(animationData.getPeriod()+"");
 				_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(animationData.getRotationAxis());
-				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(animationData.getRadiusA()+"");
+				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(animationData.getRadiusA() + "");
+				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().setText(animationData.getRadiusB() + "");
+				if (animationData.getRadiusA() == animationData.getRadiusB())
+				{
+					_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(true);
+				}
+				else
+				{
+					_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(false);
+				}
 				_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(animationData.getRotationDirection());
 			}
 			if (audioData)
@@ -728,7 +737,9 @@ package flaras.controller
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
 			_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(10+"");
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(0+"");
+			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(0 + "");
+			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().setText(0 + "");
+			_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(true);
 			_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(1);
 		}
 		

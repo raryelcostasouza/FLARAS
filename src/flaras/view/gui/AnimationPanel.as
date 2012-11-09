@@ -73,6 +73,7 @@ package flaras.view.gui
 			_jrbZ.setEnabled(status);
 			_jtfRotationRadiusA.setEnabled(status);
 			_jcbReverseRotation.setEnabled(status);
+			_jcbRadiusBCloneRadiusA.setEnabled(status);
 		}
 		
 		private function buildLine1():JPanel
@@ -193,7 +194,7 @@ package flaras.view.gui
 			
 			_jcbRadiusBCloneRadiusA = new JCheckBox("Clone");
 			_jcbRadiusBCloneRadiusA.setToolTipText("Clone 'radius a' value.\nUseful for circular animation");
-			_jcbRadiusBCloneRadiusA.addActionListener(function(e:Event):void
+			_jcbRadiusBCloneRadiusA.addSelectionListener(function(e:Event):void
 			{
 				if (_jcbRadiusBCloneRadiusA.isSelected())
 				{
@@ -317,6 +318,11 @@ package flaras.view.gui
 		public function getJcbHasAnimation():JCheckBox
 		{
 			return _jcbHasAnimation;
+		}
+		
+		public function getJCBRadiusBCloneRadiusA():JCheckBox
+		{
+			return _jcbRadiusBCloneRadiusA;
 		}
 	}
 }
