@@ -1,4 +1,22 @@
 -------------------------------
+FLARAS-2.1 - November 09, 2012
+
+ADDED: graphical interface for mouse interaction (FLARAS Developer and FLARAS Viewer) (works on all browsers)
+ADDED: graphical interface for settings of interaction marker
+ADDED: move interaction on xy plane and reset options
+ADDED: elliptical animation support
+
+REMOVED: support for keyboard interaction (did not work on IE)
+REMOVED: auxiliar sphere support
+
+FIXED BUG: if the user tried to close FLARAS with a video playing the application would crash
+
+CHANGE: FLARAS now automatically renames files with invalid characters
+CHANGE: (Publish) FLARAS now automatically names the zip file with the same filename of the .flaras file
+CHANGE: (Initialization) from now on FLARAS will automatically enable all points after the project is loaded (this was done before by manually pressing Ctrl+A)
+
+Minor bug fixes and optimizations
+-------------------------------
 FLARAS-2.0-r1296 - September 20, 2012
 
 Completely redesigned development interface
