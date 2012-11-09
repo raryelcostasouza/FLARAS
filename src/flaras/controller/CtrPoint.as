@@ -399,7 +399,7 @@ package flaras.controller
 			{
 				if (!p.isEnabled())
 				{
-					enablePoint(p,pPlaySystemAudio,true);
+					enablePoint(p,false,pPlaySystemAudio);
 				}
 			}
 		}
