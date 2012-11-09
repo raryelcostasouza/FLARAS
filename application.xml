@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/2.6">
   <id>FLARAS</id>
-  <versionNumber>2.0</versionNumber>
+  <versionNumber>2.1</versionNumber>
   <filename>FLARAS</filename>
   <initialWindow>
     <title>FLARAS</title>
@@ -24,7 +24,7 @@
   <description>Flash Augmented Reality Authoring System</description>
   <copyright>Raryel Costa Souza, Hipolito Douglas Franca Moreira, Claudio Kirner</copyright>
   <programMenuFolder>FLARAS</programMenuFolder>
-  <versionLabel>2.0-r1296</versionLabel>
+  <versionLabel>2.1</versionLabel>
   <customUpdateUI>false</customUpdateUI>
   <icon>
     <image16x16>icons/flaras16.png</image16x16>
