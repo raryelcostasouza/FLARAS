@@ -370,7 +370,7 @@ package flaras.controller
 		
 		private function onProjectSavingCancel(e:Event):void
 		{
-			if (aSaveAsRequested)
+			if (aSaveAsRequested && aProjectFile != null)
 			{
 				aAlreadySavedBefore = true;
 			}
