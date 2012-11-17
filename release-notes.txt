@@ -1,4 +1,10 @@
 -------------------------------
+FLARAS-2.1.1 - November 17, 2012
+
+FIXED BUG: FLARAS was not notificating user of problems on saving the project when they were due to lack of RAM memory.
+FIXED BUG: minor errors on project saving.
+
+-------------------------------
 FLARAS-2.1 - November 09, 2012
 
 ADDED: graphical interface for mouse interaction (FLARAS Developer and FLARAS Viewer) (works on all browsers)
