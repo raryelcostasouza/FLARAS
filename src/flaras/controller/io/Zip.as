@@ -43,28 +43,37 @@ package flaras.controller.io
 		public static function generateZipFileFromFolders(folders:Vector.<File>):ByteArray
 		{			
 			var zipOut:ZipOutput;
+			var ba:ByteArray;
 			
 			zipOut = new ZipOutput();
 			
-			for each(var f:File in folders)
+			try
 			{
-				try
+				for each(var f:File in folders)
 				{
 					recZipFolder(zipOut, f, f.name+"/");
 				}
-				catch (ioE:IOError)
-				{
-					ErrorHandler.onIOError("Zip", f.nativePath);
-				}
-				catch (se:SecurityError)
-				{
-					ErrorHandler.onSecurityError("Zip", f.nativePath);
-				}				
+				
+				zipOut.finish();				
+				ba = zipOut.byteArray;
 			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOError("Zip", f.nativePath);
+				ba = null;
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityError("Zip", f.nativePath);
+				ba = null;
+			}
+			catch (e:Error)
+			{
+				ErrorHandler.onGenericError("Zip", e.message);
+				ba = null;
+			}			
 			
-			zipOut.finish();
-			
-			return zipOut.byteArray;
+			return ba;
 		}
 		
 		private static function recZipFolder(pZipOut:ZipOutput, folder:File, fullPath:String):void

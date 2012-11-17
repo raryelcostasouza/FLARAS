@@ -46,5 +46,12 @@ package flaras.controller
 						"Class: " + pClass + "\n" +
 						"FilePath: " + pFilePath);
 		}
+		
+		public static function onGenericError(pClass:String, pMessage:String):void
+		{
+			MessageWindow.errorMessage("It has happened an Error:\n" +
+						"Class: " + pClass + "\n" +
+						"Message: " + pMessage);
+		}
 	}
 }

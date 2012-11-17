@@ -320,38 +320,51 @@ package flaras.controller
 			
 			//creating the project file (byte array)
 			ba = Zip.generateZipFileFromFolders(folders2Zip);
-			
-			// if it's the first time that the project is being saved to a .flaras file
-			if (!aAlreadySavedBefore)
+			//if the project was zipped correctly
+			if (ba != null)
 			{
-				//ask the user where to save
-				file2Save = new File(File.userDirectory.resolvePath("flarasProject.flaras").nativePath);
-				file2Save.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
-				file2Save.addEventListener(Event.COMPLETE, onProjectSavingComplete);
-				file2Save.addEventListener(Event.CANCEL, onProjectSavingCancel);
-				file2Save.save(ba);
-			}
-			else
-			{
-				//save automatically on the last place that the user saved the .flaras file
-				try
-				{					
-					fs = new FileStream();
-					fs.open(aProjectFile, FileMode.WRITE);
-					fs.writeBytes(ba);
-					fs.close();
-					MessageWindow.messageSaveSuccess();
-				}
-				catch (ioE:IOError)
+				// if it's the first time that the project is being saved to a .flaras file
+				if (!aAlreadySavedBefore)
 				{
-					ErrorHandler.onIOError("CtrUserProject", aProjectFile.nativePath);
+					//ask the user where to save
+					file2Save = new File(File.userDirectory.resolvePath("flarasProject.flaras").nativePath);
+					file2Save.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+					file2Save.addEventListener(Event.COMPLETE, onProjectSavingComplete);
+					file2Save.addEventListener(Event.CANCEL, onProjectSavingCancel);
+					try
+					{
+						file2Save.save(ba);
+					}
+					catch (me:MemoryError)
+					{
+						ErrorHandler.onGenericError("CtrUserProject", me.message);
+						file2Save.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
+						file2Save.removeEventListener(Event.COMPLETE, onProjectSavingComplete);
+						file2Save.removeEventListener(Event.CANCEL, onProjectSavingCancel);
+					}					
 				}
-				catch (se:SecurityError)
+				else
 				{
-					ErrorHandler.onSecurityError("CtrUserProject", aProjectFile.nativePath);
+					//save automatically on the last place that the user saved the .flaras file
+					try
+					{					
+						fs = new FileStream();
+						fs.open(aProjectFile, FileMode.WRITE);
+						fs.writeBytes(ba);
+						fs.close();
+						MessageWindow.messageSaveSuccess();
+					}
+					catch (ioE:IOError)
+					{
+						ErrorHandler.onIOError("CtrUserProject", aProjectFile.nativePath);
+					}
+					catch (se:SecurityError)
+					{
+						ErrorHandler.onSecurityError("CtrUserProject", aProjectFile.nativePath);
+					}
+					
+					runActionAfterSaving();
 				}
-				
-				runActionAfterSaving();
 			}
 		}
 		
@@ -427,15 +440,17 @@ package flaras.controller
 				//save the project before publishing to avoid the possibility of publishing the app with unsaved modifications
 				saveProject();
 				
-				
-				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);			
-				
-				projectFileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(aProjectFile);
-				publishFile = File.userDirectory.resolvePath(projectFileNameWithoutExtension + "-published.zip");
-				
-				publishFile.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
-				publishFile.addEventListener(Event.COMPLETE, onProjectPublishingComplete);
-				publishFile.save(ba);
+				ba = ProjectPublisher.publishProject(aCurrentProjectTempFolder);
+				//if the project was zipped correctly
+				if (ba != null)
+				{
+					projectFileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(aProjectFile);
+					publishFile = File.userDirectory.resolvePath(projectFileNameWithoutExtension + "-published.zip");
+					
+					publishFile.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+					publishFile.addEventListener(Event.COMPLETE, onProjectPublishingComplete);
+					publishFile.save(ba);
+				}				
 			}			
 		}
 		
