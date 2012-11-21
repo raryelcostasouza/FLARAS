@@ -101,22 +101,25 @@ package flaras.view.scene
 			
 			if (_animationScene.getRotationAxis() == X_ROTATION_AXIS)
 			{
-				_obj3DToAnimate.y = getCurrentTranslation().y + _animationScene.getRadiusA() * Math.cos(angSumRad);
-				_obj3DToAnimate.z = getCurrentTranslation().z + _animationScene.getRadiusB() * Math.sin(angSumRad);
+				_obj3DToAnimate.x = _viewFlarasScene.getPosRotationCenter().x;
+				_obj3DToAnimate.y = _viewFlarasScene.getPosRotationCenter().y + _animationScene.getRadiusA() * Math.cos(angSumRad);
+				_obj3DToAnimate.z = _viewFlarasScene.getPosRotationCenter().z + _animationScene.getRadiusB() * Math.sin(angSumRad);
 				
 				_obj3DToAnimate.rotationX = getCurrentRotation().x + _angSumDegree;
 			}
 			else if (_animationScene.getRotationAxis() == Y_ROTATION_AXIS)
 			{
-				_obj3DToAnimate.x = getCurrentTranslation().x + _animationScene.getRadiusA() * Math.cos(angSumRad);
-				_obj3DToAnimate.z = getCurrentTranslation().z + _animationScene.getRadiusB() * Math.sin(angSumRad);
+				_obj3DToAnimate.x = _viewFlarasScene.getPosRotationCenter().x + _animationScene.getRadiusA() * Math.cos(angSumRad);
+				_obj3DToAnimate.y = _viewFlarasScene.getPosRotationCenter().y;
+				_obj3DToAnimate.z = _viewFlarasScene.getPosRotationCenter().z + _animationScene.getRadiusB() * Math.sin(angSumRad);
 				
 				_obj3DToAnimate.rotationY = getCurrentRotation().y + _angSumDegree;
 			}
 			else
 			{
-				_obj3DToAnimate.x = getCurrentTranslation().x + _animationScene.getRadiusA() * Math.cos(angSumRad);
-				_obj3DToAnimate.y = getCurrentTranslation().y + _animationScene.getRadiusB() * Math.sin(angSumRad);
+				_obj3DToAnimate.x = _viewFlarasScene.getPosRotationCenter().x + _animationScene.getRadiusA() * Math.cos(angSumRad);
+				_obj3DToAnimate.y = _viewFlarasScene.getPosRotationCenter().y + _animationScene.getRadiusB() * Math.sin(angSumRad);
+				_obj3DToAnimate.z = _viewFlarasScene.getPosRotationCenter().z;
 				
 				_obj3DToAnimate.rotationZ = getCurrentRotation().z + _angSumDegree;
 			}

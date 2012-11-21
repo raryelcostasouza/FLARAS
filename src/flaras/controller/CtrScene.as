@@ -337,7 +337,7 @@ package flaras.controller
 			var viewScene:ViewFlarasScene;
 			
 			viewScene = getViewScene(indexScene);
-			viewScene.reloadPointPosition();
+			viewScene.resetScenePosition();
 		}
 		
 		public function updateRotation(indexScene:uint, rotation:Number3D):void
@@ -508,7 +508,9 @@ package flaras.controller
 			scene.setAnimation(animationScene);
 			
 			viewAnimationScene = new ViewAnimationScene(animationScene, viewScene);
+			viewScene.resetScenePosition();
 			viewScene.setViewAnimation(viewAnimationScene);
+			
 			
 			viewScene.showScene(true);
 		}
@@ -529,6 +531,7 @@ package flaras.controller
 				viewScene.getViewAnimation().unLoad();
 				scene.getAnimation().setAnimationProperties(period, rotationAxis, radiusA, radiusB, rotationDirection);
 			}
+			viewScene.resetScenePosition();
 			viewScene.showScene(true);
 		}
 		

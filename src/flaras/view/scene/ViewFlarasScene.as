@@ -59,6 +59,7 @@ package flaras.view.scene
 		private var _dragPlaneZ2:Plane;
 		private var _dragging:Boolean;
 		private var _viewport:Viewport3D;
+		private var _posRotationCenter:Number3D;
 		
 		public function ViewFlarasScene(selfReference:ViewFlarasScene, baseFlarasScene:FlarasScene, pCtrMain:CtrMain) 
 		{
@@ -70,6 +71,7 @@ package flaras.view.scene
 			{
 				_ctrMain = pCtrMain;
 				_baseFlarasScene = baseFlarasScene;
+				_posRotationCenter = Number3D.add(_baseFlarasScene.getParentPoint().getPosition(), _baseFlarasScene.getTranslation());
 			}
 		}
 		
@@ -91,6 +93,11 @@ package flaras.view.scene
 		public function getBaseFlarasScene():FlarasScene
 		{
 			return _baseFlarasScene;
+		}
+		
+		public function getPosRotationCenter():Number3D
+		{
+			return _posRotationCenter;
 		}
 		
 		public function setViewAnimation(viewAnimation:ViewAnimationScene):void
@@ -134,6 +141,7 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				_obj3D.position = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
+				_posRotationCenter = _obj3D.position;
 			}			
 		}
 		
@@ -160,14 +168,7 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				_obj3D.position = Number3D.add(translation, _baseFlarasScene.getParentPoint().getPosition());
-			}			
-		}
-		
-		public function reloadPointPosition():void
-		{
-			if (_obj3D)
-			{
-				_obj3D.position = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
+				_posRotationCenter = _obj3D.position;
 			}			
 		}
 		
@@ -348,8 +349,20 @@ package flaras.view.scene
 				mousePosRelative2RefMarker.rotateZ(eulerAngles.z);
 			
 				//drag the object in the XY plane
-				_obj3D.x = mousePosRelative2RefMarker.x;
-				_obj3D.y = mousePosRelative2RefMarker.y;
+				// if the object is not animated
+				if (!_viewAnimation)
+				{
+					//copy the new translation to the obj3d directly
+					_obj3D.x = mousePosRelative2RefMarker.x;
+					_obj3D.y = mousePosRelative2RefMarker.y;
+				}
+				else
+				{
+					//as the object is animated, it's not necessary to copy the new coordinates
+					//to the obj directly. It's just needed to update the coordinates of the center of rotation.
+					_posRotationCenter.x = mousePosRelative2RefMarker.x;
+					_posRotationCenter.y = mousePosRelative2RefMarker.y;
+				}				
 			}			
 		}
 		
