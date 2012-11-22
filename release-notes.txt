@@ -1,4 +1,9 @@
 -------------------------------
+FLARAS-2.2.1 - November 22, 2012
+
+FIXED BUG: it was possible to move scenes on z axis even when the point was disabled for move interaction.
+
+-------------------------------
 FLARAS-2.2.0 - November 22, 2012
 
 ADDED: move interaction along z axis
