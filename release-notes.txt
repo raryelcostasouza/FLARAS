@@ -1,5 +1,5 @@
 -------------------------------
-FLARAS-2.2.0 - November 17, 2012
+FLARAS-2.2.0 - November 22, 2012
 
 ADDED: move interaction along z axis
 FIXED BUG: it was not possible to move animated scenes.
