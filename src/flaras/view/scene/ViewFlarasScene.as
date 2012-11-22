@@ -55,8 +55,6 @@ package flaras.view.scene
 		private var _ctrMain:CtrMain;	
 		private var _obj3DLayer:ViewportLayer;
 		private var _dragPlaneXY:Plane;
-		private var _dragPlaneZ1:Plane;
-		private var _dragPlaneZ2:Plane;
 		private var _dragging:Boolean;
 		private var _viewport:Viewport3D;
 		private var _posRotationCenter:Number3D;
@@ -271,15 +269,6 @@ package flaras.view.scene
 			_dragPlaneXY = new Plane(new ColorMaterial(0x00FF00, 0), 1500, 1500, 6, 6);
 			_dragPlaneXY.material.doubleSided = true;
 			_dragging = false;
-			
-			_dragPlaneZ1 = new Plane(new ColorMaterial(0x00FF00, 1), 1, 1, 6, 6);
-			_dragPlaneZ1.rotationX = 90;
-			_dragPlaneZ1.material.doubleSided = true;
-			
-			_dragPlaneZ2 = new Plane(new ColorMaterial(0x00ff00, 1), 1500, 1500, 6, 6);
-			_dragPlaneZ2.rotationX = 90;
-			_dragPlaneZ2.rotationZ = 90;
-			_dragPlaneZ2.material.doubleSided = true;
 		}
 
 		public function setupMoveXYInteraction():void
@@ -295,27 +284,7 @@ package flaras.view.scene
 				MarkerNodeManager.addObj2MarkerNode(_dragPlaneXY, CtrMarker.REFERENCE_MARKER, null);
 				StageReference.getStage().addEventListener(Event.ENTER_FRAME, dragXY);
 			}
-		}
-		
-		public function setupMoveZInteraction():void
-		{
-			if (!_dragging)
-			{
-				_dragging = true;
-				StageReference.getStage().addEventListener(MouseEvent.MOUSE_UP, stopDragZ);
-				
-				_dragPlaneZ1.material.interactive = true;
-				_dragPlaneZ2.material.interactive = true;
-				
-				_dragPlaneZ1.copyPosition(_obj3D);
-				_dragPlaneZ2.copyPosition(_obj3D);
-				
-				MarkerNodeManager.addObj2MarkerNode(_dragPlaneZ1, CtrMarker.REFERENCE_MARKER, null);
-				MarkerNodeManager.addObj2MarkerNode(_dragPlaneZ2, CtrMarker.REFERENCE_MARKER, null);
-				StageReference.getStage().addEventListener(Event.ENTER_FRAME, dragZ);
-			}
-		}
-		
+		}		
 		
 		private function dragXY(e:Event):void
 		{
@@ -366,40 +335,19 @@ package flaras.view.scene
 			}			
 		}
 		
-		private function dragZ(e:Event):void
+		public function moveAlongZAxisTo(zPos:int):void
 		{
-			var rh:RenderHitData;
-			var eulerAngles:Number3D; 
-			var mousePosRelative2RefMarker:Number3D;
-			var refMarkerPosRelative2Camera:Number3D; 
-			
-			//copy the object position to the plane
-			_dragPlaneZ1.copyPosition(_obj3D);
-			_dragPlaneZ2.copyPosition(_obj3D);
-			
-			//return the 3d coordinates of the point where the mouse hits the 3D plane
-			rh = _viewport.hitTestPoint2D(new Point(_viewport.containerSprite.mouseX, _viewport.containerSprite.mouseY));
-			
-			//check if happened a collision with the invisible plane
-			if (rh.hasHit && (rh.displayObject3D == _dragPlaneZ1 || rh.displayObject3D == _dragPlaneZ2))
+			// if the object is not animated
+			if (!_viewAnimation)
 			{
-				//get the ref. marker position relative to the camera
-				refMarkerPosRelative2Camera = MarkerNodeManager.getPosition(CtrMarker.REFERENCE_MARKER);
-				
-				//vector mousePosRelative2RefMarker + vector refMarkerPosRelative2Camera = vector rh
-				//so... vector mousePosRelative2RefMarker = vector rh - vector refMarkerPosRelative2Camera
-				mousePosRelative2RefMarker = Number3D.sub(new Number3D(rh.x, rh.y, rh.z), refMarkerPosRelative2Camera);
-				
-				//get euler angles to convert the coordinates to the ref marker reference system
-				eulerAngles = org.papervision3d.core.math.Matrix3D.matrix2euler(MarkerNodeManager.getWorldTransfMatrix(CtrMarker.REFERENCE_MARKER));
-
-				//apply the rotations...
-				mousePosRelative2RefMarker.rotateX(eulerAngles.x);
-				mousePosRelative2RefMarker.rotateY(eulerAngles.y);
-				mousePosRelative2RefMarker.rotateZ(eulerAngles.z);
-			
-				//drag the object in the Z plane
-				_obj3D.z = mousePosRelative2RefMarker.z;
+				//copy the new translation to the obj3d directly
+				_obj3D.z = zPos;
+			}
+			else
+			{
+				//as the object is animated, it's not necessary to copy the new coordinates
+				//to the obj directly. It's just needed to update the coordinates of the center of rotation.
+				_posRotationCenter.z = zPos;
 			}
 		}
 		
@@ -412,19 +360,6 @@ package flaras.view.scene
 			
 			StageReference.getStage().removeEventListener(Event.ENTER_FRAME, dragXY);
 			StageReference.getStage().removeEventListener(MouseEvent.MOUSE_UP, stopDragXY);
-		}
-		
-		private function stopDragZ(e:Event):void
-		{
-			_dragging = false;
-			_dragPlaneZ1.material.interactive = false;
-			_dragPlaneZ2.material.interactive = false;			
-			
-			MarkerNodeManager.removeObjFromMarkerNode(_dragPlaneZ1, CtrMarker.REFERENCE_MARKER);
-			MarkerNodeManager.removeObjFromMarkerNode(_dragPlaneZ2, CtrMarker.REFERENCE_MARKER);
-			
-			StageReference.getStage().removeEventListener(Event.ENTER_FRAME, dragZ);
-			StageReference.getStage().removeEventListener(MouseEvent.MOUSE_UP, stopDragZ);
 		}
 		
 		private function onMouseOver(e:MouseEvent):void

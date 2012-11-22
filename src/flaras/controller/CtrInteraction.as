@@ -1,14 +1,14 @@
 package flaras.controller 
 {
-	import flaras.controller.util.Point3D;
-	import flaras.model.point.Point;
+	import flaras.model.point.*;
 	import flaras.view.gui.*;
-	import flaras.view.scene.ViewFlarasScene;
+	import flaras.view.scene.*;
 	
 	public class CtrInteraction 
 	{		
 		private var _ctrMain:CtrMain;
 		private var _viewGUIInteraction:ViewGUIInteraction;
+		private var _vfsClicked:ViewFlarasScene;
 		
 		public function CtrInteraction(ctrMain:CtrMain) 
 		{
@@ -61,19 +61,18 @@ package flaras.controller
 			}
 			else if (_viewGUIInteraction.isMoveZSelected())
 			{
-				/*if (p.isMoveInteractionForScenes())
-				{
-					vfs.setupMoveZInteraction();
-				}
-				else
-				{
-					MessageWindow.messageMoveInteractionNotAllowed();
-				}*/
+				_vfsClicked = vfs;
+				_viewGUIInteraction.enableWindowMoveZAxis(vfs.getObj3D().z);
 			}
 			else if (_viewGUIInteraction.isResetSelected())
 			{
 				vfs.resetScenePosition();
 			}
+		}
+		
+		public function moveAlongZAxisTo(zPos:int):void
+		{
+			_vfsClicked.moveAlongZAxisTo(zPos);
 		}
 		
 		public function resetAllScenesPosition():void

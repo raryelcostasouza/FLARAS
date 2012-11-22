@@ -39,6 +39,7 @@ package flaras.view.gui
 	{
 		private var _ctrInteraction:CtrInteraction;
 		private var _viewWindowInteractionSphere:ViewWindowInteractionSphere;
+		private var _viewWindowMoveZAxis:ViewWindowMoveZAxis;
 		private var _jtbControlBackward:JToggleButton;
 		private var _jtbControlForward:JToggleButton;
 		private var _jtbInspection:JToggleButton;
@@ -53,6 +54,7 @@ package flaras.view.gui
 			
 			this._ctrInteraction = ctrInteraction;
 			this._viewWindowInteractionSphere = new ViewWindowInteractionSphere(_ctrInteraction);
+			this._viewWindowMoveZAxis = new ViewWindowMoveZAxis(_ctrInteraction);
 						
 			jw = new JWindow();
 			jw.setContentPane(buildMainPanel());
@@ -135,7 +137,7 @@ package flaras.view.gui
 			pJToolBar.append(_jtbControlForward);
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(_jtbMoveXY);
-			//pJToolBar.append(_jtbMoveZ);
+			pJToolBar.append(_jtbMoveZ);
 			pJToolBar.append(_jtbResetScenePos);
 			pJToolBar.append(_jbResetAll);
 		}
@@ -225,6 +227,11 @@ package flaras.view.gui
 		public function isResetSelected():Boolean
 		{
 			return _jtbResetScenePos.isSelected();
+		}
+		
+		public function enableWindowMoveZAxis(zPos:int):void
+		{
+			_viewWindowMoveZAxis.enableWindowMoveZAxis(zPos);
 		}
 	}
 }
