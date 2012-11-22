@@ -1,4 +1,9 @@
 -------------------------------
+FLARAS-2.2.0 - November 17, 2012
+
+ADDED: move interaction along z axis
+
+-------------------------------
 FLARAS-2.1.1 - November 17, 2012
 
 FIXED BUG: FLARAS was not notificating user of problems on saving the project when they were due to lack of RAM memory.
