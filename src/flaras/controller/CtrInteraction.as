@@ -65,7 +65,11 @@ package flaras.controller
 				{
 					_vfsClicked = vfs;
 					_viewGUIInteraction.enableWindowMoveZAxis(vfs.getObj3D().z);
-				}				
+				}
+				else 
+				{
+					MessageWindow.messageMoveInteractionNotAllowed();
+				}
 			}
 			else if (_viewGUIInteraction.isResetSelected())
 			{
