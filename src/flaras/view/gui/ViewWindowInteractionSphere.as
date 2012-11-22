@@ -29,7 +29,6 @@
 
 package flaras.view.gui 
 {
-	import air.net.ServiceMonitor;
 	import flaras.controller.*;
 	import flash.events.*;
 	import org.aswing.*;
