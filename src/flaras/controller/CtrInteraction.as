@@ -61,8 +61,11 @@ package flaras.controller
 			}
 			else if (_viewGUIInteraction.isMoveZSelected())
 			{
-				_vfsClicked = vfs;
-				_viewGUIInteraction.enableWindowMoveZAxis(vfs.getObj3D().z);
+				if (p.isMoveInteractionForScenes())
+				{
+					_vfsClicked = vfs;
+					_viewGUIInteraction.enableWindowMoveZAxis(vfs.getObj3D().z);
+				}				
 			}
 			else if (_viewGUIInteraction.isResetSelected())
 			{
