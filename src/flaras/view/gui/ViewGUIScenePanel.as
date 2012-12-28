@@ -292,18 +292,23 @@ package flaras.view.gui
 			var tabOperations:JPanel;
 			var jbDeleteScene:JButton;
 			var jbSwapScenePosition:JButton;
+			var jbClone:JButton;
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
 			jbSwapScenePosition = new JButton("Change scene position", new LoadIcon("icons/external/swap.png"));
 			jbDeleteScene = new JButton("Delete Scene", new LoadIcon("icons/external/delete.png"));
+			jbClone = new JButton("Clone Scene", new LoadIcon(""));
+			jbClone.setPreferredWidth(167);
 			jbDeleteScene.setPreferredWidth(167);
 			
 			jbDeleteScene.addActionListener(_ctrGUI.listenerRemoveScene);
 			jbSwapScenePosition.addActionListener(_ctrGUI.listenerSwapScene);
+			jbClone.addActionListener(_ctrGUI.listenerCloneScene);
 			
 			tabOperations.append(jbSwapScenePosition);			
 			tabOperations.append(jbDeleteScene);
+			tabOperations.append(jbClone);
 			
 			return tabOperations;
 		}

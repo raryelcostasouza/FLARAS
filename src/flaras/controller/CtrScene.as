@@ -36,6 +36,7 @@ package flaras.controller
 	import flaras.model.scene.*;
 	import flaras.view.scene.*;
 	import flash.filesystem.*;
+	import flash.utils.ByteArray;
 	import org.papervision3d.core.math.*;
 	
 	public class CtrScene
@@ -306,6 +307,22 @@ package flaras.controller
 			//adds the source element on the destination position
 			_listOfScenes2.splice(indexSceneDestination, 0, flarasScene);
 			_listOfViewFlarasScenes.splice(indexSceneDestination, 0, viewFlarasScene);
+		}
+		
+		public function cloneScene(pIndexScene:uint):FlarasScene
+		{
+			var scene2Clone:FlarasScene;
+			var clone:FlarasScene;
+			
+			scene2Clone = getScene(pIndexScene);
+			
+			//workaround to clone an object on AS3 language
+			clone = scene2Clone.clone();
+			
+			_listOfScenes2.push(clone);
+			_listOfViewFlarasScenes.push(buildViewScene(clone));
+			
+			return clone;
 		}
 		
 		public function updateLabel(pIndexScene:uint, pLabel:String):void

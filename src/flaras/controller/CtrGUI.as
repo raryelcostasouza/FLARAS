@@ -601,6 +601,20 @@ package flaras.controller
 			_gui.getTreePanel().selectPoint(point2Swap);
 		}
 		
+		public function listenerCloneScene(e:Event):void
+		{
+			var indexNewScene:uint;
+			var clone:FlarasScene;
+			
+			indexNewScene = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).getNumberOfScenes();
+			clone = _ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).cloneScene(getCurrentSelectedScene2());
+			
+			_gui.getTreePanel().addScene(getCurrentSelectedPoint2());
+			_gui.getTreePanel().selectScene(getCurrentSelectedPoint2(), indexNewScene);
+			_gui.getTreePanel().updateSceneLabel(clone.getLabel());
+		}
+		
+		
 		private function fillPointGUI(indexPoint:uint):void
 		{
 			var pointTranslation:Number3D;
