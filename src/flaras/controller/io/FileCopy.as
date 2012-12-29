@@ -242,9 +242,18 @@ package flaras.controller.io
 			{
 				if (is3DObj)
 				{
-					//check if there is another folder with the obj3d file name without the extension
-					f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix).nativePath);
-					name = f.name + "." + pF.extension;
+					if (!pF.isDirectory)
+					{
+						//check if there is another folder with the obj3d file name without the extension
+						f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix).nativePath);
+						name = f.name + "." + pF.extension;
+					}
+					else
+					{
+						//if the file reference is a directory, don't need to add any extension to the new name
+						f = new File(destFolder.resolvePath(fileNameWithoutExtension + nSuffix).nativePath);
+						name = f.name;
+					}					
 				}
 				else
 				{
@@ -288,6 +297,44 @@ package flaras.controller.io
 			newFile = parentFolder.resolvePath(newFileName);
 			
 			return newFile;
+		}
+		
+		//creates a copy of  file, with a unique name on the folder
+		public static function copyUniqueName(f:File, isObj3DFile:Boolean):String
+		{
+			var newUniqueName:String;
+			var folderExtracted3DObj:File;
+			var relativePath3DFile:File;
+
+			try
+			{
+				if (!isObj3DFile)
+				{
+					newUniqueName = generateFileNameWithUniqueSuffix(f, f.parent, false);
+					f.copyTo(f.parent.resolvePath(newUniqueName), false);
+				}
+				else
+				{
+					folderExtracted3DObj = Zipped3DFileImporter.get3DFileExtractedFolder(f);
+					newUniqueName = generateFileNameWithUniqueSuffix(folderExtracted3DObj, new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + FolderConstants.COLLADA_FOLDER), true);
+					//copy the complete folder where the 3d file was extracted to the folder with the unique name generated above
+					folderExtracted3DObj.copyTo(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + FolderConstants.COLLADA_FOLDER + newUniqueName), false);
+					
+					//the complete filepath to the obj3d file is the folder name (generated above) concatenated with the path to the dae/3ds file 
+					newUniqueName += "/"+folderExtracted3DObj.getRelativePath(f);
+				}	
+				
+			}
+			catch (ioE:IOError)
+			{
+				ErrorHandler.onIOError("FileCopy", f.nativePath);
+			}
+			catch (se:SecurityError)
+			{
+				ErrorHandler.onSecurityError("FileCopy", f.nativePath);
+			}			
+			
+			return newUniqueName;
 		}
 		
 	}

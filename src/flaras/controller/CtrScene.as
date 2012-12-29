@@ -313,11 +313,38 @@ package flaras.controller
 		{
 			var scene2Clone:FlarasScene;
 			var clone:FlarasScene;
+			var newUniqueName:String;
+			var obj3dCompleteFilePath:String;
+			var audioScene:AudioScene;
 			
 			scene2Clone = getScene(pIndexScene);
 			
-			//workaround to clone an object on AS3 language
 			clone = scene2Clone.clone();
+			
+			//copy (with unique name) the file (jpg, png, dae, 3ds, mp3, mp4, flv, etc) associated with the scene
+			if (scene2Clone is TextureScene)
+			{
+				newUniqueName = FileCopy.copyUniqueName(new File(scene2Clone.getBaseSceneFilePath()), false);
+				TextureScene(clone).setTexturePath(FolderConstants.TEXTURE_FOLDER + newUniqueName);
+			}
+			else if (scene2Clone is VideoScene)
+			{
+				newUniqueName = FileCopy.copyUniqueName(new File(scene2Clone.getBaseSceneFilePath()), false);
+				VideoScene(clone).setVideoPath(FolderConstants.VIDEO_FOLDER + newUniqueName);
+			}
+			else
+			{
+				obj3dCompleteFilePath = FolderConstants.getFlarasAppCurrentFolder() + "/" + VirtualObjectScene(scene2Clone).getPath3DObjectFile();
+				newUniqueName = FileCopy.copyUniqueName(new File(obj3dCompleteFilePath), true);			
+				VirtualObjectScene(clone).set3DObjPath(FolderConstants.COLLADA_FOLDER + newUniqueName);
+			}
+			
+			audioScene = scene2Clone.getAudio();
+			if (audioScene)
+			{
+				newUniqueName = FileCopy.copyUniqueName(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + audioScene.getAudioFilePath()), false);
+				clone.getAudio().setAudioFilePath(FolderConstants.AUDIO_FOLDER + newUniqueName);
+			}
 			
 			_listOfScenes2.push(clone);
 			_listOfViewFlarasScenes.push(buildViewScene(clone));
