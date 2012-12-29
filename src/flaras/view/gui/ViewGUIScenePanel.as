@@ -299,6 +299,8 @@ package flaras.view.gui
 			jbSwapScenePosition = new JButton("Change scene position", new LoadIcon("icons/external/swap.png"));
 			jbDeleteScene = new JButton("Delete Scene", new LoadIcon("icons/external/delete.png"));
 			jbClone = new JButton("Clone Scene", new LoadIcon("icons/external/clone.png"));
+			jbClone.setToolTipText("Adds a new scene to the current point\n"+
+									"with the same properties of the current scene");
 			jbClone.setPreferredWidth(167);
 			jbDeleteScene.setPreferredWidth(167);
 			
