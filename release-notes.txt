@@ -1,4 +1,10 @@
 -------------------------------
+FLARAS-2.3.0 - December 29, 2012
+
+ADDED: button to create "clones" of scenes
+CHANGE: to avoid loss of user data, from now on older versions of FLARAS (starting with 2.3.0) 
+		will not be able to open projects created by posterior versions of FLARAS.
+-------------------------------
 FLARAS-2.2.1 - November 22, 2012
 
 FIXED BUG: it was possible to move scenes on z axis even when the point was disabled for move interaction.
