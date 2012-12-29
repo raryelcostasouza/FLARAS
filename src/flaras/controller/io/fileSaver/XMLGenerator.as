@@ -33,10 +33,26 @@ package flaras.controller.io.fileSaver
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;
+	import flaras.model.util.ModelProjectVersion;
 	import org.papervision3d.core.math.*;
 	
 	public class XMLGenerator
 	{
+		public static function generateXMLProject(modelProjectVersion:ModelProjectVersion):XML
+		{
+			var xml:XML = new XML("<project></project>");
+			
+			var infoNode:XML = new XML();
+			infoNode = 
+				<version>
+					<release>{modelProjectVersion.getRelease()}</release>
+					<subRelease>{modelProjectVersion.getSubRelease()}</subRelease>
+					<bugFix>{modelProjectVersion.getBugFix()}</bugFix>
+				</version>
+			xml.appendChild(infoNode);
+			return xml;
+		}
+		
 		public static function generateXMLInteractionSphere(modelInteractionMarker:ModelInteractionMarker):XML
 		{
 			var xml:XML = new XML("<data></data>");

@@ -29,8 +29,11 @@
 
 package flaras.controller.constants 
 {
+	import flaras.model.util.*;
 	public class GeneralConstants 
 	{
+		public static const MODEL_PROJECT_VERSION:ModelProjectVersion = new ModelProjectVersion(2, 3, 0);
+		
 		public static const VIDEO_DEFAULT_WIDTH:uint = 320;
 		public static const VIDEO_DEFAULT_HEIGHT:uint = 240;
 		

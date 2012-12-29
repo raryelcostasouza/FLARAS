@@ -36,6 +36,7 @@ package flaras.controller.io.fileSaver
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
 	import flaras.model.scene.*;
+	import flaras.model.util.ModelProjectVersion;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -80,6 +81,15 @@ package flaras.controller.io.fileSaver
 			ba = new ByteArray();
 			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLRefMarker(modelRefMarker));
 			save(tmpFolder, XMLFilesConstants.REF_MARKER_PROPERTIES_PATH, ba);
+		}
+		
+		public static function saveProjectMetaData(tmpFolder:File, modelProjectVersion:ModelProjectVersion):void
+		{
+			var ba:ByteArray;
+			
+			ba = new ByteArray();
+			ba.writeUTFBytes(defaultXMLHeader + XMLGenerator.generateXMLProject(modelProjectVersion));
+			save(tmpFolder, XMLFilesConstants.PROJECT_META_DATA_PATH, ba);
 		}
 		
 		private static function save(pCurrentProjectTempFolder:File, pFileName:String, pObjByteArray:ByteArray):void

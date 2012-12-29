@@ -32,9 +32,11 @@ package flaras.controller
 	import flaras.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
+	import flaras.controller.io.fileReader.*;
 	import flaras.controller.io.fileSaver.*;
 	import flaras.controller.video.*;
 	import flaras.model.point.*;
+	import flaras.model.util.*;
 	import flaras.view.gui.*;
 	import flash.desktop.*;
 	import flash.errors.*;
@@ -44,7 +46,7 @@ package flaras.controller
 	import flash.utils.*;
 	
 	public class CtrUserProject 
-	{
+	{		
 		private static const ACTION_NEW_PROJECT:int = 0;
 		private static const ACTION_OPEN_PROJECT:int = 1;
 		private static const ACTION_CLOSE_FLARAS:int = 2;
@@ -276,12 +278,40 @@ package flaras.controller
 			aProjectFile = file2Open;
 			aAlreadySavedBefore = true;
 			
-			//read info about the interaction sphere
-			_ctrMain.ctrMarker.loadRefMarkerData();
-			_ctrMain.ctrMarker.loadInteractionMarkerData();
+			//if the project can be opened on this version of FLARAS
+			if (checkProjectVersion())
+			{
+				//read info about the interaction sphere
+				_ctrMain.ctrMarker.loadRefMarkerData();
+				_ctrMain.ctrMarker.loadInteractionMarkerData();
 			
-			//load the list of points and list of objects
-			_ctrMain.ctrPoint.loadProjectData();
+				//load the list of points and list of objects
+				_ctrMain.ctrPoint.loadProjectData();
+			}
+			else
+			{
+				actionNewProject();
+			}
+		}
+		
+		private function checkProjectVersion():Boolean
+		{
+			var projectVersionData:ModelProjectVersion;
+			
+			projectVersionData = FileReaderProjectMetaData.readData(FolderConstants.getFlarasAppCurrentFolder() +"/" + XMLFilesConstants.PROJECT_META_DATA_PATH);
+			//Allow the project to be opened if it meets one of the following requisites:
+			//1) if the project is of previous versions of FLARAS that did not have any version control
+			//2) if the project is of an older version of FLARAS			
+			
+			if (projectVersionData == null || (projectVersionData.getHashSum() <= GeneralConstants.MODEL_PROJECT_VERSION.getHashSum()))
+			{
+				return true;
+			}
+			else
+			{
+				MessageWindow.messageIncompatibleProjectVersion(projectVersionData.toString());
+				return false;				
+			}		
 		}
 		
 		private function openProjectFromFileDirectly(file2Open:File):void
@@ -300,6 +330,7 @@ package flaras.controller
 			var folders2Zip:Vector.<File>;
 			var file2Save:File;
 			
+			FileSaver.saveProjectMetaData(getCurrentProjectTempFolder(), GeneralConstants.MODEL_PROJECT_VERSION);
 			FileSaver.saveInteractionSphereProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.getModelInteractionMarker());
 			FileSaver.saveRefMarkerProperties(getCurrentProjectTempFolder(), _ctrMain.ctrMarker.getModelRefMarker());
 			

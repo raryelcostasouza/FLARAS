@@ -29,12 +29,21 @@
 
 package flaras.view.gui 
 {
+	import flaras.controller.constants.GeneralConstants;
 	import flash.events.*;
 	import flash.net.*;
 	import org.aswing.*;
 	
 	public class MessageWindow 
 	{		
+		public static function messageIncompatibleProjectVersion(minimumVersionRequired:String):void
+		{
+			JOptionPane.showMessageDialog("Error!", "Could not open the project!"+
+											"\nYou are using FLARAS " + GeneralConstants.MODEL_PROJECT_VERSION.toString() + ", but this project was created by FLARAS " + minimumVersionRequired + "."+
+											"\nDownload and install FLARAS " + minimumVersionRequired + " (or later versions) to be able to open this project.", 
+											null, null, true, new LoadIcon("icons/external/error.png", 48, 48));
+		}
+		
 		public static function messageWarningField(pValue:String, pFieldName:String):void
 		{
 			JOptionPane.showMessageDialog("Warning!","Invalid number '" + pValue + "' on field " + pFieldName+ ".\nYour changes will not be applied until this field have a valid value!", null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
@@ -125,7 +134,7 @@ package flaras.view.gui
 		{
 			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
-			"Version 2.2.1 - November, 22 2012\n\n" +
+			"Version 2.3.0 - December, 29 2012\n\n" +
 			
 			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
 			"Official Website: http://www.ckirner.com/flaras\n\n" +

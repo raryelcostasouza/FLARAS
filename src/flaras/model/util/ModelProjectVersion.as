@@ -27,14 +27,34 @@
  * Research scholarship by FAPEMIG - Fundação de Amparo à Pesquisa no Estado de Minas Gerais
  */
 
-package flaras.controller.constants 
+package flaras.model.util 
 {
-	public class XMLFilesConstants
+	public class ModelProjectVersion 
 	{
-		public static const LIST_OF_POINTS_PATH:String = FolderConstants.XML_FOLDER + "pointsList.xml";
-		public static const LIST_OF_OBJECTS_SEMI_COMPLETE_PATH:String = FolderConstants.XML_FOLDER + "objectsList";
-		public static const INTERACTION_SPHERE_PATH:String = FolderConstants.XML_FOLDER + "interactionSphere.xml";
-		public static const REF_MARKER_PROPERTIES_PATH:String = FolderConstants.XML_FOLDER + "refMarker.xml";
-		public static const PROJECT_META_DATA_PATH:String = FolderConstants.XML_FOLDER + "project.xml";
+		private var _release:uint;
+		private var _subRelease:uint;
+		private var _bugFix:uint;		
+		
+		public function ModelProjectVersion(pRelease:uint, pSubRelease:uint, pBugFix:uint) 
+		{
+			this._release = pRelease;
+			this._subRelease = pSubRelease;
+			this._bugFix = pBugFix;
+		}
+		
+		public function getRelease():uint { return _release; }
+		public function getSubRelease():uint { return _subRelease; }
+		public function getBugFix():uint { return _bugFix; }
+		
+		public function getHashSum():uint
+		{
+			return 8 * _release + 4 * _subRelease + 2 * _bugFix;
+		}
+		
+		public function toString():String
+		{
+			return _release + "." + _subRelease + "." + _bugFix;
+		}
 	}
+
 }
