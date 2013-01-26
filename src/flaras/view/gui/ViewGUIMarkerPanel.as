@@ -86,13 +86,18 @@ package flaras.view.gui
 		{
 			var tabOperations:JPanel;
 			var jbAddPoint:JButton;
+			var jbAddAttractRepulsionPoint:JButton;
 			
 			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
 			jbAddPoint = new JButton("Add new point", new LoadIcon("icons/external/add-point.png", 48, 48));
 			jbAddPoint.addActionListener(_ctrGUI.listenerAddPoint);
 			
+			jbAddAttractRepulsionPoint = new JButton("Add new attraction/repulsion point");
+			//jbAddAttractRepulsionPoint.addActionListener();
+			
 			tabOperations.append(jbAddPoint);
+			tabOperations.append(jbAddAttractRepulsionPoint);
 			
 			return tabOperations;
 		}

@@ -85,10 +85,10 @@ package flaras.view.gui
 			window1.pack();
 			window1.show();
 			
-			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
-			_pointPanel = new ViewGUIPointPanel(ctrGui);
-			_scenePanel = new ViewGUIScenePanel(ctrGui);			
 			_projectTreePanel = new ViewGUIProjectTree(ctrGui, this);
+			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
+			_pointPanel = new ViewGUIAttractRepulsionPointPanel(ctrGui, _projectTreePanel.getJTree());
+			_scenePanel = new ViewGUIScenePanel(ctrGui);			
 			
 			_developmentWindow = new JWindow();
 			_developmentWindow.setSizeWH(214, 540);

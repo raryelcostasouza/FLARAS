@@ -43,7 +43,10 @@ package flaras.view.gui
 		private var _jtfPointTrX:JTextField;
 		private var _jtfPointTrY:JTextField;
 		private var _jtfPointTrZ:JTextField;
-		private var _jcbMovableScenes:JCheckBox;
+		protected var _jcbMovableScenes:JCheckBox;
+		
+		protected var _tabProperties:JPanel;
+		protected var _tabOperations:JPanel;
 			
 		
 		public function ViewGUIPointPanel(pCtrGUI:CtrGUI) 
@@ -60,14 +63,13 @@ package flaras.view.gui
 		
 		private function buildTabProperties():JPanel
 		{
-			var tabProperties:JPanel;
 			var subPanel:JPanel;
 			var subPanel2:JPanel;
 			var jlPointTrX:JLabel;
 			var jlPointTrY:JLabel;
 			var jlPointTrZ:JLabel;
 			
-			tabProperties = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			_tabProperties = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
 			subPanel = new JPanel();
 			subPanel.setBorder(new TitledBorder(null, "Point label", TitledBorder.TOP, TitledBorder.LEFT));
@@ -75,7 +77,7 @@ package flaras.view.gui
 			_jtfPointLabel.addActionListener(_ctrGUI.listenerUpdatePointLabel);
 			subPanel.append(_jtfPointLabel);
 			
-			tabProperties.append(subPanel);			
+			_tabProperties.append(subPanel);			
 			
 			subPanel2 = new JPanel();
 			subPanel2.setBorder(new TitledBorder(null, "Translation", TitledBorder.TOP, TitledBorder.LEFT));
@@ -105,25 +107,24 @@ package flaras.view.gui
 			subPanel2.append(jlPointTrZ);
 			subPanel2.append(_jtfPointTrZ);
 			
-			tabProperties.append(subPanel2);
+			_tabProperties.append(subPanel2);
 			
 			_jcbMovableScenes = new JCheckBox("Enable move interaction for scenes");
 			_jcbMovableScenes.addActionListener(_ctrGUI.listenerUpdateMoveInteractionForScenes);
 			
-			tabProperties.append(_jcbMovableScenes);
+			_tabProperties.append(_jcbMovableScenes);
 			
-			return tabProperties;
+			return _tabProperties;
 		}
 		
 		private function buildTabOperations():JPanel
 		{
-			var tabOperations:JPanel;
 			var jbRemPoint:JButton;
 			var jbAdd3DObjScene:JButton;
 			var jbAddTextureScene:JButton;
 			var jbAddVideoScene:JButton;
 			
-			tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			_tabOperations = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
 			jbAdd3DObjScene = new JButton("Add 3D Obj Scene", new LoadIcon("icons/external/obj3d.png", 48, 48));
 			jbAddTextureScene = new JButton("Add Texture Scene", new LoadIcon("icons/external/texture.png", 48, 48));
@@ -139,12 +140,12 @@ package flaras.view.gui
 			jbAddVideoScene.addActionListener(_ctrGUI.listenerAddVideoScene);
 			jbRemPoint.addActionListener(_ctrGUI.listenerRemovePoint);
 			
-			tabOperations.append(jbAdd3DObjScene);			
-			tabOperations.append(jbAddTextureScene);			
-			tabOperations.append(jbAddVideoScene);			
-			tabOperations.append(jbRemPoint);
+			_tabOperations.append(jbAdd3DObjScene);			
+			_tabOperations.append(jbAddTextureScene);			
+			_tabOperations.append(jbAddVideoScene);			
+			_tabOperations.append(jbRemPoint);
 			
-			return tabOperations;
+			return _tabOperations;
 		}	
 		
 		public function getJTFPointLabel():JTextField

@@ -249,7 +249,7 @@ package flaras.view.gui
 			return selectedNode.getParent().getIndex(selectedNode);
 		}
 		
-		private function getLabelPrefix(label:String):String
+		public static function getLabelPrefix(label:String):String
 		{
 			var indexToken:uint;
 			
@@ -257,7 +257,7 @@ package flaras.view.gui
 			return label.slice(0, indexToken);
 		}
 		
-		private function getLabelSufix(label:String):String
+		public static function getLabelSufix(label:String):String
 		{
 			var indexToken:uint;
 			
@@ -337,6 +337,11 @@ package flaras.view.gui
 				}
 			}
 			_tree.updateUI();
+		}
+		
+		public function getJTree():JTree
+		{
+			return _tree;
 		}
 	}
 }
