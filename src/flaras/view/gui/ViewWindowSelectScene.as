@@ -36,10 +36,14 @@ package flaras.view.gui
 	public class ViewWindowSelectScene extends JFrame 
 	{
 		private var _jtree:JTree;
+		private var _jbAddScene:JButton;
+		private var _panelAttractRepulsion:ViewGUIAttractRepulsionPointPanel;
 		
-		public function ViewWindowSelectScene(pProjectTree:JTree)
+		public function ViewWindowSelectScene(pProjectTree:JTree, pPanelAttractRepulsion:ViewGUIAttractRepulsionPointPanel)
 		{
 			super(null, "Select scene", true);			
+			
+			_panelAttractRepulsion = pPanelAttractRepulsion;
 			
 			setContentPane(buildMainPanel(pProjectTree));
 			pack();
@@ -48,28 +52,43 @@ package flaras.view.gui
 		private function buildMainPanel(pProjectTree:JTree):JPanel
 		{
 			var mainPanel:JPanel;
-			var jsp:JScrollPane;
-			
-			var jbAddScene:JButton;
+			var jsp:JScrollPane;			
 			
 			mainPanel = new JPanel(new BorderLayout());
 			
-			jbAddScene = new JButton("Add Scene");
-			jbAddScene.addActionListener(listenerAddScene);
+			_jbAddScene = new JButton("Add Scene");
+			_jbAddScene.addActionListener(listenerAddScene);
 			
 			_jtree = new JTree(pProjectTree.getModel());
 			_jtree.setExpandsSelectedPaths(true);
 			_jtree.getSelectionModel().setSelectionMode(DefaultTreeSelectionModel.SINGLE_TREE_SELECTION);
+			_jtree.addSelectionListener(listenerSelection);
 			
 			jsp = new JScrollPane(_jtree);
 			
 			mainPanel.append(jsp, BorderLayout.CENTER);
-			mainPanel.append(jbAddScene, BorderLayout.SOUTH);
+			mainPanel.append(_jbAddScene, BorderLayout.SOUTH);
 		
 			return mainPanel;
 		}
 		
 		private function listenerAddScene(e:Event):void
+		{
+			var selectedSceneNode:DefaultMutableTreeNode;
+			var pointNode:DefaultMutableTreeNode;
+			var pointIndex:uint;
+			var sceneIndex:uint;
+			
+			selectedSceneNode = DefaultMutableTreeNode(_jtree.getLastSelectedPathComponent());
+			pointNode = DefaultMutableTreeNode(selectedSceneNode.getParent());
+			pointIndex = pointNode.getParent().getIndex(pointNode);
+			sceneIndex = selectedSceneNode.getParent().getIndex(selectedSceneNode);
+			
+			_panelAttractRepulsion.addScene2List(pointIndex, sceneIndex);
+			setVisible(false);
+		}
+		
+		private function listenerSelection(e:Event):void
 		{
 			var node:DefaultMutableTreeNode;
 			var prefix:String;
@@ -79,8 +98,19 @@ package flaras.view.gui
 			
 			if (prefix.indexOf("Scene") != -1)
 			{
-				setVisible(false);
-			}			
+				_jbAddScene.setEnabled(true);
+			}
+			else
+			{
+				_jbAddScene.setEnabled(false);
+			}
+		}
+		
+		public function showWindow():void
+		{
+			_jbAddScene.setEnabled(false);
+			_jtree.updateUI();
+			setVisible(true);
 		}
 	}
 }

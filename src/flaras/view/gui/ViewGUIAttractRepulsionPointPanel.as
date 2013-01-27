@@ -45,7 +45,7 @@ package flaras.view.gui
 		{
 			super(pCtrGUI);
 			
-			_windowSelectScene = new ViewWindowSelectScene(pProjectTree);
+			_windowSelectScene = new ViewWindowSelectScene(pProjectTree, this);
 			_tabProperties.remove(_jcbMovableScenes);
 			appendTab(buildTabAttractRepulsion(), "A/R", null, "Attraction/Repulsion");
 		}		
@@ -113,15 +113,17 @@ package flaras.view.gui
 		
 		private function listenerAddToList(e:Event):void
 		{
-			_vlm.append("hello");
-			_windowSelectScene.setVisible(true);
+			_windowSelectScene.showWindow();
 		}
 		
 		private function listenerRemoveFromList(e:Event):void
 		{
-			trace(_jlistScenes.getSelectedIndex());
 			_vlm.removeElementAt(_jlistScenes.getSelectedIndex());
 		}
 		
+		public function addScene2List(indexPoint:uint, indexScene:uint):void
+		{
+			_vlm.append("P"+indexPoint + " S"+indexScene);
+		}
 	}
 }
