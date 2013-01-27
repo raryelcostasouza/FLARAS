@@ -36,6 +36,13 @@ package flaras.view.gui
 	
 	public class MessageWindow 
 	{		
+		public static function messageSelectScene2Remove():void
+		{
+			JOptionPane.showMessageDialog("Warning!", "Before clicking the remove button\n" +
+														"please select a scene to remove from the list.", 
+										null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
+		}
+		
 		public static function messageIncompatibleProjectVersion(minimumVersionRequired:String):void
 		{
 			JOptionPane.showMessageDialog("Error!", "Could not open the project!"+

@@ -53,8 +53,6 @@ package flaras.view.gui
 		private function buildTabAttractRepulsion():JPanel
 		{
 			var tabAttractionRepulsion:JPanel;
-			var jrbAttraction:JRadioButton;
-			var jrbRepulsion:JRadioButton;
 			var jspList:JScrollPane;
 			var vlm:VectorListModel;
 			var bg:ButtonGroup;
@@ -62,27 +60,17 @@ package flaras.view.gui
 			
 			tabAttractionRepulsion = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
-			jrbAttraction = new JRadioButton("Scenes to attract");
-			jrbAttraction.setSelected(true);			
-			jrbRepulsion = new JRadioButton("Scenes to repulse");
-			
-			bg = new ButtonGroup();
-			bg.append(jrbAttraction);
-			bg.append(jrbRepulsion);
-			
 			_vlm = new VectorListModel();
 			
 			_jlistScenes = new JList(_vlm);
 			_jlistScenes.setSelectionMode(JList.SINGLE_SELECTION);
 			
 			jspList = new JScrollPane(_jlistScenes);
-			jspList.setBorder(new TitledBorder(null, "List of scenes", TitledBorder.TOP, TitledBorder.LEFT));
-			jspList.setPreferredHeight(150);
+			jspList.setBorder(new TitledBorder(null, "List of scenes to attract", TitledBorder.TOP, TitledBorder.LEFT));
+			jspList.setPreferredHeight(190);
 			jspList.setPreferredWidth(200);
 			
 			formTab = new Form();
-			formTab.addRow(jrbAttraction);
-			formTab.addRow(jrbRepulsion);
 			formTab.addRow(jspList);
 			formTab.addRow(buildButtonsRow());
 			
@@ -118,7 +106,14 @@ package flaras.view.gui
 		
 		private function listenerRemoveFromList(e:Event):void
 		{
-			_vlm.removeElementAt(_jlistScenes.getSelectedIndex());
+			if (_jlistScenes.getSelectedIndex() == -1)
+			{
+				MessageWindow.messageSelectScene2Remove();
+			}
+			else
+			{
+				_vlm.removeElementAt(_jlistScenes.getSelectedIndex());
+			}			
 		}
 		
 		public function addScene2List(indexPoint:uint, indexScene:uint):void

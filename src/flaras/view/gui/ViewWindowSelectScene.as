@@ -41,23 +41,29 @@ package flaras.view.gui
 		
 		public function ViewWindowSelectScene(pProjectTree:JTree, pPanelAttractRepulsion:ViewGUIAttractRepulsionPointPanel)
 		{
-			super(null, "Select scene", true);			
+			super(null, "Select scene to attract", true);			
 			
 			_panelAttractRepulsion = pPanelAttractRepulsion;
 			
 			setContentPane(buildMainPanel(pProjectTree));
-			pack();
+			setSizeWH(250, 300);
+			setLocationXY(320 - getWidth() / 2, 240 - getHeight() / 2);
+			setResizable(false);
 		}
 		
 		private function buildMainPanel(pProjectTree:JTree):JPanel
 		{
 			var mainPanel:JPanel;
-			var jsp:JScrollPane;			
+			var jsp:JScrollPane;
+			var auxPanel:JPanel;
 			
 			mainPanel = new JPanel(new BorderLayout());
 			
 			_jbAddScene = new JButton("Add Scene");
 			_jbAddScene.addActionListener(listenerAddScene);
+			
+			auxPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			auxPanel.append(_jbAddScene);
 			
 			_jtree = new JTree(pProjectTree.getModel());
 			_jtree.setExpandsSelectedPaths(true);
@@ -67,7 +73,7 @@ package flaras.view.gui
 			jsp = new JScrollPane(_jtree);
 			
 			mainPanel.append(jsp, BorderLayout.CENTER);
-			mainPanel.append(_jbAddScene, BorderLayout.SOUTH);
+			mainPanel.append(auxPanel, BorderLayout.SOUTH);
 		
 			return mainPanel;
 		}
@@ -93,17 +99,20 @@ package flaras.view.gui
 			var node:DefaultMutableTreeNode;
 			var prefix:String;
 			
-			node = DefaultMutableTreeNode(_jtree.getLastSelectedPathComponent());
-			prefix = ViewGUIProjectTree.getLabelPrefix(node.getUserObject());
+			node = DefaultMutableTreeNode(_jtree.getLastSelectedPathComponent());			
+			if (node != null)
+			{
+				prefix = ViewGUIProjectTree.getLabelPrefix(node.getUserObject());
 			
-			if (prefix.indexOf("Scene") != -1)
-			{
-				_jbAddScene.setEnabled(true);
-			}
-			else
-			{
-				_jbAddScene.setEnabled(false);
-			}
+				if (prefix.indexOf("Scene") != -1)
+				{
+					_jbAddScene.setEnabled(true);
+				}
+				else
+				{
+					_jbAddScene.setEnabled(false);
+				}
+			}			
 		}
 		
 		public function showWindow():void
