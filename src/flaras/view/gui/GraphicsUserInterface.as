@@ -49,6 +49,7 @@ package flaras.view.gui
 		private var _projectTreePanel:ViewGUIProjectTree;
 		private var _markerPanel:ViewGUIMarkerPanel;
 		private var _pointPanel:ViewGUIPointPanel;
+		private var _pointAttractRepulsePanel:ViewGUIAttractRepulsionPointPanel;
 		private var _scenePanel:ViewGUIScenePanel;
 		private var _developmentWindow:JWindow;
 		private var _developmentPanel:JPanel;
@@ -87,7 +88,8 @@ package flaras.view.gui
 			
 			_projectTreePanel = new ViewGUIProjectTree(ctrGui, this);
 			_markerPanel = new ViewGUIMarkerPanel(ctrGui);
-			_pointPanel = new ViewGUIAttractRepulsionPointPanel(ctrGui, _projectTreePanel.getJTree());
+			_pointPanel = new ViewGUIPointPanel(ctrGui);
+			_pointAttractRepulsePanel = new ViewGUIAttractRepulsionPointPanel(ctrGui, _projectTreePanel.getJTree());
 			_scenePanel = new ViewGUIScenePanel(ctrGui);			
 			
 			_developmentWindow = new JWindow();
@@ -110,7 +112,7 @@ package flaras.view.gui
 		
 		public function showMarkerPanel():void
 		{
-			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_scenePanel))
+			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_pointAttractRepulsePanel) || _developmentPanel.remove(_scenePanel))
 			{
 				_developmentPanel.append(_markerPanel);
 				_markerPanel.setSelectedIndex(0);
@@ -120,7 +122,7 @@ package flaras.view.gui
 		
 		public function showPointPanel():void
 		{
-			if (_developmentPanel.remove(_markerPanel) || _developmentPanel.remove(_scenePanel))
+			if (_developmentPanel.remove(_markerPanel) || _developmentPanel.remove(_pointAttractRepulsePanel) ||_developmentPanel.remove(_scenePanel))
 			{
 				_developmentPanel.append(_pointPanel);
 				_pointPanel.setSelectedIndex(0);
@@ -128,9 +130,19 @@ package flaras.view.gui
 			}
 		}
 		
+		public function showAttractPointPanel():void
+		{
+			if (_developmentPanel.remove(_markerPanel) || _developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_scenePanel))
+			{
+				_developmentPanel.append(_pointAttractRepulsePanel);
+				_pointAttractRepulsePanel.setSelectedIndex(0);
+				_developmentPanel.revalidateIfNecessary();
+			}
+		}
+		
 		public function showScenePanel():void
 		{
-			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_markerPanel))
+			if (_developmentPanel.remove(_pointPanel) || _developmentPanel.remove(_pointAttractRepulsePanel) || _developmentPanel.remove(_markerPanel))
 			{
 				_developmentPanel.append(_scenePanel);
 				_scenePanel.setSelectedIndex(0);
@@ -167,6 +179,11 @@ package flaras.view.gui
 		public function getPointPanel():ViewGUIPointPanel
 		{
 			return _pointPanel;
+		}
+		
+		public function getPointAttractionRepulsionPanel():ViewGUIAttractRepulsionPointPanel
+		{
+			return _pointAttractRepulsePanel;
 		}
 		
 		public function getScenePanel():ViewGUIScenePanel 

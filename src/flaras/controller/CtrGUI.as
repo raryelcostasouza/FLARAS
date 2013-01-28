@@ -247,6 +247,16 @@ package flaras.controller
 			fillPointGUI(indexPoint);
 		}
 		
+		public function actionPointAttractionRepulsionSelected():void
+		{
+			var indexPoint:uint;
+			
+			indexPoint = getCurrentSelectedPoint2();
+			_ctrMain.ctrPoint.disableAllPointsUI();
+			_ctrMain.ctrPoint.enablePointUI(indexPoint);
+			fillPointAttractionRepulsionGUI(indexPoint);			
+		}
+		
 		public function actionSceneSelected():void
 		{
 			_ctrMain.ctrPoint.disableAllPointsUI();
@@ -261,6 +271,13 @@ package flaras.controller
 			_ctrMain.ctrPoint.addPoint(Number3D.ZERO, "", false);
 			_gui.getTreePanel().addPoint();
 			_gui.getTreePanel().selectPoint(_ctrMain.ctrPoint.getNumberOfPoints() - 1);
+		}
+		
+		public function listenerAddPointAttractRepulse(e:Event):void
+		{
+			_ctrMain.ctrPoint.addPointAttractRepulse(Number3D.ZERO, "", false);
+			_gui.getTreePanel().addPointAttractRepulse();
+			_gui.getTreePanel().selectPoint(_ctrMain.ctrPoint.getNumberOfPoints() -1);
 		}
 		
 		public function listenerToggleRefMarkerPersistence(e:Event):void
@@ -281,8 +298,16 @@ package flaras.controller
 		public function listenerUpdatePointLabel(e:Event):void
 		{
 			var label:String;
-			
-			label = _gui.getPointPanel().getJTFPointLabel().getText();
+			if (_gui.getTreePanel().getSelectedPointType() == ViewGUIProjectTree.TYPE_POINT)
+			{
+				label = _gui.getPointPanel().getJTFPointLabel().getText();
+				
+			}
+			else
+			{
+				//if it's an attraction/repulsion point
+				label = _gui.getPointAttractionRepulsionPanel().getJTFPointLabel().getText();				
+			}	
 			
 			_ctrMain.ctrPoint.updatePointLabel(getCurrentSelectedPoint2(), label);
 			_gui.getTreePanel().updatePointLabel(label);
@@ -305,9 +330,18 @@ package flaras.controller
 			var z:Number;
 			
 			indexPoint = getCurrentSelectedPoint2();
-			x = Number(_gui.getPointPanel().getJTFPointTrX().getText());
-			y = Number(_gui.getPointPanel().getJTFPointTrY().getText());
-			z = Number(_gui.getPointPanel().getJTFPointTrZ().getText());
+			if (_gui.getTreePanel().getSelectedPointType() == ViewGUIProjectTree.TYPE_POINT)
+			{
+				x = Number(_gui.getPointPanel().getJTFPointTrX().getText());
+				y = Number(_gui.getPointPanel().getJTFPointTrY().getText());
+				z = Number(_gui.getPointPanel().getJTFPointTrZ().getText());
+			}
+			else
+			{
+				x = Number(_gui.getPointAttractionRepulsionPanel().getJTFPointTrX().getText());
+				y = Number(_gui.getPointAttractionRepulsionPanel().getJTFPointTrY().getText());
+				z = Number(_gui.getPointAttractionRepulsionPanel().getJTFPointTrZ().getText());
+			}
 			
 			_ctrMain.ctrPoint.updatePointPosition(indexPoint, new Number3D(x, y, z));
 		}
@@ -633,6 +667,22 @@ package flaras.controller
 			_gui.getPointPanel().getJTFPointTrY().setText(String(pointTranslation.y));
 			_gui.getPointPanel().getJTFPointTrZ().setText(String(pointTranslation.z));
 			_gui.getPointPanel().getJCBMoveInteractionForScenes().setSelected(moveInteractionForScenes);
+		}
+		
+		private function fillPointAttractionRepulsionGUI(indexPoint:uint):void
+		{
+			var pointTranslation:Number3D;
+			var label:String;
+			var moveInteractionForScenes:Boolean;
+			
+			pointTranslation = _ctrMain.ctrPoint.getPosition(indexPoint);
+			label = _ctrMain.ctrPoint.getLabel(indexPoint);
+			moveInteractionForScenes = _ctrMain.ctrPoint.getMoveInteractionForScenes(indexPoint);
+			
+			_gui.getPointAttractionRepulsionPanel().getJTFPointLabel().setText(label);
+			_gui.getPointAttractionRepulsionPanel().getJTFPointTrX().setText(String(pointTranslation.x));
+			_gui.getPointAttractionRepulsionPanel().getJTFPointTrY().setText(String(pointTranslation.y));
+			_gui.getPointAttractionRepulsionPanel().getJTFPointTrZ().setText(String(pointTranslation.z));
 		}
 		
 		private function fillSceneGUI(indexPoint:uint, indexScene:uint):void

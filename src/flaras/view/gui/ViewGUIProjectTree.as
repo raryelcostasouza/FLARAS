@@ -40,6 +40,9 @@ package flaras.view.gui
 	
 	public class ViewGUIProjectTree extends JScrollPane
 	{
+		public static const TYPE_POINT:uint = 0;
+		public static const TYPE_ATTRACTION_REPULSION_POINT:uint = 1;
+		
 		private var _tree:JTree;
 		private var _root:DefaultMutableTreeNode;
 		
@@ -71,6 +74,15 @@ package flaras.view.gui
 			
 			pointNode = new DefaultMutableTreeNode("Point " + (_root.getChildCount() + 1) + ": ");
 			
+			_root.insert(pointNode, _root.getChildCount());
+			_tree.updateUI();
+		}
+		
+		public function addPointAttractRepulse():void
+		{
+			var pointNode:DefaultMutableTreeNode;
+			
+			pointNode = new DefaultMutableTreeNode("Point (A/R) " + (_root.getChildCount() +1 ) + ": ");
 			_root.insert(pointNode, _root.getChildCount());
 			_tree.updateUI();
 		}
@@ -143,13 +155,21 @@ package flaras.view.gui
 		
 		public function updatePointLabel(pNewLabel:String):void
 		{
+			trace("Label",pNewLabel);
 			var node:DefaultMutableTreeNode;
 			var index:uint;
 			
 			node = DefaultMutableTreeNode(_tree.getLastSelectedPathComponent());
 			index = node.getParent().getIndex(node) + 1;
 			
-			node.setUserObject("Point " + index + ": " + pNewLabel);
+			if (getSelectedPointType() == TYPE_ATTRACTION_REPULSION_POINT)
+			{
+				node.setUserObject("Point (A/R) " + index + ": " + pNewLabel);
+			}
+			else
+			{
+				node.setUserObject("Point " + index + ": " + pNewLabel);
+			}	
 			_tree.updateUI();
 		}
 		
@@ -202,8 +222,13 @@ package flaras.view.gui
 				{
 					prefixLabel = getLabelPrefix(nodeName);
 					
-					if (prefixLabel.indexOf("Point") != -1)
+					if (prefixLabel.indexOf("Point (A/R)") != -1)
 					{
+						_gui.showAttractPointPanel();
+						_ctrGUI.actionPointAttractionRepulsionSelected();
+					}
+					else if (prefixLabel.indexOf("Point") != -1)
+					{						
 						_gui.showPointPanel();
 						_ctrGUI.actionPointSelected();
 					}
@@ -342,6 +367,24 @@ package flaras.view.gui
 		public function getJTree():JTree
 		{
 			return _tree;
+		}
+		
+		public function getSelectedPointType():uint
+		{
+			var node:DefaultMutableTreeNode;
+			var prefix:String;
+			
+			node = DefaultMutableTreeNode(_tree.getLastSelectedPathComponent());
+			prefix = getLabelPrefix(node.getUserObject());
+			
+			if (prefix.indexOf("Point (A/R)") != -1)
+			{
+				return TYPE_ATTRACTION_REPULSION_POINT;
+			}
+			else
+			{
+				return TYPE_POINT;
+			}			
 		}
 	}
 }
