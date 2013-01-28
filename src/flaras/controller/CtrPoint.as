@@ -192,6 +192,23 @@ package flaras.controller
 			return p;
 		}
 		
+		public function addPointAttractRepulse(pPosition:Number3D, pLabel:String, pFromXML:Boolean=false):AttractionRepulsionPoint
+		{
+			var attractRepulsePoint:AttractionRepulsionPoint;
+			
+			if (!pFromXML)
+			{
+				_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			}
+			
+			attractRepulsePoint = new AttractionRepulsionPoint(this._listOfPoints.length, pPosition, pLabel);
+			this._listOfPoints.push(attractRepulsePoint);
+			this._listOfBoundaryPoints.push(new ViewPoint(attractRepulsePoint, _ctrMain));
+			this._listOfCtrScenes.push(new CtrScene(_ctrMain, attractRepulsePoint));
+			
+			return attractRepulsePoint;
+		}
+		
 		public function removePoint(indexPoint:uint):void
 		{
 			var id:uint;
