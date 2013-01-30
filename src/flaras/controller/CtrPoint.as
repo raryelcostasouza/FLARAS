@@ -275,6 +275,25 @@ package flaras.controller
 			}
 		}
 
+		public function updateAddScene2AttractList(indexAttractionPoint:uint, indexPoint2Attract:uint, indexScene2Attract:uint):void
+		{
+			var objRefScene2Attract:RefScene2Attract;
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
+			
+			objRefScene2Attract = new RefScene2Attract(indexPoint2Attract, indexScene2Attract);
+			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
+			
+			objAttractionRepulsionPoint.getListOfScenes2Attract().push(objRefScene2Attract);			
+		}
+		
+		public function updateRemoveSceneFromAttractList(indexAttractionPoint:uint, indexRefScene2Attract:uint):void
+		{
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
+			
+			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
+			objAttractionRepulsionPoint.getListOfScenes2Attract().splice(indexRefScene2Attract, 1);
+		}
+		
 		//functions related with navigating through the list of objects -------------------------------------------------------------
 		public function inspectPoint(p:Point):void
 		{			
