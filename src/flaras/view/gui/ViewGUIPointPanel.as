@@ -39,7 +39,6 @@ package flaras.view.gui
 	public class ViewGUIPointPanel extends JTabbedPane
 	{
 		private var _jtfPointLabel:JTextField;
-		private var _ctrGUI:CtrGUI;
 		private var _jtfPointTrX:JTextField;
 		private var _jtfPointTrY:JTextField;
 		private var _jtfPointTrZ:JTextField;
@@ -47,7 +46,7 @@ package flaras.view.gui
 		
 		protected var _tabProperties:JPanel;
 		protected var _tabOperations:JPanel;
-			
+		protected var _ctrGUI:CtrGUI;	
 		
 		public function ViewGUIPointPanel(pCtrGUI:CtrGUI) 
 		{

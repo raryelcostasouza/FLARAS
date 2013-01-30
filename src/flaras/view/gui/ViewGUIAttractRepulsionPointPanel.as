@@ -106,19 +106,30 @@ package flaras.view.gui
 		
 		private function listenerRemoveFromList(e:Event):void
 		{
-			if (_jlistScenes.getSelectedIndex() == -1)
+			var index2Remove:uint;
+			
+			index2Remove = _jlistScenes.getSelectedIndex();
+			if (index2Remove == -1)
 			{
 				MessageWindow.messageSelectScene2Remove();
 			}
 			else
 			{
-				_vlm.removeElementAt(_jlistScenes.getSelectedIndex());
+				_vlm.removeElementAt(index2Remove);
+				_ctrGUI.getCtrMain().ctrPoint.updateRemoveSceneFromAttractList(_ctrGUI.getCurrentSelectedPoint2(), index2Remove);
 			}			
 		}
 		
 		public function addScene2List(indexPoint:uint, indexScene:uint):void
 		{
-			_vlm.append("P"+indexPoint + " S"+indexScene);
+			var pointLabel:String;
+			var sceneLabel:String;
+			
+			pointLabel = _ctrGUI.getCtrMain().ctrPoint.getLabel(indexPoint);
+			sceneLabel = _ctrGUI.getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
+			
+			_ctrGUI.getCtrMain().ctrPoint.updateAddScene2AttractList(_ctrGUI.getCurrentSelectedPoint2(), indexPoint, indexScene);
+			_vlm.append("P"+indexPoint + " ("+pointLabel+")" + " S"+indexScene + " ("+sceneLabel+")");
 		}
 	}
 }
