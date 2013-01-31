@@ -709,5 +709,17 @@ package flaras.controller
 		{
 			return _listOfViewFlarasScenes[indexScene];
 		}
+		
+		public function getSceneIndex(flarasScene:FlarasScene):int
+		{
+			for (var i:uint = 0; i < _listOfScenes2.length; i++ )
+			{
+				if (_listOfScenes2[i] == flarasScene)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
 	}
 }
