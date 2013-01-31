@@ -164,6 +164,22 @@ package flaras.controller
 			return _listOfPoints[indexPoint].isMoveInteractionForScenes();
 		}
 		
+		public function isSceneOnAttractionList(indexAttractionPoint:uint, indexOfScenePoint:uint, indexOfScene:uint):Boolean
+		{
+			var attractionPoint:AttractionRepulsionPoint;
+			
+			attractionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
+			
+			for each (var ref:RefScene2Attract in attractionPoint.getListOfScenes2Attract())
+			{
+				if (ref.getIndexPoint() == indexOfScenePoint && ref.getIndexScene() == indexOfScene)
+				{
+					return true;
+				}
+			}			
+			return false;
+		}
+		
 		// functions related with adding and removing points -----------------------------------------------------------
 		public function addPointFromXML(pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean):void
 		{
