@@ -32,11 +32,12 @@ package flaras.view.scene
 	import flaras.controller.*;
 	import flaras.controller.util.*;
 	import flaras.model.*;
+	import flaras.model.point.AttractionRepulsionPoint;
 	import flaras.model.scene.*;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filters.*;
-	import flash.geom.*;
+	import flash.geom.Point;
 	import org.papervision3d.core.math.*;
 	import org.papervision3d.core.render.data.*;
 	import org.papervision3d.materials.*;
@@ -331,7 +332,9 @@ package flaras.view.scene
 					//to the obj directly. It's just needed to update the coordinates of the center of rotation.
 					_posRotationCenter.x = mousePosRelative2RefMarker.x;
 					_posRotationCenter.y = mousePosRelative2RefMarker.y;
-				}				
+				}
+				
+				checkAttractionRepulsion();
 			}			
 		}
 		
@@ -375,6 +378,53 @@ package flaras.view.scene
 		private function onMouseDown(e:MouseEvent):void
 		{
 			_ctrMain.ctrInteraction.mouseClickScene(_baseFlarasScene.getParentPoint(), this);
+		}
+		
+		private function checkAttractionRepulsion():void
+		{
+			var pointPosition:Number3D;
+			var distPoint2Scene:Number;
+			var sceneIndex:uint;
+			var pointIndex:uint;
+			
+			//index of the point where the moving scene is associated 
+			pointIndex = _baseFlarasScene.getParentPoint().getID();
+			sceneIndex = _ctrMain.ctrPoint.getCtrScene(pointIndex).getSceneIndex(_baseFlarasScene);
+			
+			//for each attraction/repulsion point
+			for each (var p:flaras.model.point.Point in _ctrMain.ctrPoint.getListOfPoints())
+			{
+				trace("here");
+				if (p is AttractionRepulsionPoint)
+				{
+					pointPosition = p.getPosition();
+					distPoint2Scene = distance(pointPosition, _obj3D.position);					
+					trace(pointPosition, _obj3D.position);
+					trace("distance: ", distPoint2Scene);
+					if (distPoint2Scene < 100)
+					{
+						trace("dist OK");
+						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getID(), pointIndex, sceneIndex))
+						{
+							//attract
+							trace("attract");
+							_obj3D.position = pointPosition;
+						}
+						else
+						{
+							trace("repulse");
+							//repulse
+							resetScenePosition();
+						}
+						stopDragXY(null);	
+					}
+				}
+			}
+		}
+		
+		private static function distance(p1:Number3D, p2:Number3D):Number
+		{
+			return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z + p2.z, 2));
 		}
 	}
 }
