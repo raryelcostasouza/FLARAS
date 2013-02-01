@@ -394,25 +394,19 @@ package flaras.view.scene
 			//for each attraction/repulsion point
 			for each (var p:flaras.model.point.Point in _ctrMain.ctrPoint.getListOfPoints())
 			{
-				trace("here");
 				if (p is AttractionRepulsionPoint)
 				{
 					pointPosition = p.getPosition();
 					distPoint2Scene = distance(pointPosition, _obj3D.position);					
-					trace(pointPosition, _obj3D.position);
-					trace("distance: ", distPoint2Scene);
 					if (distPoint2Scene < 100)
 					{
-						trace("dist OK");
 						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getID(), pointIndex, sceneIndex))
 						{
 							//attract
-							trace("attract");
 							_obj3D.position = pointPosition;
 						}
 						else
 						{
-							trace("repulse");
 							//repulse
 							resetScenePosition();
 						}
