@@ -29,6 +29,7 @@
 
 package flaras.controller.io.fileSaver 
 {
+	import flaras.controller.util.Point3D;
 	import flaras.model.*;
 	import flaras.model.marker.*;
 	import flaras.model.point.*;
@@ -83,12 +84,14 @@ package flaras.controller.io.fileSaver
 		public static function generateXMLPoints(pListOfPoints:Vector.<Point>):XML
 		{
 			var xml:XML = new XML("<pointsList></pointsList>");
+			var pointAttractionRepulsion:AttractionRepulsionPoint;
 		
 			for each(var p:Point in pListOfPoints)
 			{
 				var position:Number3D = p.getPosition();
 				var label:String = p.getLabel();
 				var moveInteractionForScenes:uint;
+				var type:String;
 				
 				if (p.isMoveInteractionForScenes())
 				{
@@ -97,11 +100,21 @@ package flaras.controller.io.fileSaver
 				else
 				{
 					moveInteractionForScenes = 0;
-				}				
+				}	
+				
+				if (p is AttractionRepulsionPoint)
+				{
+					type = "attraction-repulsion";
+				}
+				else
+				{
+					type = "default";
+				}
 				
 				var newNode:XML = new XML();
 				newNode = 
 				<point>
+					<type>{type}</type>
 					<label>{label}</label>
 					<moveInteractionForScenes>{moveInteractionForScenes}</moveInteractionForScenes>
 					<position>
@@ -109,12 +122,41 @@ package flaras.controller.io.fileSaver
 						<y>{position.y}</y>
 						<z>{position.z}</z>
 					</position>
-				<filePathObjectList>{p.getFilePathListOfObjects()}</filePathObjectList>					
+				<filePathObjectList>{p.getFilePathListOfObjects()}</filePathObjectList>
+				{XMLGenerator.generateXMLRefScenes2Attract(p)}
 				</point>;
 				
 				xml = xml.appendChild(newNode);
 			}
 			return xml;
+		}
+		
+		private static function generateXMLRefScenes2Attract(p:Point):XML
+		{
+			var xml:XML;
+			var newNode:XML;
+			var pointAttractionRepulsion:AttractionRepulsionPoint;
+			
+			xml = new XML("<listOfScenes2Attract></listOfScenes2Attract>");
+			if (p is AttractionRepulsionPoint)
+			{
+				pointAttractionRepulsion = AttractionRepulsionPoint(p);
+				for each(var objRef:RefScene2Attract in pointAttractionRepulsion.getListOfScenes2Attract())
+				{
+					newNode = 
+					<refScene2Attract>
+						<pointIndex>{objRef.getIndexPoint()}</pointIndex>
+						<sceneIndex>{objRef.getIndexScene()}</sceneIndex>
+					</refScene2Attract>
+					
+					xml = xml.appendChild(newNode);
+				}				
+				return xml;
+			}
+			else
+			{
+				return new XML();
+			}
 		}
 		
 		public static function generateXMLObjects(pListOfObjects:Vector.<FlarasScene>):XML
