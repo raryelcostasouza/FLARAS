@@ -674,6 +674,7 @@ package flaras.controller
 			var pointTranslation:Number3D;
 			var label:String;
 			var moveInteractionForScenes:Boolean;
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;		
 			
 			pointTranslation = _ctrMain.ctrPoint.getPosition(indexPoint);
 			label = _ctrMain.ctrPoint.getLabel(indexPoint);
@@ -683,6 +684,9 @@ package flaras.controller
 			_gui.getPointAttractionRepulsionPanel().getJTFPointTrX().setText(String(pointTranslation.x));
 			_gui.getPointAttractionRepulsionPanel().getJTFPointTrY().setText(String(pointTranslation.y));
 			_gui.getPointAttractionRepulsionPanel().getJTFPointTrZ().setText(String(pointTranslation.z));
+			
+			objAttractionRepulsionPoint = AttractionRepulsionPoint(_ctrMain.ctrPoint.getListOfPoints()[indexPoint]);
+			_gui.getPointAttractionRepulsionPanel().fillListOfScenes2Attract(objAttractionRepulsionPoint.getListOfScenes2Attract());
 		}
 		
 		private function fillSceneGUI(indexPoint:uint, indexScene:uint):void
