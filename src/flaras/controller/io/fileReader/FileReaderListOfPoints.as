@@ -91,8 +91,7 @@ package flaras.controller.io.fileReader
 					moveInteractionForScenes = Boolean(parseInt(point.moveInteractionForScenes));
 				}
 				
-				type = point.type;
-				if (type == undefined || type == "default")
+				if (point.type == undefined || point.type == "default")
 				{
 					aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes);
 				}
@@ -104,10 +103,9 @@ package flaras.controller.io.fileReader
 						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIndex))
 					}
 					
-					aObjCtrPoint.addPointAttractRepulse(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract);
+					aObjCtrPoint.addPointAttractRepulseFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract);
 				}				
-			}
-			
+			}			
 			aObjCtrPoint.finishedReadingListOfPoints();
 		}	
 		
