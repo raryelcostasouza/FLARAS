@@ -198,7 +198,7 @@ package flaras.controller
 			if (!pFromXML)
 			{
 				_ctrMain.ctrUserProject.setUnsavedModifications(true);
-			}			
+			}	
 			
 			p = new Point(this._listOfPoints.length, pPosition, pLabel, pMoveInteractionForScenes)
 			this._listOfPoints.push(p);
@@ -208,7 +208,17 @@ package flaras.controller
 			return p;
 		}
 		
-		public function addPointAttractRepulse(pPosition:Number3D, pLabel:String, pFromXML:Boolean, pListOfScenes2Attract:Vector.<RefScene2Attract>=null):AttractionRepulsionPoint
+		public function addPointAttractRepulseFromXML(pPosition:Number3D, pLabel:String, pFromXML:Boolean, pListOfScenes2Attract:Vector.<RefScene2Attract>):void
+		{
+			var attractRepulsePoint:AttractionRepulsionPoint;
+			
+			attractRepulsePoint = addPointAttractRepulse(pPosition, pLabel, true);
+			
+			attractRepulsePoint.setListOfScenes2Attract(pListOfScenes2Attract);
+			new FileReaderListOfObjects(attractRepulsePoint.getID(), FolderConstants.getFlarasAppCurrentFolder() + "/" + attractRepulsePoint.getFilePathListOfObjects(), this);
+		}
+		
+		public function addPointAttractRepulse(pPosition:Number3D, pLabel:String, pFromXML:Boolean):AttractionRepulsionPoint
 		{
 			var attractRepulsePoint:AttractionRepulsionPoint;
 			
@@ -218,10 +228,6 @@ package flaras.controller
 			}
 			
 			attractRepulsePoint = new AttractionRepulsionPoint(this._listOfPoints.length, pPosition, pLabel);
-			if (pListOfScenes2Attract != null)
-			{
-				attractRepulsePoint.setListOfScenes2Attract(pListOfScenes2Attract);
-			}			
 			
 			this._listOfPoints.push(attractRepulsePoint);
 			this._listOfBoundaryPoints.push(new ViewPoint(attractRepulsePoint, _ctrMain));
