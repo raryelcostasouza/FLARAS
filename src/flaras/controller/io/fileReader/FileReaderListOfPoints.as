@@ -31,6 +31,7 @@ package flaras.controller.io.fileReader
 {
 	import flaras.controller.*;
 	import flaras.controller.io.*;
+	import flaras.model.point.RefScene2Attract;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -61,6 +62,8 @@ package flaras.controller.io.fileReader
 		{			
 			var label:String;
 			var moveInteractionForScenes:Boolean;
+			var type:String;
+			var listOfScenes2Attract:Vector.<RefScene2Attract>;
 			
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
 			e.target.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
@@ -88,7 +91,21 @@ package flaras.controller.io.fileReader
 					moveInteractionForScenes = Boolean(parseInt(point.moveInteractionForScenes));
 				}
 				
-				aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes);
+				type = point.type;
+				if (type == undefined || type == "default")
+				{
+					aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes);
+				}
+				else
+				{
+					listOfScenes2Attract = new Vector.<RefScene2Attract>();
+					for each (var refScene2Attract:XML in point.listOfScenes2Attract)
+					{
+						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIndex))
+					}
+					
+					aObjCtrPoint.addPointAttractRepulse(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract);
+				}				
 			}
 			
 			aObjCtrPoint.finishedReadingListOfPoints();

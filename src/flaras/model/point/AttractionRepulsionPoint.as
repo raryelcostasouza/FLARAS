@@ -41,6 +41,11 @@ package flaras.model.point
 			_listOfScenes2Attract = new Vector.<RefScene2Attract>();
 		}		
 		
+		public function setListOfScenes2Attract(pListOfScenes2Attract:Vector.<RefScene2Attract>):void
+		{
+			_listOfScenes2Attract = pListOfScenes2Attract;
+		}
+		
 		public function getListOfScenes2Attract():Vector.<RefScene2Attract>
 		{
 			return _listOfScenes2Attract;
