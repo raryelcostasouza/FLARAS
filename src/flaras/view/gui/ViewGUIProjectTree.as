@@ -353,7 +353,15 @@ package flaras.view.gui
 			resetTree();
 			for each (var p:Point in listOfPoints) 
 			{
-				pointNode = new DefaultMutableTreeNode("Point " + (_root.getChildCount() + 1) +": " + p.getLabel());
+				if (p is AttractionRepulsionPoint)
+				{
+					pointNode = new DefaultMutableTreeNode("Point (A/R) " + (_root.getChildCount() + 1) +": " + p.getLabel());
+				}
+				else
+				{
+					pointNode = new DefaultMutableTreeNode("Point " + (_root.getChildCount() + 1) +": " + p.getLabel());
+				}
+				
 				_root.insert(pointNode, _root.getChildCount());
 				for each (var scene:FlarasScene in p.getListOfFlarasScenes()) 
 				{
