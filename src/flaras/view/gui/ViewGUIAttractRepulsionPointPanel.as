@@ -30,6 +30,7 @@
 package flaras.view.gui 
 {
 	import flaras.controller.*;
+	import flaras.model.point.RefScene2Attract;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
@@ -129,7 +130,27 @@ package flaras.view.gui
 			sceneLabel = _ctrGUI.getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
 			
 			_ctrGUI.getCtrMain().ctrPoint.updateAddScene2AttractList(_ctrGUI.getCurrentSelectedPoint2(), indexPoint, indexScene);
-			_vlm.append("P"+indexPoint + " ("+pointLabel+")" + " S"+indexScene + " ("+sceneLabel+")");
+			_vlm.append("P"+ (indexPoint+1) + " ("+pointLabel+")" + " S"+(indexScene+1) + " ("+sceneLabel+")");
+		}
+		
+		public function fillListOfScenes2Attract(pListOfScenes2Attract:Vector.<RefScene2Attract>):void
+		{
+			var pointLabel:String;
+			var sceneLabel:String;
+			var indexPoint:uint;
+			var indexScene:uint;
+			
+			_vlm.clear();
+			for each(var objRefScene2Attract:RefScene2Attract in pListOfScenes2Attract)
+			{
+				indexPoint = objRefScene2Attract.getIndexPoint();
+				indexScene = objRefScene2Attract.getIndexScene();
+				
+				pointLabel = _ctrGUI.getCtrMain().ctrPoint.getLabel(indexPoint);
+				sceneLabel = _ctrGUI.getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
+			
+				_vlm.append("P"+ (indexPoint+1) + " ("+pointLabel+")" + " S"+(indexScene+1) + " ("+sceneLabel+")");
+			}
 		}
 	}
 }
