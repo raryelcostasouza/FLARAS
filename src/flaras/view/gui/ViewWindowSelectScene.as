@@ -97,14 +97,20 @@ package flaras.view.gui
 		private function listenerSelection(e:Event):void
 		{
 			var node:DefaultMutableTreeNode;
-			var prefix:String;
+			var prefixNode:String;
+			var parentNode:DefaultMutableTreeNode;
+			var prefixParentNode:String;
 			
 			node = DefaultMutableTreeNode(_jtree.getLastSelectedPathComponent());			
+			
 			if (node != null)
 			{
-				prefix = ViewGUIProjectTree.getLabelPrefix(node.getUserObject());
+				parentNode = DefaultMutableTreeNode(node.getParent());
+				
+				prefixNode = ViewGUIProjectTree.getLabelPrefix(node.getUserObject());
+				prefixParentNode = ViewGUIProjectTree.getLabelPrefix(parentNode.getUserObject());
 			
-				if (prefix.indexOf("Scene") != -1)
+				if (prefixNode.indexOf("Scene") != -1 && prefixParentNode.indexOf("Point (A/R)") == -1 )
 				{
 					_jbAddScene.setEnabled(true);
 				}
