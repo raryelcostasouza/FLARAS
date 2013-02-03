@@ -29,6 +29,7 @@
 
 package flaras.view.gui 
 {
+	import flaras.controller.CtrGUI;
 	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.tree.*;
@@ -38,10 +39,13 @@ package flaras.view.gui
 		private var _jtree:JTree;
 		private var _jbAddScene:JButton;
 		private var _panelAttractRepulsion:ViewGUIAttractRepulsionPointPanel;
+		private var _ctrGUI:CtrGUI;
 		
-		public function ViewWindowSelectScene(pProjectTree:JTree, pPanelAttractRepulsion:ViewGUIAttractRepulsionPointPanel)
+		public function ViewWindowSelectScene(pProjectTree:JTree, pPanelAttractRepulsion:ViewGUIAttractRepulsionPointPanel, pCtrGUI:CtrGUI)
 		{
 			super(null, "Select scene to attract", true);			
+			
+			_ctrGUI = pCtrGUI;
 			
 			_panelAttractRepulsion = pPanelAttractRepulsion;
 			
@@ -90,8 +94,7 @@ package flaras.view.gui
 			pointIndex = pointNode.getParent().getIndex(pointNode);
 			sceneIndex = selectedSceneNode.getParent().getIndex(selectedSceneNode);
 			
-			_panelAttractRepulsion.addScene2List(pointIndex, sceneIndex);
-			setVisible(false);
+			_ctrGUI.actionAddRefScene2Attract(pointIndex, sceneIndex);
 		}
 		
 		private function listenerSelection(e:Event):void

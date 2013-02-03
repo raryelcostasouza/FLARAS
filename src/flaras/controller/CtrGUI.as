@@ -346,6 +346,28 @@ package flaras.controller
 			_ctrMain.ctrPoint.updatePointPosition(indexPoint, new Number3D(x, y, z));
 		}
 		
+		public function actionAddRefScene2Attract(indexPoint:uint, indexScene:uint):void
+		{
+			var pointLabel:String;
+			var sceneLabel:String;
+			
+			pointLabel = getCtrMain().ctrPoint.getLabel(indexPoint);
+			sceneLabel = getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
+			
+			//if the scene is already on the list of scenes to attract
+			if (_ctrMain.ctrPoint.isSceneOnAttractionList(getCurrentSelectedPoint2(), indexPoint, indexScene))
+			{
+				MessageWindow.messageSceneAlreadyOnAttractList();
+			}
+			else
+			{
+				//if the scene is not on the list of scenes to attract
+				_gui.getPointAttractionRepulsionPanel().setVisibleWindowSelectScene(false);
+				getCtrMain().ctrPoint.updateAddScene2AttractList(getCurrentSelectedPoint2(), indexPoint, indexScene);
+				_gui.getPointAttractionRepulsionPanel().addRefScene2JList(indexPoint, pointLabel, indexScene, sceneLabel);
+			}		
+		}
+		
 		public function listenerRemovePoint(e:Event):void
 		{
 			JOptionPane.showMessageDialog("Confirmation", "Are you sure about deleting this point?\nAll child scenes will also be deleted.",

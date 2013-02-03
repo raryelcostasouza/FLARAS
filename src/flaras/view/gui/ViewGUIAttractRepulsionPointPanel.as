@@ -46,7 +46,7 @@ package flaras.view.gui
 		{
 			super(pCtrGUI);
 			
-			_windowSelectScene = new ViewWindowSelectScene(pProjectTree, this);
+			_windowSelectScene = new ViewWindowSelectScene(pProjectTree, this, pCtrGUI);
 			_tabProperties.remove(_jcbMovableScenes);
 			appendTab(buildTabAttractRepulsion(), "A/R", null, "Attraction/Repulsion");
 		}		
@@ -121,15 +121,8 @@ package flaras.view.gui
 			}			
 		}
 		
-		public function addScene2List(indexPoint:uint, indexScene:uint):void
+		public function addRefScene2JList(indexPoint:uint, pointLabel:String, indexScene:uint, sceneLabel:String):void
 		{
-			var pointLabel:String;
-			var sceneLabel:String;
-			
-			pointLabel = _ctrGUI.getCtrMain().ctrPoint.getLabel(indexPoint);
-			sceneLabel = _ctrGUI.getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
-			
-			_ctrGUI.getCtrMain().ctrPoint.updateAddScene2AttractList(_ctrGUI.getCurrentSelectedPoint2(), indexPoint, indexScene);
 			_vlm.append("P"+ (indexPoint+1) + " ("+pointLabel+")" + " S"+(indexScene+1) + " ("+sceneLabel+")");
 		}
 		
@@ -151,6 +144,11 @@ package flaras.view.gui
 			
 				_vlm.append("P"+ (indexPoint+1) + " ("+pointLabel+")" + " S"+(indexScene+1) + " ("+sceneLabel+")");
 			}
+		}
+		
+		public function setVisibleWindowSelectScene(pEnable:Boolean):void
+		{
+			_windowSelectScene.setVisible(pEnable);
 		}
 	}
 }

@@ -36,6 +36,13 @@ package flaras.view.gui
 	
 	public class MessageWindow 
 	{		
+		public static function messageSceneAlreadyOnAttractList():void
+		{
+			JOptionPane.showMessageDialog("Warning!", "The selected scene is alredy on the list\n"+ 
+														"of scenes to attract of this point.", 
+										null, null, true, new LoadIcon("icons/external/warning.png", 48, 48));
+		}
+		
 		public static function messageSelectScene2Remove():void
 		{
 			JOptionPane.showMessageDialog("Warning!", "Before clicking the remove button\n" +
