@@ -60,14 +60,5 @@ package flaras.model.scene
 			_radiusB = radiusB;
 			_rotationDirection = rotationDirection;
 		}
-		
-		public function clone():AnimationScene
-		{
-			var clone:AnimationScene;
-			
-			clone = new AnimationScene(_period, _rotationAxis, _radiusA, _radiusB, _rotationDirection);
-			
-			return clone;
-		}
 	}
 }

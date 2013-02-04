@@ -45,7 +45,9 @@ package flaras.model.scene
 		private var _rotation:Number3D;
 		private var _scale:Number3D;
 		
-		public function FlarasScene(selfReference:FlarasScene, parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, pLabel:String) 
+		private var _idNumber:uint;
+		
+		public function FlarasScene(selfReference:FlarasScene, parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, pLabel:String, pIDNumber:uint) 
 		{
 			//this constructor requires another Object3D as parameter, it is a workaround to forbid direct instantiation
 			//of the FlarasScene, simulating a Java abstract class behaviour.
@@ -60,6 +62,7 @@ package flaras.model.scene
 				_rotation = rotation;
 				_scale = scale;
 				_label = pLabel;
+				_idNumber = pIDNumber;
 			}
 		}
 		
@@ -159,7 +162,12 @@ package flaras.model.scene
 			_label = pLabel;
 		}
 		
-		public function clone():FlarasScene
+		public function getIDNumber():uint
+		{
+			return _idNumber;
+		}
+		
+		/*public function clone():FlarasScene
 		{
 			var clone:FlarasScene;
 			var obj3DScene:VirtualObjectScene;
@@ -195,6 +203,6 @@ package flaras.model.scene
 			}
 			
 			return clone;
-		}
+		}*/
 	}
 }

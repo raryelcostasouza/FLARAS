@@ -40,9 +40,9 @@ package flaras.model.scene
 		private var _width:Number;
 		private var _height:Number;
 		
-		public function VideoScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, videoFilePath:String, repeatVideo:Boolean, width:Number, height:Number, pLabel:String) 
+		public function VideoScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, videoFilePath:String, repeatVideo:Boolean, width:Number, height:Number, pLabel:String, pIDNumber:uint) 
 		{
-			super(this, parentPoint, translation, rotation, scale, pLabel);
+			super(this, parentPoint, translation, rotation, scale, pLabel, pIDNumber);
 			_videoFilePath = videoFilePath;
 			_repeatVideo = repeatVideo;
 			_width = width;

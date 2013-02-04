@@ -36,7 +36,6 @@ package flaras.controller
 	import flaras.model.scene.*;
 	import flaras.view.scene.*;
 	import flash.filesystem.*;
-	import flash.utils.ByteArray;
 	import org.papervision3d.core.math.*;
 	
 	public class CtrScene
@@ -90,6 +89,32 @@ package flaras.controller
 			_listOfViewFlarasScenes.push(buildViewScene(scene));
 		}
 		
+		private function generateIDNumber():uint
+		{
+			var id:uint;
+			
+			id = 0;
+			do
+			{
+				id++;
+				
+			}while (!isGeneratedIDUnique(id));
+			
+			return id;
+		}
+		
+		private function isGeneratedIDUnique(pGeneratedID:uint):Boolean
+		{
+			for each (var s:FlarasScene in _listOfScenes2)
+			{
+				if (s.getIDNumber() == pGeneratedID)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		private static function absScale(scale:Number3D):Number3D
 		{
 			return new Number3D(Math.abs(scale.x), Math.abs(scale.y), Math.abs(scale.z));
@@ -106,17 +131,17 @@ package flaras.controller
 			if (pHasVideo)
 			{
 				flarasScene = new VideoScene(_point, pTranslation, pRotation, absScale(pScale), pVideoPath,
-					pRepeatVideo, pVideoWidth, pVideoHeight, pLabel);
+					pRepeatVideo, pVideoWidth, pVideoHeight, pLabel, generateIDNumber());
 			}
 			else if (pHasTexture)
 			{
 				flarasScene = new TextureScene(_point, pTranslation, pRotation, absScale(pScale), pTexturePath,
-					pTextureWidth, pTextureHeight, pLabel);
+					pTextureWidth, pTextureHeight, pLabel, generateIDNumber());
 			}
 			else
 			{
 				flarasScene = new VirtualObjectScene(_point, pTranslation, pRotation, absScale(pScale),
-					pFilePath, pLabel);
+					pFilePath, pLabel, generateIDNumber());
 			}
 			
 			if (pHasAudio)
@@ -316,10 +341,44 @@ package flaras.controller
 			var newUniqueName:String;
 			var obj3dCompleteFilePath:String;
 			var audioScene:AudioScene;
+			var animationScene:AnimationScene;
+		
+			var obj3DScene:VirtualObjectScene;
+			var textureScene:TextureScene;
+			var videoScene:VideoScene;
 			
 			scene2Clone = getScene(pIndexScene);
 			
-			clone = scene2Clone.clone();
+			//clone = scene2Clone.clone();
+			if (scene2Clone is VirtualObjectScene)
+			{
+				obj3DScene = VirtualObjectScene(scene2Clone);
+				clone = new VirtualObjectScene(scene2Clone.getParentPoint(), scene2Clone.getTranslation(), scene2Clone.getRotation(), scene2Clone.getScale(), obj3DScene.getPath3DObjectFile(), scene2Clone.getLabel(), generateIDNumber());
+			}
+			else if (scene2Clone is TextureScene)
+			{
+				textureScene = TextureScene(scene2Clone);
+				clone = new TextureScene(scene2Clone.getParentPoint(), scene2Clone.getTranslation(), scene2Clone.getRotation(), scene2Clone.getScale(), textureScene.getTextureFilePath(), textureScene.getWidth(), textureScene.getHeight(), scene2Clone.getLabel(), generateIDNumber());
+			}
+			else
+			{
+				videoScene = VideoScene(scene2Clone);
+				clone = new VideoScene(scene2Clone.getParentPoint(), scene2Clone.getTranslation(), scene2Clone.getRotation(), scene2Clone.getScale(), videoScene.getVideoFilePath(), videoScene.getRepeatVideo(), videoScene.getWidth(), videoScene.getHeight(), scene2Clone.getLabel(), generateIDNumber());
+			}
+			
+			//if this scene has audio
+			audioScene = scene2Clone.getAudio();
+			if (audioScene)
+			{
+				clone.setAudio(new AudioScene(scene2Clone, audioScene.getAudioFilePath(), audioScene.getRepeatAudio()));
+			}
+			
+			//if this scene has animation
+			animationScene = scene2Clone.getAnimation();
+			if (animationScene)
+			{
+				clone.setAnimation(new AnimationScene(animationScene.getPeriod(), animationScene.getRotationAxis(), animationScene.getRadiusA(), animationScene.getRadiusB(), animationScene.getRotationDirection()));
+			}
 			
 			//copy (with unique name) the file (jpg, png, dae, 3ds, mp3, mp4, flv, etc) associated with the scene
 			if (scene2Clone is TextureScene)
@@ -339,7 +398,6 @@ package flaras.controller
 				VirtualObjectScene(clone).set3DObjPath(FolderConstants.COLLADA_FOLDER + newUniqueName);
 			}
 			
-			audioScene = scene2Clone.getAudio();
 			if (audioScene)
 			{
 				newUniqueName = FileCopy.copyUniqueName(new File(FolderConstants.getFlarasAppCurrentFolder() + "/" + audioScene.getAudioFilePath()), false);

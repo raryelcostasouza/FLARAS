@@ -61,15 +61,6 @@ package flaras.model.scene
 		public function setRepeatAudio(repeatAudio:Boolean):void 
 		{
 			_repeatAudio = repeatAudio;
-		}	
-		
-		public function clone():AudioScene
-		{
-			var clone:AudioScene;
-			
-			clone = new AudioScene(_parentFlarasScene, _audioFilePath, _repeatAudio);
-			
-			return clone;
 		}
 	}
 }

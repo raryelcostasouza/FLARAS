@@ -39,9 +39,9 @@ package flaras.model.scene
 	{
 		private var _path3DObjectFile:String;
 		
-		public function VirtualObjectScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, path3DObjectFile:String, pLabel:String) 
+		public function VirtualObjectScene(parentPoint:Point, translation:Number3D, rotation:Number3D, scale:Number3D, path3DObjectFile:String, pLabel:String, pIDNumber:uint) 
 		{
-			super(this, parentPoint, translation, rotation, scale, pLabel);
+			super(this, parentPoint, translation, rotation, scale, pLabel, pIDNumber);
 			_path3DObjectFile = path3DObjectFile;
 		}	
 		
