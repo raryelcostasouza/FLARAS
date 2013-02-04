@@ -187,6 +187,7 @@ package flaras.controller.io.fileSaver
 				var newNode:XML = new XML();
 				newNode = 
 				<object3D>
+					<idNumber>{scene.getIDNumber()}</idNumber>
 					<label>{label}</label>
 					<filePath>{pathObj3D}</filePath>
 					<translation>
