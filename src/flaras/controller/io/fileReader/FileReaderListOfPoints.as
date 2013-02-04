@@ -98,7 +98,7 @@ package flaras.controller.io.fileReader
 				else
 				{
 					listOfScenes2Attract = new Vector.<RefScene2Attract>();
-					for each (var refScene2Attract:XML in point.listOfScenes2Attract)
+					for each (var refScene2Attract:XML in point.listOfScenes2Attract.refScene2Attract)
 					{
 						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIndex))
 					}
