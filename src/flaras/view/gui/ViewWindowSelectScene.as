@@ -106,7 +106,8 @@ package flaras.view.gui
 			
 			node = DefaultMutableTreeNode(_jtree.getLastSelectedPathComponent());			
 			
-			if (node != null)
+			//node.getParent() != null -> the node is not Ref. Marker, which is the root
+			if (node != null && node.getParent()!=null)
 			{
 				parentNode = DefaultMutableTreeNode(node.getParent());
 				
