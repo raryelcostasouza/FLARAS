@@ -100,7 +100,7 @@ package flaras.controller.io.fileReader
 					listOfScenes2Attract = new Vector.<RefScene2Attract>();
 					for each (var refScene2Attract:XML in point.listOfScenes2Attract.refScene2Attract)
 					{
-						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIndex))
+						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIDNumber))
 					}
 					
 					aObjCtrPoint.addPointAttractRepulseFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract);

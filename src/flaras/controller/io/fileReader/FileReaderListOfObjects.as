@@ -80,7 +80,7 @@ package flaras.controller.io.fileReader
 				var flarasTempFolder:File;
 				var newFilePath:String;
 				var label:String;	
-				var idNumber:uint;
+				var idNumber:int;
 				
 				//old flaras project withoud animation support
 				if (obj3D.animation.hasAnimation == undefined)
@@ -160,7 +160,7 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, label, -1, true);
+												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, label, idNumber, true);
 			}
 			aObjCtrPoint.finishedReadingListOfScenes();
 		}

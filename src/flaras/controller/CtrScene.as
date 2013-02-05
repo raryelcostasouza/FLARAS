@@ -679,6 +679,29 @@ package flaras.controller
 			}
 		}
 		
+		public function getIDNumber(pIndexScene:uint):uint
+		{
+			return _listOfScenes2[pIndexScene].getIDNumber();
+		}
+		
+		public function getSceneIndexFromIDNumber(pIDNumber:uint):int
+		{
+			var i:uint;
+			i = 0;
+			for each(var scene:FlarasScene in _listOfScenes2)
+			{
+				if (scene.getIDNumber() == pIDNumber)
+				{
+					return i;
+				}
+				else
+				{
+					i++;
+				}
+			}
+			return -1;
+		}
+		
 		public function getLabel(pIndexScene:uint):String
 		{
 			return _listOfScenes2[pIndexScene].getLabel();

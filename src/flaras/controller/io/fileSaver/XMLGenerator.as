@@ -146,7 +146,7 @@ package flaras.controller.io.fileSaver
 					newNode = 
 					<refScene2Attract>
 						<pointIndex>{objRef.getIndexPoint()}</pointIndex>
-						<sceneIndex>{objRef.getIndexScene()}</sceneIndex>
+						<sceneIDNumber>{objRef.getSceneIDNumber()}</sceneIDNumber>
 					</refScene2Attract>
 					
 					xml = xml.appendChild(newNode);

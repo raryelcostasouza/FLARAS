@@ -164,7 +164,7 @@ package flaras.controller
 			return _listOfPoints[indexPoint].isMoveInteractionForScenes();
 		}
 		
-		public function isSceneOnAttractionList(indexAttractionPoint:uint, indexOfScenePoint:uint, indexOfScene:uint):Boolean
+		public function isSceneOnAttractionList(indexAttractionPoint:uint, indexOfScenePoint:uint, sceneIDNumber:uint):Boolean
 		{
 			var attractionPoint:AttractionRepulsionPoint;
 			
@@ -172,7 +172,7 @@ package flaras.controller
 			
 			for each (var ref:RefScene2Attract in attractionPoint.getListOfScenes2Attract())
 			{
-				if (ref.getIndexPoint() == indexOfScenePoint && ref.getIndexScene() == indexOfScene)
+				if (ref.getIndexPoint() == indexOfScenePoint && ref.getSceneIDNumber() == sceneIDNumber)
 				{
 					return true;
 				}
@@ -302,12 +302,12 @@ package flaras.controller
 			}
 		}
 
-		public function updateAddScene2AttractList(indexAttractionPoint:uint, indexPoint2Attract:uint, indexScene2Attract:uint):void
+		public function updateAddScene2AttractList(indexAttractionPoint:uint, indexPoint2Attract:uint, sceneIDNumber:uint):void
 		{
 			var objRefScene2Attract:RefScene2Attract;
 			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
 			
-			objRefScene2Attract = new RefScene2Attract(indexPoint2Attract, indexScene2Attract);
+			objRefScene2Attract = new RefScene2Attract(indexPoint2Attract, sceneIDNumber);
 			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
 			
 			objAttractionRepulsionPoint.getListOfScenes2Attract().push(objRefScene2Attract);			
