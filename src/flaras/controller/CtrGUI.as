@@ -655,59 +655,9 @@ package flaras.controller
 				listOfSceneLabels.push(_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).getLabel(i));
 			}
 			
-			//updateListOfScenes2AttractAfterSwap(getCurrentSelectedPoint2(), getCurrentSelectedScene2(), pos2Swap-1);
-			
 			_gui.getTreePanel().rebuildPointBranch(getCurrentSelectedPoint2(), listOfSceneLabels);
 			_gui.getTreePanel().selectPoint(point2Swap);
 		}
-		
-		/*private function updateListOfScenes2AttractAfterSwap(pointIndex:uint, sourceSceneIndex:uint, destSceneIndex:uint ):void
-		{
-			trace("source", sourceSceneIndex);
-			trace("dest", destSceneIndex);
-			
-			if (sourceSceneIndex < destSceneIndex)
-			{
-				//when a scene is swapped to another position on the scene list other scenes (all the scenes that were between the sourceIndex and destinationIndex)  are also swapped (offset of -1)
-				//the following loop will update any existing references to the intermediate scenes that were also changed of index during the swap operation 				
-				for (var i:uint = sourceSceneIndex +1; i <= destSceneIndex; i++)
-				{
-					trace(i, i - 1);
-					updateRefScene2AttractAfterSwap(pointIndex, i, i-1);
-				}			
-			}
-			else if (sourceSceneIndex > destSceneIndex)
-			{
-				//when a scene is swapped to another position on the scene list other scenes (all the scenes that were between the sourceIndex and destinationIndex)  are also swapped (offset of +1)
-				//the following loop will update any existing references to the intermediate scenes that were also changed of index during the swap operation 				
-				for (var j:uint = sourceSceneIndex -1; j >= destSceneIndex; j--)
-				{
-					updateRefScene2AttractAfterSwap(pointIndex, j, j+1);
-				}
-			}
-			updateRefScene2AttractAfterSwap(pointIndex, sourceSceneIndex, destSceneIndex);
-		}*/
-		
-		/*private function updateRefScene2AttractAfterSwap(pointIndex:uint, sourceSceneIndex:uint, destSceneIndex:uint):void
-		{
-			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
-			
-			for each (var p:Point in _ctrMain.ctrPoint.getListOfPoints())
-			{
-				if (p is AttractionRepulsionPoint)
-				{
-					objAttractionRepulsionPoint = AttractionRepulsionPoint(p);
-					for each (var objRefScene2Attract:RefScene2Attract in objAttractionRepulsionPoint.getListOfScenes2Attract())
-					{
-						if (objRefScene2Attract.getIndexPoint() == pointIndex && 
-							objRefScene2Attract.getSceneIDNumber() == sourceSceneIndex)
-							{
-								objRefScene2Attract.setIndexScene(destSceneIndex);
-							}
-					}					
-				}				
-			}
-		}*/
 		
 		public function listenerCloneScene(e:Event):void
 		{
