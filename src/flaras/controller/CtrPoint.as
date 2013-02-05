@@ -313,6 +313,29 @@ package flaras.controller
 			objAttractionRepulsionPoint.getListOfScenes2Attract().push(objRefScene2Attract);			
 		}
 		
+		public function updateRemoveSceneFromAttractListAfterRemoveScene(indexPoint2Attract:uint, sceneIDNumber:uint):void
+		{
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
+			var indexRefScene2Attract:uint;
+			
+			for each(var p:Point in _listOfPoints)
+			{
+				if (p is AttractionRepulsionPoint)
+				{
+					objAttractionRepulsionPoint = AttractionRepulsionPoint(p);
+					indexRefScene2Attract = 0;
+					for each(var objRefScene2Attract:RefScene2Attract in objAttractionRepulsionPoint.getListOfScenes2Attract())
+					{
+						if (objRefScene2Attract.getIndexPoint() == indexPoint2Attract && objRefScene2Attract.getSceneIDNumber() == sceneIDNumber)
+						{
+							objAttractionRepulsionPoint.getListOfScenes2Attract().splice(indexRefScene2Attract, 1);
+						}
+						indexRefScene2Attract++;
+					}
+				}
+			}
+		}
+		
 		public function updateRemoveSceneFromAttractList(indexAttractionPoint:uint, indexRefScene2Attract:uint):void
 		{
 			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
