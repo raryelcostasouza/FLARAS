@@ -362,7 +362,6 @@ package flaras.controller
 			
 			scene2Clone = getScene(pIndexScene);
 			
-			//clone = scene2Clone.clone();
 			if (scene2Clone is VirtualObjectScene)
 			{
 				obj3DScene = VirtualObjectScene(scene2Clone);
