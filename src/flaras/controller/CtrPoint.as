@@ -307,6 +307,8 @@ package flaras.controller
 			var objRefScene2Attract:RefScene2Attract;
 			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
 			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
 			objRefScene2Attract = new RefScene2Attract(indexPoint2Attract, sceneIDNumber);
 			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
 			
@@ -339,6 +341,8 @@ package flaras.controller
 		public function updateRemoveSceneFromAttractList(indexAttractionPoint:uint, indexRefScene2Attract:uint):void
 		{
 			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
 			
 			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
 			objAttractionRepulsionPoint.getListOfScenes2Attract().splice(indexRefScene2Attract, 1);
