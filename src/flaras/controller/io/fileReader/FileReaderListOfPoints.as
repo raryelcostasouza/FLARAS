@@ -97,6 +97,7 @@ package flaras.controller.io.fileReader
 				}
 				else
 				{
+					//if is an attraction/repulsion point
 					listOfScenes2Attract = new Vector.<RefScene2Attract>();
 					for each (var refScene2Attract:XML in point.listOfScenes2Attract.refScene2Attract)
 					{
