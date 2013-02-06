@@ -155,7 +155,6 @@ package flaras.view.gui
 		
 		public function updatePointLabel(pNewLabel:String):void
 		{
-			trace("Label",pNewLabel);
 			var node:DefaultMutableTreeNode;
 			var index:uint;
 			
