@@ -360,6 +360,8 @@ package flaras.controller
 			var textureScene:TextureScene;
 			var videoScene:VideoScene;
 			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
 			scene2Clone = getScene(pIndexScene);
 			
 			if (scene2Clone is VirtualObjectScene)
