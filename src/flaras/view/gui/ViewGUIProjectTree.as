@@ -87,15 +87,15 @@ package flaras.view.gui
 			_tree.updateUI();
 		}
 		
-		public function removePoint(pointID:uint):void
+		public function removePoint(pointID:uint, pListOfPoints:Vector.<Point>):void
 		{
 			_root.removeAt(pointID);
 			_tree.setSelectionPath(new TreePath([_root]));
-			renumberPointLabelPrefix();
+			renumberPointLabelPrefix(pListOfPoints);
 			_tree.updateUI();
 		}
 		
-		private function renumberPointLabelPrefix():void
+		private function renumberPointLabelPrefix(pListOfPoints:Vector.<Point>):void
 		{
 			var node:DefaultMutableTreeNode;
 			var userLabel:String;
@@ -106,7 +106,15 @@ package flaras.view.gui
 				node = DefaultMutableTreeNode(_root.getChildAt(i));
 				userLabel = getLabelSufix(String(node.getUserObject()));
 				
-				newPrefix = "Point " + (i + 1) + ":";
+				if (pListOfPoints[i] is AttractionRepulsionPoint)
+				{
+					newPrefix = "Point (A/R) " + (i + 1) + ":";
+				}
+				else
+				{
+					newPrefix = "Point " + (i + 1) + ":";
+				}
+				
 				node.setUserObject(newPrefix + userLabel);
 			}
 		}
