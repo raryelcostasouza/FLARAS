@@ -29,7 +29,7 @@
 
 package flaras.model.point 
 {
-	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.*;
 	public class AttractionRepulsionPoint extends Point
 	{
 		private var _listOfScenes2Attract:Vector.<RefScene2Attract>;
@@ -40,6 +40,12 @@ package flaras.model.point
 			
 			_listOfScenes2Attract = new Vector.<RefScene2Attract>();
 		}		
+		
+		public function destroy():void
+		{
+			super.destroy();
+			_listOfScenes2Attract = null;
+		}
 		
 		public function setListOfScenes2Attract(pListOfScenes2Attract:Vector.<RefScene2Attract>):void
 		{
