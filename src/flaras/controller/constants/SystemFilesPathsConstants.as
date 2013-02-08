@@ -29,6 +29,7 @@
 
 package flaras.controller.constants 
 {
+	import flaras.controller.util.StageReference;
 	//paths of the media files used in flaras
 	public class SystemFilesPathsConstants 
 	{
@@ -42,6 +43,9 @@ package flaras.controller.constants
 		public static const AUDIO_PATH_CONTROL_BACKWARD_MARKER:String = "system-audios/controlBackward.mp3";
 		public static const AUDIO_PATH_CONTROL_FORWARD_MARKER:String = "system-audios/controlForward.mp3";
 		public static const AUDIO_PATH_INTERACTION_POINT_UNLOCK:String = "system-audios/point-interaction-unlock.mp3";
+		
+		public static const AUDIO_PATH_ATTRACTION:String = "system-audios/attraction.mp3";
+		public static const AUDIO_PATH_REPULSION:String = "system-audios/repulsion.mp3";
 		
 		public static const TEXTURE_PATH_INSPECTOR_MARKER:String = "system-textures/inspector.jpg";
 		public static const TEXTURE_PATH_CONTROL_FORWARD_MARKER:String = "system-textures/control-forward.jpg";
