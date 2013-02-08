@@ -30,6 +30,8 @@
 package flaras.view.scene 
 {
 	import flaras.controller.*;
+	import flaras.controller.audio.AudioManager;
+	import flaras.controller.constants.SystemFilesPathsConstants;
 	import flaras.controller.util.*;
 	import flaras.model.*;
 	import flaras.model.point.AttractionRepulsionPoint;
@@ -402,14 +404,16 @@ package flaras.view.scene
 					distPoint2Scene = distance(pointPosition, _obj3D.position);					
 					if (distPoint2Scene < 100)
 					{
-						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getIndexOnList(), pointIndex, sceneIDNumber))
+						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getIndexOnList(), _ctrMain.ctrPoint.getIDNumber(pointIndex), sceneIDNumber))
 						{
 							//attract
+							AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_ATTRACTION);
 							_obj3D.position = pointPosition;
 						}
 						else
 						{
 							//repulse
+							AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_REPULSION);
 							resetScenePosition();
 						}
 						stopDragXY(null);	
