@@ -41,7 +41,7 @@ package flaras.model.point
 			_listOfScenes2Attract = new Vector.<RefScene2Attract>();
 		}		
 		
-		public function destroy():void
+		override public function destroy():void
 		{
 			super.destroy();
 			_listOfScenes2Attract = null;
