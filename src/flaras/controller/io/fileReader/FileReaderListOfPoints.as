@@ -63,6 +63,7 @@ package flaras.controller.io.fileReader
 			var label:String;
 			var moveInteractionForScenes:Boolean;
 			var type:String;
+			var idNumber:int;
 			var listOfScenes2Attract:Vector.<RefScene2Attract>;
 			
 			e.target.removeEventListener(Event.COMPLETE, onComplete);
@@ -91,9 +92,18 @@ package flaras.controller.io.fileReader
 					moveInteractionForScenes = Boolean(parseInt(point.moveInteractionForScenes));
 				}
 				
+				if (point.idNumber == undefined)
+				{
+					idNumber = -1;
+				}
+				else
+				{
+					idNumber = parseInt(point.idNumber);
+				}
+				
 				if (point.type == undefined || point.type == "default")
 				{
-					aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes);
+					aObjCtrPoint.addPointFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, moveInteractionForScenes, idNumber);
 				}
 				else
 				{
@@ -104,7 +114,7 @@ package flaras.controller.io.fileReader
 						listOfScenes2Attract.push(new RefScene2Attract(refScene2Attract.pointIndex, refScene2Attract.sceneIDNumber))
 					}
 					
-					aObjCtrPoint.addPointAttractRepulseFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract);
+					aObjCtrPoint.addPointAttractRepulseFromXML(new Number3D(point.position.x, point.position.y, point.position.z), label, true, listOfScenes2Attract, idNumber);
 				}				
 			}			
 			aObjCtrPoint.finishedReadingListOfPoints();

@@ -44,7 +44,8 @@ package flaras.model.point
 	
 	public class Point
 	{		
-		private var _id:uint;
+		private var _idNumber:uint;
+		private var _indexOnList:uint;
 		private var _enabled:Boolean;
 		private var _indexActiveScene:int = 0;
 		private var _indexLastActiveScene:int = 0;
@@ -55,15 +56,17 @@ package flaras.model.point
 		private var _listOfFlarasScenes:Vector.<FlarasScene>;
 		private var _moveInteractionForScenes:Boolean;
 		
-		public function Point(pID:uint, pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean)
+		public function Point(pIndexOnList:uint, pPosition:Number3D, pLabel:String, pMoveInteractionForScenes:Boolean, pIDNumber:uint)
 		{
 			_listOfFlarasScenes = new Vector.<FlarasScene>();
 			
 			_label = pLabel;
-			_id = pID;
+			_indexOnList = pIndexOnList;
 			_enabled = false;
 			_position = pPosition;
 			_moveInteractionForScenes = pMoveInteractionForScenes;
+			
+			_idNumber = pIDNumber;
 		}
 		
 		public function destroy():void
@@ -103,14 +106,19 @@ package flaras.model.point
 			_interactionLock = pInteractionLock;
 		}
 		
-		public function getID():uint
+		public function getIndexOnList():uint
 		{
-			return _id;
+			return _indexOnList;
 		}
 		
-		public function setID(pID:uint):void
+		public function setIndexOnList(pIndexOnList:uint):void
 		{
-			_id = pID;
+			_indexOnList = pIndexOnList;
+		}
+		
+		public function getIDNumber():uint
+		{
+			return _idNumber;
 		}
 		
 		public function isEnabled():Boolean
@@ -155,7 +163,7 @@ package flaras.model.point
 		
 		public function getFilePathListOfObjects():String
 		{
-			return XMLFilesConstants.LIST_OF_OBJECTS_SEMI_COMPLETE_PATH + getID() + ".xml";
+			return XMLFilesConstants.LIST_OF_OBJECTS_SEMI_COMPLETE_PATH + getIndexOnList() + ".xml";
 		}
 		
 		public function getListOfFlarasScenes():Vector.<FlarasScene>

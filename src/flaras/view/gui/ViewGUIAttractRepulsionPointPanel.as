@@ -131,15 +131,17 @@ package flaras.view.gui
 			var pointLabel:String;
 			var sceneLabel:String;
 			var indexPoint:uint;
+			var pointIDNumber:uint;
 			var sceneIDNumber:uint;
 			var indexScene:uint;
 			
 			_vlm.clear();
 			for each(var objRefScene2Attract:RefScene2Attract in pListOfScenes2Attract)
 			{
-				indexPoint = objRefScene2Attract.getIndexPoint();
+				pointIDNumber = objRefScene2Attract.getPointIDNumber();
 				sceneIDNumber = objRefScene2Attract.getSceneIDNumber();
 				
+				indexPoint = _ctrGUI.getCtrMain().ctrPoint.getPointIndexFromIDNumber(pointIDNumber);
 				pointLabel = _ctrGUI.getCtrMain().ctrPoint.getLabel(indexPoint);
 				
 				indexScene = _ctrGUI.getCtrMain().ctrPoint.getCtrScene(indexPoint).getSceneIndexFromIDNumber(sceneIDNumber);

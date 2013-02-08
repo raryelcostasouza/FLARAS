@@ -114,6 +114,7 @@ package flaras.controller.io.fileSaver
 				var newNode:XML = new XML();
 				newNode = 
 				<point>
+					<idNumber>{p.getIDNumber()}</idNumber>
 					<type>{type}</type>
 					<label>{label}</label>
 					<moveInteractionForScenes>{moveInteractionForScenes}</moveInteractionForScenes>
@@ -145,7 +146,7 @@ package flaras.controller.io.fileSaver
 				{
 					newNode = 
 					<refScene2Attract>
-						<pointIndex>{objRef.getIndexPoint()}</pointIndex>
+						<pointIndex>{objRef.getPointIDNumber()}</pointIndex>
 						<sceneIDNumber>{objRef.getSceneIDNumber()}</sceneIDNumber>
 					</refScene2Attract>
 					

@@ -34,9 +34,9 @@ package flaras.model.point
 	{
 		private var _listOfScenes2Attract:Vector.<RefScene2Attract>;
 		
-		public function AttractionRepulsionPoint(pID:uint, pPosition:Number3D, pLabel:String ) 
+		public function AttractionRepulsionPoint(pIndexPoint:uint, pPosition:Number3D, pLabel:String, pIDNumber:uint ) 
 		{
-			super(pID, pPosition, pLabel, false);
+			super(pIndexPoint, pPosition, pLabel, false, pIDNumber);
 			
 			_listOfScenes2Attract = new Vector.<RefScene2Attract>();
 		}		

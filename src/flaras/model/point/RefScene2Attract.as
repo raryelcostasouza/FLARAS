@@ -2,18 +2,16 @@ package flaras.model.point
 {
 	public class RefScene2Attract 
 	{
-		private var _indexPoint:uint;
+		private var _pointIDNumber:uint;
 		private var _sceneIDNumber:uint;
 		
-		public function RefScene2Attract(pIndexPoint:uint, pSceneIDNumber:uint) 
+		public function RefScene2Attract(pPointIDNumber:uint, pSceneIDNumber:uint) 
 		{
-			_indexPoint = pIndexPoint;
+			_pointIDNumber = pPointIDNumber;
 			_sceneIDNumber = pSceneIDNumber;
 		}
 		
-		public function getIndexPoint():uint { return _indexPoint; }
+		public function getPointIDNumber():uint { return _pointIDNumber; }
 		public function getSceneIDNumber():uint { return _sceneIDNumber; }
-		
-		
 	}
 }

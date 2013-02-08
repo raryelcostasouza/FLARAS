@@ -309,7 +309,7 @@ package flaras.controller
 			flarasScene = getScene(indexScene);
 			viewFlarasScene = getViewScene(indexScene);
 			
-			_ctrMain.ctrPoint.updateRemoveSceneFromAttractListAfterRemoveScene(_point.getID(), flarasScene.getIDNumber());		
+			_ctrMain.ctrPoint.updateRemoveSceneFromAttractListAfterRemoveScene(_point.getIDNumber(), flarasScene.getIDNumber());		
 			
 			_listOfScenes2.splice(indexScene, 1);
 			_listOfViewFlarasScenes.splice(indexScene, 1);

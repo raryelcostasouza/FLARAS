@@ -275,7 +275,7 @@ package flaras.controller
 		
 		public function listenerAddPointAttractRepulse(e:Event):void
 		{
-			_ctrMain.ctrPoint.addPointAttractRepulse(Number3D.ZERO, "", false);
+			_ctrMain.ctrPoint.addPointAttractRepulse(Number3D.ZERO, "", -1, false);
 			_gui.getTreePanel().addPointAttractRepulse();
 			_gui.getTreePanel().selectPoint(_ctrMain.ctrPoint.getNumberOfPoints() -1);
 		}
@@ -350,14 +350,18 @@ package flaras.controller
 		{
 			var pointLabel:String;
 			var sceneLabel:String;
+			
+			var pointIDNumber:uint;
 			var sceneIDNumber:uint;
 			
 			pointLabel = getCtrMain().ctrPoint.getLabel(indexPoint);
 			sceneLabel = getCtrMain().ctrPoint.getCtrScene(indexPoint).getLabel(indexScene);
+			
+			pointIDNumber = getCtrMain().ctrPoint.getIDNumber(indexPoint);
 			sceneIDNumber = getCtrMain().ctrPoint.getCtrScene(indexPoint).getIDNumber(indexScene);
 			
 			//if the scene is already on the list of scenes to attract
-			if (_ctrMain.ctrPoint.isSceneOnAttractionList(getCurrentSelectedPoint2(), indexPoint, sceneIDNumber))
+			if (_ctrMain.ctrPoint.isSceneOnAttractionList(getCurrentSelectedPoint2(), pointIDNumber, sceneIDNumber))
 			{
 				MessageWindow.messageSceneAlreadyOnAttractList();
 			}
@@ -365,7 +369,7 @@ package flaras.controller
 			{
 				//if the scene is not on the list of scenes to attract
 				_gui.getPointAttractionRepulsionPanel().setVisibleWindowSelectScene(false);
-				getCtrMain().ctrPoint.updateAddScene2AttractList(getCurrentSelectedPoint2(), indexPoint, sceneIDNumber);
+				getCtrMain().ctrPoint.updateAddScene2AttractList(getCurrentSelectedPoint2(), pointIDNumber, sceneIDNumber);
 				_gui.getPointAttractionRepulsionPanel().addRefScene2JList(indexPoint, pointLabel, indexScene, sceneLabel);
 			}		
 		}
@@ -379,7 +383,7 @@ package flaras.controller
 		public function listenerConfirmedRemovePoint(e:Event):void
 		{
 			_ctrMain.ctrPoint.removePoint(getCurrentSelectedPoint2());
-			_gui.getTreePanel().removePoint(getCurrentSelectedPoint2());
+			_gui.getTreePanel().removePoint(getCurrentSelectedPoint2(), _ctrMain.ctrPoint.getListOfPoints());
 		}
 		
 		public function listenerAddObj3DScene(e:Event):void
@@ -697,12 +701,10 @@ package flaras.controller
 		{
 			var pointTranslation:Number3D;
 			var label:String;
-			var moveInteractionForScenes:Boolean;
 			var objAttractionRepulsionPoint:AttractionRepulsionPoint;		
 			
 			pointTranslation = _ctrMain.ctrPoint.getPosition(indexPoint);
 			label = _ctrMain.ctrPoint.getLabel(indexPoint);
-			moveInteractionForScenes = _ctrMain.ctrPoint.getMoveInteractionForScenes(indexPoint);
 			
 			_gui.getPointAttractionRepulsionPanel().getJTFPointLabel().setText(label);
 			_gui.getPointAttractionRepulsionPanel().getJTFPointTrX().setText(String(pointTranslation.x));

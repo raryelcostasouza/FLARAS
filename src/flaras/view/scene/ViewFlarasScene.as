@@ -389,7 +389,7 @@ package flaras.view.scene
 			var sceneIDNumber:uint;
 			
 			//index of the point where the moving scene is associated 
-			pointIndex = _baseFlarasScene.getParentPoint().getID();
+			pointIndex = _baseFlarasScene.getParentPoint().getIndexOnList();
 			sceneIndex = _ctrMain.ctrPoint.getCtrScene(pointIndex).getSceneIndex(_baseFlarasScene);
 			sceneIDNumber = _ctrMain.ctrPoint.getCtrScene(pointIndex).getIDNumber(sceneIndex);
 			
@@ -402,7 +402,7 @@ package flaras.view.scene
 					distPoint2Scene = distance(pointPosition, _obj3D.position);					
 					if (distPoint2Scene < 100)
 					{
-						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getID(), pointIndex, sceneIDNumber))
+						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getIndexOnList(), pointIndex, sceneIDNumber))
 						{
 							//attract
 							_obj3D.position = pointPosition;
