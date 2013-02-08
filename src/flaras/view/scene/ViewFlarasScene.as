@@ -402,7 +402,7 @@ package flaras.view.scene
 				{
 					pointPosition = p.getPosition();
 					distPoint2Scene = distance(pointPosition, _obj3D.position);					
-					if (distPoint2Scene < 100)
+					if (distPoint2Scene < 50)
 					{
 						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getIndexOnList(), _ctrMain.ctrPoint.getIDNumber(pointIndex), sceneIDNumber))
 						{
