@@ -166,43 +166,5 @@ package flaras.model.scene
 		{
 			return _idNumber;
 		}
-		
-		/*public function clone():FlarasScene
-		{
-			var clone:FlarasScene;
-			var obj3DScene:VirtualObjectScene;
-			var textureScene:TextureScene;
-			var videoScene:VideoScene;
-			
-			if (this is VirtualObjectScene)
-			{
-				obj3DScene = VirtualObjectScene(this);
-				clone = new VirtualObjectScene(_parentPoint, _translation, _rotation, _scale, obj3DScene.getPath3DObjectFile(), _label);
-			}
-			else if (this is TextureScene)
-			{
-				textureScene = TextureScene(this);
-				clone = new TextureScene(_parentPoint, _translation, _rotation, _scale, textureScene.getTextureFilePath(), textureScene.getWidth(), textureScene.getHeight(), _label);
-			}
-			else
-			{
-				videoScene = VideoScene(this);
-				clone = new VideoScene(_parentPoint, _translation, _rotation, _scale, videoScene.getVideoFilePath(), videoScene.getRepeatVideo(), videoScene.getWidth(), videoScene.getHeight(), _label);
-			}
-			
-			//if this scene has audio
-			if (getAudio())
-			{
-				clone.setAudio(getAudio().clone());
-			}
-			
-			//if this scene has animation
-			if (getAnimation())
-			{
-				clone.setAnimation(getAnimation().clone());
-			}
-			
-			return clone;
-		}*/
 	}
 }
