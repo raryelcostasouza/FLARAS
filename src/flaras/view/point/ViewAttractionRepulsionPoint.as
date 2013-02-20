@@ -45,6 +45,7 @@ package flaras.view.point
 			
 			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), 50, 10, 10);
 			_obj3DSphereAttractionRepulsionTestArea.position = pPoint.getPosition();
+			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}	
