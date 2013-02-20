@@ -39,4 +39,6 @@ reset-all - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/vie
 
 	
 clone - http://openiconlibrary.sourceforge.net/gallery2/?./Icons/actions/edit-copy-6.png
+add attraction repulsion point - http://findicons.com/icon/69578/magnet?width=48
+tab attraction repulsion - http://www.iconfinder.com/icondetails/12086/24/magnet_icon
 	

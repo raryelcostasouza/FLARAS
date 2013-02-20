@@ -48,7 +48,7 @@ package flaras.view.gui
 			
 			_windowSelectScene = new ViewWindowSelectScene(pProjectTree, this, pCtrGUI);
 			_tabProperties.remove(_jcbMovableScenes);
-			appendTab(buildTabAttractRepulsion(), "A/R", null, "Attraction/Repulsion");
+			appendTab(buildTabAttractRepulsion(), "", new LoadIcon("icons/external/tab-ar-properties.png"), "Attraction/Repulsion");
 		}		
 		
 		private function buildTabAttractRepulsion():JPanel
