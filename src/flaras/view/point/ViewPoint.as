@@ -56,8 +56,6 @@ package flaras.view.point
 		
 		public function ViewPoint(pPoint:Point, pCtrMain:CtrMain) 
 		{
-			
-			
 			_ctrMain = pCtrMain;
 			_point = pPoint;
 			
