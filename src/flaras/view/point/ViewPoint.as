@@ -49,7 +49,7 @@ package flaras.view.point
 		private var _obj3DAxis:DAE;
 		
 		private var _ctrMain:CtrMain;
-		private var _point:Point;
+		protected var _point:Point;
 		private var  _sphereOfPointLayer:ViewportLayer;
 		
 		public static const RADIUS_SPHERE_OF_POINT:uint = 10;

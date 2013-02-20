@@ -434,6 +434,17 @@ package flaras.controller
 			objAttractionRepulsionPoint.getListOfScenes2Attract().splice(indexRefScene2Attract, 1);
 		}
 		
+		public function updateAttractionSphereRadius(indexAttractionPoint:uint, pRadius:Number):void
+		{
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
+			
+			_ctrMain.ctrUserProject.setUnsavedModifications(true);
+			
+			objAttractionRepulsionPoint = AttractionRepulsionPoint(_listOfPoints[indexAttractionPoint]);
+			objAttractionRepulsionPoint.setAttractionSphereRadius(pRadius);
+			ViewAttractionRepulsionPoint(_listOfBoundaryPoints[indexAttractionPoint]).setSphereRadius(pRadius);
+		}		
+		
 		//functions related with navigating through the list of objects -------------------------------------------------------------
 		public function inspectPoint(p:Point):void
 		{			

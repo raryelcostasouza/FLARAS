@@ -346,6 +346,17 @@ package flaras.controller
 			_ctrMain.ctrPoint.updatePointPosition(indexPoint, new Number3D(x, y, z));
 		}
 		
+		public function listenerUpdateAttractionSphereRadius(e:Event):void
+		{
+			var indexPoint:uint;
+			var radius:Number;
+			
+			indexPoint = getCurrentSelectedPoint2();
+			
+			radius = parseFloat(_gui.getPointAttractionRepulsionPanel().getJTFAttractionSphereRadius().getText());
+			_ctrMain.ctrPoint.updateAttractionSphereRadius(indexPoint, radius);
+		}
+		
 		public function actionAddRefScene2Attract(indexPoint:uint, indexScene:uint):void
 		{
 			var pointLabel:String;

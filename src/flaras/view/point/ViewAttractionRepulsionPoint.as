@@ -40,15 +40,13 @@ package flaras.view.point
 	{	
 		private var _obj3DSphereAttractionRepulsionTestArea:Sphere;
 		
-		public function ViewAttractionRepulsionPoint(pPoint:Point, pSphereVisible:Boolean, pCtrMain:CtrMain) 
+		public function ViewAttractionRepulsionPoint(pAttractionRepulsionPoint:AttractionRepulsionPoint, pSphereVisible:Boolean, pCtrMain:CtrMain) 
 		{
-			super(pPoint, pCtrMain);
+			super(pAttractionRepulsionPoint, pCtrMain);
 			
-			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), 50, 10, 10);
-			_obj3DSphereAttractionRepulsionTestArea.position = pPoint.getPosition();
+			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), pAttractionRepulsionPoint.getAttractionSphereRadius(), 10, 10);
+			_obj3DSphereAttractionRepulsionTestArea.position = pAttractionRepulsionPoint.getPosition();
 			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
-			
-			if (pCtrMain.ctrGUI.getGUI())
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}	
@@ -69,6 +67,15 @@ package flaras.view.point
 		{
 			super.setPosition(pPosition);
 			_obj3DSphereAttractionRepulsionTestArea.position = pPosition;
+		}
+		
+		public function setSphereRadius(pRadius:Number):void
+		{
+			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER);
+			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), pRadius, 10, 10);
+			_obj3DSphereAttractionRepulsionTestArea.position = _point.getPosition();
+			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
+			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}
 		
 		override public function destroy():void

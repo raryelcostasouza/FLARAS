@@ -91,6 +91,8 @@ package flaras.view.gui
 			
 			jlRadius = new JLabel("Attraction sphere radius:");
 			_jtfAttractionSphereRadius = new JTextField("", 4);
+			_jtfAttractionSphereRadius.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
+			_jtfAttractionSphereRadius.addActionListener(_ctrGUI.listenerUpdateAttractionSphereRadius);
 			
 			sphereRadiusPanel.append(jlRadius);
 			sphereRadiusPanel.append(_jtfAttractionSphereRadius);
