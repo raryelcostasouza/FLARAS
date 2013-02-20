@@ -32,6 +32,7 @@ package flaras.view.point
 	import flaras.controller.*;
 	import flaras.controller.util.*;
 	import flaras.model.point.*;
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.materials.*;
 	import org.papervision3d.objects.primitives.*;
 	
@@ -62,6 +63,12 @@ package flaras.view.point
 			{
 				_obj3DSphereAttractionRepulsionTestArea.visible = true;
 			}			
+		}
+		
+		override public function setPosition(pPosition:Number3D):void
+		{
+			super.setPosition(pPosition);
+			_obj3DSphereAttractionRepulsionTestArea.position = pPosition;
 		}
 		
 		override public function destroy():void
