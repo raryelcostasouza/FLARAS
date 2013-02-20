@@ -39,7 +39,7 @@ package flaras.view.point
 	{	
 		private var _obj3DSphereAttractionRepulsionTestArea:Sphere;
 		
-		public function ViewAttractionRepulsionPoint(pPoint:Point, pCtrMain:CtrMain) 
+		public function ViewAttractionRepulsionPoint(pPoint:Point, pSphereVisible:Boolean, pCtrMain:CtrMain) 
 		{
 			super(pPoint, pCtrMain);
 			
@@ -47,11 +47,27 @@ package flaras.view.point
 			_obj3DSphereAttractionRepulsionTestArea.position = pPoint.getPosition();
 			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
 			
+			if (pCtrMain.ctrGUI.getGUI())
+			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}	
 		
+		public function toggleDisplayTestAreaSphere():void
+		{
+			if (_obj3DSphereAttractionRepulsionTestArea.visible)
+			{
+				_obj3DSphereAttractionRepulsionTestArea.visible = false;
+			}
+			else
+			{
+				_obj3DSphereAttractionRepulsionTestArea.visible = true;
+			}			
+		}
+		
 		override public function destroy():void
 		{
+			super.destroy();
+			
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER);
 			_obj3DSphereAttractionRepulsionTestArea = null;
 		}

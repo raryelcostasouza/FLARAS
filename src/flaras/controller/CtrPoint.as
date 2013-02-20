@@ -255,6 +255,7 @@ package flaras.controller
 		{
 			var attractRepulsePoint:AttractionRepulsionPoint;
 			var idNumber:uint;
+			var showAttractionSphere:Boolean;
 			
 			if (!pFromXML)
 			{
@@ -271,9 +272,10 @@ package flaras.controller
 			}
 			
 			attractRepulsePoint = new AttractionRepulsionPoint(this._listOfPoints.length, pPosition, pLabel, idNumber);
+			showAttractionSphere = _ctrMain.ctrInteraction.getViewGUIInteraction().isAttractionSphereVisible();
 			
 			this._listOfPoints.push(attractRepulsePoint);
-			this._listOfBoundaryPoints.push(new ViewAttractionRepulsionPoint(attractRepulsePoint, _ctrMain));
+			this._listOfBoundaryPoints.push(new ViewAttractionRepulsionPoint(attractRepulsePoint, showAttractionSphere, _ctrMain));
 			this._listOfCtrScenes.push(new CtrScene(_ctrMain, attractRepulsePoint));
 			
 			return attractRepulsePoint;
@@ -611,5 +613,19 @@ package flaras.controller
 			}
 		}
 		//end of functions related with navigating through the list of objects -------------------------------------------------------------
+		
+		public function toggleDisplayAttractionPointSphere():void
+		{
+			var objViewAttractionPoint:ViewAttractionRepulsionPoint;
+			
+			for each (var vp:ViewPoint in _listOfBoundaryPoints)
+			{
+				if (vp is ViewAttractionRepulsionPoint)
+				{
+					objViewAttractionPoint = ViewAttractionRepulsionPoint(vp);
+					objViewAttractionPoint.toggleDisplayTestAreaSphere();
+				}
+			}
+		}
 	}		
 }

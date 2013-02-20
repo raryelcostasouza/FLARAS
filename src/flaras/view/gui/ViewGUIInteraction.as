@@ -47,6 +47,7 @@ package flaras.view.gui
 		private var _jtbMoveZ:JToggleButton;
 		private var _jtbResetScenePos:JToggleButton;
 		private var _jbResetAll:JButton;
+		private var _jtbAttractionSphere:JToggleButton;
 		
 		public function ViewGUIInteraction(ctrInteraction:CtrInteraction) 
 		{
@@ -148,9 +149,11 @@ package flaras.view.gui
 			var jtbMarkerPersistence:JToggleButton = new JToggleButton(null, new LoadIcon("icons/markerIcon.png"));			
 			var jbInteractionMarker:JButton = new JButton(null, new LoadIcon("icons/interactionMarkerIcon.png"));
 			
+			_jtbAttractionSphere = new JToggleButton("HELLO", new LoadIcon(""));
 			jtbMirrorScreen.setToolTipText("Mirror camera");
 			jtbMarkerPersistence.setToolTipText("Marker persistence");
 			jbInteractionMarker.setToolTipText("Interaction marker properties");
+			_jtbAttractionSphere.setToolTipText("Display collision area spheres for attraction points");
 			
 			jtbMirrorScreen.addActionListener(function(e:Event):void
 			{
@@ -164,12 +167,18 @@ package flaras.view.gui
 			{
 				_viewWindowInteractionSphere.setVisible(true);
 			});
+			_jtbAttractionSphere.addActionListener(function(e:Event):void
+			{
+				_ctrInteraction.getCtrMain().ctrPoint.toggleDisplayAttractionPointSphere();
+			});
 			
+			_jtbAttractionSphere.setSelected(true);
 			
 			pJToolBar.append(new JSeparator(JSeparator.VERTICAL));
 			pJToolBar.append(jtbMirrorScreen);
 			pJToolBar.append(jtbMarkerPersistence);
 			pJToolBar.append(jbInteractionMarker);
+			pJToolBar.append(_jtbAttractionSphere);
 		}
 		
 		private function buildAllPointsPanel(pJToolBar:JToolBar):void
@@ -197,6 +206,11 @@ package flaras.view.gui
 		public function getViewWindowInteractionSphere():ViewWindowInteractionSphere 
 		{ 
 			return _viewWindowInteractionSphere; 
+		}
+		
+		public function isAttractionSphereVisible():Boolean
+		{
+			return _jtbAttractionSphere.isSelected();
 		}
 		
 		public function isInspectionSelected():Boolean
