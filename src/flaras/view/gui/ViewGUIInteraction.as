@@ -149,11 +149,11 @@ package flaras.view.gui
 			var jtbMarkerPersistence:JToggleButton = new JToggleButton(null, new LoadIcon("icons/markerIcon.png"));			
 			var jbInteractionMarker:JButton = new JButton(null, new LoadIcon("icons/interactionMarkerIcon.png"));
 			
-			_jtbAttractionSphere = new JToggleButton("HELLO", new LoadIcon(""));
+			_jtbAttractionSphere = new JToggleButton("", new LoadIcon("icons/external/toggle-attraction-sphere.png"));
 			jtbMirrorScreen.setToolTipText("Mirror camera");
 			jtbMarkerPersistence.setToolTipText("Marker persistence");
 			jbInteractionMarker.setToolTipText("Interaction marker properties");
-			_jtbAttractionSphere.setToolTipText("Display collision area spheres for attraction points");
+			_jtbAttractionSphere.setToolTipText("Display attraction spheres for attraction points");
 			
 			jtbMirrorScreen.addActionListener(function(e:Event):void
 			{
