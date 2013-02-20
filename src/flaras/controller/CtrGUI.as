@@ -275,7 +275,7 @@ package flaras.controller
 		
 		public function listenerAddPointAttractRepulse(e:Event):void
 		{
-			_ctrMain.ctrPoint.addPointAttractRepulse(Number3D.ZERO, "", -1, false);
+			_ctrMain.ctrPoint.addPointAttractRepulse(Number3D.ZERO, "", 50, -1,  false);
 			_gui.getTreePanel().addPointAttractRepulse();
 			_gui.getTreePanel().selectPoint(_ctrMain.ctrPoint.getNumberOfPoints() -1);
 		}
@@ -701,7 +701,7 @@ package flaras.controller
 		{
 			var pointTranslation:Number3D;
 			var label:String;
-			var objAttractionRepulsionPoint:AttractionRepulsionPoint;		
+			var objAttractionRepulsionPoint:AttractionRepulsionPoint;
 			
 			pointTranslation = _ctrMain.ctrPoint.getPosition(indexPoint);
 			label = _ctrMain.ctrPoint.getLabel(indexPoint);
@@ -712,6 +712,7 @@ package flaras.controller
 			_gui.getPointAttractionRepulsionPanel().getJTFPointTrZ().setText(String(pointTranslation.z));
 			
 			objAttractionRepulsionPoint = AttractionRepulsionPoint(_ctrMain.ctrPoint.getListOfPoints()[indexPoint]);
+			_gui.getPointAttractionRepulsionPanel().getJTFAttractionSphereRadius().setText(String(objAttractionRepulsionPoint.getAttractionSphereRadius()));
 			_gui.getPointAttractionRepulsionPanel().fillListOfScenes2Attract(objAttractionRepulsionPoint.getListOfScenes2Attract());
 		}
 		

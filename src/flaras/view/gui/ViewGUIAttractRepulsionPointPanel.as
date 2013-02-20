@@ -41,6 +41,7 @@ package flaras.view.gui
 		private var _vlm:VectorListModel;
 		private var _jlistScenes:JList;
 		private var _windowSelectScene:ViewWindowSelectScene;
+		private var _jtfAttractionSphereRadius:JTextField;
 		
 		public function ViewGUIAttractRepulsionPointPanel(pCtrGUI:CtrGUI, pProjectTree:JTree) 
 		{
@@ -68,16 +69,33 @@ package flaras.view.gui
 			
 			jspList = new JScrollPane(_jlistScenes);
 			jspList.setBorder(new TitledBorder(null, "List of scenes to attract", TitledBorder.TOP, TitledBorder.LEFT));
-			jspList.setPreferredHeight(190);
+			jspList.setPreferredHeight(160);
 			jspList.setPreferredWidth(200);
 			
 			formTab = new Form();
+			formTab.addRow(buildSphereRadiusRow());
 			formTab.addRow(jspList);
 			formTab.addRow(buildButtonsRow());
 			
 			tabAttractionRepulsion.append(formTab);
 			
 			return tabAttractionRepulsion;
+		}
+		
+		private function buildSphereRadiusRow():JPanel
+		{
+			var sphereRadiusPanel:JPanel;
+			var jlRadius:JLabel;
+			
+			sphereRadiusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			
+			jlRadius = new JLabel("Attraction sphere radius:");
+			_jtfAttractionSphereRadius = new JTextField("", 4);
+			
+			sphereRadiusPanel.append(jlRadius);
+			sphereRadiusPanel.append(_jtfAttractionSphereRadius);
+			
+			return sphereRadiusPanel;
 		}
 		
 		private function buildButtonsRow():JPanel
@@ -154,6 +172,11 @@ package flaras.view.gui
 		public function setVisibleWindowSelectScene(pEnable:Boolean):void
 		{
 			_windowSelectScene.setVisible(pEnable);
+		}
+		
+		public function getJTFAttractionSphereRadius():JTextField
+		{
+			return _jtfAttractionSphereRadius;
 		}
 	}
 }

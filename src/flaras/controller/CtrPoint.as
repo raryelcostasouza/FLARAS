@@ -241,17 +241,17 @@ package flaras.controller
 			return p;
 		}
 		
-		public function addPointAttractRepulseFromXML(pPosition:Number3D, pLabel:String, pFromXML:Boolean, pListOfScenes2Attract:Vector.<RefScene2Attract>, pIDNumber:int):void
+		public function addPointAttractRepulseFromXML(pPosition:Number3D, pLabel:String, pAttractionSphereRadius:Number, pFromXML:Boolean, pListOfScenes2Attract:Vector.<RefScene2Attract>, pIDNumber:int):void
 		{
 			var attractRepulsePoint:AttractionRepulsionPoint;
 			
-			attractRepulsePoint = addPointAttractRepulse(pPosition, pLabel, pIDNumber, true);
+			attractRepulsePoint = addPointAttractRepulse(pPosition, pLabel, pAttractionSphereRadius, pIDNumber, true);
 			
 			attractRepulsePoint.setListOfScenes2Attract(pListOfScenes2Attract);
 			new FileReaderListOfObjects(attractRepulsePoint.getIndexOnList(), FolderConstants.getFlarasAppCurrentFolder() + "/" + attractRepulsePoint.getFilePathListOfObjects(), this);
 		}
 		
-		public function addPointAttractRepulse(pPosition:Number3D, pLabel:String, pIDNumber:int, pFromXML:Boolean):AttractionRepulsionPoint
+		public function addPointAttractRepulse(pPosition:Number3D, pLabel:String, pAttractionSphereRadius:Number, pIDNumber:int, pFromXML:Boolean):AttractionRepulsionPoint
 		{
 			var attractRepulsePoint:AttractionRepulsionPoint;
 			var idNumber:uint;
@@ -271,7 +271,7 @@ package flaras.controller
 				idNumber = pIDNumber;
 			}
 			
-			attractRepulsePoint = new AttractionRepulsionPoint(this._listOfPoints.length, pPosition, pLabel, idNumber);
+			attractRepulsePoint = new AttractionRepulsionPoint(this._listOfPoints.length, pPosition, pLabel, pAttractionSphereRadius, idNumber);
 			showAttractionSphere = _ctrMain.ctrInteraction.getViewGUIInteraction().isAttractionSphereVisible();
 			
 			this._listOfPoints.push(attractRepulsePoint);
@@ -321,7 +321,6 @@ package flaras.controller
 				id++;
 				
 			}while (!isGeneratedIDUnique(id));
-			trace("id", id);
 			return id;
 		}
 		

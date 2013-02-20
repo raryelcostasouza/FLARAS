@@ -33,11 +33,13 @@ package flaras.model.point
 	public class AttractionRepulsionPoint extends Point
 	{
 		private var _listOfScenes2Attract:Vector.<RefScene2Attract>;
+		private var _attractionSphereRadius:Number;
 		
-		public function AttractionRepulsionPoint(pIndexPoint:uint, pPosition:Number3D, pLabel:String, pIDNumber:uint ) 
+		public function AttractionRepulsionPoint(pIndexPoint:uint, pPosition:Number3D, pLabel:String, pAttractionSphereRadius:Number, pIDNumber:uint ) 
 		{
 			super(pIndexPoint, pPosition, pLabel, false, pIDNumber);
 			
+			_attractionSphereRadius = pAttractionSphereRadius;
 			_listOfScenes2Attract = new Vector.<RefScene2Attract>();
 		}		
 		
@@ -56,5 +58,15 @@ package flaras.model.point
 		{
 			return _listOfScenes2Attract;
 		}
+		
+		public function getAttractionSphereRadius():Number
+		{
+			return _attractionSphereRadius;
+		}
+		
+		public function setAttractionSphereRadius(pAttractionSphereRadius:Number):void
+		{
+			_attractionSphereRadius = pAttractionSphereRadius;
+		}		
 	}
 }

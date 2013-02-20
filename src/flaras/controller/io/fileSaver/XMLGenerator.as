@@ -124,12 +124,28 @@ package flaras.controller.io.fileSaver
 						<z>{position.z}</z>
 					</position>
 				<filePathObjectList>{p.getFilePathListOfObjects()}</filePathObjectList>
-				{XMLGenerator.generateXMLRefScenes2Attract(p)}
+				{XMLGenerator.generateXMLAttractionSphereRadius(p)}
+				{XMLGenerator.generateXMLRefScenes2Attract(p) }				
 				</point>;
 				
 				xml = xml.appendChild(newNode);
 			}
 			return xml;
+		}
+		
+		private static function generateXMLAttractionSphereRadius(p:Point):XML
+		{
+			var pointAttractionRepulsion:AttractionRepulsionPoint;
+			
+			if (p is AttractionRepulsionPoint)
+			{
+				pointAttractionRepulsion = AttractionRepulsionPoint(p);
+				return new XML("<attractionSphereRadius>"+pointAttractionRepulsion.getAttractionSphereRadius()+"</attractionSphereRadius>")
+			}
+			else
+			{
+				return new XML();
+			}		
 		}
 		
 		private static function generateXMLRefScenes2Attract(p:Point):XML
