@@ -354,6 +354,7 @@ package flaras.view.scene
 				//to the obj directly. It's just needed to update the coordinates of the center of rotation.
 				_posRotationCenter.z = zPos;
 			}
+			checkAttractionRepulsion();
 		}
 		
 		private function stopDragXY(e:Event):void
@@ -389,6 +390,7 @@ package flaras.view.scene
 			var sceneIndex:uint;
 			var pointIndex:uint;
 			var sceneIDNumber:uint;
+			var objAttractionPoint:AttractionRepulsionPoint;
 			
 			//index of the point where the moving scene is associated 
 			pointIndex = _baseFlarasScene.getParentPoint().getIndexOnList();
@@ -400,9 +402,11 @@ package flaras.view.scene
 			{
 				if (p is AttractionRepulsionPoint)
 				{
+					objAttractionPoint = AttractionRepulsionPoint(p);
+					
 					pointPosition = p.getPosition();
 					distPoint2Scene = distance(pointPosition, _obj3D.position);					
-					if (distPoint2Scene < 50)
+					if (distPoint2Scene < objAttractionPoint.getAttractionSphereRadius())
 					{
 						if (_ctrMain.ctrPoint.isSceneOnAttractionList(p.getIndexOnList(), _ctrMain.ctrPoint.getIDNumber(pointIndex), sceneIDNumber))
 						{
