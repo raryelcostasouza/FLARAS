@@ -43,7 +43,7 @@ package flaras.view.gui
 		
 		public function ViewWindowSelectScene(pProjectTree:JTree, pPanelAttractRepulsion:ViewGUIAttractRepulsionPointPanel, pCtrGUI:CtrGUI)
 		{
-			super(null, "Select scene to attract", true);			
+			super(null, "Select the scene to attract", true);			
 			
 			_ctrGUI = pCtrGUI;
 			
