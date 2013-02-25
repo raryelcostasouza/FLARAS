@@ -47,6 +47,7 @@ package flaras.view.point
 			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), pAttractionRepulsionPoint.getAttractionSphereRadius(), 10, 10);
 			_obj3DSphereAttractionRepulsionTestArea.position = pAttractionRepulsionPoint.getPosition();
 			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
+			_obj3DSphereAttractionRepulsionTestArea.visible = pSphereVisible;
 			
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}	
@@ -71,10 +72,14 @@ package flaras.view.point
 		
 		public function setSphereRadius(pRadius:Number):void
 		{
+			var isSphereVisibleBeforeResize:Boolean;
+			
+			isSphereVisibleBeforeResize = _obj3DSphereAttractionRepulsionTestArea.visible;
 			MarkerNodeManager.removeObjFromMarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER);
 			_obj3DSphereAttractionRepulsionTestArea = new Sphere(new WireframeMaterial(0x000000), pRadius, 10, 10);
 			_obj3DSphereAttractionRepulsionTestArea.position = _point.getPosition();
 			_obj3DSphereAttractionRepulsionTestArea.rotationX = 90;
+			_obj3DSphereAttractionRepulsionTestArea.visible = isSphereVisibleBeforeResize;
 			MarkerNodeManager.addObj2MarkerNode(_obj3DSphereAttractionRepulsionTestArea, CtrMarker.REFERENCE_MARKER, null);
 		}
 		
