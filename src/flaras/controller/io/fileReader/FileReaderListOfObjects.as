@@ -81,6 +81,11 @@ package flaras.controller.io.fileReader
 				var newFilePath:String;
 				var label:String;	
 				var idNumber:int;
+				var animationType:String;
+				var p2pAnimationStartPoint:Number3D;
+				var p2pAnimationDestPoint:Number3D;
+				var p2pAnimationTime:Number;
+				var p2pAnimationLoop:Boolean;
 				
 				//old flaras project withoud animation support
 				if (obj3D.animation.hasAnimation == undefined)
@@ -92,12 +97,14 @@ package flaras.controller.io.fileReader
 				else
 				{
 					hasAnimation = Boolean(parseInt(obj3D.animation.hasAnimation));
-					animationPeriod = obj3D.animation.period;
-					animationAxis = obj3D.animation.rotationAxis;
 					
 					//flaras project with partial animation support	
 					if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
 					{
+						animationPeriod = obj3D.animation.period;
+						animationAxis = obj3D.animation.rotationAxis;
+					
+						
 						animationRadiusA = 0;
 						animationRadiusB = 0;
 						animationRotDirection = 1;
@@ -105,16 +112,57 @@ package flaras.controller.io.fileReader
 					//previous flaras project (support for radius and rotationDirection)
 					else if (obj3D.animation.radiusB == undefined)
 					{
+						animationPeriod = obj3D.animation.period;
+						animationAxis = obj3D.animation.rotationAxis;
+					
 						animationRadiusA = obj3D.animation.radius;
 						animationRadiusB = obj3D.animation.radius;
 						animationRotDirection = obj3D.animation.rotationDirection;
 					}
-					//latest flaras project - elliptical animation
-					else
+					//elliptical animation
+					else if(obj3D.animation.type == undefined)
 					{
+						animationPeriod = obj3D.animation.period;
+						animationAxis = obj3D.animation.rotationAxis;
+					
+						
 						animationRadiusA = obj3D.animation.radius;
 						animationRadiusB = obj3D.animation.radiusB;
 						animationRotDirection = obj3D.animation.rotationDirection;
+					}
+					//after adding point 2 point animation support
+					else
+					{
+						if (obj3D.animation.type == "circular")
+						{
+							p2pAnimationStartPoint = Number3D.ZERO;
+							p2pAnimationDestPoint = Number3D.ZERO;
+							p2pAnimationTime = 0;
+							p2pAnimationLoop = false;
+							
+							animationPeriod = obj3D.animation.circular.period;
+							animationAxis = obj3D.animation.circular.rotationAxis;							
+							animationRadiusA = obj3D.animation.circular.radius;
+							animationRadiusB = obj3D.animation.circular.radiusB;
+							animationRotDirection = obj3D.animation.circular.rotationDirection;
+						}
+						else
+						{
+							p2pAnimationStartPoint = new Number3D(obj3D.animation.point2point.startPoint.x, 
+																	obj3D.animation.point2point.startPoint.y, 
+																	obj3D.animation.point2point.startPoint.z);
+							p2pAnimationDestPoint = new Number3D(obj3D.animation.point2point.destinationPoint.x, 
+																	obj3D.animation.point2point.destinationPoint.y, 
+																	obj3D.animation.point2point.destinationPoint.z);
+							p2pAnimationTime = obj3D.animation.point2point.time;
+							p2pAnimationLoop = new Boolean(parseInt(obj3D.animation.point2point.loop));
+							
+							animationPeriod = 0;
+							animationAxis = 0;
+							animationRadiusA = 0;
+							animationRadiusB = 0;
+							animationRotDirection = 0;
+						}
 					}
 				}
 				
@@ -160,7 +208,9 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.hasAudio)), obj3D.audio.audioPath, 
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
-												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, label, idNumber, true);
+												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, 
+												animationType, p2pAnimationStartPoint, p2pAnimationDestPoint, p2pAnimationTime, p2pAnimationLoop,
+												label, idNumber, true);
 			}
 			aObjCtrPoint.finishedReadingListOfScenes();
 		}

@@ -69,21 +69,21 @@ package flaras.controller
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene(pFilePath, Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, false,
-						"", 0, 0, false, false, 0, 0, 0, 0, 0, "");
+						"", 0, 0, false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
 				}
 				if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH,
 						GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false,
-						false, 0, 0, 0, 0, 0, "");
+						false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
 				}
 				if (pCopyDestination == FolderConstants.VIDEO_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, true,
 						pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
-						false, false, 0, 0, 0, 0, 0, "");
+						false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
 				}
 				
 				_gui.getTreePanel().addScene(getCurrentSelectedPoint2());
@@ -112,9 +112,12 @@ package flaras.controller
 							new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())),
 							false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
-							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
-							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
+							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
+							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 					{
@@ -128,9 +131,12 @@ package flaras.controller
 							true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH, GeneralConstants.TEXTURE_DEFAULT_HEIGHT,
 							_gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), false, "", 0, 0, false,
-							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA()),
-							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							_gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
+							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
+							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else
 					{
@@ -143,10 +149,12 @@ package flaras.controller
 							new Number(_gui.getScenePanel().getJTFSceneScY().getText()), new Number(_gui.getScenePanel().getJTFSceneScZ().getText())),
 							false, "", 0, 0, _gui.getScenePanel().getJCBAudio().isSelected(), _gui.getScenePanel().getJTFAudioPath().getText(),
 							_gui.getScenePanel().getJCBAudioRepeat().isSelected(), true, pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH,
-							GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(),
-							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-							_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
-							Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection(), _gui.getScenePanel().getJTFSceneLabel().getText());
+							GeneralConstants.VIDEO_DEFAULT_HEIGHT, false, _gui.getScenePanel().getAnimationPanel().getHasAnimation(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
+							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
+							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
+							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 				}
@@ -594,10 +602,21 @@ package flaras.controller
 		{
 			if (newState)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddAnimation(getCurrentSelectedScene2(),
-					Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText()),
-					_gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText()),
-					Number(_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+				if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf("circular") != -1)
+				{
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddCircularAnimation(getCurrentSelectedScene2(),
+						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
+						_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
+						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection());
+				}
+				else
+				{
+					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddP2PAnimation(getCurrentSelectedScene2(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(),
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
+				}				
 			}
 			else
 			{
@@ -605,7 +624,7 @@ package flaras.controller
 			}
 		}
 		
-		public function listenerUpdateAnimationProperties(e:Event):void
+		public function listenerUpdateCircularAnimationProperties(e:Event):void
 		{
 			var strRadiusA:String;
 			var strRadiusB:String;
@@ -613,9 +632,9 @@ package flaras.controller
 			var allFieldsValid:Boolean;
 			var vectFieldData:Vector.<FieldData>;
 			
-			strRadiusA = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().getText();
-			strPeriod = _gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().getText();
-			strRadiusB = _gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().getText();
+			strRadiusA = _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText();
+			strPeriod = _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText();
+			strRadiusB = _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText();
 			
 			vectFieldData = new Vector.<FieldData>();
 			vectFieldData.push(new FieldData("Radius A", strRadiusA));
@@ -626,9 +645,54 @@ package flaras.controller
 			
 			if (allFieldsValid)
 			{
-				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAnimationProperties(getCurrentSelectedScene2(),
-					Number(strPeriod), _gui.getScenePanel().getAnimationPanel().getAnimationRotationAxis(),
-					Number(strRadiusA), Number(strRadiusB), _gui.getScenePanel().getAnimationPanel().getAnimationDirection());
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateCircularAnimationProperties(getCurrentSelectedScene2(),
+					Number(strPeriod), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(),
+					Number(strRadiusA), Number(strRadiusB), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection());
+			}
+		}
+		
+		public function listenerUpdateP2PAnimationProperties(e:Event):void
+		{
+			var startX:String;
+			var startY:String;
+			var startZ:String;
+			
+			var destX:String;
+			var destY:String;
+			var destZ:String;
+		
+			var time:String;
+			var allFieldsValid:Boolean;
+			var vectFieldData:Vector.<FieldData>;
+			
+			startX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartX().getText();
+			startY = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartY().getText();
+			startZ = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartZ().getText();
+			
+			destX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestX().getText();
+			destY = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestY().getText();
+			destZ = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestZ().getText();
+			
+			time = destX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().getText();
+			
+			vectFieldData = new Vector.<FieldData>();
+			vectFieldData.push(new FieldData("Start point: X", startX));
+			vectFieldData.push(new FieldData("Start point: Y", startY));
+			vectFieldData.push(new FieldData("Start point: Z", startZ));
+			vectFieldData.push(new FieldData("Destination point: X", destX));
+			vectFieldData.push(new FieldData("Destination point: Y", destY));
+			vectFieldData.push(new FieldData("Destination point: Z", destZ));
+			vectFieldData.push(new FieldData("Time", time));
+			
+			allFieldsValid = generalNumericFieldValidator(vectFieldData);
+			
+			if (allFieldsValid)
+			{
+				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateP2PAnimationProperties(getCurrentSelectedScene2(), 
+											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
+											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), 
+											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
+											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
 			}
 		}
 		
@@ -738,6 +802,8 @@ package flaras.controller
 			var textureData:TextureScene;
 			var virtualObjectData:VirtualObjectScene;
 			var animationData:AnimationScene;
+			var p2pAnimationData:P2PAnimationScene;
+			var circularAnimationData:CircularAnimationScene;
 			
 			cleanSceneFields2();
 			
@@ -766,19 +832,32 @@ package flaras.controller
 			if (animationData)
 			{
 				_gui.getScenePanel().getAnimationPanel().setHasAnimation(true);
-				_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(animationData.getPeriod()+"");
-				_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(animationData.getRotationAxis());
-				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(animationData.getRadiusA() + "");
-				_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().setText(animationData.getRadiusB() + "");
-				if (animationData.getRadiusA() == animationData.getRadiusB())
+				if (animationData is CircularAnimationScene)
 				{
-					_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(true);
+					circularAnimationData = CircularAnimationScene(animationData);
+					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().setText(circularAnimationData.getPeriod()+"");
+					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationAxis(circularAnimationData.getRotationAxis());
+					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().setText(circularAnimationData.getRadiusA() + "");
+					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().setText(circularAnimationData.getRadiusB() + "");
+					if (circularAnimationData.getRadiusA() == circularAnimationData.getRadiusB())
+					{
+						_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJCBRadiusBCloneRadiusA().setSelected(true);
+					}
+					else
+					{
+						_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJCBRadiusBCloneRadiusA().setSelected(false);
+					}
+					
+					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationDirection(circularAnimationData.getRotationDirection());
 				}
 				else
 				{
-					_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(false);
-				}
-				_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(animationData.getRotationDirection());
+					p2pAnimationData = P2PAnimationScene(animationData);
+					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setStartPointPosition(p2pAnimationData.getStartPointPosition());
+					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setDestPointPosition(p2pAnimationData.getDestPointPosition());
+					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().setText(p2pAnimationData.getTime()+"");
+					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setLoop(p2pAnimationData.hasLoop());
+				}				
 			}
 			if (audioData)
 			{
@@ -844,12 +923,14 @@ package flaras.controller
 			_gui.getScenePanel().getJTFTextureHeight().setText("");
 			
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
-			_gui.getScenePanel().getAnimationPanel().setAnimationRotationAxis(ViewAnimationScene.X_ROTATION_AXIS);
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationPeriod().setText(10+"");
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusA().setText(0 + "");
-			_gui.getScenePanel().getAnimationPanel().getJTFRotationRadiusB().setText(0 + "");
-			_gui.getScenePanel().getAnimationPanel().getJCBRadiusBCloneRadiusA().setSelected(true);
-			_gui.getScenePanel().getAnimationPanel().setAnimationRotationDirection(1);
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationAxis(ViewCircularAnimationScene.X_ROTATION_AXIS);
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().setText(10+"");
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().setText(0 + "");
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().setText(0 + "");
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJCBRadiusBCloneRadiusA().setSelected(true);
+			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationDirection(1);
+			
+			_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().cleanFields();
 		}
 		
 		public function listenerAudioSelected(e:Event):void

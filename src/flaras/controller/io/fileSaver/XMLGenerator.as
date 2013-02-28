@@ -351,31 +351,41 @@ package flaras.controller.io.fileSaver
 		{
 			var xml:XML;
 			var animationScene:AnimationScene;
+			var circularAnimationScene:CircularAnimationScene;
+			var p2pAnimationScene:P2PAnimationScene;
+			
 			var hasAnimation:uint;
 			var period:Number;
 			var rotationAxis:uint;
 			var radiusA:Number;
 			var radiusB:Number;
-			var rotationDirection:int;
+			var rotationDirection:int;	
+			var animationType:String;
 			
 			if (scene.getAnimation())
 			{
 				animationScene = scene.getAnimation();
 				hasAnimation = 1;
-				period = animationScene.getPeriod();
-				rotationAxis = animationScene.getRotationAxis();
-				radiusA = animationScene.getRadiusA();
-				radiusB = animationScene.getRadiusB();
-				rotationDirection = animationScene.getRotationDirection();
+				if (animationScene is CircularAnimationScene)
+				{
+					animationType = "circular";
+					circularAnimationScene = CircularAnimationScene(animationScene);
+					period = circularAnimationScene.getPeriod();
+					rotationAxis = circularAnimationScene.getRotationAxis();
+					radiusA = circularAnimationScene.getRadiusA();
+					radiusB = circularAnimationScene.getRadiusB();
+					rotationDirection = circularAnimationScene.getRotationDirection();
+				}
+				else
+				{
+					animationType = "point2point";
+					p2pAnimationScene = P2PAnimationScene(animationScene);
+				}
 			}
 			else
 			{
 				hasAnimation = 0;
-				period = 0;
-				rotationAxis = 0;
-				radiusA = 0;
-				radiusB = 0;
-				rotationDirection = 0;
+				animationType = "circular";
 			}
 			
 			xml = new XML();	
@@ -383,14 +393,79 @@ package flaras.controller.io.fileSaver
 			xml = 
 				<animation>
 						<hasAnimation>{hasAnimation}</hasAnimation>
-						<period>{period}</period>
-						<rotationAxis>{rotationAxis}</rotationAxis>
-						<radius>{radiusA}</radius>
-						<radiusB>{radiusB}</radiusB>
-						<rotationDirection>{rotationDirection}</rotationDirection>
-					</animation>
+						<animationType>{animationType}</animationType>
+						{generateXMLCircularAnimation(scene.getAnimation())}
+						{generateXMLP2PAnimation(scene.getAnimation())}
+				</animation>
 					
 			return xml;
+		}
+		
+		private static function generateXMLCircularAnimation(pAnimationScene:AnimationScene):XML
+		{
+			var xml:XML;
+			var circularAnimation:CircularAnimationScene;
+			if (pAnimationScene != null && pAnimationScene is CircularAnimationScene)
+			{
+				circularAnimation = CircularAnimationScene(pAnimationScene);
+				
+				xml = new XML();
+				xml = <circular>
+							<period>{circularAnimation.getPeriod()}</period>
+							<rotationAxis>{circularAnimation.getRotationAxis()}</rotationAxis>
+							<radius>{circularAnimation.getRadiusA()}</radius>
+							<radiusB>{circularAnimation.getRadiusB()}</radiusB>
+							<rotationDirection>{circularAnimation.getRotationDirection()}</rotationDirection>
+						</circular>;
+						
+				return xml;				
+			}
+			else
+			{
+				return new XML();
+			}
+		}
+		
+		private static function generateXMLP2PAnimation(pAnimationScene:AnimationScene):XML
+		{
+			var xml:XML;
+			var p2pAnimation:P2PAnimationScene;
+			var loop:int;
+			
+			if (pAnimationScene != null && pAnimationScene is P2PAnimationScene)
+			{
+				p2pAnimation = P2PAnimationScene(pAnimationScene);
+				if (p2pAnimation.hasLoop())
+				{
+					loop = 1;
+				}
+				else
+				{
+					loop = 0;
+				}
+				
+				xml = new XML();
+				xml = <point2point>
+							<startPoint>
+								<x>p2pAnimation.getStartPointPosition().x</x>
+								<y>p2pAnimation.getStartPointPosition().y</y>
+								<z>p2pAnimation.getStartPointPosition().z</z>
+							</startPoint>
+							<destinationPoint>
+								<x>p2pAnimation.getDestPointPosition().x</x>
+								<y>p2pAnimation.getDestPointPosition().y</y>
+								<z>p2pAnimation.getDestPointPosition().z</z>
+							</destinationPoint>
+							<time>{p2pAnimation.getTime()}</time>
+							<loop>{loop}</loop>
+						</point2point>;
+						
+				return xml;				
+			}
+			else
+			{
+				return new XML();
+			}
 		}
 	}
 }
