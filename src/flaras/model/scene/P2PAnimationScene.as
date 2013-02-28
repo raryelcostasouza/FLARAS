@@ -29,8 +29,50 @@
 
 package flaras.model.scene 
 {
-	public class AnimationScene 
-	{		
+	import org.papervision3d.core.math.*;
+	
+	public class P2PAnimationScene extends AnimationScene
+	{
+		private var _startPointPosition:Number3D;
+		private var _destPointPosition:Number3D;
+		private var _time:Number;
+		private var _hasLoop:Boolean;
 		
+		//point to point animation
+		public function P2PAnimationScene(pStartPointPosition:Number3D, pDestPointPosition:Number3D, pTime:Number, pLoop:Boolean) 
+		{
+			_startPointPosition = pStartPointPosition;
+			_destPointPosition = pDestPointPosition;
+			_time = pTime;
+			_hasLoop = pLoop;
+		}
+		
+		public function getStartPointPosition():Number3D
+		{
+			return _startPointPosition;
+		}
+		
+		public function getDestPointPosition():Number3D
+		{
+			return _destPointPosition;
+		}
+		
+		public function getTime():Number
+		{
+			return _time;
+		}
+		
+		public function hasLoop():Boolean
+		{
+			return _hasLoop;
+		}		
+		
+		public function setAnimationProperties(pStartPoint:Number3D, pDestPoint:Number3D, pTime:Number, pHasLoop:Boolean):void
+		{
+			_startPointPosition = pStartPoint;
+			_destPointPosition = pDestPoint;
+			_time = pTime;
+			_hasLoop = pHasLoop;
+		}
 	}
 }

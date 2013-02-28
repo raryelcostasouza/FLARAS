@@ -38,15 +38,13 @@ package flaras.view.gui
 	
 	public class AnimationPanel extends Form
 	{
+		private var _windowCircularAnimation:ViewWindowCircularAnimation;
+		private var _windowP2PAnimation:ViewWindowP2PAnimation;
+		
 		private var _jcbHasAnimation:JCheckBox;
-		private var _jrbX:JRadioButton;
-		private var _jrbY:JRadioButton;
-		private var _jrbZ:JRadioButton;
-		private var _jtfRotationPeriod:JTextField;
-		private var _jtfRotationRadiusA:JTextField;
-		private var _jtfRotationRadiusB:JTextField;		
-		private var _jcbReverseRotation:JCheckBox;
-		private var _jcbRadiusBCloneRadiusA:JCheckBox;
+		private var _jrbCircularType:JRadioButton;
+		private var _jrbP2PType:JRadioButton;
+		private var _jbEditProperties:JButton;
 		
 		private var _ctrGUI:CtrGUI;
 		
@@ -54,25 +52,31 @@ package flaras.view.gui
 		{						
 			this._ctrGUI = ctrGUI;
 			
+			_windowCircularAnimation = new ViewWindowCircularAnimation(ctrGUI);
+			_windowP2PAnimation = new ViewWindowP2PAnimation(ctrGUI);
+			
 			addRow(buildLine1());
 			addRow(buildLine2());
 			addRow(buildLine3());
-			addRow(buildLine4());
-			addRow(buildLine5());
-			addRow(buildLine6());
 			
 			setComponentsStatus(false);
 		}
 		
+		public function getWindowCircularAnimation():ViewWindowCircularAnimation
+		{
+			return _windowCircularAnimation;
+		}
+		
+		public function getWindowP2PAnimation():ViewWindowP2PAnimation
+		{
+			return _windowP2PAnimation;
+		}		
+		
 		private function setComponentsStatus(status:Boolean):void
 		{
-			_jtfRotationPeriod.setEnabled(status);
-			_jrbX.setEnabled(status);
-			_jrbY.setEnabled(status);
-			_jrbZ.setEnabled(status);
-			_jtfRotationRadiusA.setEnabled(status);
-			_jcbReverseRotation.setEnabled(status);
-			_jcbRadiusBCloneRadiusA.setEnabled(status);
+			_jrbCircularType.setEnabled(status);
+			_jrbP2PType.setEnabled(status);
+			_jbEditProperties.setEnabled(status);
 		}
 		
 		private function buildLine1():JPanel
@@ -103,29 +107,19 @@ package flaras.view.gui
 			var buttonGroup:ButtonGroup;
 			
 			centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			centerPanel.setBorder(new TitledBorder(null, "Rotation Axis", 1,TitledBorder.LEFT));
+			centerPanel.setBorder(new TitledBorder(null, "Type", 1, TitledBorder.LEFT));
+			centerPanel.setPreferredWidth(210);
 			
-			_jrbX = new JRadioButton("X");
-			_jrbX.setForeground(ASColor.RED);
-			_jrbX.setSelected(true);
-			_jrbX.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
-			
-			_jrbY = new JRadioButton("Y");
-			_jrbY.setForeground(ASColor.BLUE);
-			_jrbY.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
-			
-			_jrbZ = new JRadioButton("Z");
-			_jrbZ.setForeground(ASColor.GREEN.darker().darker());
-			_jrbZ.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
+			_jrbCircularType = new JRadioButton("Circular");
+			_jrbCircularType.setSelected(true);
+			_jrbP2PType = new JRadioButton("Point to point");
 			
 			buttonGroup = new ButtonGroup();
-			buttonGroup.append(_jrbX);
-			buttonGroup.append(_jrbY);
-			buttonGroup.append(_jrbZ);
+			buttonGroup.append(_jrbCircularType);
+			buttonGroup.append(_jrbP2PType);
 			
-			centerPanel.append(_jrbX);
-			centerPanel.append(_jrbY);
-			centerPanel.append(_jrbZ);			
+			centerPanel.append(_jrbCircularType);
+			centerPanel.append(_jrbP2PType);
 			
 			return centerPanel;
 		}
@@ -133,99 +127,26 @@ package flaras.view.gui
 		private function buildLine3():JPanel
 		{
 			var southPanel:JPanel;
-			var jlRotationSpeed:JLabel;
-			var jlRotationUnit:JLabel;
 			
-			southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
-			jlRotationSpeed = new JLabel("Rotation period: ");
-			_jtfRotationPeriod = new JTextField("10", 5);
-			_jtfRotationPeriod.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			_jtfRotationPeriod.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
-			
-			jlRotationUnit = new JLabel("seconds");
-			
-			southPanel.append(jlRotationSpeed);
-			southPanel.append(_jtfRotationPeriod);			
-			southPanel.append(jlRotationUnit);
-			
+			_jbEditProperties = new JButton("Edit properties");
+			_jbEditProperties.addActionListener(listenerJBEditProperties);
+			southPanel.append(_jbEditProperties);
+
 			return southPanel;
 		}
 		
-		public function buildLine4():JPanel
+		private function listenerJBEditProperties(e:Event):void
 		{
-			var panelLine4:JPanel;
-			var jlRotationRadius:JLabel;
-			
-			panelLine4 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			
-			jlRotationRadius = new JLabel("Rotation radius a: ");
-			_jtfRotationRadiusA = new JTextField("0", 5);
-			_jtfRotationRadiusA.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			_jtfRotationRadiusA.addActionListener(function(e:Event):void
+			if (_jrbCircularType.isSelected())
 			{
-				if (_jcbRadiusBCloneRadiusA.isSelected())
-				{
-					_jtfRotationRadiusB.setText(_jtfRotationRadiusA.getText());
-				}
-			});
-			_jtfRotationRadiusA.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
-			
-			
-			
-			panelLine4.append(jlRotationRadius);
-			panelLine4.append(_jtfRotationRadiusA);
-			
-			return panelLine4;			
-		}
-		
-		public function buildLine5():JPanel
-		{
-			var panelLine5:JPanel;
-			var jlRotationRadius:JLabel;
-			
-			panelLine5 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			
-			jlRotationRadius = new JLabel("Rotation radius b: ");
-			_jtfRotationRadiusB = new JTextField("0", 5);
-			_jtfRotationRadiusB.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
-			_jtfRotationRadiusB.addActionListener(_ctrGUI.listenerUpdateAnimationProperties);
-			
-			_jcbRadiusBCloneRadiusA = new JCheckBox("Clone");
-			_jcbRadiusBCloneRadiusA.setToolTipText("Clone 'radius a' value.\nUseful for circular animation");
-			_jcbRadiusBCloneRadiusA.addSelectionListener(function(e:Event):void
+				_windowCircularAnimation.setVisible(true);
+			}
+			else
 			{
-				if (_jcbRadiusBCloneRadiusA.isSelected())
-				{
-					_jtfRotationRadiusB.setText(_jtfRotationRadiusA.getText());
-					_jtfRotationRadiusB.setEnabled(false);					
-				}
-				else
-				{
-					_jtfRotationRadiusB.setEnabled(true);
-				}
-			});
-			
-			panelLine5.append(jlRotationRadius);
-			panelLine5.append(_jtfRotationRadiusB);
-			panelLine5.append(_jcbRadiusBCloneRadiusA);
-			
-			return panelLine5;			
-		}
-		
-		
-		public function buildLine6():JPanel
-		{
-			var jp6:JPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				
-			_jcbReverseRotation = new JCheckBox("Reverse rotation");
-			_jcbReverseRotation.addActionListener(function():void
-			{
-				_ctrGUI.listenerUpdateAnimationProperties(null);	
-			});
-			jp6.append(_jcbReverseRotation);
-			
-			return jp6;
+				_windowP2PAnimation.setVisible(true);
+			}			
 		}
 		
 		public function getHasAnimation():Boolean
@@ -233,52 +154,6 @@ package flaras.view.gui
 			return _jcbHasAnimation.isSelected();
 		}
 		
-		public function getJTFRotationPeriod():JTextField
-		{
-			return _jtfRotationPeriod;
-		}
-		
-		public function getAnimationRotationAxis():uint
-		{
-			if (_jrbX.isSelected())
-			{
-				return ViewAnimationScene.X_ROTATION_AXIS;
-			}
-			else if (_jrbY.isSelected())
-			{
-				return ViewAnimationScene.Y_ROTATION_AXIS;
-			}
-			else
-			{
-				return ViewAnimationScene.Z_ROTATION_AXIS;
-			}
-		}
-		
-		public function getJTFRotationRadiusA():JTextField
-		{
-			return _jtfRotationRadiusA;
-		}
-		
-		public function getJTFRotationRadiusB():JTextField
-		{
-			return _jtfRotationRadiusB;
-		}
-		
-		public function getAnimationDirection():int
-		{
-			var rotationDirection:int;
-			
-			if (_jcbReverseRotation.isSelected())
-			{
-				rotationDirection = -1;
-			}
-			else
-			{
-				rotationDirection = 1;
-			}
-			
-			return rotationDirection;
-		}
 		
 		public function setHasAnimation(hasAnimation:Boolean):void
 		{
@@ -286,42 +161,21 @@ package flaras.view.gui
 			setComponentsStatus(hasAnimation);
 		}
 		
-		public function setAnimationRotationAxis(rotationAxis:uint):void
-		{
-			if (rotationAxis == ViewAnimationScene.X_ROTATION_AXIS)
-			{
-				_jrbX.setSelected(true);
-			}
-			else if (rotationAxis == ViewAnimationScene.Y_ROTATION_AXIS)
-			{
-				_jrbY.setSelected(true);
-			}
-			else
-			{
-				_jrbZ.setSelected(true);
-			}
-		}
-		
-		public function setAnimationRotationDirection(rotationDirection:int):void
-		{
-			if (rotationDirection == -1)
-			{
-				_jcbReverseRotation.setSelected(true);
-			}
-			else
-			{
-				_jcbReverseRotation.setSelected(false);
-			}
-		}
-		
 		public function getJcbHasAnimation():JCheckBox
 		{
 			return _jcbHasAnimation;
 		}
 		
-		public function getJCBRadiusBCloneRadiusA():JCheckBox
+		public function getAnimationType():String
 		{
-			return _jcbRadiusBCloneRadiusA;
+			if (_jrbCircularType.isSelected())
+			{
+				return "circular";
+			}
+			else
+			{
+				return "point to point";
+			}
 		}
 	}
 }
