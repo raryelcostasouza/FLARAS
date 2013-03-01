@@ -98,41 +98,44 @@ package flaras.controller.io.fileReader
 				{
 					hasAnimation = Boolean(parseInt(obj3D.animation.hasAnimation));
 					
-					//flaras project with partial animation support	
-					if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
+					if (obj3D.animation.type == undefined)
 					{
-						animationPeriod = obj3D.animation.period;
-						animationAxis = obj3D.animation.rotationAxis;
-					
+						//flaras project with partial animation support	
+						if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
+						{
+							animationPeriod = obj3D.animation.period;
+							animationAxis = obj3D.animation.rotationAxis;
 						
-						animationRadiusA = 0;
-						animationRadiusB = 0;
-						animationRotDirection = 1;
-					}
-					//previous flaras project (support for radius and rotationDirection)
-					else if (obj3D.animation.radiusB == undefined)
-					{
-						animationPeriod = obj3D.animation.period;
-						animationAxis = obj3D.animation.rotationAxis;
-					
-						animationRadiusA = obj3D.animation.radius;
-						animationRadiusB = obj3D.animation.radius;
-						animationRotDirection = obj3D.animation.rotationDirection;
-					}
-					//elliptical animation
-					else if(obj3D.animation.type == undefined)
-					{
-						animationPeriod = obj3D.animation.period;
-						animationAxis = obj3D.animation.rotationAxis;
-					
+							animationRadiusA = 0;
+							animationRadiusB = 0;
+							animationRotDirection = 1;
+						}
+						//previous flaras project (support for radius and rotationDirection)
+						else if (obj3D.animation.radiusB == undefined)
+						{
+							animationPeriod = obj3D.animation.period;
+							animationAxis = obj3D.animation.rotationAxis;
 						
-						animationRadiusA = obj3D.animation.radius;
-						animationRadiusB = obj3D.animation.radiusB;
-						animationRotDirection = obj3D.animation.rotationDirection;
+							animationRadiusA = obj3D.animation.radius;
+							animationRadiusB = obj3D.animation.radius;
+							animationRotDirection = obj3D.animation.rotationDirection;
+						}
+						//elliptical animation
+						else
+						{
+							animationPeriod = obj3D.animation.period;
+							animationAxis = obj3D.animation.rotationAxis;
+						
+							
+							animationRadiusA = obj3D.animation.radius;
+							animationRadiusB = obj3D.animation.radiusB;
+							animationRotDirection = obj3D.animation.rotationDirection;
+						}
 					}
 					//after adding point 2 point animation support
 					else
 					{
+						animationType = obj3D.animation.type;
 						if (obj3D.animation.type == "circular")
 						{
 							p2pAnimationStartPoint = Number3D.ZERO;
