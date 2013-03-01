@@ -393,7 +393,7 @@ package flaras.controller.io.fileSaver
 			xml = 
 				<animation>
 						<hasAnimation>{hasAnimation}</hasAnimation>
-						<animationType>{animationType}</animationType>
+						<type>{animationType}</type>
 						{generateXMLCircularAnimation(scene.getAnimation())}
 						{generateXMLP2PAnimation(scene.getAnimation())}
 				</animation>
@@ -447,14 +447,14 @@ package flaras.controller.io.fileSaver
 				xml = new XML();
 				xml = <point2point>
 							<startPoint>
-								<x>p2pAnimation.getStartPointPosition().x</x>
-								<y>p2pAnimation.getStartPointPosition().y</y>
-								<z>p2pAnimation.getStartPointPosition().z</z>
+								<x>{p2pAnimation.getStartPointPosition().x}</x>
+								<y>{p2pAnimation.getStartPointPosition().y}</y>
+								<z>{p2pAnimation.getStartPointPosition().z}</z>
 							</startPoint>
 							<destinationPoint>
-								<x>p2pAnimation.getDestPointPosition().x</x>
-								<y>p2pAnimation.getDestPointPosition().y</y>
-								<z>p2pAnimation.getDestPointPosition().z</z>
+								<x>{p2pAnimation.getDestPointPosition().x}</x>
+								<y>{p2pAnimation.getDestPointPosition().y}</y>
+								<z>{p2pAnimation.getDestPointPosition().z}</z>
 							</destinationPoint>
 							<time>{p2pAnimation.getTime()}</time>
 							<loop>{loop}</loop>
