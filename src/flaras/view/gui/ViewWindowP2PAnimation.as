@@ -151,6 +151,7 @@ package flaras.view.gui
 			jlSeconds = new JLabel("seconds");
 			
 			_jtfTime.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidStrictPositiveCharFromTextField);
+			_jtfTime.addActionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
 			
 			jpLine.append(jlTime);
 			jpLine.append(_jtfTime);
@@ -168,7 +169,7 @@ package flaras.view.gui
 			_jcbLoop = new JCheckBox("Loop?")
 			jpLine.append(_jcbLoop);
 
-			_jcbLoop.addSelectionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
+			_jcbLoop.addActionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
 			
 			return jpLine;
 		}
@@ -217,8 +218,8 @@ package flaras.view.gui
 		public function setDestPointPosition(pPosition:Number3D):void
 		{
 			_jtfDestX.setText(pPosition.x+"");
-			_jtfDestX.setText(pPosition.y+"");
-			_jtfDestX.setText(pPosition.z+"");
+			_jtfDestY.setText(pPosition.y+"");
+			_jtfDestZ.setText(pPosition.z+"");
 		}
 		
 		public function setLoop(hasLoop:Boolean):void
