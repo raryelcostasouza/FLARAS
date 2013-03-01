@@ -33,28 +33,21 @@ package flaras.model.scene
 	
 	public class P2PAnimationScene extends AnimationScene
 	{
-		private var _startPointPosition:Number3D;
-		private var _destPointPosition:Number3D;
+		private var _displacement:Number3D;
 		private var _time:Number;
 		private var _hasLoop:Boolean;
 		
 		//point to point animation
-		public function P2PAnimationScene(pStartPointPosition:Number3D, pDestPointPosition:Number3D, pTime:Number, pLoop:Boolean) 
+		public function P2PAnimationScene(pDisplacement:Number3D, pTime:Number, pLoop:Boolean) 
 		{
-			_startPointPosition = pStartPointPosition;
-			_destPointPosition = pDestPointPosition;
+			_displacement = pDisplacement;
 			_time = pTime;
 			_hasLoop = pLoop;
 		}
 		
-		public function getStartPointPosition():Number3D
+		public function getDisplacement():Number3D
 		{
-			return _startPointPosition;
-		}
-		
-		public function getDestPointPosition():Number3D
-		{
-			return _destPointPosition;
+			return _displacement;
 		}
 		
 		public function getTime():Number
@@ -67,10 +60,9 @@ package flaras.model.scene
 			return _hasLoop;
 		}		
 		
-		public function setAnimationProperties(pStartPoint:Number3D, pDestPoint:Number3D, pTime:Number, pHasLoop:Boolean):void
+		public function setAnimationProperties(pDisplacement:Number3D, pTime:Number, pHasLoop:Boolean):void
 		{
-			_startPointPosition = pStartPoint;
-			_destPointPosition = pDestPoint;
+			_displacement = pDisplacement;
 			_time = pTime;
 			_hasLoop = pHasLoop;
 		}

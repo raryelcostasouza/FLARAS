@@ -446,16 +446,11 @@ package flaras.controller.io.fileSaver
 				
 				xml = new XML();
 				xml = <point2point>
-							<startPoint>
-								<x>{p2pAnimation.getStartPointPosition().x}</x>
-								<y>{p2pAnimation.getStartPointPosition().y}</y>
-								<z>{p2pAnimation.getStartPointPosition().z}</z>
-							</startPoint>
-							<destinationPoint>
-								<x>{p2pAnimation.getDestPointPosition().x}</x>
-								<y>{p2pAnimation.getDestPointPosition().y}</y>
-								<z>{p2pAnimation.getDestPointPosition().z}</z>
-							</destinationPoint>
+							<displacement>
+								<x>{p2pAnimation.getDisplacement().x}</x>
+								<y>{p2pAnimation.getDisplacement().y}</y>
+								<z>{p2pAnimation.getDisplacement().z}</z>
+							</displacement>
 							<time>{p2pAnimation.getTime()}</time>
 							<loop>{loop}</loop>
 						</point2point>;

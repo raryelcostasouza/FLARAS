@@ -72,7 +72,7 @@ package flaras.controller
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
 			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pCircularAnimationPeriod:Number,
 			pCircularAnimationRotationAxis:uint, pCircularAnimationRadiusA:Number, pCircularAnimationRadiusB:Number, 
-			pCircularAnimationRotationDirection:int, pAnimationType:String, pP2PAnimationStartPoint:Number3D, pP2PAnimationDestPoint:Number3D, 
+			pCircularAnimationRotationDirection:int, pAnimationType:String, pP2PAnimationDisplacement:Number3D, 
 			pP2PAnimationTime:Number, pP2PAnimationLoop:Boolean, pLabel:String, pIDNumber:int = -1, pFromXML:Boolean=false):void
 		{
 			var scene:FlarasScene;
@@ -97,7 +97,7 @@ package flaras.controller
 				pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio, pHasVideo, pVideoPath,
 				pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pCircularAnimationPeriod, pCircularAnimationRotationAxis,
 				pCircularAnimationRadiusA, pCircularAnimationRadiusB, pCircularAnimationRotationDirection,
-				pAnimationType, pP2PAnimationStartPoint, pP2PAnimationDestPoint, pP2PAnimationTime, pP2PAnimationLoop,
+				pAnimationType, pP2PAnimationDisplacement, pP2PAnimationTime, pP2PAnimationLoop,
 				pLabel, idNumber);
 			
 			_listOfScenes2.push(scene);
@@ -140,7 +140,7 @@ package flaras.controller
 			pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean, pVideoPath:String, pVideoWidth:Number,
 			pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean, pAnimationPeriod:Number,
 			pAnimationRotationAxis:uint, pAnimationRadiusA:Number, pAnimationRadiusB:Number, pAnimationRotationDirection:int, 
-			pAnimationType:String, pP2PAnimationStartPoint:Number3D, pP2PAnimationDestPoint:Number3D, 
+			pAnimationType:String, pP2PAnimationDisplacement:Number3D, 
 			pP2PAnimationTime:Number, pP2PAnimationLoop:Boolean, pLabel:String, pIDNumber:uint):FlarasScene
 		{
 			var flarasScene:FlarasScene;
@@ -175,7 +175,7 @@ package flaras.controller
 				}
 				else
 				{
-					flarasScene.setAnimation(new P2PAnimationScene(pP2PAnimationStartPoint, pP2PAnimationDestPoint, 
+					flarasScene.setAnimation(new P2PAnimationScene(pP2PAnimationDisplacement, 
 					pP2PAnimationTime, pP2PAnimationLoop));
 				}
 				
@@ -189,7 +189,7 @@ package flaras.controller
 			pTextureHeight:Number, pHasAudio:Boolean, pAudioPath:String, pRepeatAudio:Boolean, pHasVideo:Boolean,
 			pVideoPath:String, pVideoWidth:Number, pVideoHeight:Number, pRepeatVideo:Boolean, pHasAnimation:Boolean,
 			pAnimationPeriod:Number, pAnimationRotationAxis:uint, pAnimationRadiusA:Number, pAnimationRadiusB:Number, pAnimationRotationDirection:int,
-			pAnimationType:String, pP2PAnimationStartPoint:Number3D, pP2PAnimationDestPoint:Number3D, 
+			pAnimationType:String, pP2PAnimationDisplacement:Number3D, 
 			pP2PAnimationTime:Number, pP2PAnimationLoop:Boolean, pLabel:String):void
 		{
 			var scene:FlarasScene;
@@ -250,7 +250,7 @@ package flaras.controller
 					pTexturePath, pTextureWidth, pTextureHeight, pHasAudio, pAudioPath, pRepeatAudio,
 					pHasVideo, pVideoPath, pVideoWidth, pVideoHeight, pRepeatVideo, pHasAnimation, pAnimationPeriod,
 					pAnimationRotationAxis, pAnimationRadiusA, pAnimationRadiusB, pAnimationRotationDirection, 
-					pAnimationType, pP2PAnimationStartPoint, pP2PAnimationDestPoint, pP2PAnimationTime, pP2PAnimationLoop,
+					pAnimationType, pP2PAnimationDisplacement, pP2PAnimationTime, pP2PAnimationLoop,
 					pLabel, scene.getIDNumber());
 				viewFlarasScene = buildViewScene(scene);
 				
@@ -431,7 +431,7 @@ package flaras.controller
 				else
 				{
 					p2pAnimationScene = P2PAnimationScene(animationScene);
-					clone.setAnimation(new P2PAnimationScene(p2pAnimationScene.getStartPointPosition(), p2pAnimationScene.getDestPointPosition(), p2pAnimationScene.getTime(), p2pAnimationScene.hasLoop()));
+					clone.setAnimation(new P2PAnimationScene(p2pAnimationScene.getDisplacement(), p2pAnimationScene.getTime(), p2pAnimationScene.hasLoop()));
 				}				
 			}
 			
@@ -672,7 +672,7 @@ package flaras.controller
 			viewScene.showScene(true);
 		}
 		
-		public function updateAddP2PAnimation(indexScene:uint, startPoint:Number3D, destPoint:Number3D,
+		public function updateAddP2PAnimation(indexScene:uint, displacement:Number3D,
 												time:Number, hasLoop:Boolean):void
 		{
 			var viewScene:ViewFlarasScene;
@@ -685,7 +685,7 @@ package flaras.controller
 			scene = getScene(indexScene);
 			viewScene = getViewScene(indexScene);
 			
-			animationScene = new P2PAnimationScene(startPoint, destPoint, time, hasLoop);
+			animationScene = new P2PAnimationScene(displacement, time, hasLoop);
 			scene.setAnimation(animationScene);
 			
 			viewAnimationScene = new ViewP2PAnimationScene(animationScene, viewScene);
@@ -715,7 +715,7 @@ package flaras.controller
 			viewScene.showScene(true);
 		}
 		
-		public function updateP2PAnimationProperties(indexScene:uint, startPoint:Number3D, destPoint:Number3D,
+		public function updateP2PAnimationProperties(indexScene:uint, displacement:Number3D,
 													time:uint, hasLoop:Boolean):void
 		{
 			var scene:FlarasScene;
@@ -729,7 +729,7 @@ package flaras.controller
 			if (scene.getAnimation())
 			{
 				viewScene.getViewAnimation().unLoad();
-				P2PAnimationScene(scene.getAnimation()).setAnimationProperties(startPoint, destPoint, time, hasLoop);
+				P2PAnimationScene(scene.getAnimation()).setAnimationProperties(displacement, time, hasLoop);
 			}
 			viewScene.resetScenePosition();
 			viewScene.showScene(true);

@@ -1,18 +1,15 @@
 package flaras.view.gui 
 {
 	import flaras.controller.*;
-	import flash.events.KeyboardEvent;
+	import flash.events.*;
 	import org.aswing.*;
 	import org.aswing.border.*;
 	import org.aswing.ext.*;
-	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.*;
+	
 	public class ViewWindowP2PAnimation extends JFrame
 	{
 		private var _ctrGUI:CtrGUI;
-		
-		private var _jtfStartX:JTextField;
-		private var _jtfStartY:JTextField;
-		private var _jtfStartZ:JTextField;
 		
 		private var _jtfDestX:JTextField;
 		private var _jtfDestY:JTextField;
@@ -45,55 +42,12 @@ package flaras.view.gui
 			var objForm:Form;
 			
 			objForm = new Form();
-			objForm.addRow(buildLine1());
 			objForm.addRow(buildLine2());
 			objForm.addRow(buildLine3());
 			objForm.addRow(buildLine4());			
 			
 			return objForm;
-		}
-		
-		private function buildLine1():JPanel
-		{
-			var jpLine:JPanel;
-			var jlStartX:JLabel;
-			var jlStartY:JLabel;
-			var jlStartZ:JLabel;
-			
-			jpLine = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			jpLine.setBorder(new TitledBorder(null, "Start point position", TitledBorder.TOP, TitledBorder.LEFT));
-			
-			_jtfStartX = new JTextField("", 4);
-			_jtfStartY = new JTextField("", 4);
-			_jtfStartZ = new JTextField("", 4);
-			
-			_jtfStartX.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidCharFromTextField);
-			_jtfStartY.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidCharFromTextField);
-			_jtfStartZ.addEventListener(KeyboardEvent.KEY_UP, _ctrGUI.filterValidCharFromTextField);
-			
-			_jtfStartX.addActionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
-			_jtfStartY.addActionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
-			_jtfStartZ.addActionListener(_ctrGUI.listenerUpdateP2PAnimationProperties);
-			
-			jlStartX = new JLabel("X");
-			jlStartY = new JLabel("Y");
-			jlStartZ = new JLabel("Z");
-			
-			jlStartX.setForeground(ASColor.RED);
-			jlStartY.setForeground(ASColor.BLUE);
-			jlStartZ.setForeground(ASColor.GREEN.darker());
-			
-			jpLine.append(jlStartX);
-			jpLine.append(_jtfStartX);
-			
-			jpLine.append(jlStartY);
-			jpLine.append(_jtfStartY);
-			
-			jpLine.append(jlStartZ);
-			jpLine.append(_jtfStartZ);
-			
-			return jpLine;
-		}
+		}		
 		
 		private function buildLine2():JPanel
 		{
@@ -104,7 +58,7 @@ package flaras.view.gui
 			var jlDestZ:JLabel;
 			
 			jpLine = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			jpLine.setBorder(new TitledBorder(null, "Destination point position", TitledBorder.TOP, TitledBorder.LEFT));			
+			jpLine.setBorder(new TitledBorder(null, "Displacement", TitledBorder.TOP, TitledBorder.LEFT));			
 			
 			_jtfDestX = new JTextField("", 4);
 			_jtfDestY = new JTextField("", 4);
@@ -176,10 +130,6 @@ package flaras.view.gui
 		
 		public function cleanFields():void
 		{
-			_jtfStartX.setText("0");
-			_jtfStartY.setText("0");
-			_jtfStartZ.setText("0");
-			
 			_jtfDestX.setText("0");
 			_jtfDestY.setText("0");
 			_jtfDestZ.setText("0");
@@ -188,12 +138,7 @@ package flaras.view.gui
 			_jcbLoop.setSelected(false);
 		}
 		
-		public function getStartPointPosition():Number3D
-		{
-			return new Number3D(Number(_jtfStartX.getText()), Number(_jtfStartY.getText()), Number(_jtfStartZ.getText()));
-		}
-		
-		public function getDestPointPosition():Number3D
+		public function getDisplacement():Number3D
 		{
 			return new Number3D(Number(_jtfDestX.getText()), Number(_jtfDestY.getText()), Number(_jtfDestZ.getText()));
 		}
@@ -208,14 +153,7 @@ package flaras.view.gui
 			return _jcbLoop.isSelected();
 		}
 		
-		public function setStartPointPosition(pPosition:Number3D):void
-		{
-			_jtfStartX.setText(pPosition.x+"");
-			_jtfStartY.setText(pPosition.y+"");
-			_jtfStartZ.setText(pPosition.z+"");
-		}
-		
-		public function setDestPointPosition(pPosition:Number3D):void
+		public function setDisplacement(pPosition:Number3D):void
 		{
 			_jtfDestX.setText(pPosition.x+"");
 			_jtfDestY.setText(pPosition.y+"");
@@ -225,21 +163,6 @@ package flaras.view.gui
 		public function setLoop(hasLoop:Boolean):void
 		{
 			_jcbLoop.setSelected(hasLoop);
-		}
-		
-		public function getJTFStartX():JTextField
-		{
-			return _jtfStartX;
-		}
-		
-		public function getJTFStartY():JTextField
-		{
-			return _jtfStartY;
-		}
-		
-		public function getJTFStartZ():JTextField
-		{
-			return _jtfStartZ;
 		}
 		
 		public function getJTFDestX():JTextField

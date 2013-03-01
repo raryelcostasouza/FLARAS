@@ -82,8 +82,7 @@ package flaras.controller.io.fileReader
 				var label:String;	
 				var idNumber:int;
 				var animationType:String;
-				var p2pAnimationStartPoint:Number3D;
-				var p2pAnimationDestPoint:Number3D;
+				var p2pAnimationDisplacement:Number3D;
 				var p2pAnimationTime:Number;
 				var p2pAnimationLoop:Boolean;
 				
@@ -138,8 +137,7 @@ package flaras.controller.io.fileReader
 						animationType = obj3D.animation.type;
 						if (obj3D.animation.type == "circular")
 						{
-							p2pAnimationStartPoint = Number3D.ZERO;
-							p2pAnimationDestPoint = Number3D.ZERO;
+							p2pAnimationDisplacement = Number3D.ZERO;
 							p2pAnimationTime = 0;
 							p2pAnimationLoop = false;
 							
@@ -151,12 +149,9 @@ package flaras.controller.io.fileReader
 						}
 						else
 						{
-							p2pAnimationStartPoint = new Number3D(obj3D.animation.point2point.startPoint.x, 
-																	obj3D.animation.point2point.startPoint.y, 
-																	obj3D.animation.point2point.startPoint.z);
-							p2pAnimationDestPoint = new Number3D(obj3D.animation.point2point.destinationPoint.x, 
-																	obj3D.animation.point2point.destinationPoint.y, 
-																	obj3D.animation.point2point.destinationPoint.z);
+							p2pAnimationDisplacement = new Number3D(obj3D.animation.point2point.displacement.x, 
+																	obj3D.animation.point2point.displacement.y, 
+																	obj3D.animation.point2point.displacement.z);
 							p2pAnimationTime = obj3D.animation.point2point.time;
 							p2pAnimationLoop = new Boolean(parseInt(obj3D.animation.point2point.loop));
 							
@@ -212,7 +207,7 @@ package flaras.controller.io.fileReader
 												Boolean(parseInt(obj3D.audio.repeatAudio)), Boolean(parseInt(obj3D.video.hasVideo)),
 												obj3D.video.videoPath, obj3D.video.width, obj3D.video.height, Boolean(parseInt(obj3D.video.repeatVideo)),
 												hasAnimation, animationPeriod, animationAxis, animationRadiusA, animationRadiusB, animationRotDirection, 
-												animationType, p2pAnimationStartPoint, p2pAnimationDestPoint, p2pAnimationTime, p2pAnimationLoop,
+												animationType, p2pAnimationDisplacement, p2pAnimationTime, p2pAnimationLoop,
 												label, idNumber, true);
 			}
 			aObjCtrPoint.finishedReadingListOfScenes();

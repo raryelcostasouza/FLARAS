@@ -69,21 +69,21 @@ package flaras.controller
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene(pFilePath, Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, false,
-						"", 0, 0, false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
+						"", 0, 0, false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, 0, false, "");
 				}
 				if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), true, pFilePath, GeneralConstants.TEXTURE_DEFAULT_WIDTH,
 						GeneralConstants.TEXTURE_DEFAULT_HEIGHT, false, "", false, false, "", 0, 0, false,
-						false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
+						false, 0, 0, 0, 0, 0, "", Number3D.ZERO, 0, false, "");
 				}
 				if (pCopyDestination == FolderConstants.VIDEO_FOLDER)
 				{
 					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).addScene("", Number3D.ZERO,
 						Number3D.ZERO, new Number3D(1, 1, 1), false, "", 0, 0, false, "", false, true,
 						pFilePath, GeneralConstants.VIDEO_DEFAULT_WIDTH, GeneralConstants.VIDEO_DEFAULT_HEIGHT,
-						false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, Number3D.ZERO, 0, false, "");
+						false, false, 0, 0, 0, 0, 0, "", Number3D.ZERO, 0, false, "");
 				}
 				
 				_gui.getTreePanel().addScene(getCurrentSelectedPoint2());
@@ -116,7 +116,7 @@ package flaras.controller
 							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
 							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
 							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
-							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDisplacement(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
 							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else if (pCopyDestination == FolderConstants.TEXTURE_FOLDER)
@@ -135,7 +135,7 @@ package flaras.controller
 							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
 							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
 							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
-							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDisplacement(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
 							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					else
@@ -153,7 +153,7 @@ package flaras.controller
 							_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
 							Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection(), 
 							_gui.getScenePanel().getAnimationPanel().getAnimationType(),
-							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
+							_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDisplacement(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop(),
 							_gui.getScenePanel().getJTFSceneLabel().getText());
 					}
 					fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
@@ -628,8 +628,7 @@ package flaras.controller
 		private function addP2PAnimation():void
 		{
 			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddP2PAnimation(getCurrentSelectedScene2(), 
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(),
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDisplacement(),
 												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
 												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
 		}
@@ -679,10 +678,6 @@ package flaras.controller
 		
 		public function listenerUpdateP2PAnimationProperties(e:Event):void
 		{
-			var startX:String;
-			var startY:String;
-			var startZ:String;
-			
 			var destX:String;
 			var destY:String;
 			var destZ:String;
@@ -691,10 +686,6 @@ package flaras.controller
 			var allFieldsValid:Boolean;
 			var vectFieldData:Vector.<FieldData>;
 			
-			startX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartX().getText();
-			startY = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartY().getText();
-			startZ = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFStartZ().getText();
-			
 			destX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestX().getText();
 			destY = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestY().getText();
 			destZ = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestZ().getText();
@@ -702,12 +693,9 @@ package flaras.controller
 			time = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().getText();
 			
 			vectFieldData = new Vector.<FieldData>();
-			vectFieldData.push(new FieldData("Start point: X", startX));
-			vectFieldData.push(new FieldData("Start point: Y", startY));
-			vectFieldData.push(new FieldData("Start point: Z", startZ));
-			vectFieldData.push(new FieldData("Destination point: X", destX));
-			vectFieldData.push(new FieldData("Destination point: Y", destY));
-			vectFieldData.push(new FieldData("Destination point: Z", destZ));
+			vectFieldData.push(new FieldData("Displacement on x axis", destX));
+			vectFieldData.push(new FieldData("Destination on y axis", destY));
+			vectFieldData.push(new FieldData("Destination on z axis", destZ));
 			vectFieldData.push(new FieldData("Time", time));
 			
 			allFieldsValid = generalNumericFieldValidator(vectFieldData);
@@ -715,8 +703,7 @@ package flaras.controller
 			if (allFieldsValid)
 			{
 				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateP2PAnimationProperties(getCurrentSelectedScene2(), 
-											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
-											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(), 
+											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDisplacement(), 
 											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
 											_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
 			}
@@ -884,8 +871,7 @@ package flaras.controller
 					p2pAnimationData = P2PAnimationScene(animationData);
 					_gui.getScenePanel().getAnimationPanel().setP2PAnimationType();
 					
-					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setStartPointPosition(p2pAnimationData.getStartPointPosition());
-					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setDestPointPosition(p2pAnimationData.getDestPointPosition());
+					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setDisplacement(p2pAnimationData.getDisplacement());
 					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().setText(p2pAnimationData.getTime()+"");
 					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setLoop(p2pAnimationData.hasLoop());
 				}				
