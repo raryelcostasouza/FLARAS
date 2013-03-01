@@ -71,9 +71,10 @@ package flaras.view.scene
 			{
 				initAnimVars();
 				
-				_xDestInteger = int(Math.round(_animationScene.getDestPointPosition().x));
-				_yDestInteger = int(Math.round(_animationScene.getDestPointPosition().y));
-				_zDestInteger = int(Math.round(_animationScene.getDestPointPosition().z));
+				//animation start point and dest point coordinates are relative to the scene translation
+				_xDestInteger = int(Math.round(getCurrentTranslation().x+_animationScene.getDestPointPosition().x));
+				_yDestInteger = int(Math.round(getCurrentTranslation().y+_animationScene.getDestPointPosition().y));
+				_zDestInteger = int(Math.round(getCurrentTranslation().z+_animationScene.getDestPointPosition().z));
 				
 				velocity = Number3D.sub(_animationScene.getDestPointPosition(), _animationScene.getStartPointPosition());
 				velocity.x = velocity.x / (1.0 * _animationScene.getTime());
@@ -82,9 +83,8 @@ package flaras.view.scene
 			
 				_step = new Number3D(velocity.x * 1.0 / _frameRate, velocity.y * 1.0 / _frameRate, velocity.z * 1.0 / _frameRate);
 				
-				_obj3DToAnimate.x = _animationScene.getStartPointPosition().x;
-				_obj3DToAnimate.y = _animationScene.getStartPointPosition().y;
-				_obj3DToAnimate.z = _animationScene.getStartPointPosition().z;
+				//animation start point and dest point coordinates are relative to the scene translation
+				_obj3DToAnimate.position = Number3D.add(getCurrentTranslation(), _animationScene.getStartPointPosition());
 				
 				StageReference.getStage().addEventListener(Event.ENTER_FRAME, animation);
 				_running = true;				
