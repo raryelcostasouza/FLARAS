@@ -269,8 +269,8 @@ package flaras.controller
 		{
 			_ctrMain.ctrPoint.disableAllPointsUI();
 			_ctrMain.ctrPoint.enablePointUI(getCurrentSelectedPoint2());
-			_ctrMain.ctrPoint.goToScene(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).resetAllScenesPosition();
+			_ctrMain.ctrPoint.goToScene(getCurrentSelectedPoint2(), getCurrentSelectedScene2());			
 			fillSceneGUI(getCurrentSelectedPoint2(), getCurrentSelectedScene2());
 		}
 		
@@ -604,24 +604,50 @@ package flaras.controller
 			{
 				if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf("circular") != -1)
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddCircularAnimation(getCurrentSelectedScene2(),
-						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
-						_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
-						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection());
+					addCircularAnimation();
 				}
 				else
 				{
-					_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddP2PAnimation(getCurrentSelectedScene2(), 
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(),
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
-												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
-				}				
+					addP2PAnimation();
+				}
 			}
 			else
 			{
 				_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRemoveAnimation(getCurrentSelectedScene2());
 			}
+		}
+		
+		private function addCircularAnimation():void
+		{
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddCircularAnimation(getCurrentSelectedScene2(),
+						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().getText()),
+						_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationRotationAxis(), Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().getText()),
+						Number(_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusB().getText()), _gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getAnimationDirection());
+		}
+		
+		private function addP2PAnimation():void
+		{
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateAddP2PAnimation(getCurrentSelectedScene2(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getStartPointPosition(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getDestPointPosition(),
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getTime(), 
+												_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().hasLoop());
+		}
+		
+		public function listenerChangeAnimationType(e:Event):void
+		{
+			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRemoveAnimation(getCurrentSelectedScene2());
+			
+			//changed from point to point animation to circular animation
+			if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf("circular") != -1)
+			{
+				addCircularAnimation();
+			}
+			//changed from circular animation to point to point animation
+			else
+			{
+				addP2PAnimation();
+			}			
 		}
 		
 		public function listenerUpdateCircularAnimationProperties(e:Event):void
@@ -673,7 +699,7 @@ package flaras.controller
 			destY = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestY().getText();
 			destZ = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFDestZ().getText();
 			
-			time = destX = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().getText();
+			time = _gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().getText();
 			
 			vectFieldData = new Vector.<FieldData>();
 			vectFieldData.push(new FieldData("Start point: X", startX));
@@ -832,9 +858,12 @@ package flaras.controller
 			if (animationData)
 			{
 				_gui.getScenePanel().getAnimationPanel().setHasAnimation(true);
+				
 				if (animationData is CircularAnimationScene)
 				{
 					circularAnimationData = CircularAnimationScene(animationData);
+					_gui.getScenePanel().getAnimationPanel().setCircularAnimationType();
+					
 					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().setText(circularAnimationData.getPeriod()+"");
 					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationAxis(circularAnimationData.getRotationAxis());
 					_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().setText(circularAnimationData.getRadiusA() + "");
@@ -853,6 +882,8 @@ package flaras.controller
 				else
 				{
 					p2pAnimationData = P2PAnimationScene(animationData);
+					_gui.getScenePanel().getAnimationPanel().setP2PAnimationType();
+					
 					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setStartPointPosition(p2pAnimationData.getStartPointPosition());
 					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().setDestPointPosition(p2pAnimationData.getDestPointPosition());
 					_gui.getScenePanel().getAnimationPanel().getWindowP2PAnimation().getJTFTime().setText(p2pAnimationData.getTime()+"");
@@ -923,6 +954,7 @@ package flaras.controller
 			_gui.getScenePanel().getJTFTextureHeight().setText("");
 			
 			_gui.getScenePanel().getAnimationPanel().setHasAnimation(false);
+			_gui.getScenePanel().getAnimationPanel().setCircularAnimationType();
 			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().setAnimationRotationAxis(ViewCircularAnimationScene.X_ROTATION_AXIS);
 			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationPeriod().setText(10+"");
 			_gui.getScenePanel().getAnimationPanel().getWindowCircularAnimation().getJTFRotationRadiusA().setText(0 + "");
