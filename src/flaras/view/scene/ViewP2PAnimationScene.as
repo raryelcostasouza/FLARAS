@@ -43,6 +43,10 @@ package flaras.view.scene
 		private var _frameRate:Number;
 		private var _step:Number3D;
 		
+		private var _xDestInteger:int;
+		private var _yDestInteger:int;
+		private	var _zDestInteger:int;
+			
 		
 		public function ViewP2PAnimationScene(pP2PAnimationScene:P2PAnimationScene, pViewFlarasScene:ViewFlarasScene) 
 		{
@@ -67,6 +71,10 @@ package flaras.view.scene
 			{
 				initAnimVars();
 				
+				_xDestInteger = int(Math.round(_animationScene.getDestPointPosition().x));
+				_yDestInteger = int(Math.round(_animationScene.getDestPointPosition().y));
+				_zDestInteger = int(Math.round(_animationScene.getDestPointPosition().z));
+				
 				velocity = Number3D.sub(_animationScene.getDestPointPosition(), _animationScene.getStartPointPosition());
 				velocity.x = velocity.x / (1.0 * _animationScene.getTime());
 				velocity.y = velocity.y / (1.0 * _animationScene.getTime());
@@ -74,8 +82,12 @@ package flaras.view.scene
 			
 				_step = new Number3D(velocity.x * 1.0 / _frameRate, velocity.y * 1.0 / _frameRate, velocity.z * 1.0 / _frameRate);
 				
+				_obj3DToAnimate.x = _animationScene.getStartPointPosition().x;
+				_obj3DToAnimate.y = _animationScene.getStartPointPosition().y;
+				_obj3DToAnimate.z = _animationScene.getStartPointPosition().z;
+				
 				StageReference.getStage().addEventListener(Event.ENTER_FRAME, animation);
-				_running = true;
+				_running = true;				
 			}
 		}
 		
@@ -89,8 +101,50 @@ package flaras.view.scene
 		}	
 		
 		private function animation(e:Event):void
+		{	
+			if (!hasArrivedAtDestination())
+			{
+				_obj3DToAnimate.x += _step.x;
+				_obj3DToAnimate.y += _step.y;
+				_obj3DToAnimate.z += _step.z;
+			}
+			else
+			{
+				//if the animation loop is disabled
+				if (!_animationScene.hasLoop())
+				{
+					//stop the animation
+					hideScene();
+				}
+				else
+				{
+					//restart the animation
+					hideScene();
+					showScene();
+				}				
+			}
+		}
+		
+		private function hasArrivedAtDestination():Boolean
 		{
-			_obj3DToAnimate.position.plusEq(_step);
+			var xObj:int;
+			var yObj:int;
+			var zObj:int;
+			
+			xObj = int(Math.round(_obj3DToAnimate.x));
+			yObj = int(Math.round(_obj3DToAnimate.y));
+			zObj = int(Math.round(_obj3DToAnimate.z));
+			
+			if (xObj == _xDestInteger && 
+				yObj == _yDestInteger && 
+				zObj == _zDestInteger)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}			
 		}
 		
 		override public function unLoad():void
