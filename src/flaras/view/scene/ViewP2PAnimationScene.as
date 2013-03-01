@@ -43,11 +43,6 @@ package flaras.view.scene
 		private var _frameRate:Number;
 		private var _step:Number3D;
 		
-		private var _xDestInteger:int;
-		private var _yDestInteger:int;
-		private	var _zDestInteger:int;
-			
-		
 		public function ViewP2PAnimationScene(pP2PAnimationScene:P2PAnimationScene, pViewFlarasScene:ViewFlarasScene) 
 		{
 			super(pViewFlarasScene);
@@ -71,20 +66,15 @@ package flaras.view.scene
 			{
 				initAnimVars();
 				
-				//animation start point and dest point coordinates are relative to the scene translation
-				_xDestInteger = int(Math.round(getCurrentTranslation().x+_animationScene.getDestPointPosition().x));
-				_yDestInteger = int(Math.round(getCurrentTranslation().y+_animationScene.getDestPointPosition().y));
-				_zDestInteger = int(Math.round(getCurrentTranslation().z+_animationScene.getDestPointPosition().z));
-				
-				velocity = Number3D.sub(_animationScene.getDestPointPosition(), _animationScene.getStartPointPosition());
+				//animation displacement is relative to the scene translation
+				velocity = Number3D.sub(Number3D.add(_animationScene.getDisplacement(), getCurrentTranslation()), getCurrentTranslation());
 				velocity.x = velocity.x / (1.0 * _animationScene.getTime());
 				velocity.y = velocity.y / (1.0 * _animationScene.getTime());
 				velocity.z = velocity.z / (1.0 * _animationScene.getTime());
 			
 				_step = new Number3D(velocity.x * 1.0 / _frameRate, velocity.y * 1.0 / _frameRate, velocity.z * 1.0 / _frameRate);
 				
-				//animation start point and dest point coordinates are relative to the scene translation
-				_obj3DToAnimate.position = Number3D.add(getCurrentTranslation(), _animationScene.getStartPointPosition());
+				_obj3DToAnimate.position = getCurrentTranslation();
 				
 				StageReference.getStage().addEventListener(Event.ENTER_FRAME, animation);
 				_running = true;				
@@ -104,9 +94,7 @@ package flaras.view.scene
 		{	
 			if (!hasArrivedAtDestination())
 			{
-				_obj3DToAnimate.x += _step.x;
-				_obj3DToAnimate.y += _step.y;
-				_obj3DToAnimate.z += _step.z;
+				_obj3DToAnimate.position = Number3D.add(_step, _obj3DToAnimate.position);
 			}
 			else
 			{
@@ -130,14 +118,21 @@ package flaras.view.scene
 			var xObj:int;
 			var yObj:int;
 			var zObj:int;
+			var xDestInteger:int;
+			var yDestInteger:int;
+			var zDestInteger:int;
 			
 			xObj = int(Math.round(_obj3DToAnimate.x));
 			yObj = int(Math.round(_obj3DToAnimate.y));
 			zObj = int(Math.round(_obj3DToAnimate.z));
 			
-			if (xObj == _xDestInteger && 
-				yObj == _yDestInteger && 
-				zObj == _zDestInteger)
+			xDestInteger = int(Math.round(getCurrentTranslation().x+_animationScene.getDisplacement().x));
+			yDestInteger = int(Math.round(getCurrentTranslation().y+_animationScene.getDisplacement().y));
+			zDestInteger = int(Math.round(getCurrentTranslation().z+_animationScene.getDisplacement().z));
+				
+			if (xObj == xDestInteger && 
+				yObj == yDestInteger && 
+				zObj == zDestInteger)
 			{
 				return true;
 			}
