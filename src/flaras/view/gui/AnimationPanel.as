@@ -114,6 +114,9 @@ package flaras.view.gui
 			_jrbCircularType.setSelected(true);
 			_jrbP2PType = new JRadioButton("Point to point");
 			
+			_jrbCircularType.addActionListener(_ctrGUI.listenerChangeAnimationType);
+			_jrbP2PType.addActionListener(_ctrGUI.listenerChangeAnimationType);
+			
 			buttonGroup = new ButtonGroup();
 			buttonGroup.append(_jrbCircularType);
 			buttonGroup.append(_jrbP2PType);
@@ -159,6 +162,16 @@ package flaras.view.gui
 		{
 			_jcbHasAnimation.setSelected(hasAnimation);
 			setComponentsStatus(hasAnimation);
+		}
+		
+		public function setCircularAnimationType():void
+		{
+			_jrbCircularType.setSelected(true);
+		}
+		
+		public function setP2PAnimationType():void
+		{
+			_jrbP2PType.setSelected(true);
 		}
 		
 		public function getJcbHasAnimation():JCheckBox
