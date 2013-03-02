@@ -385,7 +385,7 @@ package flaras.controller.io.fileSaver
 			else
 			{
 				hasAnimation = 0;
-				animationType = "circular";
+				animationType = "0";
 			}
 			
 			xml = new XML();	
