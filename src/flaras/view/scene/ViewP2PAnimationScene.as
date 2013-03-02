@@ -42,6 +42,7 @@ package flaras.view.scene
 		private var _running:Boolean;
 		private var _frameRate:Number;
 		private var _step:Number3D;
+		private var _startPointPosition:Number3D;
 		
 		public function ViewP2PAnimationScene(pP2PAnimationScene:P2PAnimationScene, pViewFlarasScene:ViewFlarasScene) 
 		{
@@ -74,7 +75,15 @@ package flaras.view.scene
 			
 				_step = new Number3D(velocity.x * 1.0 / _frameRate, velocity.y * 1.0 / _frameRate, velocity.z * 1.0 / _frameRate);
 				
-				_obj3DToAnimate.position = getCurrentTranslation();
+				//startPointPosition is only used while using moving interaction
+				if (_startPointPosition == null)
+				{
+					_obj3DToAnimate.position = getCurrentTranslation();
+				}
+				else
+				{
+					_obj3DToAnimate.position = _startPointPosition;
+				}				
 				
 				StageReference.getStage().addEventListener(Event.ENTER_FRAME, animation);
 				_running = true;				
@@ -126,9 +135,20 @@ package flaras.view.scene
 			yObj = int(Math.round(_obj3DToAnimate.y));
 			zObj = int(Math.round(_obj3DToAnimate.z));
 			
-			xDestInteger = int(Math.round(getCurrentTranslation().x+_animationScene.getDisplacement().x));
-			yDestInteger = int(Math.round(getCurrentTranslation().y+_animationScene.getDisplacement().y));
-			zDestInteger = int(Math.round(getCurrentTranslation().z+_animationScene.getDisplacement().z));
+			//startPointPosition is only used while using moving interaction
+			if (_startPointPosition == null)
+			{
+				xDestInteger = int(Math.round(getCurrentTranslation().x+_animationScene.getDisplacement().x));
+				yDestInteger = int(Math.round(getCurrentTranslation().y+_animationScene.getDisplacement().y));
+				zDestInteger = int(Math.round(getCurrentTranslation().z+_animationScene.getDisplacement().z));			
+			}
+			else
+			{
+				xDestInteger = int(Math.round(_startPointPosition.x+_animationScene.getDisplacement().x));
+				yDestInteger = int(Math.round(_startPointPosition.y+_animationScene.getDisplacement().y));
+				zDestInteger = int(Math.round(_startPointPosition.z+_animationScene.getDisplacement().z));
+			}
+			
 				
 			if (xObj == xDestInteger && 
 				yObj == yDestInteger && 
@@ -140,6 +160,12 @@ package flaras.view.scene
 			{
 				return false;
 			}			
+		}
+		
+		//startPointPosition is only used while using moving interaction
+		public function setStartPointPosition(pPosition:Number3D):void
+		{
+			_startPointPosition = pPosition;
 		}
 		
 		override public function unLoad():void

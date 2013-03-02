@@ -59,7 +59,7 @@ package flaras.view.scene
 			
 		}
 		
-		protected function getCurrentTranslation():Number3D
+		public function getCurrentTranslation():Number3D
 		{
 			return Number3D.add(_viewFlarasScene.getBaseFlarasScene().getTranslation(), _viewFlarasScene.getBaseFlarasScene().getParentPoint().getPosition());
 		}

@@ -143,6 +143,14 @@ package flaras.view.scene
 			{
 				_obj3D.position = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
 				_posRotationCenter = _obj3D.position;
+				
+				if (_viewAnimation)
+				{
+					if (_viewAnimation is ViewP2PAnimationScene)
+					{
+						ViewP2PAnimationScene(_viewAnimation).setStartPointPosition(null);
+					}
+				}
 			}			
 		}
 		
@@ -322,11 +330,16 @@ package flaras.view.scene
 			
 				//drag the object in the XY plane
 				// if the object is not animated
-				if (!_viewAnimation)
+				if (!_viewAnimation || _viewAnimation is ViewP2PAnimationScene)
 				{
 					//copy the new translation to the obj3d directly
 					_obj3D.x = mousePosRelative2RefMarker.x;
 					_obj3D.y = mousePosRelative2RefMarker.y;
+					
+					if (_viewAnimation is ViewP2PAnimationScene)
+					{
+						ViewP2PAnimationScene(_viewAnimation).setStartPointPosition(new Number3D(mousePosRelative2RefMarker.x, mousePosRelative2RefMarker.y, _obj3D.z));
+					}
 				}
 				else
 				{
@@ -343,10 +356,15 @@ package flaras.view.scene
 		public function moveAlongZAxisTo(zPos:int):void
 		{
 			// if the object is not animated
-			if (!_viewAnimation)
+			if (!_viewAnimation || _viewAnimation is ViewP2PAnimationScene)
 			{
 				//copy the new translation to the obj3d directly
 				_obj3D.z = zPos;
+				
+				if (_viewAnimation is ViewP2PAnimationScene)
+				{
+					ViewP2PAnimationScene(_viewAnimation).setStartPointPosition(new Number3D(_viewAnimation.getCurrentTranslation().x, _viewAnimation.getCurrentTranslation().y, zPos));
+				}
 			}
 			else
 			{
