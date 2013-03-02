@@ -716,7 +716,7 @@ package flaras.controller
 		}
 		
 		public function updateP2PAnimationProperties(indexScene:uint, displacement:Number3D,
-													time:uint, hasLoop:Boolean):void
+													time:Number, hasLoop:Boolean):void
 		{
 			var scene:FlarasScene;
 			var viewScene:ViewFlarasScene;
