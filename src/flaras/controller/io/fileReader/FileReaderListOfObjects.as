@@ -100,6 +100,7 @@ package flaras.controller.io.fileReader
 					
 					if (obj3D.animation.type == undefined)
 					{
+						animationType = AnimationScene.TYPE_CIRCULAR;
 						//flaras project with partial animation support	
 						if (obj3D.animation.radius == undefined && obj3D.animation.rotationDirection == undefined)
 						{
