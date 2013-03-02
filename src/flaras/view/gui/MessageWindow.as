@@ -127,7 +127,7 @@ package flaras.view.gui
 		public static function licenseFlaras():void
 		{
 			JOptionPane.showMessageDialog("License", 
-			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
+			"Copyright (C) 2011-2013 Raryel, Hipolito, Claudio\n\n" +
 			
 			"This program is free software: you can redistribute it and/or modify\n"+
 			"it under the terms of the GNU General Public License as published by\n" +
@@ -148,7 +148,7 @@ package flaras.view.gui
 		{
 			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
-			"Version 2.3.0 - December, 29 2012\n\n" +
+			"Version 2.4.0 - March, 04 2013\n\n" +
 			
 			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
 			"Official Website: http://www.ckirner.com/flaras\n\n" +
