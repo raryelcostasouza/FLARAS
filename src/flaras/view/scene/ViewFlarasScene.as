@@ -142,7 +142,7 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				_obj3D.position = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
-				_posRotationCenter = _obj3D.position;
+				_posRotationCenter = Number3D.add(_baseFlarasScene.getTranslation(), _baseFlarasScene.getParentPoint().getPosition());
 				
 				if (_viewAnimation)
 				{
@@ -177,7 +177,7 @@ package flaras.view.scene
 			if (_obj3D)
 			{
 				_obj3D.position = Number3D.add(translation, _baseFlarasScene.getParentPoint().getPosition());
-				_posRotationCenter = _obj3D.position;
+				_posRotationCenter = Number3D.add(translation, _baseFlarasScene.getParentPoint().getPosition());
 			}			
 		}
 		
@@ -310,6 +310,7 @@ package flaras.view.scene
 			//return the 3d coordinates of the point where the mouse hits the 3D plane
 			rh = _viewport.hitTestPoint2D(new Point(_viewport.containerSprite.mouseX, _viewport.containerSprite.mouseY));
 			
+			
 			//check if happened a collision with the invisible plane
 			if (rh.hasHit && rh.displayObject3D == _dragPlaneXY)
 			{
@@ -347,6 +348,7 @@ package flaras.view.scene
 					//to the obj directly. It's just needed to update the coordinates of the center of rotation.
 					_posRotationCenter.x = mousePosRelative2RefMarker.x;
 					_posRotationCenter.y = mousePosRelative2RefMarker.y;
+					trace("posRotCenter", _posRotationCenter.x, _posRotationCenter.y);
 				}
 				
 				checkAttractionRepulsion();
