@@ -32,6 +32,7 @@ package flaras.controller.io.fileReader
 	import flaras.controller.*;
 	import flaras.controller.constants.*;
 	import flaras.controller.io.*;
+	import flaras.model.scene.AnimationScene;
 	import flash.errors.*;
 	import flash.events.*;
 	import flash.filesystem.*;
@@ -135,7 +136,7 @@ package flaras.controller.io.fileReader
 					else
 					{
 						animationType = obj3D.animation.type;
-						if (obj3D.animation.type == "circular")
+						if (obj3D.animation.type == AnimationScene.TYPE_CIRCULAR)
 						{
 							p2pAnimationDisplacement = Number3D.ZERO;
 							p2pAnimationTime = 0;

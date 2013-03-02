@@ -602,7 +602,7 @@ package flaras.controller
 		{
 			if (newState)
 			{
-				if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf("circular") != -1)
+				if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf(AnimationScene.TYPE_CIRCULAR) != -1)
 				{
 					addCircularAnimation();
 				}
@@ -638,7 +638,7 @@ package flaras.controller
 			_ctrMain.ctrPoint.getCtrScene(getCurrentSelectedPoint2()).updateRemoveAnimation(getCurrentSelectedScene2());
 			
 			//changed from point to point animation to circular animation
-			if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf("circular") != -1)
+			if (_gui.getScenePanel().getAnimationPanel().getAnimationType().indexOf(AnimationScene.TYPE_CIRCULAR) != -1)
 			{
 				addCircularAnimation();
 			}

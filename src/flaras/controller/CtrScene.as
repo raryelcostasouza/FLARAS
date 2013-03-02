@@ -168,7 +168,7 @@ package flaras.controller
 			
 			if (pHasAnimation)
 			{
-				if (pAnimationType.indexOf("circular") != -1)
+				if (pAnimationType.indexOf(AnimationScene.TYPE_CIRCULAR) != -1)
 				{
 					flarasScene.setAnimation(new CircularAnimationScene(pAnimationPeriod, pAnimationRotationAxis,
 					pAnimationRadiusA, pAnimationRadiusB, pAnimationRotationDirection));

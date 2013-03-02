@@ -30,6 +30,7 @@
 package flaras.view.gui 
 {
 	import flaras.controller.*;
+	import flaras.model.scene.AnimationScene;
 	import flaras.view.scene.*;
 	import flash.events.*;
 	import org.aswing.*;
@@ -183,11 +184,11 @@ package flaras.view.gui
 		{
 			if (_jrbCircularType.isSelected())
 			{
-				return "circular";
+				return AnimationScene.TYPE_CIRCULAR;
 			}
 			else
 			{
-				return "point to point";
+				return AnimationScene.TYPE_POINT_TO_POINT;
 			}
 		}
 	}

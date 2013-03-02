@@ -368,7 +368,7 @@ package flaras.controller.io.fileSaver
 				hasAnimation = 1;
 				if (animationScene is CircularAnimationScene)
 				{
-					animationType = "circular";
+					animationType = AnimationScene.TYPE_CIRCULAR
 					circularAnimationScene = CircularAnimationScene(animationScene);
 					period = circularAnimationScene.getPeriod();
 					rotationAxis = circularAnimationScene.getRotationAxis();
@@ -378,7 +378,7 @@ package flaras.controller.io.fileSaver
 				}
 				else
 				{
-					animationType = "point2point";
+					animationType = AnimationScene.TYPE_POINT_TO_POINT;
 					p2pAnimationScene = P2PAnimationScene(animationScene);
 				}
 			}

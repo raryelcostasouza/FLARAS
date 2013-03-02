@@ -31,6 +31,7 @@ package flaras.model.scene
 {
 	public class AnimationScene 
 	{		
-		
+		public static const TYPE_CIRCULAR:String = "circular";
+		public static const TYPE_POINT_TO_POINT:String = "point2point";
 	}
 }
