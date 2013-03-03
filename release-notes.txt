@@ -1,4 +1,12 @@
 -------------------------------
+FLARAS-2.4.2 - March 04, 2013
+
+ADDED: attraction/repulsion points
+ADDED: support for point to point animation
+
+FIXED BUG: after cloning a scene FLARAS did not registered that as an unsaved modification
+
+-------------------------------
 FLARAS-2.3.0 - December 29, 2012
 
 ADDED: button to create "clones" of scenes

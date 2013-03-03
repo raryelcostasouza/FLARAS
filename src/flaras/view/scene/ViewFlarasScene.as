@@ -348,7 +348,6 @@ package flaras.view.scene
 					//to the obj directly. It's just needed to update the coordinates of the center of rotation.
 					_posRotationCenter.x = mousePosRelative2RefMarker.x;
 					_posRotationCenter.y = mousePosRelative2RefMarker.y;
-					trace("posRotCenter", _posRotationCenter.x, _posRotationCenter.y);
 				}
 				
 				checkAttractionRepulsion();
@@ -432,7 +431,21 @@ package flaras.view.scene
 						{
 							//attract
 							AudioManager.playSystemAudio(SystemFilesPathsConstants.AUDIO_PATH_ATTRACTION);
-							_obj3D.position = pointPosition;
+							if (!_viewAnimation)
+							{
+								_obj3D.position = pointPosition;
+							}
+							else if (_viewAnimation is ViewCircularAnimationScene)
+							{
+								_posRotationCenter.x = pointPosition.x;
+								_posRotationCenter.y = pointPosition.y;
+								_posRotationCenter.z = pointPosition.z;
+							}
+							else
+							{
+								_obj3D.position = pointPosition;
+								ViewP2PAnimationScene(_viewAnimation).setStartPointPosition(pointPosition);
+							}						
 						}
 						else
 						{
