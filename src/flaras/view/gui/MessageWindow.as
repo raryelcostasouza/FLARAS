@@ -148,9 +148,9 @@ package flaras.view.gui
 		{
 			var jop:JOptionPane = JOptionPane.showMessageDialog("About FLARAS", 
 			"Flash Augmented Reality Authoring System\n\n" +
-			"Version 2.4.2 - March, 04 2013\n\n" +
+			"Version 2.4.3 - March, 04 2013\n\n" +
 			
-			"Copyright (C) 2011-2012 Raryel, Hipolito, Claudio\n\n" +
+			"Copyright (C) 2011-2013 Raryel, Hipolito, Claudio\n\n" +
 			"Official Website: http://www.ckirner.com/flaras\n\n" +
 			"Developers: \n" +
 			"Raryel Costa Souza - raryel.costa@gmail.com\n" +
